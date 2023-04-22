@@ -6,16 +6,15 @@ const songSchema = new mongoose.Schema(
       type: String,
       required: [true, 'A song must have a name'],
       trim: true,
-      unique: true,
     },
     // artist: {
     //     type: String,
     //     required: [true, 'A song must have a artist'],
     // },
-    song: {
-      type: String,
-      required: [true, 'A song must have a song'],
-    },
+    // song: {
+    //     type: String,
+    //     required: [true, 'A song must have a song'],
+    // },
     img: {
       type: String,
       required: [true, 'A song must have a cover img'],
