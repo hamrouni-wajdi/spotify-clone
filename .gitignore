@@ -128,4 +128,4 @@ dist
 
 .idea/
 
-.server/songs
+server/songs/
