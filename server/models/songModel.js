@@ -32,7 +32,7 @@ const songSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  },
 );
 
 const Song = new mongoose.model('Song', songSchema);
