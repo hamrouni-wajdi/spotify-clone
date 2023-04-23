@@ -15,7 +15,16 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-exports.uploadSongFile = upload.single('song');
+exports.uploadSongFiles = upload.fields([
+  {
+    name: 'song',
+    maxCount: 1,
+  },
+  {
+    name: 'img',
+    maxCount: 1,
+  },
+]);
 
 exports.getAllSongs = async (req, res, next) => {
   try {
@@ -23,8 +32,8 @@ exports.getAllSongs = async (req, res, next) => {
 
     const serverUrl = `${req.protocol}://${req.get('host')}/`;
     songs.map((song) => {
-      const songFile = song.song;
-      song.song = serverUrl + songFile;
+      song.song = serverUrl + song.song;
+      song.img = serverUrl + song.img;
     });
 
     res.status(200).json({
@@ -63,7 +72,8 @@ exports.getSong = async (req, res, next) => {
 exports.createSong = async (req, res, next) => {
   try {
     // Add filename to request body
-    req.body.song = req.file.filename;
+    req.body.song = req.files.song[0].filename;
+    req.body.img = req.files.img[0].filename;
     const newSong = await Song.create(req.body);
 
     res.status(200).json({

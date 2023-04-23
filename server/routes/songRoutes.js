@@ -6,7 +6,7 @@ const router = express.Router();
 router
   .route('/')
   .get(songController.getAllSongs)
-  .post(songController.uploadSongFile, songController.createSong);
+  .post(songController.uploadSongFiles, songController.createSong);
 
 router
   .route('/:id')
