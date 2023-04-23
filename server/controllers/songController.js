@@ -41,6 +41,24 @@ exports.getAllSongs = async (req, res, next) => {
   }
 };
 
+exports.getSong = async (req, res, next) => {
+  try {
+    const song = await Song.findById(req.params.id);
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        song,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err.message,
+    });
+  }
+};
+
 exports.createSong = async (req, res, next) => {
   try {
     // Add filename to request body
