@@ -78,3 +78,27 @@ exports.createSong = async (req, res, next) => {
     });
   }
 };
+
+exports.updateSong = async (req, res, next) => {
+  try {
+    // Prevent updating song file
+    if (req.body.song) return next(new Error('You can not update a song file'));
+
+    const song = await Song.findByIdAndUpdate(req.params.id, req.body, {
+      runValidators: true,
+      new: true,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        song,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err.message,
+    });
+  }
+};

@@ -8,6 +8,9 @@ router
   .get(songController.getAllSongs)
   .post(songController.uploadSongFile, songController.createSong);
 
-router.route('/:id').get(songController.getSong);
+router
+  .route('/:id')
+  .get(songController.getSong)
+  .patch(songController.updateSong);
 
 module.exports = router;
