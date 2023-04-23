@@ -8,13 +8,38 @@ const storage = multer.diskStorage({
   },
   filename(req, file, cb) {
     const ext = file.mimetype.split('/')[1];
-    cb(null, `${req.body.name.replace(/ /g, '').toLowerCase()}.${ext}`);
+    cb(null, `${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
   },
 });
 
 const upload = multer({ storage });
 
 exports.uploadSongFile = upload.single('song');
+
+exports.getAllSongs = async (req, res, next) => {
+  try {
+    const songs = await Song.find();
+
+    const serverUrl = `${req.protocol}://${req.get('host')}/`;
+    songs.map((song) => {
+      const songFile = song.song;
+      song.song = serverUrl + songFile;
+    });
+
+    res.status(200).json({
+      status: 'success',
+      results: songs.length,
+      data: {
+        songs,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err.message,
+    });
+  }
+};
 
 exports.createSong = async (req, res, next) => {
   try {

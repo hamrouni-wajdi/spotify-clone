@@ -18,6 +18,6 @@ app.get('/', (req, res) => {
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(
-    chalk.hex('#78dce8').bold('LISTENING ON PORT ' + process.env.PORT)
+    chalk.hex('#78dce8').bold(`LISTENING ON PORT ${process.env.PORT}`)
   );
 });

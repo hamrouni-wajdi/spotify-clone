@@ -6,6 +6,9 @@ const app = express();
 
 app.use(express.json());
 
+// Static folder
+app.use(express.static('songs'));
+
 // Routes
 app.use('/api/v1/songs', songRouter);
 
