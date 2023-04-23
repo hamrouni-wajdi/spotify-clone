@@ -11,6 +11,7 @@ router
 router
   .route('/:id')
   .get(songController.getSong)
-  .patch(songController.updateSong);
+  .patch(songController.updateSong)
+  .delete(songController.deleteSong);
 
 module.exports = router;

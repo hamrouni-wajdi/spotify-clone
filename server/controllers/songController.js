@@ -1,4 +1,5 @@
 const multer = require('multer');
+const fs = require('fs');
 const Song = require('../models/songModel');
 
 // Multer
@@ -94,6 +95,29 @@ exports.updateSong = async (req, res, next) => {
       data: {
         song,
       },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err.message,
+    });
+  }
+};
+
+exports.deleteSong = async (req, res, next) => {
+  try {
+    const song = await Song.findByIdAndDelete(req.params.id);
+
+    // delete song file from storage
+    fs.unlink(`./songs/${song.song}`, (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+
+    res.status(204).json({
+      status: 'success',
+      data: null,
     });
   } catch (err) {
     res.status(404).json({
