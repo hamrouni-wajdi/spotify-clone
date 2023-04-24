@@ -16,8 +16,18 @@ app.get('/', (req, res) => {
   res.send('Hello, world');
 });
 
-app.listen(process.env.PORT || 3000, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
   console.log(
     chalk.hex('#78dce8').bold(`LISTENING ON PORT ${process.env.PORT}`)
   );
+});
+
+process.on('unhandledRejection', (err) => {
+  console.log(err.name, err.message);
+  console.log(
+    chalk.hex('#ff6188').bold('UNHANDLED REJECTION! 💥 Shutting down...')
+  );
+  server.close(() => {
+    process.exit(1);
+  });
 });

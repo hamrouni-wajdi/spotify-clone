@@ -34,8 +34,7 @@ const sendErrorProd = (err, res) => {
     // Programming or other unknown error: don't leak details to client
   } else {
     // Log error
-    console.log('ERROR 💥', err);
-    chalk.hex('#ff6188').bold('ERROR 💥', err);
+    console.log(chalk.hex('#ff6188').bold('ERROR 💥', err));
 
     // Send generic message
     res.status(500).json({
