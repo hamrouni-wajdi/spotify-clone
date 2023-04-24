@@ -1,5 +1,6 @@
 const express = require('express');
 
+const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const songRouter = require('./routes/songRoutes');
 
@@ -19,7 +20,7 @@ app.all('*', (req, res, next) => {
     status: 'fail',
     message: `Can't find ${req.originalUrl} on this server`,
   });
-  next();
+  next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 
 // Global error handler
