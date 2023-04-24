@@ -12,6 +12,7 @@
   "rules": {
     "quotes": ["error", "single"],
     "no-unused-vars": "warn",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "no-param-reassign": "off"
   }
 }
