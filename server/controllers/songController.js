@@ -1,6 +1,7 @@
 const multer = require('multer');
 const fs = require('fs');
 const Song = require('../models/songModel');
+const catchAsync = require('../utils/catchAsync');
 
 // Multer
 const storage = multer.diskStorage({
@@ -26,113 +27,78 @@ exports.uploadSongFiles = upload.fields([
   },
 ]);
 
-exports.getAllSongs = async (req, res, next) => {
-  try {
-    const songs = await Song.find();
+exports.getAllSongs = catchAsync(async (req, res, next) => {
+  const songs = await Song.find();
 
-    const serverUrl = `${req.protocol}://${req.get('host')}/`;
-    songs.map((song) => {
-      song.song = serverUrl + song.song;
-      song.img = serverUrl + song.img;
-    });
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  songs.map((song) => {
+    song.song = serverUrl + song.song;
+    song.img = serverUrl + song.img;
+  });
 
-    res.status(200).json({
-      status: 'success',
-      results: songs.length,
-      data: {
-        songs,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err.message,
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    results: songs.length,
+    data: {
+      songs,
+    },
+  });
+});
 
-exports.getSong = async (req, res, next) => {
-  try {
-    const song = await Song.findById(req.params.id);
+exports.getSong = catchAsync(async (req, res, next) => {
+  const song = await Song.findById(req.params.id);
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        song,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err.message,
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    data: {
+      song,
+    },
+  });
+});
 
-exports.createSong = async (req, res, next) => {
-  try {
-    // Add filename to request body
-    req.body.song = req.files.song[0].filename;
-    req.body.img = req.files.img[0].filename;
-    const newSong = await Song.create(req.body);
+exports.createSong = catchAsync(async (req, res, next) => {
+  // Add filename to request body
+  req.body.song = req.files.song[0].filename;
+  req.body.img = req.files.img[0].filename;
+  const newSong = await Song.create(req.body);
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        song: newSong,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err.message,
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    data: {
+      song: newSong,
+    },
+  });
+});
 
-exports.updateSong = async (req, res, next) => {
-  try {
-    // Prevent updating song file
-    if (req.body.song) return next(new Error('You can not update a song file'));
+exports.updateSong = catchAsync(async (req, res, next) => {
+  // Prevent updating song file
+  if (req.body.song) return next(new Error('You can not update a song file'));
 
-    const song = await Song.findByIdAndUpdate(req.params.id, req.body, {
-      runValidators: true,
-      new: true,
-    });
+  const song = await Song.findByIdAndUpdate(req.params.id, req.body, {
+    runValidators: true,
+    new: true,
+  });
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        song,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err.message,
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    data: {
+      song,
+    },
+  });
+});
 
-exports.deleteSong = async (req, res, next) => {
-  try {
-    const song = await Song.findByIdAndDelete(req.params.id);
+exports.deleteSong = catchAsync(async (req, res, next) => {
+  const song = await Song.findByIdAndDelete(req.params.id);
 
-    // delete song file from storage
-    fs.unlink(`./songs/${song.song}`, (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
+  // delete song file from storage
+  fs.unlink(`./songs/${song.song}`, (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
 
-    res.status(204).json({
-      status: 'success',
-      data: null,
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err.message,
-    });
-  }
-};
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  });
+});
