@@ -7,6 +7,7 @@ const songSchema = new mongoose.Schema(
       required: [true, 'A song must have a name'],
       trim: true,
       unique: true,
+      minLength: 3,
     },
     // artist: {
     //     type: String,
@@ -32,7 +33,7 @@ const songSchema = new mongoose.Schema(
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  },
+  }
 );
 
 const Song = new mongoose.model('Song', songSchema);

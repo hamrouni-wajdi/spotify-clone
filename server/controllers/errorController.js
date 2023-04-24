@@ -11,6 +11,8 @@ const handleDuplicateFields = (err) => {
   return new AppError(message, 400);
 };
 
+const handleValidationError = (err) => new AppError(err.message, 400);
+
 // Error sender function
 const sendErrorDev = (err, res) => {
   res.status(err.statusCode).json({
@@ -53,6 +55,7 @@ module.exports = (err, req, res, next) => {
 
     if (error.name === 'CastError') error = handleCastError(error);
     if (error.code === 11000) error = handleDuplicateFields(error);
+    if (error.name === 'ValidationError') error = handleValidationError(error);
 
     sendErrorProd(error, res);
   }
