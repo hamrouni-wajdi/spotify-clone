@@ -2,6 +2,7 @@ const multer = require('multer');
 const fs = require('fs');
 const Song = require('../models/songModel');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 // Multer
 const storage = multer.diskStorage({
@@ -48,6 +49,8 @@ exports.getAllSongs = catchAsync(async (req, res, next) => {
 exports.getSong = catchAsync(async (req, res, next) => {
   const song = await Song.findById(req.params.id);
 
+  if (!song) return next(new AppError('No song found with given id', 404));
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -79,6 +82,8 @@ exports.updateSong = catchAsync(async (req, res, next) => {
     new: true,
   });
 
+  if (!song) return next(new AppError('No song found with given id', 404));
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -89,6 +94,8 @@ exports.updateSong = catchAsync(async (req, res, next) => {
 
 exports.deleteSong = catchAsync(async (req, res, next) => {
   const song = await Song.findByIdAndDelete(req.params.id);
+
+  if (!song) return next(new AppError('No song found with given id', 404));
 
   // delete song file from storage
   fs.unlink(`./songs/${song.song}`, (err) => {
