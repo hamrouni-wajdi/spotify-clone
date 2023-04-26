@@ -3,6 +3,7 @@ const express = require('express');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const songRouter = require('./routes/songRoutes');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.static('songs'));
 
 // Routes
 app.use('/api/v1/songs', songRouter);
+app.use('/api/v1/users', userRouter);
 
 // Unhandled routes
 app.all('*', (req, res, next) => {
