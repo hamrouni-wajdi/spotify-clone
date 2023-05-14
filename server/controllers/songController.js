@@ -12,7 +12,12 @@ const storage = multer.diskStorage({
   },
   filename(req, file, cb) {
     const ext = file.mimetype.split('/')[1];
-    cb(null, `${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
+
+    if (file.fieldname === 'song') {
+      cb(null, `song-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
+    } else if (file.fieldname === 'img') {
+      cb(null, `img-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
+    }
   },
 });
 
@@ -62,6 +67,7 @@ exports.getSong = catchAsync(async (req, res, next) => {
 
 exports.createSong = catchAsync(async (req, res, next) => {
   // Add filename to request body
+  // console.log(req.files);
   req.body.song = req.files.song[0].filename;
   req.body.img = req.files.img[0].filename;
   const newSong = await Song.create(req.body);
