@@ -1,5 +1,6 @@
 const express = require('express');
 const songController = require('../controllers/songController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ router
 
 router
   .route('/:id')
-  .get(songController.getSong)
+  .get(authController.protect, songController.getSong)
   .patch(songController.updateSong)
   .delete(songController.deleteSong);
 

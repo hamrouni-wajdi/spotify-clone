@@ -3,6 +3,7 @@ const fs = require('fs');
 const Song = require('../models/songModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const { log } = require('console');
 
 // Multer
 const storage = multer.diskStorage({

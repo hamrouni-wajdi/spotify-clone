@@ -7,6 +7,7 @@ const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
+// Middlewares
 app.use(express.json());
 
 // Static folder
