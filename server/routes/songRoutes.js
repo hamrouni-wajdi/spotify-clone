@@ -13,6 +13,10 @@ router
   .route('/:id')
   .get(authController.protect, songController.getSong)
   .patch(songController.updateSong)
-  .delete(songController.deleteSong);
+  .delete(
+    authController.protect,
+    authController.restrictTo('artist', 'admin'),
+    songController.deleteSong
+  );
 
 module.exports = router;
