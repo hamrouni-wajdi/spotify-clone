@@ -8,4 +8,8 @@ router
   .route('/')
   .post(authController.protect, playlistController.createPlaylist);
 
+router
+  .route('/:id')
+  .get(authController.protect, playlistController.getPlaylist);
+
 module.exports = router;
