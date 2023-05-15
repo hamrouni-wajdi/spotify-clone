@@ -177,3 +177,30 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     token,
   });
 });
+
+exports.updateMe = catchAsync(async (req, res, next) => {
+  // 1) Check if user posted their password
+  if (req.body.password || req.body.passwordConfirm)
+    return next(
+      new AppError('🚫 This route is not for password updates.', 400)
+    );
+
+  // 2) Update user data
+  const userData = {
+    name: req.body.name,
+    email: req.body.email,
+    photo: req.body.photo,
+  };
+
+  const user = await User.findByIdAndUpdate(req.user.id, userData, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});
