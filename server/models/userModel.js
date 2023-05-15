@@ -21,12 +21,6 @@ const userSchema = new mongoose.Schema({
     enum: ['user', 'artist', 'admin'],
     default: 'user',
   },
-  songs: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Song',
-    },
-  ],
   password: {
     type: String,
     required: true,

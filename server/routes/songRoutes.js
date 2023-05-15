@@ -7,7 +7,12 @@ const router = express.Router();
 router
   .route('/')
   .get(songController.getAllSongs)
-  .post(songController.uploadSongFiles, songController.createSong);
+  .post(
+    authController.protect,
+    authController.restrictTo('artist'),
+    songController.uploadSongFiles,
+    songController.createSong
+  );
 
 router
   .route('/:id')

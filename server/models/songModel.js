@@ -9,10 +9,11 @@ const songSchema = new mongoose.Schema(
       unique: true,
       minLength: 3,
     },
-    // artist: {
-    //     type: String,
-    //     required: [true, 'A song must have a artist'],
-    // },
+    artist: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: [true, 'A song must belong to an artist'],
+    },
     song: {
       type: String,
       required: [true, 'A song must have a song'],
@@ -35,6 +36,16 @@ const songSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+// Query middlewares
+songSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'artist',
+    select: 'name photo',
+  });
+
+  next();
+});
 
 const Song = new mongoose.model('Song', songSchema);
 

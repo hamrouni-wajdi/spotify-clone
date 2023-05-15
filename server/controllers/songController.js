@@ -66,8 +66,11 @@ exports.getSong = catchAsync(async (req, res, next) => {
 });
 
 exports.createSong = catchAsync(async (req, res, next) => {
+  // 1) Modify req.boy
   req.body.song = req.files.song[0].filename;
   req.body.img = req.files.img[0].filename;
+  req.body.artist = req.user.id;
+
   const newSong = await Song.create(req.body);
 
   res.status(200).json({
