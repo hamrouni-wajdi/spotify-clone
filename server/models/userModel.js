@@ -47,6 +47,13 @@ const userSchema = new mongoose.Schema({
   passwordResetExpires: Date,
 });
 
+// Query middlewares
+userSchema.pre(/^find/, function (next) {
+  this.find({ active: { $ne: false } });
+  next();
+});
+
+// Document middlewares
 userSchema.pre('save', async function (next) {
   // Run if the password is modified
   if (!this.isModified('password')) return next();
