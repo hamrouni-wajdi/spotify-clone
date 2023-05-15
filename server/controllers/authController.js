@@ -10,6 +10,13 @@ const signToken = (id) =>
     expiresIn: '30d',
   });
 
+const generateCookie = (res, token) => {
+  res.cookie('jwt', token, {
+    expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    // secure: true,
+  });
+};
+
 exports.signUp = catchAsync(async (req, res, next) => {
   const userData = {
     name: req.body.name,
@@ -24,6 +31,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   await new Email(user).sendWelcome();
 
   const token = signToken(user.id);
+  generateCookie(res, token);
   res.status(200).json({
     status: 'success',
     token,
@@ -49,6 +57,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // 4) Sign token and send to the user
   const token = signToken(user.id);
+  generateCookie(res, token);
   res.status(200).json({
     status: 'success',
     token,
@@ -150,6 +159,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // 4) Update passwordChangedAt
   // 5) Log user in
   const token = signToken(user._id);
+  generateCookie(res, token);
   res.status(200).json({
     status: 'success',
     token,
@@ -172,6 +182,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
   // 4) Log user in
   const token = signToken();
+  generateCookie(res, token);
   res.status(200).json({
     status: 'success',
     token,
