@@ -33,4 +33,8 @@ module.exports = class Email {
   async sendWelcome() {
     await this.send('Welcome to Spotify', templates.welcomeTemplate());
   }
+
+  async sendResetToken() {
+    await this.send('Reset token', templates.resetTokenTemplate());
+  }
 };

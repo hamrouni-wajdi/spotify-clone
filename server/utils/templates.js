@@ -118,3 +118,7 @@ exports.welcomeTemplate = () => {
 
   `;
 };
+
+exports.resetTokenTemplate = (resetToken) => {
+  return `<p>${resetToken}</p>`;
+};
