@@ -8,7 +8,7 @@ const { log } = require('console');
 // Multer
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, './songs');
+    cb(null, './public/songs');
   },
   filename(req, file, cb) {
     const ext = file.mimetype.split('/')[1];

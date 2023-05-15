@@ -15,7 +15,12 @@ router.patch(
   authController.protect,
   authController.updatePassword
 );
-router.patch('/updateMe', authController.protect, authController.updateMe);
+router.patch(
+  '/updateMe',
+  authController.protect,
+  userController.uploadPhoto,
+  userController.updateMe
+);
 router.delete('/deleteMe', authController.protect, authController.deleteMe);
 
 module.exports = router;
