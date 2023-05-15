@@ -56,6 +56,14 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
+userSchema.pre('save', function (next) {
+  // Only run this function if password was actually modified
+  if (!this.isModified('password') || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now() - 1000;
+  next();
+});
+
 // Schema methods
 userSchema.methods.checkPassword = async function (pass, realPass) {
   return await bcrypt.compare(pass, realPass);
