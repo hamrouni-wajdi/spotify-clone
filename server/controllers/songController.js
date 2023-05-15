@@ -53,7 +53,12 @@ exports.getAllSongs = catchAsync(async (req, res, next) => {
 });
 
 exports.getSong = catchAsync(async (req, res, next) => {
-  const song = await Song.findById(req.params.id);
+  // $inc increases plays field every time this route hits
+  const song = await Song.findByIdAndUpdate(
+    req.params.id,
+    { $inc: { plays: 1 } },
+    { new: true }
+  );
 
   if (!song) return next(new AppError('No song found with given id', 404));
 
