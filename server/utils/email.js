@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const templates = require('./templates.js');
 
 module.exports = class Email {
   constructor(user) {
@@ -18,9 +19,7 @@ module.exports = class Email {
     });
   }
 
-  async send(subject) {
-    const html = '<h1>Welcome to Spotify 🎵</h1>';
-
+  async send(subject, html) {
     const mailOptions = {
       from: this.from,
       to: this.to,
@@ -32,6 +31,6 @@ module.exports = class Email {
   }
 
   async sendWelcome() {
-    await this.send('Welcome to Spotify');
+    await this.send('Welcome to Spotify', templates.welcomeTemplate());
   }
 };
