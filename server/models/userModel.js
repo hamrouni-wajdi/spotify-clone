@@ -2,51 +2,57 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-  },
-  photo: {
-    type: String,
-    default: 'default.jpg',
-  },
-  role: {
-    type: String,
-    enum: ['user', 'artist', 'admin'],
-    default: 'user',
-  },
-  password: {
-    type: String,
-    required: true,
-    minLength: 8,
-    select: false,
-  },
-  passwordConfirm: {
-    type: String,
-    required: true,
-    validate: {
-      validator(confirm) {
-        return confirm === this.password;
-      },
-      message: 'Passwords are not the same',
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+    },
+    photo: {
+      type: String,
+      default: 'default.jpg',
+    },
+    role: {
+      type: String,
+      enum: ['user', 'artist', 'admin'],
+      default: 'user',
+    },
+    password: {
+      type: String,
+      required: true,
+      minLength: 8,
+      select: false,
+    },
+    passwordConfirm: {
+      type: String,
+      required: true,
+      validate: {
+        validator(confirm) {
+          return confirm === this.password;
+        },
+        message: 'Passwords are not the same',
+      },
+    },
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
+    },
+    passwordChangedAt: { type: Date, select: false },
+    passwordResetToken: String,
+    passwordResetExpires: Date,
   },
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
-  passwordChangedAt: { type: Date, select: false },
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 // Query middlewares
 userSchema.pre(/^find/, function (next) {
