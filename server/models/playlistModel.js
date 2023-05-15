@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const playlistSchema = new mongoose.Schema(
   {
-    title: {
+    name: {
       type: String,
       minLength: 4,
       trim: true,
@@ -17,7 +17,7 @@ const playlistSchema = new mongoose.Schema(
       default: 'default.jpg',
     },
     owner: {
-      type: mongoose.Schema.Object.Id,
+      type: mongoose.Schema.ObjectId,
       ref: 'User',
       required: [true, 'Please specify owner'],
     },
@@ -40,6 +40,6 @@ const playlistSchema = new mongoose.Schema(
   }
 );
 
-const Playlist = new mongoose.Model('Playlist', playlistSchema);
+const Playlist = new mongoose.model('Playlist', playlistSchema);
 
 module.exports = Playlist;
