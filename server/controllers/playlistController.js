@@ -3,10 +3,15 @@ const AppError = require('../utils/appError');
 const Playlist = require('../models/playlistModel');
 
 exports.getAllPlaylists = catchAsync(async (req, res, next) => {
-  // 1) Get playlists from DB
-  const playlist = await Playlist.find();
+  // 1) Get user's playlists
+  let filter = {};
+  if (req.params.userId) filter = { user: req.params.userId };
+  console.log(req.params, filter);
 
-  // 2) Send res
+  // 2) Get playlists from DB
+  const playlist = await Playlist.find(filter);
+
+  // 3) Send res
   res.status(200).json({
     status: 'success',
     length: playlist.length,
@@ -34,7 +39,7 @@ exports.getPlaylist = catchAsync(async (req, res, next) => {
 
 exports.createPlaylist = catchAsync(async (req, res, next) => {
   // 1) Create a new Playlist
-  req.body.owner = req.user.id;
+  req.body.user = req.user.id;
   const playlist = await Playlist.create(req.body);
 
   // 2) Send res

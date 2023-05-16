@@ -16,7 +16,7 @@ const playlistSchema = new mongoose.Schema(
       type: String,
       default: 'default.jpg',
     },
-    owner: {
+    user: {
       type: mongoose.Schema.ObjectId,
       ref: 'User',
       required: [true, 'Please specify owner'],
