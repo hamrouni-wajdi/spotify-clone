@@ -26,6 +26,22 @@ const songSchema = new mongoose.Schema(
     //     type: Number,
     //     required: [true, 'A song must have a duration'],
     // },
+    gengre: {
+      type: String,
+      enaum: [
+        'pop',
+        'hip-hop',
+        'rock',
+        'electronic',
+        'latin',
+        'indie',
+        'classic',
+        'k-pop',
+        'country',
+        'metal',
+      ],
+      required: [true, 'Please select song genre'],
+    },
     plays: {
       type: Number,
       default: 0,
