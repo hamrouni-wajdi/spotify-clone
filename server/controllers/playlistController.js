@@ -1,6 +1,27 @@
+const multer = require('multer');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Playlist = require('../models/playlistModel');
+
+// Multer
+const storage = multer.diskStorage({
+  destination(req, file, cb) {
+    cb(null, './public/songs');
+  },
+  filename(req, file, cb) {
+    const ext = file.mimetype.split('/')[1];
+
+    if (file.fieldname === 'song') {
+      cb(null, `song-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
+    } else if (file.fieldname === 'img') {
+      cb(null, `img-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
+    }
+  },
+});
+
+const upload = multer({ storage });
+
+exports.uploadPlaylistImg = upload.single('img');
 
 exports.getAllPlaylists = catchAsync(async (req, res, next) => {
   // 1) Get user's playlists
@@ -53,7 +74,15 @@ exports.createPlaylist = catchAsync(async (req, res, next) => {
 
 exports.updatePlaylist = catchAsync(async (req, res, next) => {
   // 1) Update Playlist
-  const playlist = await Playlist.findByIdAndUpdate(req.params.id, req.body, {
+  const body = {
+    name: req.body.name,
+    song: req.body.songs,
+  };
+
+  // This prevents updating image if there is a img propery but not the file on request
+  if (req.file) body.img = req.file.filename;
+
+  const playlist = await Playlist.findByIdAndUpdate(req.params.id, body, {
     new: true,
     runValidators: true,
   });

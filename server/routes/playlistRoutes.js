@@ -12,7 +12,10 @@ router
 router
   .route('/:id')
   .get(authController.protect, playlistController.getPlaylist)
-  .patch(playlistController.updatePlaylist)
+  .patch(
+    playlistController.uploadPlaylistImg,
+    playlistController.updatePlaylist
+  )
   .delete(playlistController.deletePlaylist);
 
 module.exports = router;
