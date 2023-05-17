@@ -40,6 +40,18 @@ const playlistSchema = new mongoose.Schema(
   }
 );
 
+// Query middlewares
+
+// Populate songs when we get only one playlist
+playlistSchema.pre('findOne', function (next) {
+  this.populate({
+    path: 'songs',
+    select: 'name plays',
+  });
+
+  next();
+});
+
 const Playlist = new mongoose.model('Playlist', playlistSchema);
 
 module.exports = Playlist;

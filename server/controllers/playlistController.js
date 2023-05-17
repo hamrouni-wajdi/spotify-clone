@@ -76,7 +76,6 @@ exports.updatePlaylist = catchAsync(async (req, res, next) => {
   // 1) Update Playlist
   const body = {
     name: req.body.name,
-    song: req.body.songs,
   };
 
   // This prevents updating image if there is a img propery but not the file on request
@@ -110,5 +109,27 @@ exports.deletePlaylist = catchAsync(async (req, res, next) => {
   res.status(204).json({
     status: 'success',
     data: null,
+  });
+});
+
+// Manage songs in playlist
+exports.addSong = catchAsync(async (req, res, next) => {
+  // 1) Check body
+  console.log(req.body);
+
+  // 2) Update playlist
+  const playlist = await Playlist.findByIdAndUpdate(
+    req.params.id,
+    {
+      $addToSet: { songs: req.body.song },
+    },
+    { runValidators: true, new: true }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      playlist,
+    },
   });
 });
