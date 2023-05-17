@@ -114,15 +114,26 @@ exports.deletePlaylist = catchAsync(async (req, res, next) => {
 
 // Manage songs in playlist
 exports.addSong = catchAsync(async (req, res, next) => {
-  // 1) Check body
-  console.log(req.body);
-
-  // 2) Update playlist
+  // 1) Update playlist
   const playlist = await Playlist.findByIdAndUpdate(
     req.params.id,
-    {
-      $addToSet: { songs: req.body.song },
+    { $addToSet: { songs: req.body.song } },
+    { runValidators: true, new: true }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      playlist,
     },
+  });
+});
+
+exports.deleteSong = catchAsync(async (req, res, next) => {
+  // 1) Update playlist
+  const playlist = await Playlist.findByIdAndUpdate(
+    req.params.id,
+    { $pull: { songs: req.body.song } },
     { runValidators: true, new: true }
   );
 

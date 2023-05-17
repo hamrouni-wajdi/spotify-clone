@@ -19,6 +19,9 @@ router
   .delete(playlistController.deletePlaylist);
 
 // Manage songs in playlist
-router.route('/:id/song').post(playlistController.addSong);
+router
+  .route('/:id/song')
+  .post(playlistController.addSong)
+  .delete(playlistController.deleteSong);
 
 module.exports = router;
