@@ -42,7 +42,7 @@ const playlistSchema = new mongoose.Schema(
 
 // Query middlewares
 
-// Populate songs when we get only one playlist
+// - Populate songs when we get only one playlist
 playlistSchema.pre('findOne', function (next) {
   this.populate({
     path: 'songs',

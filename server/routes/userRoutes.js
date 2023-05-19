@@ -5,8 +5,6 @@ const playlistRouter = require('../routes/playlistRoutes');
 
 const router = express.Router();
 
-router.use('/:userId/playlists', playlistRouter);
-
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
 
@@ -25,5 +23,10 @@ router.patch(
   userController.updateMe
 );
 router.delete('/deleteMe', authController.protect, authController.deleteMe);
+
+router.use('/:userId/playlists', playlistRouter);
+
+// Manage likes
+router.use('/likes', authController.protect, userController.likeSong);
 
 module.exports = router;

@@ -72,6 +72,15 @@ userSchema.pre(/^find/, function (next) {
   next();
 });
 
+// playlistSchema.pre('findOne', function (next) {
+//   this.populate({
+//     path: 'songs',
+//     select: 'name plays',
+//   });
+
+//   next();
+// });
+
 // Document middlewares
 userSchema.pre('save', async function (next) {
   // Run if the password is modified

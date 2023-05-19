@@ -45,3 +45,23 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+// Likes
+exports.likeSong = catchAsync(async (req, res, next) => {
+  const { song } = req.body;
+
+  // 1) Update playlist
+  // REVIEW: If logged in used is artist user info is populated twice
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $addToSet: { likedSongs: song } },
+    { runValidators: true, new: true }
+  ).populate('likedSongs');
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});
