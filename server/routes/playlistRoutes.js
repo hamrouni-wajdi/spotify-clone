@@ -14,6 +14,7 @@ router
   .get(authController.protect, playlistController.getPlaylist)
   .patch(
     playlistController.uploadPlaylistImg,
+    playlistController.resizePlaylistImg,
     playlistController.updatePlaylist
   )
   .delete(playlistController.deletePlaylist);

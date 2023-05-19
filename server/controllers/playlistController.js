@@ -1,25 +1,35 @@
 const multer = require('multer');
+const sharp = require('sharp');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Playlist = require('../models/playlistModel');
 
 // Multer
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, './public/songs');
-  },
-  filename(req, file, cb) {
-    const ext = file.mimetype.split('/')[1];
+const storage = multer.memoryStorage();
 
-    if (file.fieldname === 'song') {
-      cb(null, `song-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
-    } else if (file.fieldname === 'img') {
-      cb(null, `img-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
-    }
-  },
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.split('/')[0] === 'image') {
+    cb(null, true);
+  } else {
+    cb(new Error('Only images are allowed!'));
+  }
+};
+
+exports.resizePlaylistImg = catchAsync(async (req, res, next) => {
+  if (!req.file) return next();
+
+  req.file.filename = `playlist-${req.params.id}-${Date.now()}.jpeg`;
+
+  await sharp(req.file.buffer)
+    .resize(520, 520)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/playlists/${req.file.filename}`);
+
+  next();
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage, fileFilter });
 
 exports.uploadPlaylistImg = upload.single('img');
 
@@ -74,14 +84,8 @@ exports.createPlaylist = catchAsync(async (req, res, next) => {
 
 exports.updatePlaylist = catchAsync(async (req, res, next) => {
   // 1) Update Playlist
-  const body = {
-    name: req.body.name,
-  };
-
-  // This prevents updating image if there is a img propery but not the file on request
-  if (req.file) body.img = req.file.filename;
-
-  const playlist = await Playlist.findByIdAndUpdate(req.params.id, body, {
+  req.body.img = req.file.filename;
+  const playlist = await Playlist.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
