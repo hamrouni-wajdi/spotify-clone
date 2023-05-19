@@ -1,23 +1,48 @@
 const multer = require('multer');
+const sharp = require('sharp');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 
 // Multer
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, './public/users');
-  },
-  filename(req, file, cb) {
-    const ext = file.mimetype.split('/')[1];
+// const storage = multer.diskStorage({
+//   destination(req, file, cb) {
+//     cb(null, './public/users');
+//   },
+//   filename(req, file, cb) {
+//     const ext = file.mimetype.split('/')[1];
 
-    cb(null, `artist-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
-  },
-});
+//     cb(null, `artist-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
+//   },
+// });
 
-const upload = multer({ storage });
+const storage = multer.memoryStorage();
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.split('/')[0] === 'image') {
+    cb(null, true);
+  } else {
+    cb(new Error('Only images are allowed!'));
+  }
+};
+
+const upload = multer({ storage, fileFilter });
 
 exports.uploadPhoto = upload.single('photo');
+
+exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
+  if (!req.file) return next();
+
+  req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+
+  await sharp(req.file.buffer)
+    .resize(520, 520)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/users/${req.file.filename}`);
+
+  next();
+});
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   // 1) Check if user posted their password
@@ -25,6 +50,8 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     return next(
       new AppError('🚫 This route is not for password updates.', 400)
     );
+
+  console.log(req.file);
 
   // 2) Update user data
   const userData = {
