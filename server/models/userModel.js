@@ -18,6 +18,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: 'default.jpg',
     },
+    likedSongs: {
+      type: [
+        {
+          type: mongoose.Schema.ObjectId,
+          ref: 'Song',
+        },
+      ],
+      validate: {
+        validator: (arr) => arr.length <= 50,
+        message: 'You can not like more than 50 songs',
+      },
+    },
     role: {
       type: String,
       enum: ['user', 'artist', 'admin'],

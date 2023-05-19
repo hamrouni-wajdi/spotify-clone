@@ -26,7 +26,7 @@ const songSchema = new mongoose.Schema(
     //     type: Number,
     //     required: [true, 'A song must have a duration'],
     // },
-    gengre: {
+    genre: {
       type: String,
       enaum: [
         'pop',
