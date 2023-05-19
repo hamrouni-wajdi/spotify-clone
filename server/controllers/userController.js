@@ -47,10 +47,21 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 
 // Likes
+exports.getLikedSongs = catchAsync(async (req, res, next) => {
+  // REVIEW: If logged in used is artist user info is populated twice
+  const user = await User.findById(req.user.id).populate('likedSongs');
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      songs: user.likedSongs,
+    },
+  });
+});
+
 exports.likeSong = catchAsync(async (req, res, next) => {
   const { song } = req.body;
 
-  // 1) Update playlist
   // REVIEW: If logged in used is artist user info is populated twice
   const user = await User.findByIdAndUpdate(
     req.user.id,
@@ -61,7 +72,25 @@ exports.likeSong = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      user,
+      songs: user.likedSongs,
+    },
+  });
+});
+
+exports.unlikeSong = catchAsync(async (req, res, next) => {
+  const { song } = req.body;
+
+  // REVIEW: If logged in used is artist user info is populated twice
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $pull: { likedSongs: song } },
+    { runValidators: true, new: true }
+  ).populate('likedSongs');
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      songs: user.likedSongs,
     },
   });
 });
