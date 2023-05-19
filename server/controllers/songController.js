@@ -1,27 +1,25 @@
 const multer = require('multer');
+const sharp = require('sharp');
 const fs = require('fs');
 const Song = require('../models/songModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const { log } = require('console');
 
-// Multer
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, './public/songs');
-  },
-  filename(req, file, cb) {
-    const ext = file.mimetype.split('/')[1];
+const storage = multer.memoryStorage();
 
-    if (file.fieldname === 'song') {
-      cb(null, `song-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
-    } else if (file.fieldname === 'img') {
-      cb(null, `img-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
-    }
-  },
-});
+const fileFilter = (req, file, cb) => {
+  // console.log(file);
+  if (file.mimetype.split('/')[0] === 'image') {
+    cb(null, true);
+  } else if (file.mimetype.split('/')[0] === 'audio') {
+    cb(null, true);
+  } else {
+    cb(new Error('Only images and audios are allowed!'));
+  }
+};
 
-const upload = multer({ storage });
+const upload = multer({ storage, fileFilter });
 
 exports.uploadSongFiles = upload.fields([
   {
@@ -33,6 +31,30 @@ exports.uploadSongFiles = upload.fields([
     maxCount: 1,
   },
 ]);
+
+exports.resizeSongImg = catchAsync(async (req, res, next) => {
+  if (!req.files.img) return next();
+
+  // console.log('song', req.files.img[0].buffer);
+  req.files.img[0].filename = `img-${req.user.id}-${Date.now()}.jpeg`;
+
+  await sharp(req.files.img[0].buffer)
+    .resize(520, 520)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toFile(`public/songs/${req.files.img.filename}`);
+
+  next();
+});
+
+exports.saveSongFile = catchAsync(async (req, res, next) => {
+  if (!req.files.song) return next();
+
+  req.files.song[0].filename = `song-${req.user.id}-${Date.now()}.mp3`;
+  fs.writeFileSync(`public/songs/${req.files.song[0].filename}`, req.files.song[0].buffer);
+
+  next();
+});
 
 exports.getAllSongs = catchAsync(async (req, res, next) => {
   const songs = await Song.find();

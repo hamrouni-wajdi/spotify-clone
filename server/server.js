@@ -6,7 +6,7 @@ dotenv.config({ path: './.env' });
 
 // Uncaught Exception
 process.on('uncaughtException', (err) => {
-  console.log(err.name, err.message);
+  console.log(err.name, err.message, err);
   console.log(
     chalk.hex('#ff6188').bold('UNHANDLED EXCEPTION! 💥 Shutting down...')
   );

@@ -11,6 +11,8 @@ router
     authController.protect,
     authController.restrictTo('artist'),
     songController.uploadSongFiles,
+    songController.resizeSongImg,
+    songController.saveSongFile,
     songController.createSong
   );
 
