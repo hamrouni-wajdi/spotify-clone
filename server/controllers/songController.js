@@ -51,7 +51,10 @@ exports.saveSongFile = catchAsync(async (req, res, next) => {
   if (!req.files.song) return next();
 
   req.files.song[0].filename = `song-${req.user.id}-${Date.now()}.mp3`;
-  fs.writeFileSync(`public/songs/${req.files.song[0].filename}`, req.files.song[0].buffer);
+  fs.writeFileSync(
+    `public/songs/${req.files.song[0].filename}`,
+    req.files.song[0].buffer
+  );
 
   next();
 });
