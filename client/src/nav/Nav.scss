@@ -4,4 +4,16 @@
   min-width: 42rem;
   height: 100%;
   margin: 8px;
+  padding: 8px 12px;
+
+  &-link {
+    font-size: 16px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 12px;
+    height: 4rem;
+  }
 }
