@@ -1,0 +1,29 @@
+.library {
+  background-color: #121212;
+  border-radius: 8px;
+  
+  margin: 8px;
+  padding: 8px 12px;
+
+  &-link {
+    font-size: 16px;
+    font-weight: 700;
+
+    height: 4rem;
+    padding: 4px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__add {
+      background-color: #000000aa;
+      border-radius: 50%;
+
+      height: 32px;
+      width: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
