@@ -1,7 +1,7 @@
 .library {
   background-color: #121212;
   border-radius: 8px;
-  
+
   margin: 8px;
   padding: 8px 12px;
 
@@ -15,6 +15,12 @@
     align-items: center;
     justify-content: space-between;
 
+    &__link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     &__add {
       background-color: #000000aa;
       border-radius: 50%;
@@ -24,6 +30,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    svg {
+      font-size: 24px;
     }
   }
 }

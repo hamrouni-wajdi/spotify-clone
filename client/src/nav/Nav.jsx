@@ -15,7 +15,7 @@ const Nav = (props) => {
       </div>
       <div className="library">
         <div className="library-link">
-          <div>
+          <div className="library-link__link">
             <IoLibraryOutline /> Library
           </div>
           <div className="library-link__add">+</div>
