@@ -1,4 +1,5 @@
 import "./App.scss";
+import userImg from "./../img/user.png";
 
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 
@@ -13,6 +14,9 @@ const App = (props) => {
           <div className="app-nav__history-icon">
             <IoChevronForwardOutline />
           </div>
+        </div>
+        <div className="app-nav__profile">
+          <img src={userImg} alt="" className="app-nav__profile--img" />
         </div>
       </div>
     </div>

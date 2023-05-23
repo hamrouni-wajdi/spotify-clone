@@ -10,6 +10,9 @@
   &-nav {
     padding: 16px 24px;
     background-color: #1db954;
+    box-shadow: 0 0 36px #000000;
+    display: flex;
+    justify-content: space-between;
 
     &__history {
       display: flex;
@@ -26,6 +29,14 @@
         background-color: #000000b3;
         border-radius: 50%;
         cursor: pointer;
+      }
+    }
+
+    &__profile {
+      &--img {
+        height: 32px;
+        border-radius: 50%;
+        box-shadow: 0 0 0 2px #000000b3;
       }
     }
   }
