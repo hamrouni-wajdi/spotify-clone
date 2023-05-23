@@ -1,8 +1,32 @@
 .app {
   background-color: #121212;
   border-radius: 8px;
-  
+  overflow: hidden;
+
   height: 100%;
   margin-top: 8px;
   margin-right: 8px;
+
+  &-nav {
+    padding: 16px 24px;
+    background-color: #1db954;
+
+    &__history {
+      display: flex;
+      gap: 8px;
+
+      &-icon {
+        font-size: 24px;
+        height: 32px;
+        width: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background-color: #000000b3;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
 }
