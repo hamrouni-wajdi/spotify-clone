@@ -1,0 +1,29 @@
+.card-artist {
+  background-color: #181818;
+  border-radius: 8px;
+  cursor: pointer;
+
+  padding: 16px;
+
+  &:hover {
+    background-color: #282828;
+    transition: 0.2s;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: #fff;
+  }
+
+  .type {
+    font-size: 14px;
+    color: #a7a7a7;
+    font-weight: 400;
+  }
+}

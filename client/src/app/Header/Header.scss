@@ -9,6 +9,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 16px 24px;
+    margin-bottom: 24px;
   }
 
   &__latest-card {
@@ -50,5 +51,10 @@
       font-size: 48px;
       color: #1db954;
     }
+  }
+
+  &__list {
+    display: flex;
+    gap: 16px;
   }
 }

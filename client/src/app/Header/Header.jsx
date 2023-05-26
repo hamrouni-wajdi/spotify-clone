@@ -1,3 +1,4 @@
+import CardArtist from '../UI/CardArtist';
 import './Header.scss';
 
 import { IoPlayCircle } from 'react-icons/io5';
@@ -7,6 +8,7 @@ const img =
 
 const Header = (props) => {
   const latest = [1, 2, 3, 4, 5, 6];
+  const list = [1, 2, 3, 4, 5, 6, 7];
 
   return (
     <div className='app-header'>
@@ -20,6 +22,12 @@ const Header = (props) => {
               <IoPlayCircle className='app-header__latest-card-btn' />
             </div>
           </div>
+        ))}
+      </div>
+      <h2 className='h2'>Top Artists</h2>
+      <div className='app-header__list'>
+        {list.map((el) => (
+          <CardArtist />
         ))}
       </div>
     </div>
