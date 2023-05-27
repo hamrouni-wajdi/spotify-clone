@@ -2,6 +2,7 @@
   background-color: #121212;
   border-radius: 8px;
   overflow: hidden;
+  overflow-y: scroll;
 
   height: 100%;
   margin-top: 8px;
@@ -10,6 +11,7 @@
   &-nav {
     padding: 16px 24px;
     background-color: #1db954;
+    background-color: #121212;
     box-shadow: 0 0 36px #000000;
     display: flex;
     justify-content: space-between;
