@@ -13,7 +13,7 @@ const playlistRouter = require('./routes/playlistRoutes');
 const app = express();
 
 // Middlewares
-app.use(cors({ origin: '*', credentials: true }));
+app.use(cors());
 app.use(helmet());
 app.use(express.json({ limit: '10kb' }));
 app.use(mongoSanitize());
