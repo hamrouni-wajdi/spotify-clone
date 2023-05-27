@@ -38,6 +38,20 @@ const Header = (props) => {
           <CardPlaylist />
         ))}
       </div>
+
+      <h2 className='h2'>Top Artists</h2>
+      <div className='app-header__list'>
+        {list.map((el) => (
+          <CardArtist />
+        ))}
+      </div>
+
+      <h2 className='h2'>Top Playlists</h2>
+      <div className='app-header__list'>
+        {list.map((el) => (
+          <CardPlaylist />
+        ))}
+      </div>
     </div>
   );
 };
