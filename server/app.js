@@ -14,6 +14,8 @@ const app = express();
 
 // Middlewares
 app.use(cors());
+app.options('*', cors());
+
 app.use(helmet());
 app.use(express.json({ limit: '10kb' }));
 app.use(mongoSanitize());
