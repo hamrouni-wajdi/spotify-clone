@@ -21,6 +21,16 @@
     padding-bottom: 8px;
   }
 
+  &__link {
+    font-size: 14px;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
   input {
     font-size: inherit;
     color: #fff;

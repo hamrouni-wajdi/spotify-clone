@@ -4,7 +4,8 @@ import './MainApp.scss';
 import Nav from './nav/Nav';
 import App from './app/App';
 import Player from './player/Player';
-import Auth from './auth/Auth';
+import Login from './auth/Login';
+import Signup from './auth/Signup';
 
 function MainApp() {
   return (
@@ -20,7 +21,8 @@ function MainApp() {
             </div>
           }
         />
-        <Route path='/login' element={<Auth />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
       </Routes>
     </BrowserRouter>
   );
