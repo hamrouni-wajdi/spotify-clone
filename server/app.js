@@ -24,7 +24,7 @@ const app = express();
 app.use(
   cors({
     origin:
-      'http://localhost:3000,https://spotify-clone-maqsudtolipov.vercel.app/',
+      'http://localhost:3000',
     credentials: true,
   })
 );
