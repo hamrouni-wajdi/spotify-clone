@@ -20,9 +20,9 @@ const Login = (props) => {
       });
 
       const JWT = res.data.token;
-      const role = res.data.data.user.role;
+      const user = res.data.data.user;
 
-      setAuth({ JWT, role });
+      setAuth({ JWT, user });
 
       localStorage.setItem('user', JSON.stringify(res.data.data));
       setSuccess(true);
