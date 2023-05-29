@@ -23,7 +23,9 @@
     padding-bottom: 8px;
   }
 
-  &__link {
+  &__link:link,
+  &__link:visited {
+    color: #b3b3b3;
     font-size: 14px;
     text-decoration: underline;
     cursor: pointer;
