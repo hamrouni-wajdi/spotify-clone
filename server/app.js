@@ -34,7 +34,7 @@ app.use(mongoSanitize());
 app.use(xss());
 
 // Static folder
-app.use(express.static('songs'));
+app.use('/public', express.static('public'));
 
 // Routes
 app.use('/api/v1/songs', songRouter);
