@@ -3,6 +3,7 @@ import axios from '../api/axios';
 import './Auth.scss';
 import logo from './../img/logo.svg';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Signup = (props) => {
   const signup = async (e) => {
@@ -26,7 +27,9 @@ const Signup = (props) => {
     <div className='auth'>
       <form className='auth-form' onSubmit={signup}>
         <img className='auth-form__logo' src={logo} alt='' />
-        <p className='auth-form__link'>Log In here</p>
+        <Link to='/login' className='auth-form__link'>
+          Log In here
+        </Link>
         <input type='text' name='name' placeholder='Name' required />
         <input type='text' name='email' placeholder='Email' required />
         <input type='text' name='password' placeholder='Password' required />
