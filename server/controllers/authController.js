@@ -17,7 +17,7 @@ const signToken = (id) =>
 //   });
 // };
 
-const createSendToken = (user, statusCode, res) => {
+const createSendToken = (user, statusCode, req, res) => {
   // Generate token
   const token = signToken(user.id);
 
@@ -26,10 +26,12 @@ const createSendToken = (user, statusCode, res) => {
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     httpOnly: true,
     sameSite: 'none',
+    secure: true,
   };
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
   res.cookie('jwt', token, cookieOptions);
 
+  user.photo = req.protocol + '://' + req.get('host') + '/public/users/' + user.photo;
   user.password = undefined;
 
   // Send response
@@ -53,7 +55,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
   await new Email(user).sendWelcome();
 
-  createSendToken(user, 201, res);
+  createSendToken(user, 201, req, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -73,7 +75,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 4) Sign token and send to the user
-  createSendToken(user, 200, res);
+  createSendToken(user, 200, req, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -170,7 +172,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // 4) Update passwordChangedAt
   // 5) Log user in
 
-  createSendToken(user, 200, res);
+  createSendToken(user, 200, req, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
