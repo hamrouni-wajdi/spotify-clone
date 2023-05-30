@@ -4,11 +4,7 @@ import userImg from './../img/user.png';
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 import Header from './Header/Header';
 
-import AuthContext from '../context/AuthProvider';
-import { useContext } from 'react';
-
 const App = (props) => {
-  const { auth } = useContext(AuthContext);
 
   return (
     <div className='app'>
@@ -24,7 +20,7 @@ const App = (props) => {
         <div className='app-nav__profile'>
           <img
             crossorigin='anonymous'
-            src={auth.user.photo}
+            src={userImg}
             alt=''
             className='app-nav__profile--img'
           />
