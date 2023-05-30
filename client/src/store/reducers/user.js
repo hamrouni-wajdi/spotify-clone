@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser } from "../thunks/user";
+import { loginUser, signupUser } from "../thunks/user";
 
 let DEFAULT_USER_STATE = {
   data: {
@@ -17,10 +17,16 @@ export const userSlice = createSlice({
   initialState: DEFAULT_USER_STATE,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.data = action.payload.data;
-      state.token = action.payload.token;
-    });
+    builder
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.data = action.payload.data;
+        state.token = action.payload.token;
+      })
+      // Sign up
+      .addCase(signupUser.fulfilled, (state, action) => {
+        state.data = action.payload.data;
+        state.token = action.payload.token;
+      });
   },
 });
 

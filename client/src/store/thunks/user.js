@@ -17,3 +17,22 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
+export const signupUser = createAsyncThunk(
+  "user/signup",
+  async ({ name, email, password, passwordConfirm }) => {
+    try {
+      const res = await axios.post("/users/signup", {
+        name,
+        email,
+        password,
+        passwordConfirm,
+      });
+      console.log(res);
+
+      return { data: res.data.data.user, token: res.data.token };
+    } catch (e) {
+      throw e;
+    }
+  }
+);

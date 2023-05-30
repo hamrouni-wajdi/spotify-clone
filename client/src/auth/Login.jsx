@@ -8,34 +8,11 @@ import { loginUser } from "../store/thunks/user";
 import { Link } from "react-router-dom";
 
 const Login = (props) => {
-  // ⚛️ Redux
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  // const login = async (e) => {
-  //   e.preventDefault();
-  //
-  //   try {
-  //     const res = await axios.post('/users/login', {
-  //       email: e.target[0].value,
-  //       password: e.target[1].value,
-  //     });
-  //
-  //     const JWT = res.data.token;
-  //     const user = res.data.data.user;
-  //
-  //     setAuth({ JWT, user });
-  //
-  //     localStorage.setItem('user', JSON.stringify(res.data.data));
-  //     setSuccess(true);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const login = (e) => {
     e.preventDefault();
-    console.log(e);
 
     const email = e.target[0].value;
     const password = e.target[1].value;
