@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const Email = require('../utils/email');
-const crypto = require('crypto');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -31,7 +31,9 @@ const createSendToken = (user, statusCode, req, res) => {
   // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
   res.cookie('jwt', token, cookieOptions);
 
-  user.photo = req.protocol + '://' + req.get('host') + '/public/users/' + user.photo;
+  user.photo = `${req.protocol}://${req.get('host')}/public/users/${
+    user.photo
+  }`;
   user.password = undefined;
 
   // Send response
@@ -85,13 +87,17 @@ exports.protect = catchAsync(async (req, res, next) => {
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer ')
-  )
+  ) {
     token = req.headers.authorization.split(' ')[1];
+  } else if (req.cookies.jwt) {
+    token = req.cookies.jwt;
+  }
 
-  if (!token)
+  if (!token) {
     return next(
       new AppError('🔐 You are not logged in! Please log in to access', 401)
     );
+  }
 
   // 2) Verify the token
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -101,10 +107,11 @@ exports.protect = catchAsync(async (req, res, next) => {
   if (!user) return next(new AppError());
 
   // 4) Check user changed password after the token was issued
-  if (user.changedPasswordAfter(decoded.iat))
+  if (user.changedPasswordAfter(decoded.iat)) {
     return next(
       new AppError('🔐 Your password has been changed. Please log in again.')
     );
+  }
 
   // 5) Grant access
   req.user = user;
@@ -112,18 +119,49 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.restrictTo = (...roles) => {
-  return (req, res, next) => {
+// Is logged in
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    // 1) Verify token
+    const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+
+    // 2) If still user exists
+    const user = await User.findById(decoded.id);
+    if (!user) return next(new AppError());
+
+    // 3) Check user changed password after the token was issued
+    if (user.changedPasswordAfter(decoded.iat)) {
+      return next(
+        new AppError('🔐 Your password has been changed. Please log in again.')
+      );
+    }
+
+    // 4) Grant access
+    res.status(200).json({
+      status: 'success',
+      data: { user },
+    });
+  }
+
+  res.status(401).json({
+    status: 'fail',
+    data: null,
+  });
+});
+
+exports.restrictTo =
+  (...roles) =>
+  (req, res, next) => {
     console.log(roles);
     console.log(req.user.role);
-    if (!roles.includes(req.user.role))
+    if (!roles.includes(req.user.role)) {
       return next(
         new AppError('⛔ You do not have permission to perform this action!')
       );
+    }
 
     return next();
   };
-};
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user from DB using email
