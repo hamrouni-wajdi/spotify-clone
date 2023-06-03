@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, signupUser } from "../thunks/user";
+import {loginUser, signupUser, isAuth, isLoggedIn} from "../thunks/user";
+import cookie from 'react-cookies'
 
 let DEFAULT_USER_STATE = {
   data: {
@@ -9,13 +10,18 @@ let DEFAULT_USER_STATE = {
     photo: null,
     role: null,
   },
-  token: null,
+  auth: null,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState: DEFAULT_USER_STATE,
-  reducers: {},
+  reducers: {
+    // isAuth: state => {
+    //   console.log('here')
+    //   console.log(cookie.load('jwt'))
+    // }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -26,8 +32,14 @@ export const userSlice = createSlice({
       .addCase(signupUser.fulfilled, (state, action) => {
         state.data = action.payload.data;
         state.token = action.payload.token;
-      });
+      })
+    // Is auth
+        .addCase(isLoggedIn.fulfilled, (state, action) => {
+          state.auth = true;
+          state.data = action.payload.data;
+        })
   },
 });
 
+// export const {isAuth} = userSlice.actions
 export default userSlice.reducer;
