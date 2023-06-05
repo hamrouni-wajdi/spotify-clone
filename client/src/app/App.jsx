@@ -21,7 +21,7 @@ const App = (props) => {
         </div>
         <div className='app-nav__profile'>
           <img
-            crossorigin='anonymous'
+            crossOrigin='anonymous'
             src={data.photo}
             alt=''
             className='app-nav__profile--img'

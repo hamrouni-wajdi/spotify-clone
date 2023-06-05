@@ -7,6 +7,16 @@
   margin: 8px;
   padding: 8px;
 
+  svg {
+    font-size: 36px;
+    color: #FFF;
+  }
+
+  &__icon-btn {
+    background-color: transparent;
+    border: none;
+  }
+
   &-song {
     display: flex;
     align-items: center;
@@ -39,4 +49,41 @@
       color: #1db954;
     }
   }
+}
+
+// Chrome and Safari
+input[type='range'] {
+  --range-progress: 50%;
+
+  -webkit-appearance: none;
+  position: relative;
+  background: #5d5d5d;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+input[type="range"]::before {
+  content: '';
+  width: var(--range-progress);
+  height: 4px;
+  background: #fff;
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// - Circle
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+  position: relative;
 }
