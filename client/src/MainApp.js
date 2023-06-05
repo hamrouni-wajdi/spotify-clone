@@ -16,6 +16,7 @@ import Signup from "./auth/Signup";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import {isLoggedIn} from "./store/thunks/user";
+import Loading from "./components/UI/Loading";
 
 function MainApp() {
   const [loading, setLoading] = useState(true)
@@ -41,7 +42,7 @@ function MainApp() {
         <Route
           path="/"
           element={
-          loading ? <div>Loading...</div> :
+          loading ? <Loading /> :
 
             <div className="main-app">
               <Nav />
