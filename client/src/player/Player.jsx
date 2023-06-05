@@ -14,10 +14,13 @@ const Player = (props) => {
 
   // Ref
   const audioRef = useRef();
+  const progressRef = useRef();
 
   // State
   const [isPlaying, setIsPlaying] = useState(false)
   const [volume, setVolume] = useState(60);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0)
 
   // Effect
   useEffect(() => {
@@ -45,6 +48,30 @@ const Player = (props) => {
   // Music player
   const togglePlayPauseHandler = () => setIsPlaying(pre => !pre)
 
+  const progressChangeHandler = () =>{
+    audioRef.current.currentTime = progressRef.current.value;
+  }
+
+  const onLoadedMetadataHandler = () => {
+    const seconds = audioRef.current.duration;
+    setDuration(seconds);
+    progressRef.current.max = seconds;
+  }
+
+  // Helper functions
+  const formatTime = (time) => {
+    if (time && !isNaN(time)) {
+      const minutes = Math.floor(time / 60);
+      const formatMinutes =
+        minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(time % 60);
+      const formatSeconds =
+        seconds < 10 ? `0${seconds}` : `${seconds}`;
+      return `${formatMinutes}:${formatSeconds}`;
+    }
+    return '00:00';
+  };
+
 
   return (
     <div className='player'>
@@ -59,16 +86,19 @@ const Player = (props) => {
         <IoHeart className='player-song__like' />
       </div>
           <div>
-            <span className='player-song__time'>00:00</span>
-            <audio ref={audioRef} src={song.song} controls />
+            <audio ref={audioRef} src={song.song} onLoadedMetadata={onLoadedMetadataHandler} />
             <button onClick={togglePlayPauseHandler}>PLay/Pause</button>
-            <input type='range' min={0} max={100}  value={volume}
-                   onChange={(e) => setVolume(e.target.value)} />
+            <br />
+            <span className='player-song__time'>00:00</span>
+            <input ref={progressRef} type='range' defaultValue={0} onChange={progressChangeHandler} />
+            <span className='player-song__time'>{formatTime(duration)}</span>
           </div>
          </>
       }
 
       <div>
+        <input type='range' min={0} max={100}  value={volume}
+               onChange={(e) => setVolume(e.target.value)} />
         <button onClick={getSongHandler}>aa</button>
       </div>
     </div>
