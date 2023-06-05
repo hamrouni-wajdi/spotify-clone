@@ -24,7 +24,7 @@ function MainApp() {
 
   useEffect(() => {
     dispatch(isLoggedIn())
-  }, [])
+  }, [user])
 
   useEffect(() => {
     if(user.auth === true) {
