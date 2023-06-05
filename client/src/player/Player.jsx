@@ -1,5 +1,12 @@
 import './Player.scss';
-import {IoHeart, IoPauseCircle, IoPlayCircle} from 'react-icons/io5';
+import {
+  IoHeart,
+  IoPauseCircle,
+  IoPlayCircle,
+  IoPlaySkipForwardSharp,
+  IoPlaySkipBackSharp,
+  IoRepeat, IoShuffle, IoVolumeMediumOutline
+} from 'react-icons/io5';
 import {useDispatch, useSelector} from "react-redux";
 import {getSong} from "../store/thunks/song";
 import {useCallback, useEffect, useRef, useState} from "react";
@@ -20,7 +27,7 @@ const Player = (props) => {
 
   // State
   const [isPlaying, setIsPlaying] = useState(false)
-  const [volume, setVolume] = useState(60);
+  const [volume, setVolume] = useState(50);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0)
 
@@ -106,21 +113,31 @@ const Player = (props) => {
       </div>
           <div>
             <audio ref={audioRef} src={song.song} onLoadedMetadata={onLoadedMetadataHandler} />
+
+            <div className='player__icons'>
+
+            <IoShuffle />
+            <IoPlaySkipBackSharp />
             <button className='player__icon-btn' onClick={togglePlayPauseHandler}>
               {isPlaying ? <IoPauseCircle /> : <IoPlayCircle />}
             </button>
-            <br />
+            <IoPlaySkipForwardSharp />
+            <IoRepeat />
+            </div>
+            <div className='player__range'>
+
             <span className='player-song__time'>{formatTime(currentTime)}</span>
-            <input ref={progressRef} type='range' defaultValue={0} onChange={progressChangeHandler} />
+            <input ref={progressRef}  type='range' defaultValue={0} onChange={progressChangeHandler} />
             <span className='player-song__time'>{formatTime(duration)}</span>
+            </div>
           </div>
          </>
       }
 
-      <div>
+      <div className='player__volume'>
+        <IoVolumeMediumOutline onClick={getSongHandler}/>
         <input ref={volumeRef} type='range' min={0} max={100}  value={volume}
                onChange={(e) => volumeChangeHandler(e)} />
-        <button onClick={getSongHandler}>aa</button>
       </div>
     </div>
   );

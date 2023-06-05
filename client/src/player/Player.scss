@@ -7,14 +7,42 @@
   margin: 8px;
   padding: 8px;
 
+  &__icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding-top: 8px;
+    padding-bottom: 4px;
+  }
+
   svg {
-    font-size: 36px;
-    color: #FFF;
+    font-size: 20px;
+    color: #b3b3b3;
+    cursor: pointer;
   }
 
   &__icon-btn {
     background-color: transparent;
     border: none;
+    display: flex;
+    align-items: center;
+
+    svg {
+      font-size: 32px;
+      color: #FFF;
+    }
+  }
+
+  &__range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    // Duration
+    input[type="range"] {
+      width: 100%;
+    }
   }
 
   &-song {
@@ -48,6 +76,18 @@
       font-size: 24px;
       color: #1db954;
     }
+
+    &__time {
+      font-size: 11px;
+      font-weight: 400;
+    }
+  }
+
+  &__volume {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
   }
 }
 
@@ -58,7 +98,6 @@ input[type='range'] {
   -webkit-appearance: none;
   position: relative;
   background: #5d5d5d;
-  width: 100%;
   height: 4px;
   border-radius: 2px;
   cursor: pointer;
@@ -76,11 +115,15 @@ input[type="range"]::before {
   left: 0;
 }
 
+input[type="range"]:hover::before {
+  background: #1db954;
+}
+
 // - Circle
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 16px;
-  width: 16px;
+  height: 14px;
+  width: 14px;
   border-radius: 50%;
   border: none;
   background-color: #fff;
