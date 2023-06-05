@@ -17,15 +17,26 @@ const Player = (props) => {
 
   // State
   const [isPlaying, setIsPlaying] = useState(false)
+  const [volume, setVolume] = useState(60);
 
   // Effect
   useEffect(() => {
+    // Prevent useEffect triggered before audio is loaded
+    if (audioRef.current === undefined) return;
+
     if (isPlaying) {
       audioRef.current.play();
     } else {
       audioRef.current.pause();
     }
+
   }, [isPlaying, audioRef])
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 100;
+    }
+  }, [volume, audioRef]);
 
   const getSongHandler = () => {
     dispatch(getSong({id: '647ded0e45407a3b165ea4e2'}))
@@ -48,8 +59,11 @@ const Player = (props) => {
         <IoHeart className='player-song__like' />
       </div>
           <div>
-            <audio ref={audioRef} src={song.song} controls autoPlay />
+            <span className='player-song__time'>00:00</span>
+            <audio ref={audioRef} src={song.song} controls />
             <button onClick={togglePlayPauseHandler}>PLay/Pause</button>
+            <input type='range' min={0} max={100}  value={volume}
+                   onChange={(e) => setVolume(e.target.value)} />
           </div>
          </>
       }
