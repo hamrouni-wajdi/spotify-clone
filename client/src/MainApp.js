@@ -2,9 +2,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link,
-  Navigate,
-  redirect,
 } from "react-router-dom";
 
 import "./MainApp.scss";
