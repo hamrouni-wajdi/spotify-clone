@@ -24,9 +24,10 @@ function MainApp() {
 
   useEffect(() => {
     dispatch(isLoggedIn())
-  }, [user])
+  }, [])
 
   useEffect(() => {
+    console.log(user)
     if(user.auth === true) {
       setLoading(false)
     }

@@ -3,8 +3,10 @@ import userImg from './../img/user.png';
 
 import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 import Header from './Header/Header';
+import {useSelector} from "react-redux";
 
 const App = (props) => {
+  const {data} = useSelector(state => state.user)
 
   return (
     <div className='app'>
@@ -20,7 +22,7 @@ const App = (props) => {
         <div className='app-nav__profile'>
           <img
             crossorigin='anonymous'
-            src={userImg}
+            src={data.photo}
             alt=''
             className='app-nav__profile--img'
           />
