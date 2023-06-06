@@ -129,6 +129,10 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     const user = await User.findById(decoded.id);
     if (!user) return next(new AppError());
 
+    user.photo = `${req.protocol}://${req.get('host')}/public/users/${
+      user.photo
+    }`;
+
     // 3) Check user changed password after the token was issued
     if (user.changedPasswordAfter(decoded.iat)) {
       return next(
@@ -143,10 +147,10 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     });
   }
 
-  res.status(401).json({
-    status: 'fail',
-    data: null,
-  });
+  // res.status(401).json({
+  //   status: 'fail',
+  //   data: null,
+  // });
 });
 
 exports.restrictTo =

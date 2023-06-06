@@ -1,10 +1,10 @@
 const multer = require('multer');
 const sharp = require('sharp');
 const fs = require('fs');
+const { log } = require('console');
 const Song = require('../models/songModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-const { log } = require('console');
 
 const storage = multer.memoryStorage();
 
@@ -35,14 +35,13 @@ exports.uploadSongFiles = upload.fields([
 exports.resizeSongImg = catchAsync(async (req, res, next) => {
   if (!req.files.img) return next();
 
-  // console.log('song', req.files.img[0].buffer);
   req.files.img[0].filename = `img-${req.user.id}-${Date.now()}.jpeg`;
 
   await sharp(req.files.img[0].buffer)
     .resize(520, 520)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`public/songs/${req.files.img.filename}`);
+    .toFile(`public/songs/${req.files.img[0].filename}`);
 
   next();
 });
@@ -86,6 +85,10 @@ exports.getSong = catchAsync(async (req, res, next) => {
   );
 
   if (!song) return next(new AppError('No song found with given id', 404));
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  song.song = `${serverUrl}public/songs/${song.song}`;
+  song.img = `${serverUrl}public/songs/${song.img}`;
 
   res.status(200).json({
     status: 'success',

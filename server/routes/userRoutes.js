@@ -26,6 +26,10 @@ router.patch(
 );
 router.delete('/deleteMe', authController.protect, authController.deleteMe);
 
+// User
+router.get('/:id', authController.protect, userController.getArtist);
+
+// Playlists
 router.use('/:userId/playlists', playlistRouter);
 
 // Manage likes

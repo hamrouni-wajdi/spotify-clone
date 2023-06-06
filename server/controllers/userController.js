@@ -46,10 +46,11 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   // 1) Check if user posted their password
-  if (req.body.password || req.body.passwordConfirm)
+  if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError('🚫 This route is not for password updates.', 400)
     );
+  }
 
   console.log(req.file);
 
@@ -69,6 +70,22 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     status: 'success',
     data: {
       user,
+    },
+  });
+});
+
+exports.getArtist = catchAsync(async (req, res, next) => {
+  const artist = await User.findById(req.params.id);
+  console.log(artist);
+
+  if (!artist || artist.role !== 'artist') {
+    return next(new AppError('No artist found with that ID', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: artist,
     },
   });
 });
