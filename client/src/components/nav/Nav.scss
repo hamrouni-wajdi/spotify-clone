@@ -1,11 +1,12 @@
 .nav {
   background-color: #121212;
   border-radius: 8px;
-  
-  min-width: 42rem;
+
+  // TODO: Change it to 42 later
+  min-width: 36rem;
   margin: 8px;
   padding: 8px 12px;
-
+ 
   &-link {
     font-size: 16px;
     font-weight: 700;

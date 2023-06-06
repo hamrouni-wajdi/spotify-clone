@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {loginUser, signupUser, isAuth, isLoggedIn} from "../thunks/user";
-import cookie from 'react-cookies'
+import { isLoggedIn, loginUser, signupUser } from "../thunks/user";
 
 let DEFAULT_USER_STATE = {
   data: {
@@ -14,7 +13,7 @@ let DEFAULT_USER_STATE = {
 };
 
 export const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: DEFAULT_USER_STATE,
   reducers: {
     // isAuth: state => {
@@ -33,11 +32,11 @@ export const userSlice = createSlice({
         state.data = action.payload.data;
         state.token = action.payload.token;
       })
-    // Is auth
-        .addCase(isLoggedIn.fulfilled, (state, action) => {
-          state.auth = true;
-          state.data = action.payload.data;
-        })
+      // Is auth
+      .addCase(isLoggedIn.fulfilled, (state, action) => {
+        state.auth = true;
+        state.data = action.payload.data;
+      })
   },
 });
 

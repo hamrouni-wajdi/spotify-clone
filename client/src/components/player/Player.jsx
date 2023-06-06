@@ -1,0 +1,166 @@
+import "./Player.scss";
+import {
+  IoHeart,
+  IoPauseCircle,
+  IoPlayCircle,
+  IoPlaySkipBackSharp,
+  IoPlaySkipForwardSharp,
+  IoRepeat,
+  IoShuffle,
+  IoVolumeMediumOutline,
+} from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { getSong } from "../../store/thunks/song";
+import { useCallback, useEffect, useRef, useState } from "react";
+
+const img =
+  "https://images.unsplash.com/photo-1659922964423-bbecb913f7ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80";
+
+const Player = (props) => {
+  // ⚛ Redux
+  const { song } = useSelector((state) => state.song);
+  const dispatch = useDispatch();
+
+  // Ref
+  const audioRef = useRef();
+  const progressRef = useRef();
+  const playAnimationRef = useRef();
+  const volumeRef = useRef();
+
+  // State
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [volume, setVolume] = useState(50);
+  const [duration, setDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+
+  // We need this function above because it is being called in useEffect
+  const repeat = useCallback(() => {
+    const time = audioRef.current.currentTime;
+    setCurrentTime(time);
+
+    progressRef.current.value = time;
+    progressRef.current.style.setProperty(
+      "--range-progress",
+      `${(progressRef.current.value / duration) * 100}%`
+    );
+
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [audioRef, duration, progressRef, setCurrentTime]);
+
+  // Effect
+  useEffect(() => {
+    // Prevent useEffect triggered before audio is loaded
+    if (audioRef.current === undefined) return;
+
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [isPlaying, audioRef, repeat]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume / 100;
+    }
+  }, [volume, audioRef]);
+
+  const getSongHandler = () => {
+    dispatch(getSong({ id: "647ded0e45407a3b165ea4e2" }));
+  };
+
+  // Music player
+  const togglePlayPauseHandler = () => setIsPlaying((pre) => !pre);
+
+  const progressChangeHandler = () => {
+    audioRef.current.currentTime = progressRef.current.value;
+  };
+
+  const volumeChangeHandler = (e) => {
+    setVolume(e.target.value);
+    e.target.style.setProperty("--range-progress", `${e.target.value}%`);
+  };
+
+  const onLoadedMetadataHandler = () => {
+    const seconds = audioRef.current.duration;
+    setDuration(seconds);
+    progressRef.current.max = seconds;
+  };
+
+  // Helper functions
+  const formatTime = (time) => {
+    if (time && !isNaN(time)) {
+      const minutes = Math.floor(time / 60);
+      const formatMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+      const seconds = Math.floor(time % 60);
+      const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
+      return `${formatMinutes}:${formatSeconds}`;
+    }
+    return "00:00";
+  };
+
+  return (
+    <div className="player">
+      {song && (
+        <>
+          <div className="player-song">
+            <img src={song.img} alt="" />
+            <div className="player-song__context">
+              <span className="player-song__name">{song.name}</span>
+              <span className="player-song__artist">{song.artist.name}</span>
+            </div>
+            <IoHeart className="player-song__like" />
+          </div>
+          <div>
+            <audio
+              ref={audioRef}
+              src={song.song}
+              onLoadedMetadata={onLoadedMetadataHandler}
+            />
+
+            <div className="player__icons">
+              <IoShuffle />
+              <IoPlaySkipBackSharp />
+              <button
+                className="player__icon-btn"
+                onClick={togglePlayPauseHandler}
+              >
+                {isPlaying ? <IoPauseCircle /> : <IoPlayCircle />}
+              </button>
+              <IoPlaySkipForwardSharp />
+              <IoRepeat />
+            </div>
+            <div className="player__range">
+              <span className="player-song__time">
+                {formatTime(currentTime)}
+              </span>
+              <input
+                ref={progressRef}
+                type="range"
+                defaultValue={0}
+                onChange={progressChangeHandler}
+              />
+              <span className="player-song__time">{formatTime(duration)}</span>
+            </div>
+          </div>
+        </>
+      )}
+
+      <div className="player__volume">
+        <IoVolumeMediumOutline onClick={getSongHandler} />
+        <input
+          ref={volumeRef}
+          type="range"
+          min={0}
+          max={100}
+          value={volume}
+          onChange={(e) => volumeChangeHandler(e)}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Player;

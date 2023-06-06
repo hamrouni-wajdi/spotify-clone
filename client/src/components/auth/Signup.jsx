@@ -1,10 +1,7 @@
-import axios from "../api/axios";
-import { useEffect, useState, useContext } from "react";
-
 import "./Auth.scss";
-import logo from "./../img/logo.svg";
+import logo from "../../img/logo.svg";
 import { Link } from "react-router-dom";
-import { loginUser, signupUser } from "../store/thunks/user";
+import { signupUser } from "../../store/thunks/user";
 import { useDispatch, useSelector } from "react-redux";
 
 const Signup = (props) => {
