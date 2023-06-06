@@ -1,8 +1,8 @@
 import "./App.scss";
 
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
-import Header from "./Header/Header";
 import { useSelector } from "react-redux";
+import Artist from "./Artist/Artist";
 
 const App = (props) => {
   const { data } = useSelector((state) => state.user);
@@ -27,7 +27,8 @@ const App = (props) => {
           />
         </div>
       </div>
-      <Header />
+      {/*<Header />*/}
+      <Artist />
     </div>
   );
 };

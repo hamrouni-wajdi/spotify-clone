@@ -4,15 +4,20 @@
   overflow: hidden;
   overflow-y: scroll;
 
+
+  position: relative;
   height: 100%;
   margin-top: 8px;
   margin-right: 8px;
 
   &-nav {
+    position: absolute;
+    width: 100%;
     padding: 16px 24px;
-    background-color: #1db954;
-    background-color: #121212;
-    box-shadow: 0 0 36px #000000;
+    //background-color: #1db954;
+    //background-color: #121212;
+    background-color: rgba(255, 255, 255, 0);
+    //box-shadow: 0 0 36px #000000;
     display: flex;
     justify-content: space-between;
 
@@ -38,7 +43,7 @@
       &--img {
         height: 32px;
         border-radius: 50%;
-        box-shadow: 0 0 0 2px #000000b3;
+        box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.5);
       }
     }
   }

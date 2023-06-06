@@ -7,16 +7,19 @@ const Nav = (props) => {
     <div>
       <div className="nav">
         <div className="nav-link">
-          <IoHomeOutline /> Home
+          <IoHomeOutline />
+          <span>Home</span>
         </div>
         <div className="nav-link">
-          <IoSearch /> Search
+          <IoSearch />
+          <span>Search</span>
         </div>
       </div>
       <div className="library">
         <div className="library-link">
           <div className="library-link__link">
-            <IoLibraryOutline /> Library
+            <IoLibraryOutline />
+            <span>Library</span>
           </div>
           <div className="library-link__add">+</div>
         </div>
