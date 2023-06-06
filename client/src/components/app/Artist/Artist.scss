@@ -69,4 +69,12 @@
       padding: 7px 15px;
     }
   }
+
+  // Songs
+  &-songs {
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+  }
 }

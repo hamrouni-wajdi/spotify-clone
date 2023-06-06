@@ -17,7 +17,15 @@ const Artist = () => {
         <IoPauseCircle />
         <button>Following</button>
       </div>
-      <List />
+      <div className="artist-songs">
+        <div className="artist-songs__list">
+          <h2 className="h2">Popular</h2>
+          <List />
+        </div>
+        <div className="artist-songs__liked">
+          <h2 className="h2">Liked Songs</h2>
+        </div>
+      </div>
     </div>
   );
 };

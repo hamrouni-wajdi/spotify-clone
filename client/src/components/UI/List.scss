@@ -1,0 +1,28 @@
+.list {
+
+}
+
+.list-item {
+  border-radius: 4px;
+  color: #fff;
+
+  padding: 0 16px;
+  height: 56px;
+  display: grid;
+  align-items: center;
+  grid-gap: 16px;
+  grid-template-columns: auto auto 2fr 1fr auto auto;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  img {
+    height: 40px
+  }
+
+  svg {
+    color: var(--main-cl);
+    font-size: 24px
+  }
+}
