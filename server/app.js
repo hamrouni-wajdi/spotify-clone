@@ -22,10 +22,15 @@ const app = express();
 // );
 // app.options('*', cors());
 
+const corsOrigin =
+  process.NODE_ENV === 'production'
+    ? 'https://spotify.maqsud.me/'
+    : 'http://localhost:3000';
+
 app.use(
   cors({
     // origin: 'https://maqsud-spotify.vercel.app',
-    origin: 'http://localhost:3000/',
+    origin: corsOrigin,
     credentials: true,
   })
 );
