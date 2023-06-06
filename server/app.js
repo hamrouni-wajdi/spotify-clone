@@ -23,7 +23,7 @@ const app = express();
 // app.options('*', cors());
 
 const corsOrigin =
-  process.env.NODE_ENV === 'production'
+  process.NODE_ENV === 'production'
     ? 'https://spotify.maqsud.me/'
     : 'http://localhost:3000';
 
