@@ -58,14 +58,14 @@ const songSchema = new mongoose.Schema(
 );
 
 // Query middlewares
-songSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'artist',
-    select: 'name photo',
-  });
-
-  next();
-});
+// songSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'artist',
+//     select: 'name photo',
+//   });
+//
+//   next();
+// });
 
 const Song = new mongoose.model('Song', songSchema);
 

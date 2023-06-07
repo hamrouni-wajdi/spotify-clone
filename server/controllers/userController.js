@@ -52,8 +52,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     );
   }
 
-  console.log(req.file);
-
   // 2) Update user data
   const userData = {
     name: req.body.name,
@@ -75,7 +73,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 
 exports.getArtist = catchAsync(async (req, res, next) => {
-  const artist = await User.findById(req.params.id);
+  const artist = await User.findById(req.params.id).populate('songs');
   console.log(artist);
 
   if (!artist || artist.role !== 'artist') {
@@ -84,9 +82,7 @@ exports.getArtist = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    data: {
-      data: artist,
-    },
+    data: artist,
   });
 });
 

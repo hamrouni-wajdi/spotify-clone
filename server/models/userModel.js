@@ -66,11 +66,22 @@ const userSchema = new mongoose.Schema(
   }
 );
 
+// Virtual populate
+userSchema.virtual('songs', {
+  ref: 'Song',
+  foreignField: 'artist',
+  localField: '_id',
+});
+
 // Query middlewares
 userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
   next();
 });
+
+// userSchema.pre('findOne', (next) => {
+//   this.find().populate('songs');
+// });
 
 // playlistSchema.pre('findOne', function (next) {
 //   this.populate({
