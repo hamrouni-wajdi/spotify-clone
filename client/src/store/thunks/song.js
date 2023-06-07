@@ -1,8 +1,9 @@
 import axios from "../../api/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getSong = createAsyncThunk("song/getSong", async ({ id }) => {
+export const getSong = createAsyncThunk("song/getSong", async (id) => {
   try {
+    console.log("redux", id);
     const res = await axios.get(`/songs/${id}`);
 
     return res.data.data.song;

@@ -11,7 +11,6 @@ const Artist = () => {
 
   // Handler functions
   const getArtistHandler = () => {
-    console.log("click");
     dispatch(getArtist());
   };
 
@@ -31,7 +30,7 @@ const Artist = () => {
       <div className="artist-songs">
         <div className="artist-songs__list">
           <h2 className="h2">Popular</h2>
-          <List />
+          {artist && <List list={artist.songs} />}
         </div>
         <div className="artist-songs__liked">
           <h2 className="h2">Liked Songs</h2>
