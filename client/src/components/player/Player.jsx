@@ -10,7 +10,7 @@ import {
   IoVolumeMediumOutline,
 } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { getSong } from "../../store/thunks/song";
+import { likeSong } from "../../store/thunks/song";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const img =
@@ -29,7 +29,7 @@ const Player = (props) => {
 
   // State
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(50);
+  const [volume, setVolume] = useState(100);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
 
@@ -67,9 +67,7 @@ const Player = (props) => {
     }
   }, [volume, audioRef]);
 
-  const getSongHandler = () => {
-    dispatch(getSong({ id: "647fb866772cb4c3664d12fd" }));
-  };
+  const likeSongHandler = () => dispatch(likeSong(song.id));
 
   // Music player
   const togglePlayPauseHandler = () => setIsPlaying((pre) => !pre);
@@ -111,7 +109,7 @@ const Player = (props) => {
               <span className="player-song__name">{song.name}</span>
               <span className="player-song__artist">{song.artist.name}</span>
             </div>
-            <IoHeart className="player-song__like" />
+            <IoHeart className="player-song__like" onClick={likeSongHandler} />
           </div>
           <div>
             <audio
@@ -149,13 +147,14 @@ const Player = (props) => {
       )}
 
       <div className="player__volume">
-        <IoVolumeMediumOutline onClick={getSongHandler} />
+        <IoVolumeMediumOutline />
         <input
           ref={volumeRef}
           type="range"
           min={0}
           max={100}
           value={volume}
+          defaultValue={100}
           onChange={(e) => volumeChangeHandler(e)}
         />
       </div>
