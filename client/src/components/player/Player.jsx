@@ -1,6 +1,7 @@
 import "./Player.scss";
 import {
   IoHeart,
+  IoHeartOutline,
   IoPauseCircle,
   IoPlayCircle,
   IoPlaySkipBackSharp,
@@ -10,7 +11,7 @@ import {
   IoVolumeMediumOutline,
 } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { likeSong } from "../../store/thunks/song";
+import { dislikeSong, likeSong } from "../../store/thunks/song";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const img =
@@ -18,7 +19,7 @@ const img =
 
 const Player = (props) => {
   // ⚛ Redux
-  const { song } = useSelector((state) => state.song);
+  const { song, isLiked } = useSelector((state) => state.song);
   const dispatch = useDispatch();
 
   // Ref
@@ -69,6 +70,8 @@ const Player = (props) => {
 
   const likeSongHandler = () => dispatch(likeSong(song.id));
 
+  const dislikeSongHandler = () => dispatch(dislikeSong(song.id));
+
   // Music player
   const togglePlayPauseHandler = () => setIsPlaying((pre) => !pre);
 
@@ -109,7 +112,17 @@ const Player = (props) => {
               <span className="player-song__name">{song.name}</span>
               <span className="player-song__artist">{song.artist.name}</span>
             </div>
-            <IoHeart className="player-song__like" onClick={likeSongHandler} />
+            {isLiked === true ? (
+              <IoHeart
+                className="player-song__like player-song__like--green"
+                onClick={dislikeSongHandler}
+              />
+            ) : (
+              <IoHeartOutline
+                className="player-song__like"
+                onClick={likeSongHandler}
+              />
+            )}
           </div>
           <div>
             <audio

@@ -75,6 +75,10 @@
     &__like {
       font-size: 24px;
       color: #1db954;
+
+      &--green {
+        fill: var(--main-cl);
+      }
     }
 
     &__time {

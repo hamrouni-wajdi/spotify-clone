@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSong, likeSong } from "../thunks/song";
+import { dislikeSong, getSong, likeSong } from "../thunks/song";
 
 export const songSlice = createSlice({
   name: "song",
   initialState: {
     song: null,
+    isLiked: false,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -17,6 +18,12 @@ export const songSlice = createSlice({
       // like song
       .addCase(likeSong.fulfilled, (state, action) => {
         console.log(state, action.payload);
+        state.isLiked = true;
+      })
+      // dislike song
+      .addCase(dislikeSong.fulfilled, (state, action) => {
+        console.log(state, action.payload);
+        state.isLiked = false;
       });
   },
 });
