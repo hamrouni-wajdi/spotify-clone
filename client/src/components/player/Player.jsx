@@ -73,7 +73,17 @@ const Player = (props) => {
   const dislikeSongHandler = () => dispatch(dislikeSong(song.id));
 
   // Music player
-  const togglePlayPauseHandler = () => setIsPlaying((pre) => !pre);
+  const togglePlayPauseHandler = () => {
+    setIsPlaying((pre) => !pre);
+    if (navigator && navigator.mediaSession) {
+      console.log("navigator is here");
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: `${song.name}`,
+        artist: "Maqsud's Spotify",
+        artwork: [{ src: song.img }],
+      });
+    }
+  };
 
   const progressChangeHandler = () => {
     audioRef.current.currentTime = progressRef.current.value;
