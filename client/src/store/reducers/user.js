@@ -25,20 +25,18 @@ export const userSlice = createSlice({
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
         state.data = action.payload.data;
-        // state.token = action.payload.token;
+        state.auth = true;
       })
       // Sign up
       .addCase(signupUser.fulfilled, (state, action) => {
         state.data = action.payload.data;
-        state.token = action.payload.token;
+        state.auth = true;
       })
       // Is auth
       .addCase(isLoggedIn.fulfilled, (state, action) => {
         state.auth = true;
-        state.data = action.payload.data;
       });
   },
 });
 
-// export const {isAuth} = userSlice.actions
 export default userSlice.reducer;

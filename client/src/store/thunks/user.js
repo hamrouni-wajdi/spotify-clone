@@ -10,7 +10,7 @@ export const loginUser = createAsyncThunk(
         password,
       });
 
-      return { data: res.data.data.user };
+      return { data: res.data.data.user, auth: true };
     } catch (e) {
       throw e;
     }
@@ -28,7 +28,7 @@ export const signupUser = createAsyncThunk(
         passwordConfirm,
       });
 
-      return { data: res.data.data.user };
+      return { data: res.data.data.user, auth: true };
     } catch (e) {
       throw e;
     }
@@ -38,9 +38,8 @@ export const signupUser = createAsyncThunk(
 export const isLoggedIn = createAsyncThunk("user/isLoggedIn", async () => {
   try {
     const res = await axios.get("/users/isLoggedIn");
-    console.log(res.data);
 
-    return { data: res.data.data.user };
+    return { data: res.data.data.user, auth: true };
   } catch (e) {
     throw e;
   }
