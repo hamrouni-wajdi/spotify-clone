@@ -13,7 +13,7 @@ let DEFAULT_USER_STATE = {
 };
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: DEFAULT_USER_STATE,
   reducers: {
     // isAuth: state => {
@@ -25,7 +25,7 @@ export const userSlice = createSlice({
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
         state.data = action.payload.data;
-        state.token = action.payload.token;
+        // state.token = action.payload.token;
       })
       // Sign up
       .addCase(signupUser.fulfilled, (state, action) => {
@@ -36,7 +36,7 @@ export const userSlice = createSlice({
       .addCase(isLoggedIn.fulfilled, (state, action) => {
         state.auth = true;
         state.data = action.payload.data;
-      })
+      });
   },
 });
 

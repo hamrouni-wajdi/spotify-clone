@@ -9,9 +9,8 @@ export const loginUser = createAsyncThunk(
         email,
         password,
       });
-      console.log(res.data.data.user);
 
-      return { data: res.data.data.user, token: res.data.token };
+      return { data: res.data.data.user };
     } catch (e) {
       throw e;
     }
@@ -28,9 +27,8 @@ export const signupUser = createAsyncThunk(
         password,
         passwordConfirm,
       });
-      console.log(res);
 
-      return { data: res.data.data.user, token: res.data.token };
+      return { data: res.data.data.user };
     } catch (e) {
       throw e;
     }

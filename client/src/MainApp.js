@@ -23,7 +23,6 @@ function MainApp() {
   }, []);
 
   useEffect(() => {
-    console.log(user);
     if (user.auth === true) {
       setLoading(false);
     }
