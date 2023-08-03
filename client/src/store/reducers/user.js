@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { isLoggedIn, loginUser, signupUser } from "../thunks/user";
+import {
+  dislikeSong,
+  isLoggedIn,
+  likeSong,
+  loginUser,
+  signupUser,
+} from "../thunks/user";
 
 let DEFAULT_USER_STATE = {
   data: {
@@ -20,6 +26,9 @@ export const userSlice = createSlice({
     //   console.log('here')
     //   console.log(cookie.load('jwt'))
     // }
+    // likeSongUser: (state, action) => {
+    //   console.log("like song user", action.payload);
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -34,7 +43,16 @@ export const userSlice = createSlice({
       })
       // Is auth
       .addCase(isLoggedIn.fulfilled, (state, action) => {
+        state.data = action.payload.data;
         state.auth = true;
+      })
+      // Like song
+      .addCase(likeSong.fulfilled, (state, action) => {
+        state.data.likedSongs = action.payload;
+      })
+      // Dislike song
+      .addCase(dislikeSong.fulfilled, (state, action) => {
+        state.data.likedSongs = action.payload;
       });
   },
 });

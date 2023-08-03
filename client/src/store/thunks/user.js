@@ -44,3 +44,28 @@ export const isLoggedIn = createAsyncThunk("user/isLoggedIn", async () => {
     throw e;
   }
 });
+
+// Like/dislike
+export const likeSong = createAsyncThunk("song/likeSong", async (id) => {
+  try {
+    const res = await axios.post("/users/likes/add", {
+      song: id,
+    });
+
+    return res.data.songs;
+  } catch (err) {
+    throw err;
+  }
+});
+
+export const dislikeSong = createAsyncThunk("song/dislikeSong", async (id) => {
+  try {
+    const res = await axios.post("/users/likes/remove", {
+      song: id,
+    });
+
+    return res.data.songs;
+  } catch (err) {
+    throw err;
+  }
+});

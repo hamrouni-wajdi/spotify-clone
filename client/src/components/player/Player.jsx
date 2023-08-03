@@ -11,15 +11,13 @@ import {
   IoVolumeMediumOutline,
 } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { dislikeSong, likeSong } from "../../store/thunks/song";
+import { dislikeSong, likeSong } from "../../store/thunks/user";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const img =
-  "https://images.unsplash.com/photo-1659922964423-bbecb913f7ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80";
-
-const Player = (props) => {
+const Player = () => {
   // ⚛ Redux
-  const { song, isLiked } = useSelector((state) => state.song);
+  const { song } = useSelector((state) => state.song);
+  const { likedSongs } = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
 
   // Ref
@@ -76,7 +74,6 @@ const Player = (props) => {
   const togglePlayPauseHandler = () => {
     setIsPlaying((pre) => !pre);
     if (navigator && navigator.mediaSession) {
-      console.log("navigator is here");
       navigator.mediaSession.metadata = new MediaMetadata({
         title: `${song.name}`,
         artist: "Maqsud's Spotify",
@@ -112,6 +109,11 @@ const Player = (props) => {
     return "00:00";
   };
 
+  //-- Like
+  const userLikedSong = () => {
+    return likedSongs.includes(song.id);
+  };
+
   return (
     <div className="player">
       {song && (
@@ -122,7 +124,7 @@ const Player = (props) => {
               <span className="player-song__name">{song.name}</span>
               <span className="player-song__artist">{song.artist.name}</span>
             </div>
-            {isLiked === true ? (
+            {userLikedSong() === true ? (
               <IoHeart
                 className="player-song__like player-song__like--green"
                 onClick={dislikeSongHandler}
