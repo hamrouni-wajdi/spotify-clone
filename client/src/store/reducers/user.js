@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   dislikeSong,
+  followArtist,
   isLoggedIn,
   likeSong,
   loginUser,
@@ -53,6 +54,10 @@ export const userSlice = createSlice({
       // Dislike song
       .addCase(dislikeSong.fulfilled, (state, action) => {
         state.data.likedSongs = action.payload;
+      })
+      // Follow user
+      .addCase(followArtist.fulfilled, (state, action) => {
+        state.data.followedUsers = action.payload;
       });
   },
 });

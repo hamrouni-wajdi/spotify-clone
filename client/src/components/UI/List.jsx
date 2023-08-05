@@ -1,12 +1,14 @@
 import "./List.scss";
 import img from "./../../img/user.png";
-import { IoHeart } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 import { getSong } from "../../store/thunks/song";
 
 const List = (props) => {
   // ⚛ Redux
+  const likedSongs = useSelector((state) => state.user.data.likedSongs);
   const dispatch = useDispatch();
+
   const playSongHandler = (id) => {
     dispatch(getSong(id));
   };
@@ -24,7 +26,12 @@ const List = (props) => {
             <img src={el.img} alt="Song cover image" />
             <span>{el.name}</span>
             <span>{el.plays}</span>
-            <IoHeart />
+            {/*{el.isLiked ? <IoHeart onClick={likeSong} /> : null}*/}
+            {likedSongs.includes(el.id) ? (
+              <IoHeart />
+            ) : (
+              <IoHeartOutline style={{ color: "#fff" }} />
+            )}
             <span>3:15</span>
           </div>
         ))}

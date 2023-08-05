@@ -69,3 +69,18 @@ export const dislikeSong = createAsyncThunk("song/dislikeSong", async (id) => {
     throw err;
   }
 });
+
+// Follow artist
+export const followArtist = createAsyncThunk(
+  "user/followArtist",
+  async (id) => {
+    try {
+      const res = await axios.post(`/users/follow/${id}`);
+      console.log("follow thunk", res.data);
+
+      return res.data.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+);

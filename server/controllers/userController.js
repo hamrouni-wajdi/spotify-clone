@@ -106,7 +106,7 @@ exports.followArtist = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    data: user,
+    data: user.followedUsers,
   });
 });
 
