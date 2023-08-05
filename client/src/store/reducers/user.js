@@ -6,6 +6,7 @@ import {
   likeSong,
   loginUser,
   signupUser,
+  unfollowArtist,
 } from "../thunks/user";
 
 let DEFAULT_USER_STATE = {
@@ -22,15 +23,7 @@ let DEFAULT_USER_STATE = {
 export const userSlice = createSlice({
   name: "user",
   initialState: DEFAULT_USER_STATE,
-  reducers: {
-    // isAuth: state => {
-    //   console.log('here')
-    //   console.log(cookie.load('jwt'))
-    // }
-    // likeSongUser: (state, action) => {
-    //   console.log("like song user", action.payload);
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -57,6 +50,12 @@ export const userSlice = createSlice({
       })
       // Follow user
       .addCase(followArtist.fulfilled, (state, action) => {
+        console.log("case follow", action.payload);
+        state.data.followedUsers = action.payload;
+      }) // Follow user
+      .addCase(unfollowArtist.fulfilled, (state, action) => {
+        console.log("case unfollow", action.payload);
+
         state.data.followedUsers = action.payload;
       });
   },

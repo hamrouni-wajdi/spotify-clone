@@ -29,6 +29,11 @@ router.delete('/deleteMe', authController.protect, authController.deleteMe);
 // User
 router.get('/:id', authController.protect, userController.getArtist);
 router.post('/follow/:id', authController.protect, userController.followArtist);
+router.post(
+  '/unfollow/:id',
+  authController.protect,
+  userController.unfollowArtist
+);
 
 // Playlists
 router.use('/:userId/playlists', playlistRouter);

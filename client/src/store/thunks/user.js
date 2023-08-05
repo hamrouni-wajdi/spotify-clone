@@ -84,3 +84,17 @@ export const followArtist = createAsyncThunk(
     }
   }
 );
+
+export const unfollowArtist = createAsyncThunk(
+  "user/unfollowArtist",
+  async (id) => {
+    try {
+      const res = await axios.post(`/users/unfollow/${id}`);
+      console.log("unfollow thunk", res.data);
+
+      return res.data.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+);

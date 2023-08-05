@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema(
         message: 'You can not like more than 50 songs',
       },
     },
-    followedUsers: {
+    followedArtists: {
       type: [
         {
           type: mongoose.Schema.ObjectId,

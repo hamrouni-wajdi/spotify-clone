@@ -100,13 +100,32 @@ exports.followArtist = catchAsync(async (req, res, next) => {
 
   const user = await User.findByIdAndUpdate(
     req.user.id,
-    { $addToSet: { followedUsers: req.params.id } },
+    { $addToSet: { followedArtists: req.params.id } },
     { runValidators: true, new: true }
   );
 
   res.status(200).json({
     status: 'success',
-    data: user.followedUsers,
+    data: user.followedArtists,
+  });
+});
+
+exports.unfollowArtist = catchAsync(async (req, res, next) => {
+  const artist = await User.findById(req.params.id);
+
+  if (!artist || artist.role !== 'artist') {
+    return next(new AppError('No artist found with that id', 404));
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $pull: { followedArtists: req.params.id } },
+    { runValidators: true, new: true }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: user.followedArtists,
   });
 });
 
