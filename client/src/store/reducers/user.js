@@ -51,12 +51,12 @@ export const userSlice = createSlice({
       // Follow user
       .addCase(followArtist.fulfilled, (state, action) => {
         console.log("case follow", action.payload);
-        state.data.followedUsers = action.payload;
+        state.data.followedArtists = action.payload;
       }) // Follow user
       .addCase(unfollowArtist.fulfilled, (state, action) => {
         console.log("case unfollow", action.payload);
 
-        state.data.followedUsers = action.payload;
+        state.data.followedArtists = action.payload;
       });
   },
 });

@@ -1,15 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./MainApp.scss";
-import Nav from "./components/nav/Nav";
-import App from "./components/app/App";
-import Player from "./components/player/Player";
-import Login from "./components/auth/Login";
-import Signup from "./components/auth/Signup";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { isLoggedIn } from "./store/thunks/user";
-import Loading from "./components/UI/Loading";
+import Nav from "./components/nav/Nav";
+import Player from "./components/player/Player";
+import App from "./components/app/App";
+import Artist from "./components/app/Artist/Artist";
 
 function MainApp() {
   const [loading, setLoading] = useState(true);
@@ -30,26 +28,25 @@ function MainApp() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            loading ? (
-              <Loading />
-            ) : (
-              <div className="main-app">
-                <Nav />
-                <App />
-                <Player />
-              </div>
-            )
-
-            // <Navigate to='/login' />
-          }
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
+      <div className="main-app">
+        <Nav />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route
+            path="/artist/:id"
+            element={
+              <App>
+                <Artist />
+              </App>
+            }
+          />
+        </Routes>
+        <Player />
+      </div>
+      {/*<Routes>*/}
+      {/*  <Route path="/login" element={<Login />} />*/}
+      {/*  <Route path="/signup" element={<Signup />} />*/}
+      {/*</Routes>*/}
     </BrowserRouter>
   );
 }
