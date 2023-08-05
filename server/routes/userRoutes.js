@@ -28,15 +28,24 @@ router.delete('/deleteMe', authController.protect, authController.deleteMe);
 
 // User
 router.get('/:id', authController.protect, userController.getArtist);
+router.post('/follow/:id', authController.protect, userController.followArtist);
 
 // Playlists
 router.use('/:userId/playlists', playlistRouter);
 
 // Manage likes
+// router
+//   .route('/likes')
+//   .get(authController.protect, userController.getLikedSongs)
+//   .post(authController.protect, userController.likeSong)
+//   .delete(authController.protect, userController.unlikeSong);
+
 router
-  .route('/likes')
-  .get(authController.protect, userController.getLikedSongs)
-  .post(authController.protect, userController.likeSong)
-  .delete(authController.protect, userController.unlikeSong);
+  .route('/likes/add')
+  .post(authController.protect, userController.likeSong);
+
+router
+  .route('/likes/remove')
+  .post(authController.protect, userController.dislikeSong);
 
 module.exports = router;

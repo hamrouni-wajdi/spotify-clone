@@ -74,15 +74,39 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 
 exports.getArtist = catchAsync(async (req, res, next) => {
   const artist = await User.findById(req.params.id).populate('songs');
-  console.log(artist);
 
   if (!artist || artist.role !== 'artist') {
     return next(new AppError('No artist found with that ID', 404));
   }
 
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  artist.songs.map((song) => {
+    song.song = `${serverUrl}public/songs/${song.song}`;
+    song.img = `${serverUrl}public/songs/${song.img}`;
+  });
+
   res.status(200).json({
     status: 'success',
     data: artist,
+  });
+});
+
+exports.followArtist = catchAsync(async (req, res, next) => {
+  const artist = await User.findById(req.params.id);
+
+  if (!artist || artist.role !== 'artist') {
+    return next(new AppError('You can only follow artists', 404));
+  }
+
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $addToSet: { followedUsers: req.params.id } },
+    { runValidators: true, new: true }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: user,
   });
 });
 
@@ -107,30 +131,27 @@ exports.likeSong = catchAsync(async (req, res, next) => {
     req.user.id,
     { $addToSet: { likedSongs: song } },
     { runValidators: true, new: true }
-  ).populate('likedSongs');
+  );
 
   res.status(200).json({
     status: 'success',
-    data: {
-      songs: user.likedSongs,
-    },
+    songs: user.likedSongs,
   });
 });
 
-exports.unlikeSong = catchAsync(async (req, res, next) => {
+exports.dislikeSong = catchAsync(async (req, res, next) => {
   const { song } = req.body;
+  console.log(req.body);
 
   // REVIEW: If logged in used is artist user info is populated twice
   const user = await User.findByIdAndUpdate(
     req.user.id,
     { $pull: { likedSongs: song } },
     { runValidators: true, new: true }
-  ).populate('likedSongs');
+  );
 
   res.status(200).json({
     status: 'success',
-    data: {
-      songs: user.likedSongs,
-    },
+    songs: user.likedSongs,
   });
 });

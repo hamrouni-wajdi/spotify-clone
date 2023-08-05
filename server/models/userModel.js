@@ -30,6 +30,18 @@ const userSchema = new mongoose.Schema(
         message: 'You can not like more than 50 songs',
       },
     },
+    followedUsers: {
+      type: [
+        {
+          type: mongoose.Schema.ObjectId,
+          ref: 'User',
+        },
+      ],
+      validate: {
+        validator: (arr) => arr.length <= 50,
+        message: 'You can not like more than 50 songs',
+      },
+    },
     role: {
       type: String,
       enum: ['user', 'artist', 'admin'],

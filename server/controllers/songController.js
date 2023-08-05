@@ -63,8 +63,8 @@ exports.getAllSongs = catchAsync(async (req, res, next) => {
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
   songs.map((song) => {
-    song.song = serverUrl + song.song;
-    song.img = serverUrl + song.img;
+    song.song = `${serverUrl}public/songs/${song.song}`;
+    song.img = `${serverUrl}public/songs/${song.img}`;
   });
 
   res.status(200).json({
