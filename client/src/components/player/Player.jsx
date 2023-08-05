@@ -13,11 +13,13 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { dislikeSong, likeSong } from "../../store/thunks/user";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { playPause } from "../../store/reducers/player";
 
 const Player = () => {
   // ⚛ Redux
   const { song } = useSelector((state) => state.song);
   const { likedSongs } = useSelector((state) => state.user.data);
+  const { isPlaying } = useSelector((state) => state.player);
   const dispatch = useDispatch();
 
   // Ref
@@ -27,7 +29,7 @@ const Player = () => {
   const volumeRef = useRef();
 
   // State
-  const [isPlaying, setIsPlaying] = useState(false);
+  // const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(100);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -72,7 +74,8 @@ const Player = () => {
 
   // Music player
   const togglePlayPauseHandler = () => {
-    setIsPlaying((pre) => !pre);
+    // setIsPlaying((pre) => !pre);
+    dispatch(playPause());
     if (navigator && navigator.mediaSession) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: `${song.name}`,
@@ -107,6 +110,10 @@ const Player = () => {
       return `${formatMinutes}:${formatSeconds}`;
     }
     return "00:00";
+  };
+
+  const playPauseHandler = () => {
+    dispatch(playPause());
   };
 
   //-- Like

@@ -1,17 +1,19 @@
 import "./Artist.scss";
 import badgeImg from "./../../../img/verify.png";
-import { IoPauseCircle } from "react-icons/io5";
+import { IoPauseCircle, IoPlayCircle } from "react-icons/io5";
 import List from "../../UI/List";
 import { useDispatch, useSelector } from "react-redux";
 import { getArtist } from "../../../store/thunks/artist";
 import { followArtist, unfollowArtist } from "../../../store/thunks/user";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { playPause } from "../../../store/reducers/player";
 
 const Artist = () => {
-  const dispatch = useDispatch();
   const { artist } = useSelector((state) => state.artist);
   const { followedArtists } = useSelector((state) => state.user.data);
+  const { isPlaying } = useSelector((state) => state.player);
+  const dispatch = useDispatch();
 
   // React router
   const { id } = useParams();
@@ -22,6 +24,9 @@ const Artist = () => {
   }, [id]);
 
   // Handler functions
+  const playPauseHandler = () => {
+    dispatch(playPause());
+  };
 
   // Follow artist
   const userFollowedArtist = () => {
@@ -50,8 +55,11 @@ const Artist = () => {
           </div>
 
           <div className="artist__nav">
-            <IoPauseCircle />
-            {/*make this work afer auto loading artist */}
+            {isPlaying ? (
+              <IoPauseCircle onClick={playPauseHandler} />
+            ) : (
+              <IoPlayCircle onClick={playPauseHandler} />
+            )}
             {!userFollowedArtist() ? (
               <button onClick={followArtistHandler}>Follow</button>
             ) : (
