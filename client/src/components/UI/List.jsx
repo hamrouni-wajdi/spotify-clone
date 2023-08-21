@@ -1,5 +1,4 @@
 import "./List.scss";
-import img from "./../../img/user.png";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { getSong } from "../../store/thunks/song";
@@ -29,7 +28,7 @@ const List = (props) => {
             onClick={() => playSongHandler(el.id)}
           >
             <span>{i + 1}</span>
-            <img src={el.img} alt="Song cover image" />
+            <img src={el.img} alt="Song cover" />
             <span>{el.name}</span>
             <span>{el.plays}</span>
             {/*{el.isLiked ? <IoHeart onClick={likeSong} /> : null}*/}
