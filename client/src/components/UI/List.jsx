@@ -3,6 +3,7 @@ import img from "./../../img/user.png";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { getSong } from "../../store/thunks/song";
+import { dislikeSong, likeSong } from "../../store/thunks/user";
 
 const List = (props) => {
   // ⚛ Redux
@@ -12,6 +13,11 @@ const List = (props) => {
   const playSongHandler = (id) => {
     dispatch(getSong(id));
   };
+
+  // 💚 like song
+  const likeSongHandler = (id) => dispatch(likeSong(id));
+
+  const dislikeSongHandler = (id) => dispatch(dislikeSong(id));
 
   return (
     <div className="list">
@@ -28,9 +34,12 @@ const List = (props) => {
             <span>{el.plays}</span>
             {/*{el.isLiked ? <IoHeart onClick={likeSong} /> : null}*/}
             {likedSongs.includes(el.id) ? (
-              <IoHeart />
+              <IoHeart onClick={() => dislikeSongHandler(el.id)} />
             ) : (
-              <IoHeartOutline style={{ color: "#fff" }} />
+              <IoHeartOutline
+                style={{ color: "#fff" }}
+                onClick={() => likeSongHandler(el.id)}
+              />
             )}
             <span>3:15</span>
           </div>
