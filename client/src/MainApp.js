@@ -8,6 +8,7 @@ import Nav from "./components/nav/Nav";
 import Player from "./components/player/Player";
 import App from "./components/app/App";
 import Artist from "./components/app/Artist/Artist";
+import Playlist from "./components/app/Playlist/Playlist";
 
 function MainApp() {
   const [loading, setLoading] = useState(true);
@@ -37,6 +38,15 @@ function MainApp() {
             element={
               <App>
                 <Artist />
+              </App>
+            }
+          />
+          <Route
+            path="/playlist"
+            // path="/playlist/:id"
+            element={
+              <App>
+                <Playlist />
               </App>
             }
           />
