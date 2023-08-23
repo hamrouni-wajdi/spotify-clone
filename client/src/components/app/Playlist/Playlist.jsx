@@ -1,8 +1,18 @@
 import "./Playlist.scss";
 import { IoPauseCircle } from "react-icons/io5";
+import { useEffect } from "react";
+import { getPlaylist } from "../../../store/thunks/playlist";
+import { useDispatch } from "react-redux";
 
 const Playlist = () => {
   // Redux
+
+  const dispatch = useDispatch();
+
+  // Effects
+  useEffect(() => {
+    dispatch(getPlaylist());
+  }, []);
 
   return (
     <div className="playlist">
