@@ -1,6 +1,9 @@
 import "./Playlist.scss";
+import { IoPauseCircle } from "react-icons/io5";
 
 const Playlist = () => {
+  // Redux
+
   return (
     <div className="playlist">
       <div className="playlist__header">
@@ -11,10 +14,15 @@ const Playlist = () => {
           />
         </div>
         <div className="playlist__info">
-          <p>Playlist</p>
-          <h1 className="artist__name">Russian hits</h1>
+          <p className="playlist__info--type">Playlist</p>
+          <h1 className="playlist__name">Russian hits</h1>
+          <div></div>
           <p>👨 * Maqsud Tolipov * 46 songs</p>
         </div>
+      </div>
+
+      <div className="playlist-nav">
+        <IoPauseCircle />
       </div>
 
       <div className="playlist__songs">a</div>
