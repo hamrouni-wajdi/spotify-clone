@@ -4,6 +4,7 @@ import songReducer from "./reducers/song";
 import artistReducer from "./reducers/artist";
 import playerReducer from "./reducers/player";
 import playlistReducer from "./reducers/playlist";
+import queueReducer from './reducers/queue'
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     artist: artistReducer,
     player: playerReducer,
     playlist: playlistReducer,
+    queue: queueReducer
   },
 });

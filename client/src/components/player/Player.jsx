@@ -14,10 +14,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { dislikeSong, likeSong } from "../../store/thunks/user";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { playPause } from "../../store/reducers/player";
+import { nextSong, prevSong } from "../../store/reducers/queue";
 
 const Player = () => {
   // ⚛ Redux
-  const { song } = useSelector((state) => state.song);
+  const currentIndex = useSelector((state) => state.queue.current);
+  const queue = useSelector((state) => state.queue.list);
+  const song = queue[currentIndex];
+  // const { song } = useSelector((state) => state.song);
   const { likedSongs } = useSelector((state) => state.user.data);
   const { isPlaying } = useSelector((state) => state.player);
   const dispatch = useDispatch();
@@ -42,7 +46,7 @@ const Player = () => {
     progressRef.current.value = time;
     progressRef.current.style.setProperty(
       "--range-progress",
-      `${(progressRef.current.value / duration) * 100}%`
+      `${(progressRef.current.value / duration) * 100}%`,
     );
 
     playAnimationRef.current = requestAnimationFrame(repeat);
@@ -100,6 +104,14 @@ const Player = () => {
     progressRef.current.max = seconds;
   };
 
+  const handleNext = () => {
+    dispatch(nextSong());
+  };
+
+  const handlePrev = () => {
+    dispatch(prevSong());
+  };
+
   // Helper functions
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
@@ -110,10 +122,6 @@ const Player = () => {
       return `${formatMinutes}:${formatSeconds}`;
     }
     return "00:00";
-  };
-
-  const playPauseHandler = () => {
-    dispatch(playPause());
   };
 
   //-- Like
@@ -152,14 +160,14 @@ const Player = () => {
 
             <div className="player__icons">
               <IoShuffle />
-              <IoPlaySkipBackSharp />
+              <IoPlaySkipBackSharp onClick={handlePrev} />
               <button
                 className="player__icon-btn"
                 onClick={togglePlayPauseHandler}
               >
                 {isPlaying ? <IoPauseCircle /> : <IoPlayCircle />}
               </button>
-              <IoPlaySkipForwardSharp />
+              <IoPlaySkipForwardSharp onClick={handleNext} />
               <IoRepeat />
             </div>
             <div className="player__range">

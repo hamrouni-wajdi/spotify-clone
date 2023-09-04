@@ -4,6 +4,7 @@ import { IoPauseCircle, IoPlayCircle } from "react-icons/io5";
 import List from "../../UI/List";
 import { useDispatch, useSelector } from "react-redux";
 import { getArtist } from "../../../store/thunks/artist";
+import {replaceQueue} from '../../../store/reducers/queue';
 import { followArtist, unfollowArtist } from "../../../store/thunks/user";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -41,6 +42,10 @@ const Artist = () => {
     dispatch(unfollowArtist(artist.id));
   };
 
+  const replaceQueueHandler = (songs) => {
+    dispatch(replaceQueue(songs))
+  }
+
   return (
     <>
       {artist ? (
@@ -65,6 +70,7 @@ const Artist = () => {
             ) : (
               <button onClick={unfollowArtistHandler}>Following</button>
             )}
+            <div onClick={() => replaceQueueHandler(artist.songs)}>replace</div>
           </div>
 
           <div className="artist-songs">

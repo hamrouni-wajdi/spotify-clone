@@ -9,6 +9,8 @@ import Player from "./components/player/Player";
 import App from "./components/app/App";
 import Artist from "./components/app/Artist/Artist";
 import Playlist from "./components/app/Playlist/Playlist";
+import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
 
 function MainApp() {
   const [loading, setLoading] = useState(true);
@@ -53,10 +55,10 @@ function MainApp() {
         </Routes>
         <Player />
       </div>
-      {/*<Routes>*/}
-      {/*  <Route path="/login" element={<Login />} />*/}
-      {/*  <Route path="/signup" element={<Signup />} />*/}
-      {/*</Routes>*/}
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
     </BrowserRouter>
   );
 }

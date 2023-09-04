@@ -1,7 +1,7 @@
 import "./List.scss";
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { getSong } from "../../store/thunks/song";
+import { changeCurrent } from "../../store/reducers/queue";
 import { dislikeSong, likeSong } from "../../store/thunks/user";
 
 const List = (props) => {
@@ -9,8 +9,9 @@ const List = (props) => {
   const likedSongs = useSelector((state) => state.user.data.likedSongs);
   const dispatch = useDispatch();
 
-  const playSongHandler = (id) => {
-    dispatch(getSong(id));
+  const playSongHandler = (id, i) => {
+    dispatch(changeCurrent(i));
+    // dispatch(getSong(id));
   };
 
   // 💚 like song
@@ -25,7 +26,7 @@ const List = (props) => {
           <div
             className="list-item"
             key={el.id}
-            onClick={() => playSongHandler(el.id)}
+            onClick={() => playSongHandler(el.id, i)}
           >
             <span>{i + 1}</span>
             <img src={el.img} alt="Song cover" />
