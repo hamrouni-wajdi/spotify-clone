@@ -112,6 +112,10 @@ const Player = () => {
     dispatch(prevSong());
   };
 
+  const onEndedHandler = () => {
+    handleNext();
+  };
+
   // Helper functions
   const formatTime = (time) => {
     if (time && !isNaN(time)) {
@@ -156,6 +160,7 @@ const Player = () => {
               ref={audioRef}
               src={song.song}
               onLoadedMetadata={onLoadedMetadataHandler}
+              onEnded={onEndedHandler}
             />
 
             <div className="player__icons">
