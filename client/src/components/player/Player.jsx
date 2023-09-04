@@ -37,6 +37,7 @@ const Player = () => {
   const [volume, setVolume] = useState(100);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
+  const [repeatSong, setRepeatSong] = useState(false);
 
   // We need this function above because it is being called in useEffect
   const repeat = useCallback(() => {
@@ -133,6 +134,11 @@ const Player = () => {
     return likedSongs.includes(song.id);
   };
 
+  const repeatSongHandler = () => {
+    setRepeatSong((state) => !state);
+    audioRef.current.loop = !repeatSong;
+  };
+
   return (
     <div className="player">
       {song && (
@@ -173,7 +179,14 @@ const Player = () => {
                 {isPlaying ? <IoPauseCircle /> : <IoPlayCircle />}
               </button>
               <IoPlaySkipForwardSharp onClick={handleNext} />
-              <IoRepeat />
+              {repeatSong ? (
+                <IoRepeat
+                  className={"player__repeat"}
+                  onClick={repeatSongHandler}
+                />
+              ) : (
+                <IoRepeat onClick={repeatSongHandler} />
+              )}
             </div>
             <div className="player__range">
               <span className="player-song__time">
