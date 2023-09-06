@@ -28,7 +28,13 @@ const List = (props) => {
             key={el.id}
             onClick={() => playSongHandler(el.id, i)}
           >
-            <span>{i + 1}</span>
+            {/*<span>{i + 1}</span>*/}
+            <div className="anim">
+              <div className="sq sq1"></div>
+              <div className="sq sq2"></div>
+              <div className="sq sq3"></div>
+              <div class="sq sq4"></div>
+            </div>
             <img src={el.img} alt="Song cover" />
             <span>{el.name}</span>
             <span>{el.plays}</span>
