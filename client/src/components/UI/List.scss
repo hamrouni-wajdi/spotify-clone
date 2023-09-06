@@ -1,5 +1,8 @@
 .list {
-
+  &__num {
+    width: 16px;
+    text-align: center;
+  }
 }
 
 .list-item {
@@ -29,6 +32,10 @@
   svg:hover {
     cursor: pointer;
   }
+}
+
+.list--green {
+  color: #1db954;
 }
 
 // Animation
