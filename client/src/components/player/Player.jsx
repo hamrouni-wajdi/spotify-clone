@@ -81,13 +81,13 @@ const Player = () => {
   const togglePlayPauseHandler = () => {
     // setIsPlaying((pre) => !pre);
     dispatch(playPause());
-    if (navigator && navigator.mediaSession) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: `${song.name}`,
-        artist: "Maqsud's Spotify",
-        artwork: [{ src: song.img }],
-      });
-    }
+    // if (navigator && navigator.mediaSession) {
+    //   navigator.mediaSession.metadata = new MediaMetadata({
+    //     title: `${song.name}`,
+    //     artist: "Maqsud's Spotify",
+    //     artwork: [{ src: song.img }],
+    //   });
+    // }
   };
 
   const progressChangeHandler = () => {
@@ -112,6 +112,23 @@ const Player = () => {
   const handlePrev = () => {
     dispatch(prevSong());
   };
+
+  // Navigator control
+  navigator.mediaSession.setActionHandler("previoustrack", () => {
+    dispatch(prevSong());
+  });
+
+  navigator.mediaSession.setActionHandler("nexttrack", () => {
+    dispatch(nextSong());
+  });
+
+  navigator.mediaSession.setActionHandler("play", () => {
+    dispatch(playPause());
+  });
+
+  navigator.mediaSession.setActionHandler("pause", () => {
+    dispatch(playPause());
+  });
 
   const onEndedHandler = () => {
     handleNext();
