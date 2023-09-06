@@ -18,13 +18,14 @@
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
   }
 
   img {
     height: 40px
   }
 
-  svg {
+  svg:not(:last-child) {
     color: var(--main-cl);
     font-size: 24px
   }

@@ -1,5 +1,5 @@
 import "./List.scss";
-import { IoHeart, IoHeartOutline } from "react-icons/io5";
+import { IoEllipsisHorizontal, IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCurrent } from "../../store/reducers/queue";
 import { dislikeSong, likeSong } from "../../store/thunks/user";
@@ -50,7 +50,9 @@ const List = (props) => {
                 onClick={() => likeSongHandler(el.id)}
               />
             )}
-            <span>3:15</span>
+            <span>
+              <IoEllipsisHorizontal />
+            </span>
           </div>
         ))}
     </div>
