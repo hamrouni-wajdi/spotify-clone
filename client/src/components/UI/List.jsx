@@ -35,7 +35,7 @@ const List = (props) => {
                 <div className="sq sq1"></div>
                 <div className="sq sq2"></div>
                 <div className="sq sq3"></div>
-                <div class="sq sq4"></div>
+                <div className="sq sq4"></div>
               </div>
             )}
             <img src={el.img} alt="Song cover" />
