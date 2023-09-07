@@ -11,6 +11,7 @@ import Artist from "./components/app/Artist/Artist";
 import Playlist from "./components/app/Playlist/Playlist";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+import Profile from "./components/app/Profile/Profile";
 
 function MainApp() {
   const [loading, setLoading] = useState(true);
@@ -52,6 +53,14 @@ function MainApp() {
               </App>
             }
           />
+          <Route
+            path="/profile"
+            element={
+              <App>
+                <Profile />
+              </App>
+            }
+          ></Route>
         </Routes>
         <Player />
       </div>

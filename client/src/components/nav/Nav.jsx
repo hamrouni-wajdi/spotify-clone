@@ -1,6 +1,11 @@
 import "./Nav.scss";
 import "./NavLibrary.scss";
-import { IoHomeOutline, IoLibraryOutline, IoSearch } from "react-icons/io5";
+import {
+  IoHomeOutline,
+  IoLibraryOutline,
+  IoPersonCircleOutline,
+  IoSearch,
+} from "react-icons/io5";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -30,6 +35,14 @@ const Nav = (props) => {
           <div className="library-link__add">+</div>
           <Link to={"/artist"}>Artist</Link>
           <Link to={"/"}>Home</Link>
+        </div>
+      </div>
+      <div className="nav">
+        <div className="nav-link">
+          <IoPersonCircleOutline />
+          <Link className="nav-link" to="/profile">
+            Profile
+          </Link>
         </div>
       </div>
     </div>
