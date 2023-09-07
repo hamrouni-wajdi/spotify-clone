@@ -7,6 +7,7 @@ import {
   loginUser,
   signupUser,
   unfollowArtist,
+  updateUser,
 } from "../thunks/user";
 
 let DEFAULT_USER_STATE = {
@@ -57,6 +58,10 @@ export const userSlice = createSlice({
         console.log("case unfollow", action.payload);
 
         state.data.followedArtists = action.payload;
+      }) //Update user
+      .addCase(updateUser.fulfilled, (state, action) => {
+        console.log("Updated user", action.payload);
+        state.data = action.payload.user;
       });
   },
 });

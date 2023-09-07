@@ -14,7 +14,7 @@ export const loginUser = createAsyncThunk(
     } catch (e) {
       throw e;
     }
-  }
+  },
 );
 
 export const signupUser = createAsyncThunk(
@@ -32,7 +32,7 @@ export const signupUser = createAsyncThunk(
     } catch (e) {
       throw e;
     }
-  }
+  },
 );
 
 export const isLoggedIn = createAsyncThunk("user/isLoggedIn", async () => {
@@ -82,7 +82,7 @@ export const followArtist = createAsyncThunk(
     } catch (err) {
       throw err;
     }
-  }
+  },
 );
 
 export const unfollowArtist = createAsyncThunk(
@@ -96,5 +96,16 @@ export const unfollowArtist = createAsyncThunk(
     } catch (err) {
       throw err;
     }
-  }
+  },
 );
+
+// Form
+export const updateUser = createAsyncThunk("user/updateUser", async (data) => {
+  try {
+    const res = await axios.patch("/users/updateMe", data);
+
+    return res.data.data;
+  } catch (err) {
+    throw err;
+  }
+});

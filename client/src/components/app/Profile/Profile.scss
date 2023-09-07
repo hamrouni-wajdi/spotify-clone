@@ -5,10 +5,13 @@
   flex-direction: column;
   justify-content: flex-end;
 
-
-
   &__header {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1678186878140-1c7eefc0a0b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=80");
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.5)
+      ),
+      url("https://images.unsplash.com/photo-1678186878140-1c7eefc0a0b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=80");
     background-position: center;
     background-size: cover;
 
@@ -35,8 +38,57 @@
   }
 
   &__body {
-    background-image: linear-gradient(to bottom, rgba(127, 107, 173, 0.25), #121212);
+    background-image: linear-gradient(
+      to bottom,
+      rgba(127, 107, 173, 0.25),
+      #121212
+    );
     padding: 2.4rem;
     min-height: 16rem;
+  }
+
+  &__form {
+    h2 {
+      padding-bottom: 16px;
+    }
+
+    form {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 200px 1fr;
+      gap: 8px 16px;
+      padding-bottom: 32px;
+
+
+
+      label {
+        justify-self: end;
+      }
+
+      input {
+        min-width: 35rem;
+        justify-self: start;
+        font-size: inherit;
+        color: #fff;
+        background-color: #121212;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 50px;
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+      }
+
+      button {
+        cursor: pointer;
+        font-weight: inherit;
+        font-size: inherit;
+        color: #fff;
+        background-color: var(--main-cl);
+        border: none;
+        padding: 8px 16px;
+        border-radius: 50px;
+        grid-column: 2;
+        justify-self: start;
+      }
+    }
   }
 }

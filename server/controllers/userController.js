@@ -53,17 +53,19 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   }
 
   // 2) Update user data
-  const userData = {
-    name: req.body.name,
-    email: req.body.email,
-  };
+  const userData = {};
 
+  if (req.body.name) userData.name = req.body.name;
+  if (req.body.email) userData.email = req.body.email;
   if (req.file) userData.photo = req.file.filename;
 
   const user = await User.findByIdAndUpdate(req.user.id, userData, {
     new: true,
     runValidators: true,
   });
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  user.photo = `${serverUrl}public/users/${user.photo}`;
 
   res.status(200).json({
     status: 'success',
@@ -161,7 +163,6 @@ exports.likeSong = catchAsync(async (req, res, next) => {
 
 exports.dislikeSong = catchAsync(async (req, res, next) => {
   const { song } = req.body;
-  console.log(req.body);
 
   // REVIEW: If logged in used is artist user info is populated twice
   const user = await User.findByIdAndUpdate(
