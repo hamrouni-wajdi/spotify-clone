@@ -33,41 +33,62 @@ function MainApp() {
   return (
     <BrowserRouter>
       <div className="main-app">
-        <Nav />
         <Routes>
-          <Route path="/" element={<App />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Nav />
+                <App></App>
+
+                <Player />
+              </>
+            }
+          />
           <Route
             path="/artist/:id"
             element={
-              <App>
-                <Artist />
-              </App>
+              <>
+                <Nav />
+                <App>
+                  <Artist />
+                </App>
+
+                <Player />
+              </>
             }
           />
           <Route
             path="/playlist"
             // path="/playlist/:id"
             element={
-              <App>
-                <Playlist />
-              </App>
+              <>
+                <Nav />
+                <App>
+                  <Playlist />
+                </App>
+
+                <Player />
+              </>
             }
           />
           <Route
             path="/profile"
             element={
-              <App>
-                <Profile />
-              </App>
+              <>
+                <Nav />
+                <App>
+                  <Profile />
+                </App>
+
+                <Player />
+              </>
             }
           ></Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
-        <Player />
       </div>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
     </BrowserRouter>
   );
 }
