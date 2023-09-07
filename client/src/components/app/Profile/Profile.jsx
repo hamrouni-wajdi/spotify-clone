@@ -5,18 +5,25 @@ const Profile = () => {
   const user = useSelector((state) => state.user.data);
 
   return (
-    <div className="profile">
-      <div className="profile__header">
-        <div className="profile__photo">
-          <img src={user.photo} alt="Avatar" />
+    <>
+      {user.name ? (
+        <div className="profile">
+          <div className="profile__header">
+            <div className="profile__photo">
+              <img src={user.photo} alt="Avatar" />
+            </div>
+            <div className="profile__info">
+              <span>Profile</span>
+              <h1 className="profile__name">{user.name}</h1>
+              <span>{user.followedArtists.length} Following</span>
+            </div>
+          </div>
+          <div className="profile__body">I am here</div>
         </div>
-        <div className="profile__info">
-          <span>Profile</span>
-          <h1 className="profile__name">Maqsud Tolipov</h1>
-          <span>35 Following</span>
-        </div>
-      </div>
-    </div>
+      ) : (
+        <div>Really?? You are not logged in man!!</div>
+      )}
+    </>
   );
 };
 
