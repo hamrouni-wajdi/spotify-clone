@@ -24,9 +24,9 @@ const createSendToken = (user, statusCode, req, res) => {
   // Generate cookie
   const cookieOptions = {
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-    httpOnly: true,
-    sameSite: 'none',
-    secure: true,
+    // httpOnly: true,
+    // sameSite: 'none',
+    // secure: true,
   };
   // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
   res.cookie('jwt', token, cookieOptions);
@@ -232,7 +232,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   await user.save();
 
   // 4) Log user in
-  createSendToken(user, 201, res);
+  createSendToken(user, 201, req, res);
 });
 
 exports.deleteMe = catchAsync(async (req, res, next) => {

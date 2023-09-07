@@ -109,3 +109,14 @@ export const updateUser = createAsyncThunk("user/updateUser", async (data) => {
     throw err;
   }
 });
+
+export const updatePassword = createAsyncThunk(
+  "user/updatePassword",
+  async (data) => {
+    try {
+      const res = await axios.patch("/users/updatePassword", data);
+    } catch (err) {
+      throw err;
+    }
+  },
+);

@@ -1,6 +1,6 @@
 import "./Profile.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../../store/thunks/user";
+import { updatePassword, updateUser } from "../../../store/thunks/user";
 import { useRef } from "react";
 
 const Profile = () => {
@@ -8,6 +8,7 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   const formInfoRef = useRef();
+  const formPassRef = useRef();
 
   const formInfoHandler = (e) => {
     e.preventDefault();
@@ -15,6 +16,18 @@ const Profile = () => {
     const formData = new FormData(formInfoRef.current);
 
     dispatch(updateUser(formData));
+  };
+
+  const formPassHandler = (e) => {
+    e.preventDefault();
+
+    const data = {
+      currentPassword: e.target[0].value,
+      password: e.target[1].value,
+      passwordConfirm: e.target[2].value,
+    };
+
+    dispatch(updatePassword(data));
   };
 
   return (
@@ -44,7 +57,7 @@ const Profile = () => {
                 <button type="submit">Update</button>
               </form>
               <h2>Update your password</h2>
-              <form>
+              <form ref={formPassRef} onSubmit={formPassHandler}>
                 <label htmlFor="oldPassword">Old password</label>
                 <input type="password" name="oldPassword" />
                 <label htmlFor="newPassword">New password</label>

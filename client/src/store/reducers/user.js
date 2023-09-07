@@ -7,6 +7,7 @@ import {
   loginUser,
   signupUser,
   unfollowArtist,
+  updatePassword,
   updateUser,
 } from "../thunks/user";
 
@@ -58,11 +59,11 @@ export const userSlice = createSlice({
         console.log("case unfollow", action.payload);
 
         state.data.followedArtists = action.payload;
-      }) //Update user
+      }) // Update user
       .addCase(updateUser.fulfilled, (state, action) => {
         console.log("Updated user", action.payload);
         state.data = action.payload.user;
-      });
+      }); // Update password
   },
 });
 
