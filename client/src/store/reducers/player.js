@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const playerSlice = createSlice({
   name: "player",
-  initialState: { isPlaying: false },
+  initialState: { isPlaying: true },
   reducers: {
     playPause: (state) => {
       console.log("play hey");

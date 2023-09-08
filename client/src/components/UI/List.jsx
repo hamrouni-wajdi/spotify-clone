@@ -1,7 +1,7 @@
 import "./List.scss";
 import { IoEllipsisHorizontal, IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCurrent } from "../../store/reducers/queue";
+import { changeCurrent, replaceQueue } from "../../store/reducers/queue";
 import { dislikeSong, likeSong } from "../../store/thunks/user";
 
 const List = (props) => {
@@ -11,7 +11,10 @@ const List = (props) => {
   const dispatch = useDispatch();
 
   const playSongHandler = (i, id) => {
+    const songs = props.list;
+
     dispatch(changeCurrent({ i, id }));
+    dispatch(replaceQueue({ songs, i, id }));
   };
 
   // 💚 like song
