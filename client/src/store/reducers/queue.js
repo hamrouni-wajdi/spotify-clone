@@ -5,22 +5,36 @@ const queueSlice = createSlice({
   initialState: {
     list: [],
     current: 0,
+    currentId: "",
   },
   reducers: {
     replaceQueue: (state, action) => {
       state.list = action.payload;
+      state.current = 0;
+      state.currentId = state.list[0].id;
     },
     changeCurrent: (state, action) => {
       console.log("payload", action.payload);
-      state.current = action.payload;
+      state.current = action.payload.i;
+      state.currentId = action.payload.id;
     },
     nextSong: (state) => {
-      if (state.list.length - 1 === state.current) state.current = 0;
-      else state.current += 1;
+      if (state.list.length - 1 === state.current) {
+        state.current = 0;
+        state.currentId = state.list[0].id;
+      } else {
+        state.current += 1;
+        state.currentId = state.list[state.current].id;
+      }
     },
     prevSong: (state) => {
-      if (0 === state.current) state.current = state.list.length - 1;
-      else state.current -= 1;
+      if (0 === state.current) {
+        state.current = state.list.length - 1;
+        state.currentId = state.list[state.current].id;
+      } else {
+        state.current -= 1;
+        state.currentId = state.list[state.current].id;
+      }
     },
   },
 });

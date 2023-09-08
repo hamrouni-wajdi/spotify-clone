@@ -184,6 +184,7 @@ const Player = () => {
               src={song.song}
               onLoadedMetadata={onLoadedMetadataHandler}
               onEnded={onEndedHandler}
+              autoPlay={true}
             />
 
             <div className="player__icons">

@@ -7,11 +7,11 @@ import { dislikeSong, likeSong } from "../../store/thunks/user";
 const List = (props) => {
   // ⚛ Redux
   const likedSongs = useSelector((state) => state.user.data.likedSongs);
-  const currentId = useSelector((state) => state.queue.current);
+  const { current, currentId } = useSelector((state) => state.queue);
   const dispatch = useDispatch();
 
-  const playSongHandler = (id, i) => {
-    dispatch(changeCurrent(i));
+  const playSongHandler = (i, id) => {
+    dispatch(changeCurrent({ i, id }));
   };
 
   // 💚 like song
@@ -26,9 +26,9 @@ const List = (props) => {
           <div
             className="list-item"
             key={el.id}
-            onClick={() => playSongHandler(el.id, i)}
+            onClick={() => playSongHandler(i, el.id)}
           >
-            {currentId !== i ? (
+            {currentId !== el.id ? (
               <span className="list__num">{i + 1}</span>
             ) : (
               <div className="anim">
@@ -39,7 +39,9 @@ const List = (props) => {
               </div>
             )}
             <img src={el.img} alt="Song cover" />
-            <span className={currentId === i && "list--green "}>{el.name}</span>
+            <span className={currentId === el.id && "list--green "}>
+              {el.name}
+            </span>
             <span>{el.plays}</span>
             {/*{el.isLiked ? <IoHeart onClick={likeSong} /> : null}*/}
             {likedSongs.includes(el.id) ? (
