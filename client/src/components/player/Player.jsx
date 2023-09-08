@@ -73,6 +73,16 @@ const Player = () => {
     }
   }, [volume, audioRef]);
 
+  // Widow event to play payse audio
+  useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      console.log(e.code === "Space");
+      if (e.code === "Space") {
+        dispatch(playPause());
+      }
+    });
+  }, []);
+
   const likeSongHandler = () => dispatch(likeSong(song.id));
 
   const dislikeSongHandler = () => dispatch(dislikeSong(song.id));

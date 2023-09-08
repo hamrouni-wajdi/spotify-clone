@@ -33,8 +33,10 @@ const Nav = (props) => {
             <span>Library</span>
           </div>
           <div className="library-link__add">+</div>
-          <Link to={"/artist"}>Artist</Link>
           <Link to={"/"}>Home</Link>
+          <Link to={"/artist/64f9832d10dbf93f2e5af3cc"}>Alan Walker</Link>
+          <Link to={"/artist/64f88ed5c20246c3c14e688d"}>Connor Price</Link>
+          <Link to={"/artist/64f9e78083e383c2f5e11c3e"}>Coldplay</Link>
         </div>
       </div>
       <div className="nav">
