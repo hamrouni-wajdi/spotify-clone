@@ -1,15 +1,19 @@
 import "./Playlist.scss";
 import { IoCloseCircle, IoPauseCircle, IoPlayCircle } from "react-icons/io5";
-import { useEffect, useState } from "react";
-import { getPlaylist } from "../../../store/thunks/playlist";
+import { useEffect, useRef, useState } from "react";
+import { getPlaylist, updatePlaylist } from "../../../store/thunks/playlist";
 import { useDispatch, useSelector } from "react-redux";
 import List from "../../UI/List";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { replaceQueue } from "../../../store/reducers/queue";
+import { updateUser } from "../../../store/thunks/user";
 
 const Playlist = () => {
   // State
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
+
+  // Ref
+  const formRef = useRef();
 
   // Redux
   const { playlist } = useSelector((state) => state.playlist);
@@ -17,6 +21,7 @@ const Playlist = () => {
 
   // Router
   const { id } = useParams();
+  const navigate = useNavigate();
 
   // Effects
   useEffect(() => {
@@ -37,6 +42,15 @@ const Playlist = () => {
     setModal(false);
   };
 
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(formRef.current);
+
+    dispatch(updatePlaylist({ data: formData, id: playlist.id }));
+    navigate(0);
+  };
+
   return (
     <>
       {playlist ? (
@@ -47,7 +61,9 @@ const Playlist = () => {
             </div>
             <div className="playlist__info">
               <p className="playlist__info--type">Playlist</p>
-              <h1 className="playlist__name">{playlist.name}</h1>
+              <h1 className="playlist__name" onClick={openModalHandler}>
+                {playlist.name}
+              </h1>
               <div></div>
               <div className="playlist__user">
                 <img className="playlist__user-img" src={playlist.user.photo} />
@@ -84,14 +100,22 @@ const Playlist = () => {
               <IoCloseCircle onClick={closeModalHandler} />
             </div>
           </div>
-          <form className="playlist-modal__form">
+          <form
+            className="playlist-modal__form"
+            ref={formRef}
+            onSubmit={formSubmitHandler}
+          >
             <div className="playlist-modal__img">
               <img src={playlist.img} alt="Playlist cover" />
-              <input type="file" />
+              <input type="file" name="img" />
             </div>
             <div>
-              <input type="text" />
-              <textarea name="description" cols="30"></textarea>
+              <input type="text" name="name" placeholder={playlist.name} />
+              <textarea
+                name="description"
+                cols="30"
+                placeholder="Add an optional description"
+              ></textarea>
               <button>Save</button>
             </div>
           </form>

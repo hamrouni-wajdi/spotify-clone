@@ -66,6 +66,7 @@ exports.getPlaylist = catchAsync(async (req, res, next) => {
     song.img = `${serverUrl}public/songs/${song.img}`;
   });
   playlist.user.photo = `${serverUrl}public/users/${playlist.user.photo}`;
+  playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
 
   res.status(200).json({
     status: 'success',
@@ -91,14 +92,21 @@ exports.createPlaylist = catchAsync(async (req, res, next) => {
 
 exports.updatePlaylist = catchAsync(async (req, res, next) => {
   // 1) Update Playlist
-  req.body.img = req.file.filename;
-  const playlist = await Playlist.findByIdAndUpdate(req.params.id, req.body, {
+
+  const data = {};
+  if (req.file) data.img = req.file.filename;
+  if (req.body.name) data.name = req.body.name;
+
+  const playlist = await Playlist.findByIdAndUpdate(req.params.id, data, {
     new: true,
     runValidators: true,
   });
 
   if (!playlist)
     return next(new AppError('❓ No playlist found with that id', 404));
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
 
   // 2) Send res
   res.status(200).json({

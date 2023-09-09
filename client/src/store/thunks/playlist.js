@@ -15,3 +15,16 @@ export const getPlaylist = createAsyncThunk(
     }
   },
 );
+
+export const updatePlaylist = createAsyncThunk(
+  "playlist/editPlaylist",
+  async ({ data, id }) => {
+    try {
+      const res = await axios.patch(`/playlists/${id}`, data);
+
+      return res.data.data;
+    } catch (e) {
+      console.log(e);
+    }
+  },
+);

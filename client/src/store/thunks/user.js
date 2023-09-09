@@ -102,6 +102,7 @@ export const unfollowArtist = createAsyncThunk(
 // Form
 export const updateUser = createAsyncThunk("user/updateUser", async (data) => {
   try {
+    console.log("user olala", data);
     const res = await axios.patch("/users/updateMe", data);
 
     return res.data.data;

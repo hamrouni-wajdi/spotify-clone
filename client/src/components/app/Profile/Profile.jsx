@@ -14,6 +14,7 @@ const Profile = () => {
     e.preventDefault();
 
     const formData = new FormData(formInfoRef.current);
+    console.log(formData);
 
     dispatch(updateUser(formData));
   };
