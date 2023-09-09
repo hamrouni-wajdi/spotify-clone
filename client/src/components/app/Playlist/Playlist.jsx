@@ -1,20 +1,30 @@
 import "./Playlist.scss";
-import { IoPauseCircle } from "react-icons/io5";
+import { IoPauseCircle, IoPlayCircle } from "react-icons/io5";
 import { useEffect } from "react";
 import { getPlaylist } from "../../../store/thunks/playlist";
 import { useDispatch, useSelector } from "react-redux";
 import List from "../../UI/List";
+import { Link, useParams } from "react-router-dom";
+import { replaceQueue } from "../../../store/reducers/queue";
 
 const Playlist = () => {
   // Redux
   const { playlist } = useSelector((state) => state.playlist);
-
   const dispatch = useDispatch();
+
+  // Router
+  const { id } = useParams();
 
   // Effects
   useEffect(() => {
-    dispatch(getPlaylist());
-  }, []);
+    dispatch(getPlaylist(id));
+  }, [id]);
+
+  // Handlers
+  const replaceQueueHandler = (songs) => {
+    console.log(songs);
+    dispatch(replaceQueue({ songs }));
+  };
 
   return (
     <>
@@ -31,12 +41,23 @@ const Playlist = () => {
               <p className="playlist__info--type">Playlist</p>
               <h1 className="playlist__name">{playlist.name}</h1>
               <div></div>
-              <p>👨 * Maqsud Tolipov * 46 songs</p>
+              <div className="playlist__user">
+                <img className="playlist__user-img" src={playlist.user.photo} />
+                <Link
+                  className="playlist__user-name"
+                  to={`/user/${playlist.user.id}`}
+                >
+                  {playlist.user.name}
+                </Link>
+                <span className="playlist__user-songs">
+                  {playlist.songs.length} songs
+                </span>
+              </div>
             </div>
           </div>
 
           <div className="playlist-nav">
-            <IoPauseCircle />
+            <IoPlayCircle onClick={() => replaceQueueHandler(playlist.songs)} />
           </div>
 
           <div className="playlist__songs">

@@ -59,8 +59,8 @@ function MainApp() {
             }
           />
           <Route
-            path="/playlist"
-            // path="/playlist/:id"
+            // path="/playlist"
+            path="/playlist/:id"
             element={
               <>
                 <Nav />

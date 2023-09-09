@@ -6,12 +6,12 @@ export const getPlaylist = createAsyncThunk(
   async (id) => {
     try {
       // const res = await axios.get(`/playlists/${id}`);
-      const res = await axios.get(`/playlists/64f585c316baa089b4fcc145`);
+      const res = await axios.get(`/playlists/${id}`);
       console.log(res);
 
       return res.data.data;
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 );
