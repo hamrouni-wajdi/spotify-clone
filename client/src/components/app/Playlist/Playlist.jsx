@@ -1,6 +1,6 @@
 import "./Playlist.scss";
-import { IoPauseCircle, IoPlayCircle } from "react-icons/io5";
-import { useEffect } from "react";
+import { IoCloseCircle, IoPauseCircle, IoPlayCircle } from "react-icons/io5";
+import { useEffect, useState } from "react";
 import { getPlaylist } from "../../../store/thunks/playlist";
 import { useDispatch, useSelector } from "react-redux";
 import List from "../../UI/List";
@@ -8,6 +8,9 @@ import { Link, useParams } from "react-router-dom";
 import { replaceQueue } from "../../../store/reducers/queue";
 
 const Playlist = () => {
+  // State
+  const [modal, setModal] = useState(true);
+
   // Redux
   const { playlist } = useSelector((state) => state.playlist);
   const dispatch = useDispatch();
@@ -26,16 +29,21 @@ const Playlist = () => {
     dispatch(replaceQueue({ songs }));
   };
 
+  const openModalHandler = () => {
+    setModal(true);
+  };
+
+  const closeModalHandler = () => {
+    setModal(false);
+  };
+
   return (
     <>
       {playlist ? (
         <div className="playlist">
           <div className="playlist__header">
             <div className="playlist__image">
-              <img
-                src="https://images.unsplash.com/photo-1653299832314-5d3dc1e5a83c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=627&q=80"
-                alt="Playlist cover"
-              />
+              <img src={playlist.img} alt="Playlist cover" />
             </div>
             <div className="playlist__info">
               <p className="playlist__info--type">Playlist</p>
@@ -66,6 +74,28 @@ const Playlist = () => {
         </div>
       ) : (
         <div>loading</div>
+      )}
+
+      {playlist && modal && (
+        <div className="playlist-modal">
+          <div className="playlist-modal__header">
+            <h2>Edit playlist info</h2>
+            <div className="playlist-modal__close">
+              <IoCloseCircle onClick={closeModalHandler} />
+            </div>
+          </div>
+          <form className="playlist-modal__form">
+            <div className="playlist-modal__img">
+              <img src={playlist.img} alt="Playlist cover" />
+              <input type="file" />
+            </div>
+            <div>
+              <input type="text" />
+              <textarea name="description" cols="30"></textarea>
+              <button>Save</button>
+            </div>
+          </form>
+        </div>
       )}
     </>
   );
