@@ -194,6 +194,6 @@ exports.dislikePlaylist = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    songs: user.likedPlaylists,
+    playlists: user.likedPlaylists,
   });
 });
