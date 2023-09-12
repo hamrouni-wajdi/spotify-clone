@@ -25,4 +25,12 @@ router
   .post(playlistController.addSong)
   .delete(playlistController.deleteSong);
 
+router
+  .route('/likes/add')
+  .post(authController.protect, playlistController.likePlaylist);
+
+router
+  .route('/likes/remove')
+  .post(authController.protect, playlistController.dislikePlaylist);
+
 module.exports = router;

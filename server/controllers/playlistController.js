@@ -3,6 +3,7 @@ const sharp = require('sharp');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Playlist = require('../models/playlistModel');
+const User = require('../models/userModel');
 
 // Multer
 const storage = multer.memoryStorage();
@@ -161,5 +162,38 @@ exports.deleteSong = catchAsync(async (req, res, next) => {
     data: {
       playlist,
     },
+  });
+});
+
+// 💚 Like system
+exports.likePlaylist = catchAsync(async (req, res, next) => {
+  const { playlist } = req.body;
+  console.log(playlist);
+
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $addToSet: { likedPlaylists: playlist } },
+    { runValidators: true, new: true }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    playlists: user.likedPlaylists,
+  });
+});
+
+exports.dislikePlaylist = catchAsync(async (req, res, next) => {
+  const { playlist } = req.body;
+
+  // REVIEW: If logged in used is artist user info is populated twice
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $pull: { likedPlaylists: playlist } },
+    { runValidators: true, new: true }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    songs: user.likedPlaylists,
   });
 });
