@@ -1,12 +1,23 @@
 import "./Playlist.scss";
-import { IoCloseCircle, IoPauseCircle, IoPlayCircle } from "react-icons/io5";
+import {
+  IoCloseCircle,
+  IoHeart,
+  IoHeartOutline,
+  IoPauseCircle,
+  IoPlayCircle,
+} from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
-import { getPlaylist, updatePlaylist } from "../../../store/thunks/playlist";
+import {
+  getPlaylist,
+  likePlaylist,
+  dislikePlaylist,
+  updatePlaylist,
+} from "../../../store/thunks/playlist";
 import { useDispatch, useSelector } from "react-redux";
 import List from "../../UI/List";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { replaceQueue } from "../../../store/reducers/queue";
-import { updateUser } from "../../../store/thunks/user";
+import { likeSong, updateUser } from "../../../store/thunks/user";
 
 const Playlist = () => {
   // State
@@ -17,6 +28,7 @@ const Playlist = () => {
 
   // Redux
   const { playlist } = useSelector((state) => state.playlist);
+  const likedPlaylists = useSelector((state) => state.user.data.likedPlaylists);
   const dispatch = useDispatch();
 
   // Router
@@ -51,6 +63,10 @@ const Playlist = () => {
     navigate(0);
   };
 
+  const likePlaylistHandler = (id) => dispatch(likePlaylist(id));
+
+  const dislikePlaylistHandler = (id) => dispatch(dislikePlaylist(id));
+
   return (
     <>
       {playlist ? (
@@ -82,6 +98,17 @@ const Playlist = () => {
 
           <div className="playlist-nav">
             <IoPlayCircle onClick={() => replaceQueueHandler(playlist.songs)} />
+            {likedPlaylists.includes(playlist.id) ? (
+              <IoHeart
+                className="heart heart--active"
+                onClick={() => dislikePlaylistHandler(playlist.id)}
+              />
+            ) : (
+              <IoHeartOutline
+                className="heart"
+                onClick={() => likePlaylistHandler(playlist.id)}
+              />
+            )}
           </div>
 
           <div className="playlist__songs">

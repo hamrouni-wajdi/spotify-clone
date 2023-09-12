@@ -92,6 +92,23 @@
         scale: 1.05;
       }
     }
+
+    .heart {
+      font-size: 4.2rem;
+      color: #b3b3b3;
+
+      &--active {
+        color: #1db954;
+
+        &:hover {
+          color: #1db954 !important;
+        }
+      }
+
+      &:hover {
+        color: #fff;
+      }
+    }
   }
 
   &__songs {
@@ -136,7 +153,8 @@
     grid-template-columns: 18rem auto;
     column-gap: 16px;
 
-    input, textarea {
+    input,
+    textarea {
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid transparent;
       border-radius: 4px;

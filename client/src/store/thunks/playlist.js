@@ -28,3 +28,33 @@ export const updatePlaylist = createAsyncThunk(
     }
   },
 );
+
+export const likePlaylist = createAsyncThunk(
+  "playlist/likePlaylist",
+  async (id) => {
+    try {
+      const res = await axios.post(`/playlists/likes/add`, {
+        playlist: id,
+      });
+
+      return res.data.playlists;
+    } catch (e) {
+      throw e;
+    }
+  },
+);
+
+export const dislikePlaylist = createAsyncThunk(
+  "playlist/dislikePlaylist",
+  async (id) => {
+    try {
+      const res = await axios.post(`/playlists/likes/remove`, {
+        playlist: id,
+      });
+
+      return res.data.playlists;
+    } catch (e) {
+      throw e;
+    }
+  },
+);

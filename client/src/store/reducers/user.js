@@ -10,6 +10,7 @@ import {
   updatePassword,
   updateUser,
 } from "../thunks/user";
+import { dislikePlaylist, likePlaylist } from "../thunks/playlist";
 
 let DEFAULT_USER_STATE = {
   data: {
@@ -63,7 +64,13 @@ export const userSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         console.log("Updated user", action.payload);
         state.data = action.payload.user;
-      }); // Update password
+      }) // Like playlist
+      .addCase(likePlaylist.fulfilled, (state, action) => {
+        state.data.likedPlaylists = action.payload;
+      }) // Dislike playlist
+      .addCase(dislikePlaylist.fulfilled, (state, action) => {
+        state.data.likedPlaylists = action.payload;
+      });
   },
 });
 
