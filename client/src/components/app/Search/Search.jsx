@@ -78,7 +78,9 @@ const Search = () => {
       </ul>
       <div className="list">
         {results?.type === "song" && <List list={results.list} search={true} />}
-        {results?.type === "artist" && <SquareList list={results.list} />}
+        {results?.type === "artist" && (
+          <SquareList list={results.list} artist={true} />
+        )}
         {results?.type === "playlist" && <SquareList list={results.list} />}
       </div>
     </div>

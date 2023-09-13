@@ -23,6 +23,10 @@
     margin-bottom: 4px;
   }
 
+  &--artist img {
+    border-radius: 500px;
+  }
+
   &:hover {
     background: #282828;
     cursor: pointer;

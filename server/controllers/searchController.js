@@ -56,6 +56,11 @@ exports.searchArtist = catchAsync(async (req, res, next) => {
 
   if (artists.length === 0) return next(new AppError('No artist found', 404));
 
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  artists.forEach((artist) => {
+    artist.img = `${serverUrl}public/users/${artist.img}`;
+  });
+
   res.status(200).json({
     status: 'success',
     data: artists,

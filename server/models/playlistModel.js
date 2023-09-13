@@ -14,7 +14,7 @@ const playlistSchema = new mongoose.Schema(
     },
     img: {
       type: String,
-      default: 'default.jpg',
+      default: 'default.png',
     },
     user: {
       type: mongoose.Schema.ObjectId,

@@ -51,6 +51,7 @@ const Nav = (props) => {
       <Link to={"/artist/64f9e78083e383c2f5e11c3e"}>CPY</Link>
       <br />
       <Link to={"/playlist/64fc4ad1cf33fdb3633e6bb9"}>P1</Link>
+      <Link to={"/playlist/6501b805d0592bee92c1e15e"}>P2</Link>
       {/*<Link to={"/artist/64f88ed5c20246c3c14e688d"}>CP</Link>*/}
       {/*<Link to={"/artist/64f9e78083e383c2f5e11c3e"}>CPY</Link>*/}
     </div>

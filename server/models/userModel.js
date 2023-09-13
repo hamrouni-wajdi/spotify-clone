@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
     },
-    photo: {
+    img: {
       type: String,
       default: 'default.jpg',
     },
