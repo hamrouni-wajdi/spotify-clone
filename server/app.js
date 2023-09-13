@@ -10,6 +10,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const songRouter = require('./routes/songRoutes');
 const userRouter = require('./routes/userRoutes');
 const playlistRouter = require('./routes/playlistRoutes');
+const searchRouter = require('./routes/searchRoutes');
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use('/public', express.static('public'));
 app.use('/api/v1/songs', songRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/playlists', playlistRouter);
+app.use('/api/v1/search', searchRouter);
 
 // Unhandled routes
 app.all('*', (req, res, next) => {
