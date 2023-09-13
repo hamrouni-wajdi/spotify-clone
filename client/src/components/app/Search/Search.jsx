@@ -19,7 +19,10 @@ const Search = () => {
       type: "song",
       list: res.data.data,
     });
-    console.log(results);
+  };
+
+  const changeTagHandler = (tag) => {
+    setQueryType(tag);
   };
 
   return (
@@ -30,8 +33,34 @@ const Search = () => {
           <IoSearch className="search__icon" />
         </form>
       </div>
+      <ul className="search__tags">
+        <li
+          className={
+            "search__tag " + (queryType === "song" && "search__tag--active")
+          }
+          onClick={() => changeTagHandler("song")}
+        >
+          Song
+        </li>
+        <li
+          className={
+            "search__tag " + (queryType === "artist" && "search__tag--active")
+          }
+          onClick={() => changeTagHandler("artist")}
+        >
+          Artist
+        </li>
+        <li
+          className={
+            "search__tag " + (queryType === "playlist" && "search__tag--active")
+          }
+          onClick={() => changeTagHandler("playlist")}
+        >
+          Playlist
+        </li>
+      </ul>
       <div className="list">
-        {results && results.type === "song" && (
+        {queryType === "song" && results?.type === "song" && (
           <List list={results.list} search={true} />
         )}
       </div>
