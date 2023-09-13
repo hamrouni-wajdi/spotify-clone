@@ -12,6 +12,7 @@ import Playlist from "./components/app/Playlist/Playlist";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Profile from "./components/app/Profile/Profile";
+import Search from "./components/app/Search/Search";
 
 function MainApp() {
   const [loading, setLoading] = useState(true);
@@ -46,6 +47,19 @@ function MainApp() {
             }
           />
           <Route
+            path="/search"
+            element={
+              <>
+                <Nav />
+                <App>
+                  <Search />
+                </App>
+
+                <Player />
+              </>
+            }
+          />
+          <Route
             path="/artist/:id"
             element={
               <>
@@ -59,7 +73,6 @@ function MainApp() {
             }
           />
           <Route
-            // path="/playlist"
             path="/playlist/:id"
             element={
               <>
