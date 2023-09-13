@@ -7,7 +7,10 @@
   margin: 8px;
   padding: 8px 12px;
 
-  &-link {
+  &-link:link,
+  &-link:visited {
+    text-decoration: none;
+    color: inherit;
     font-size: 16px;
     font-weight: 700;
 
