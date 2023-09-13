@@ -83,7 +83,7 @@ const Playlist = () => {
               </h1>
               <div></div>
               <div className="playlist__user">
-                <img className="playlist__user-img" src={playlist.user.photo} />
+                <img className="playlist__user-img" src={playlist.user.img} />
                 <Link
                   className="playlist__user-name"
                   to={`/user/${playlist.user.id}`}

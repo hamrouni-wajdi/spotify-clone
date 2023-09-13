@@ -129,9 +129,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     const user = await User.findById(decoded.id);
     if (!user) return next(new AppError());
 
-    user.photo = `${req.protocol}://${req.get('host')}/public/users/${
-      user.photo
-    }`;
+    user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
 
     // 3) Check user changed password after the token was issued
     if (user.changedPasswordAfter(decoded.iat)) {

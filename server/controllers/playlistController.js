@@ -56,7 +56,7 @@ exports.getAllPlaylists = catchAsync(async (req, res, next) => {
 exports.getPlaylist = catchAsync(async (req, res, next) => {
   const playlist = await Playlist.findById(req.params.id)
     .populate('songs')
-    .populate('user', 'name photo');
+    .populate('user', 'name img');
 
   if (!playlist)
     return next(new AppError('❓ No playlist found with that id', 404));
@@ -66,7 +66,7 @@ exports.getPlaylist = catchAsync(async (req, res, next) => {
     song.song = `${serverUrl}public/songs/${song.song}`;
     song.img = `${serverUrl}public/songs/${song.img}`;
   });
-  playlist.user.photo = `${serverUrl}public/users/${playlist.user.photo}`;
+  playlist.user.img = `${serverUrl}public/users/${playlist.user.img}`;
   playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
 
   res.status(200).json({

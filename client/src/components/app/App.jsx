@@ -20,7 +20,7 @@ const App = (props) => {
         <div className="app-nav__profile">
           <img
             crossOrigin="anonymous"
-            src={data.photo}
+            src={data.img}
             alt=""
             className="app-nav__profile--img"
           />

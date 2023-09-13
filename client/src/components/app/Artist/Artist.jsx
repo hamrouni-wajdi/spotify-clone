@@ -55,7 +55,6 @@ const Artist = () => {
             <span className="artist__badge">
               <img src={badgeImg} alt="Verified badge" /> Verified Artist
             </span>
-            {/*<h1 className="artist__name">Rauf & Faik</h1>*/}
             <h1 className="artist__name">{artist.name}</h1>
             <p>1,323 listeners</p>
           </div>
