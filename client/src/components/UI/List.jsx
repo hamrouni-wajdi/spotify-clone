@@ -45,8 +45,7 @@ const List = (props) => {
             <span className={currentId === el.id && "list--green "}>
               {el.name}
             </span>
-            <span>{el.plays}</span>
-            {/*{el.isLiked ? <IoHeart onClick={likeSong} /> : null}*/}
+            <span>{el.artist.name}</span>
             {likedSongs.includes(el.id) ? (
               <IoHeart onClick={() => dislikeSongHandler(el.id)} />
             ) : (
