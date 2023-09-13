@@ -27,6 +27,7 @@ const Playlist = () => {
   const formRef = useRef();
 
   // Redux
+  const userId = useSelector((state) => state.user.data.id);
   const { playlist } = useSelector((state) => state.playlist);
   const likedPlaylists = useSelector((state) => state.user.data.likedPlaylists);
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const Playlist = () => {
   };
 
   const openModalHandler = () => {
-    setModal(true);
+    if (playlist.user.id === userId) setModal(true);
   };
 
   const closeModalHandler = () => {
