@@ -30,10 +30,15 @@ exports.searchPlaylist = catchAsync(async (req, res, next) => {
 
   const playlists = await Playlist.find({
     name: { $regex: name, $options: 'ix' },
-  });
+  }).populate('user', 'name');
 
   if (playlists.length === 0)
     return next(new AppError('No playlist found', 404));
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  playlists.forEach((playlist) => {
+    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  });
 
   res.status(200).json({
     status: 'success',

@@ -3,6 +3,7 @@ import axios from "../../../api/axios";
 import { IoSearch } from "react-icons/io5";
 import { useState } from "react";
 import List from "../../UI/List";
+import SquareList from "../../UI/SquareList";
 
 const Search = () => {
   // State
@@ -13,12 +14,28 @@ const Search = () => {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const res = await axios.get(`/search/song?name=${e.target[0].value}`);
+    const res = await axios.get(
+      `/search/${queryType}?name=${e.target[0].value}`,
+    );
 
-    setResults({
-      type: "song",
-      list: res.data.data,
-    });
+    console.log(res.data.data);
+
+    if (queryType === "song") {
+      setResults({
+        type: "song",
+        list: res.data.data,
+      });
+    } else if (queryType === "artist") {
+      setResults({
+        type: "artist",
+        list: res.data.data,
+      });
+    } else if (queryType === "playlist") {
+      setResults({
+        type: "playlist",
+        list: res.data.data,
+      });
+    }
   };
 
   const changeTagHandler = (tag) => {
@@ -60,9 +77,9 @@ const Search = () => {
         </li>
       </ul>
       <div className="list">
-        {queryType === "song" && results?.type === "song" && (
-          <List list={results.list} search={true} />
-        )}
+        {results?.type === "song" && <List list={results.list} search={true} />}
+        {results?.type === "artist" && <SquareList list={results.list} />}
+        {results?.type === "playlist" && <SquareList list={results.list} />}
       </div>
     </div>
   );
