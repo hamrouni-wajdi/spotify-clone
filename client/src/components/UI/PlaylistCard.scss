@@ -1,4 +1,6 @@
-.card-playlist {
+.card-playlist,
+.card-playlist:link,
+.card-playlist:visited {
   text-decoration: none;
   color: inherit;
   background-color: #181818;
