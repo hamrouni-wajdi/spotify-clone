@@ -76,6 +76,24 @@ exports.getAllSongs = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getLikedSongs = catchAsync(async (req, res, next) => {
+  const songs = await Song.find();
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  songs.map((song) => {
+    song.song = `${serverUrl}public/songs/${song.song}`;
+    song.img = `${serverUrl}public/songs/${song.img}`;
+  });
+
+  res.status(200).json({
+    status: 'success',
+    results: songs.length,
+    data: {
+      songs,
+    },
+  });
+});
+
 exports.getSong = catchAsync(async (req, res, next) => {
   // $inc increases plays field every time this route hits
   const song = await Song.findByIdAndUpdate(
