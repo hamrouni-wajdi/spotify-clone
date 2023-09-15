@@ -47,27 +47,6 @@ const Playlist = () => {
     dispatch(replaceQueue({ songs }));
   };
 
-  // const openModalHandler = () => {
-  //   if (playlist.user.id === userId) setModal(true);
-  // };
-  //
-  // const closeModalHandler = () => {
-  //   setModal(false);
-  // };
-
-  // const formSubmitHandler = (e) => {
-  //   e.preventDefault();
-  //
-  //   const formData = new FormData(formRef.current);
-  //
-  //   dispatch(updatePlaylist({ data: formData, id: playlist.id }));
-  //   navigate(0);
-  // };
-  //
-  // const likePlaylistHandler = (id) => dispatch(likePlaylist(id));
-  //
-  // const dislikePlaylistHandler = (id) => dispatch(dislikePlaylist(id));
-
   return (
     <>
       {likedSongs ? (
@@ -94,36 +73,6 @@ const Playlist = () => {
       ) : (
         <div>loading</div>
       )}
-
-      {/*{playlist && modal && (*/}
-      {/*  <div className="playlist-modal">*/}
-      {/*    <div className="playlist-modal__header">*/}
-      {/*      <h2>Edit playlist info</h2>*/}
-      {/*      <div className="playlist-modal__close">*/}
-      {/*        <IoCloseCircle onClick={closeModalHandler} />*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*    <form*/}
-      {/*      className="playlist-modal__form"*/}
-      {/*      ref={formRef}*/}
-      {/*      onSubmit={formSubmitHandler}*/}
-      {/*    >*/}
-      {/*      <div className="playlist-modal__img">*/}
-      {/*        <img src={playlist.img} alt="Playlist cover" />*/}
-      {/*        <input type="file" name="img" />*/}
-      {/*      </div>*/}
-      {/*      <div>*/}
-      {/*        <input type="text" name="name" placeholder={playlist.name} />*/}
-      {/*        <textarea*/}
-      {/*          name="description"*/}
-      {/*          cols="30"*/}
-      {/*          placeholder="Add an optional description"*/}
-      {/*        ></textarea>*/}
-      {/*        <button>Save</button>*/}
-      {/*      </div>*/}
-      {/*    </form>*/}
-      {/*  </div>*/}
-      {/*)}*/}
     </>
   );
 };

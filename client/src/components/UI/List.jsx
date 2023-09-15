@@ -7,7 +7,7 @@ import { dislikeSong, likeSong } from "../../store/thunks/user";
 const List = (props) => {
   // ⚛ Redux
   const likedSongs = useSelector((state) => state.user.data.likedSongs);
-  const { current, currentId } = useSelector((state) => state.queue);
+  const { currentId } = useSelector((state) => state.queue);
   const dispatch = useDispatch();
 
   const playSongHandler = (i, id) => {
@@ -17,25 +17,26 @@ const List = (props) => {
     dispatch(replaceQueue({ songs, i, id }));
   };
 
-  const userLikedSong = (song) => {
-    let likedSong = likedSongs.find((likedSong) => likedSong.id === song.id);
-    return !!likedSong;
+  const userLikedSong = (id) => {
+    let res = likedSongs.find((obj) => obj.id === id);
+
+    return res ? true : false;
   };
 
   // 💚 like song
-  const likeSongHandler = (id) => dispatch(likeSong(id));
+  const likeSongHandler = (song) => {
+    dispatch(likeSong(song.id));
+  };
 
-  const dislikeSongHandler = (id) => dispatch(dislikeSong(id));
+  const dislikeSongHandler = (song) => {
+    dispatch(dislikeSong(song.id));
+  };
 
   return (
     <div className="list">
       {props.list &&
         props.list.map((el, i) => (
-          <div
-            className="list-item"
-            key={el.id}
-            onClick={() => playSongHandler(i, el.id)}
-          >
+          <div className="list-item" key={el.id}>
             {currentId !== el.id ? (
               <span className="list__num">{i + 1}</span>
             ) : (
@@ -47,16 +48,21 @@ const List = (props) => {
               </div>
             )}
             <img src={el.img} alt="Song cover" />
-            <span className={currentId === el.id && "list--green "}>
+            <span
+              className={
+                (currentId === el.id ? "list--green" : "") + " list-item__name"
+              }
+              onClick={() => playSongHandler(i, el.id)}
+            >
               {el.name}
             </span>
             <span>{el.artist.name}</span>
-            {userLikedSong(el) ? (
-              <IoHeart onClick={() => dislikeSongHandler(el.id)} />
+            {userLikedSong(el.id) ? (
+              <IoHeart onClick={() => dislikeSongHandler(el)} />
             ) : (
               <IoHeartOutline
                 style={{ color: "#fff" }}
-                onClick={() => likeSongHandler(el.id)}
+                onClick={() => likeSongHandler(el)}
               />
             )}
             <span>

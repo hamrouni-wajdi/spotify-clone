@@ -37,6 +37,7 @@ export const userSlice = createSlice({
       })
       // Like song
       .addCase(likeSong.fulfilled, (state, action) => {
+        console.log("likesong", action.payload);
         state.data.likedSongs = action.payload;
       })
       // Dislike song

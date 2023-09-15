@@ -148,12 +148,17 @@ exports.getLikedSongs = catchAsync(async (req, res, next) => {
 exports.likeSong = catchAsync(async (req, res, next) => {
   const { song } = req.body;
 
-  // REVIEW: If logged in used is artist user info is populated twice
   const user = await User.findByIdAndUpdate(
     req.user.id,
     { $addToSet: { likedSongs: song } },
     { runValidators: true, new: true }
-  );
+  ).populate('likedSongs');
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  user.likedSongs.map((song) => {
+    song.song = `${serverUrl}public/songs/${song.song}`;
+    song.img = `${serverUrl}public/songs/${song.img}`;
+  });
 
   res.status(200).json({
     status: 'success',
@@ -164,12 +169,17 @@ exports.likeSong = catchAsync(async (req, res, next) => {
 exports.dislikeSong = catchAsync(async (req, res, next) => {
   const { song } = req.body;
 
-  // REVIEW: If logged in used is artist user info is populated twice
   const user = await User.findByIdAndUpdate(
     req.user.id,
     { $pull: { likedSongs: song } },
     { runValidators: true, new: true }
-  );
+  ).populate('likedSongs');
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  user.likedSongs.map((song) => {
+    song.song = `${serverUrl}public/songs/${song.song}`;
+    song.img = `${serverUrl}public/songs/${song.img}`;
+  });
 
   res.status(200).json({
     status: 'success',

@@ -40,7 +40,7 @@ const Home = (props) => {
         </div>
         <h2 className="h2">Your Favourite Artists</h2>
         <div className="app-header__list">
-          {user.followedArtists.map((artist) => (
+          {user.followedArtists?.map((artist) => (
             <ArtistCard artist={artist} />
           ))}
         </div>
