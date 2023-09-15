@@ -31,8 +31,8 @@ const Home = (props) => {
         </div>
         <h2 className="h2">Top Artists</h2>
         <div className="app-header__list">
-          {list.map((el) => (
-            <CardArtist />
+          {user.followedArtists.map((artist) => (
+            <CardArtist artist={artist} />
           ))}
         </div>
 

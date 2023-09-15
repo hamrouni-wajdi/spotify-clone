@@ -6,8 +6,8 @@ const img =
 const CardArtist = (props) => {
   return (
     <div className="card-artist">
-      <img src={img} alt="" />
-      <p className="card-artist__name">Alan Walker</p>
+      <img src={props.artist?.img} alt="" />
+      <p className="card-artist__name">{props.artist?.name}</p>
       <p>Artist</p>
     </div>
   );
