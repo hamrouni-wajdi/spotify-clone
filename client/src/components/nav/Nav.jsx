@@ -36,7 +36,7 @@ const Nav = (props) => {
         </div>
       </div>
       <div className="nav">
-        <Link to="/" className="nav-link">
+        <Link to="/profile" className="nav-link">
           <IoPersonCircleOutline />
           <span>Profile</span>
         </Link>
