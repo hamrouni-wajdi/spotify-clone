@@ -129,7 +129,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
 
     // 2) If still user exists
     const user = await User.findById(decoded.id)
-      .populate('followedArtists', 'name img')
+      .populate('followedArtists', 'name img role')
       .populate('likedPlaylists', 'name img')
       .populate('likedSongs');
     if (!user) return next(new AppError());

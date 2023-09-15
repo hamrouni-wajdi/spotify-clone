@@ -2,10 +2,10 @@
   background-color: #121212;
   border-radius: 8px;
 
-  margin: 8px;
-  padding: 8px 12px;
- 
-  &-link {
+  padding: 8px 0;
+  height: 100%;
+
+  &__header {
     font-size: 16px;
     font-weight: 700;
 
@@ -13,27 +13,61 @@
     padding: 4px 12px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
 
-    &__link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
 
-    &__add {
-      background-color: #000000aa;
-      border-radius: 50%;
-
-      height: 32px;
-      width: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
 
     svg {
       font-size: 24px;
     }
+  }
+}
+
+.saved {
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+
+  &__link,
+  &__link:link,
+  &__link:visited {
+    font: inherit;
+    text-decoration: none;
+    color: inherit;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 8px;
+    border-radius: 6px;
+
+    img {
+      width: 48px;
+      border-radius: 6px;
+    }
+
+    span {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    &:hover {
+      background: #181818;
+    }
+  }
+
+  &__link[aria-current=page] {
+    background: #232323;
+
+  }
+
+  &__link--artist img {
+    border-radius: 50px !important;
+  }
+
+  &__link--active {
+    background-color: #282828;
   }
 }
