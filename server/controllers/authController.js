@@ -130,7 +130,8 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     // 2) If still user exists
     const user = await User.findById(decoded.id)
       .populate('followedArtists', 'name img')
-      .populate('likedPlaylists', 'name img');
+      .populate('likedPlaylists', 'name img')
+      .populate('likedSongs');
     if (!user) return next(new AppError());
 
     user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
@@ -141,6 +142,10 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     });
     user.likedPlaylists.map((playlist) => {
       playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+    });
+    user.likedSongs.map((song) => {
+      song.img = `${serverUrl}public/songs/${song.img}`;
+      song.song = `${serverUrl}public/songs/${song.song}`;
     });
 
     // 3) Check user changed password after the token was issued

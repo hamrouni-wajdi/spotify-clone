@@ -14,6 +14,7 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Profile from "./components/app/Profile/Profile";
 import Search from "./components/app/Search/Search";
+import LikedSongs from "./components/app/Playlist/LikedSongs";
 
 function MainApp() {
   const [loading, setLoading] = useState(true);
@@ -69,6 +70,19 @@ function MainApp() {
                 <Nav />
                 <App>
                   <Artist />
+                </App>
+
+                <Player />
+              </>
+            }
+          />
+          <Route
+            path="/likedSongs"
+            element={
+              <>
+                <Nav />
+                <App>
+                  <LikedSongs />
                 </App>
 
                 <Player />
