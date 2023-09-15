@@ -158,7 +158,8 @@ const Player = () => {
 
   //-- Like
   const userLikedSong = () => {
-    return likedSongs.includes(song.id);
+    let likedSong = likedSongs.find((likedSong) => likedSong.id === song.id);
+    return !!likedSong;
   };
 
   const repeatSongHandler = () => {

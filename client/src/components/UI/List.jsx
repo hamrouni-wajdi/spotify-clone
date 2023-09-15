@@ -17,6 +17,11 @@ const List = (props) => {
     dispatch(replaceQueue({ songs, i, id }));
   };
 
+  const userLikedSong = (song) => {
+    let likedSong = likedSongs.find((likedSong) => likedSong.id === song.id);
+    return !!likedSong;
+  };
+
   // 💚 like song
   const likeSongHandler = (id) => dispatch(likeSong(id));
 
@@ -46,7 +51,7 @@ const List = (props) => {
               {el.name}
             </span>
             <span>{el.artist.name}</span>
-            {likedSongs.includes(el.id) ? (
+            {userLikedSong(el) ? (
               <IoHeart onClick={() => dislikeSongHandler(el.id)} />
             ) : (
               <IoHeartOutline
