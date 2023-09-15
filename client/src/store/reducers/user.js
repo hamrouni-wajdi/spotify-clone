@@ -12,20 +12,12 @@ import {
 } from "../thunks/user";
 import { dislikePlaylist, likePlaylist } from "../thunks/playlist";
 
-let DEFAULT_USER_STATE = {
-  data: {
-    _id: null,
-    email: null,
-    name: null,
-    photo: null,
-    role: null,
-  },
-  auth: null,
-};
-
 export const userSlice = createSlice({
   name: "user",
-  initialState: DEFAULT_USER_STATE,
+  initialState: {
+    data: {},
+    auth: null,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder

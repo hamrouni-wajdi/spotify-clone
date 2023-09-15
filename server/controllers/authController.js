@@ -69,7 +69,9 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // 2) Get the user from DB
-  const user = await User.findOne({ email }).select('+password');
+  const user = await User.findOne({ email })
+    .select('+password')
+    .populate('followedArtists', 'name img');
 
   // 3) Check passwords are correct
   if (!user || !(await user.checkPassword(password, user.password))) {
@@ -126,10 +128,18 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
 
     // 2) If still user exists
-    const user = await User.findById(decoded.id);
+    const user = await User.findById(decoded.id).populate(
+      'followedArtists',
+      'name img'
+    );
     if (!user) return next(new AppError());
 
     user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
+
+    const serverUrl = `${req.protocol}://${req.get('host')}/`;
+    user.followedArtists.map((artist) => {
+      artist.img = `${serverUrl}public/users/${artist.img}`;
+    });
 
     // 3) Check user changed password after the token was issued
     if (user.changedPasswordAfter(decoded.iat)) {
