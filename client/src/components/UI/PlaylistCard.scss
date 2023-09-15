@@ -1,8 +1,11 @@
 .card-playlist {
+  text-decoration: none;
+  color: inherit;
   background-color: #181818;
-  border-radius: 8px;
+  border-radius: 9px;
   cursor: pointer;
 
+  width: 100%;
   padding: 16px;
 
   &:hover {
@@ -11,19 +14,16 @@
   }
 
   img {
-    width: 100%;
     border-radius: 4px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    margin-bottom: 8px;
-  }
 
-  p {
-    color: #fff;
+    width: 100%;
+    margin-bottom: 15px;
   }
+}
 
-  .type {
-    font-size: 14px;
-    color: #a7a7a7;
-    font-weight: 400;
-  }
+.playlist-card__name {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 4px;
 }

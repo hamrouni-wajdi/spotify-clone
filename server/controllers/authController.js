@@ -128,10 +128,9 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
 
     // 2) If still user exists
-    const user = await User.findById(decoded.id).populate(
-      'followedArtists',
-      'name img'
-    );
+    const user = await User.findById(decoded.id)
+      .populate('followedArtists', 'name img')
+      .populate('likedPlaylists', 'name img');
     if (!user) return next(new AppError());
 
     user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
@@ -139,6 +138,9 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     const serverUrl = `${req.protocol}://${req.get('host')}/`;
     user.followedArtists.map((artist) => {
       artist.img = `${serverUrl}public/users/${artist.img}`;
+    });
+    user.likedPlaylists.map((playlist) => {
+      playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
     });
 
     // 3) Check user changed password after the token was issued

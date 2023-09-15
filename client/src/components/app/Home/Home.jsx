@@ -1,5 +1,5 @@
-import CardArtist from "../../UI/CardArtist";
-import CardPlaylist from "../../UI/CardPlaylist";
+import ArtistCard from "../../UI/ArtistCard";
+import PlaylistCard from "../../UI/PlaylistCard";
 import "./Home.scss";
 
 import { IoPlayCircle } from "react-icons/io5";
@@ -29,31 +29,31 @@ const Home = (props) => {
             </div>
           ))}
         </div>
-        <h2 className="h2">Top Artists</h2>
+        <h2 className="h2">Your Favourite Artists</h2>
         <div className="app-header__list">
           {user.followedArtists.map((artist) => (
-            <CardArtist artist={artist} />
+            <ArtistCard artist={artist} />
           ))}
         </div>
 
-        <h2 className="h2">Top Playlists</h2>
+        <h2 className="h2">Your Favourite Playlists</h2>
         <div className="app-header__list">
-          {list.map((el) => (
-            <CardPlaylist />
+          {user.likedPlaylists.map((playlist) => (
+            <PlaylistCard playlist={playlist} />
           ))}
         </div>
 
         <h2 className="h2">Top Artists</h2>
         <div className="app-header__list">
           {list.map((el) => (
-            <CardArtist />
+            <ArtistCard />
           ))}
         </div>
 
         <h2 className="h2">Top Playlists</h2>
         <div className="app-header__list">
           {list.map((el) => (
-            <CardPlaylist />
+            <PlaylistCard />
           ))}
         </div>
       </div>
