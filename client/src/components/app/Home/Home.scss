@@ -1,8 +1,7 @@
 .app-header {
-  // background-image: linear-gradient(to bottom, #242424, #121212);
- 
-  padding-top: 8px;
-  padding: 8px 24px 0 24px;
+   //background-image: linear-gradient(to bottom, #242424, #121212);
+
+  padding: 84px 24px 0 24px;
   margin-bottom: 16px;
 
   &__latest {
@@ -54,7 +53,8 @@
   }
 
   &__list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 16px;
     padding-bottom: 24px;
   }

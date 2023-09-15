@@ -1,8 +1,13 @@
-.card-artist {
-  background-color: #181818;
-  border-radius: 8px;
-  cursor: pointer;
+.card-artist,
+.card-artist:link,
+.card-artist:visited {
+  text-decoration: none;
+  color: inherit;
 
+  background: #181818;
+  border-radius: 9px;
+
+  width: 100%;
   padding: 16px;
 
   &:hover {
@@ -12,18 +17,14 @@
  
   img {
     width: 100%;
-    border-radius: 50%;
+    border-radius: 50rem;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
+}
 
-  p {
-    color: #fff;
-  }
-
-  .type {
-    font-size: 14px;
-    color: #a7a7a7;
-    font-weight: 400;
-  }
+.card-artist__name {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 4px;
 }

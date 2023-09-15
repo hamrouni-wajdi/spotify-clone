@@ -7,6 +7,7 @@ import { isLoggedIn } from "./store/thunks/user";
 import Nav from "./components/nav/Nav";
 import Player from "./components/player/Player";
 import App from "./components/app/App";
+import Home from "./components/app/Home/Home";
 import Artist from "./components/app/Artist/Artist";
 import Playlist from "./components/app/Playlist/Playlist";
 import Login from "./components/auth/Login";
@@ -40,7 +41,9 @@ function MainApp() {
             element={
               <>
                 <Nav />
-                <App></App>
+                <App>
+                  <Home />
+                </App>
 
                 <Player />
               </>

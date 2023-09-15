@@ -26,7 +26,7 @@ const App = (props) => {
           />
         </div>
       </div>
-      {/*<Header />*/}
+      {/*<Home />*/}
       {/*<Artist />*/}
       {props.children}
     </div>
