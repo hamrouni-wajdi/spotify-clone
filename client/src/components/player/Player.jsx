@@ -169,7 +169,7 @@ const Player = () => {
 
   return (
     <div className="player">
-      {song && (
+      {song ? (
         <>
           <div className="player-song">
             <img src={song.img} alt="" />
@@ -230,21 +230,22 @@ const Player = () => {
               <span className="player-song__time">{formatTime(duration)}</span>
             </div>
           </div>
+          <div className="player__volume">
+            <IoVolumeMediumOutline />
+            <input
+              ref={volumeRef}
+              type="range"
+              min={0}
+              max={100}
+              value={volume}
+              defaultValue={100}
+              onChange={(e) => volumeChangeHandler(e)}
+            />
+          </div>
         </>
+      ) : (
+        <div className="player__note">Please select a song 🐈 . . .</div>
       )}
-
-      <div className="player__volume">
-        <IoVolumeMediumOutline />
-        <input
-          ref={volumeRef}
-          type="range"
-          min={0}
-          max={100}
-          value={volume}
-          defaultValue={100}
-          onChange={(e) => volumeChangeHandler(e)}
-        />
-      </div>
     </div>
   );
 };
