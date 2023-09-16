@@ -29,9 +29,10 @@ const Artist = () => {
     dispatch(playPause());
   };
 
-  // Follow artist
-  const userFollowedArtist = () => {
-    return followedArtists.includes(artist.id);
+  const userFollowedArtist = (id) => {
+    let res = followedArtists.find((obj) => obj.id === id);
+
+    return res ? true : false;
   };
 
   const followArtistHandler = () => {
@@ -66,7 +67,7 @@ const Artist = () => {
             {/*  <IoPlayCircle onClick={playPauseHandler} />*/}
             {/*)}*/}
             <IoPlayCircle onClick={() => replaceQueueHandler(artist.songs)} />
-            {!userFollowedArtist() ? (
+            {!userFollowedArtist(artist.id) ? (
               <button onClick={followArtistHandler}>Follow</button>
             ) : (
               <button onClick={unfollowArtistHandler}>Following</button>
