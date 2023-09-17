@@ -14,6 +14,8 @@ const searchRouter = require('./routes/searchRoutes');
 
 const app = express();
 
+app.enable('trust proxy');
+
 // Middlewares
 // app.use(cors());
 // app.use(
