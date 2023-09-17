@@ -68,6 +68,12 @@ const Playlist = () => {
 
   const dislikePlaylistHandler = (id) => dispatch(dislikePlaylist(id));
 
+  const userLikedPlaylist = (id) => {
+    let res = likedPlaylists.find((obj) => obj.id === id);
+
+    return res ? true : false;
+  };
+
   return (
     <>
       {playlist ? (
@@ -99,7 +105,7 @@ const Playlist = () => {
 
           <div className="playlist-nav">
             <IoPlayCircle onClick={() => replaceQueueHandler(playlist.songs)} />
-            {likedPlaylists.includes(playlist.id) ? (
+            {userLikedPlaylist(playlist.id) ? (
               <IoHeart
                 className="heart heart--active"
                 onClick={() => dislikePlaylistHandler(playlist.id)}

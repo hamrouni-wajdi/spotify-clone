@@ -26,9 +26,8 @@ const createSendToken = (user, statusCode, req, res) => {
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     httpOnly: true,
     sameSite: 'none',
-    secure: true,
   };
-  // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
   res.cookie('jwt', token, cookieOptions);
 
   user.photo = `${req.protocol}://${req.get('host')}/public/users/${
@@ -123,8 +122,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 // Is logged in
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
-  console.log(req);
-  console.log(req.cookies);
   if (req.cookies.jwt) {
     // 1) Verify token
     const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
@@ -162,12 +159,12 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       status: 'success',
       data: { user },
     });
+  } else {
+    res.status(401).json({
+      status: 'error',
+      message: '🍪 There is no cookie',
+    });
   }
-
-  // res.status(401).json({
-  //   status: 'fail',
-  //   data: null,
-  // });
 });
 
 exports.restrictTo =
