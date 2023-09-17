@@ -16,7 +16,12 @@ const app = express();
 
 app.enable('trust proxy');
 
-app.use(cors('*'));
+app.use(
+  cors({
+    origin: 'https://maqsud-spotify.vercel.app',
+    credentials: true,
+  })
+);
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser());
