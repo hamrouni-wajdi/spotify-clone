@@ -165,16 +165,19 @@ exports.deleteSong = catchAsync(async (req, res, next) => {
   });
 });
 
-// 💚 Like system
 exports.likePlaylist = catchAsync(async (req, res, next) => {
   const { playlist } = req.body;
-  console.log(playlist);
 
   const user = await User.findByIdAndUpdate(
     req.user.id,
     { $addToSet: { likedPlaylists: playlist } },
     { runValidators: true, new: true }
-  );
+  ).populate('likedPlaylists', 'name img');
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  user.likedPlaylists.map((playlist) => {
+    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  });
 
   res.status(200).json({
     status: 'success',
@@ -190,7 +193,12 @@ exports.dislikePlaylist = catchAsync(async (req, res, next) => {
     req.user.id,
     { $pull: { likedPlaylists: playlist } },
     { runValidators: true, new: true }
-  );
+  ).populate('likedPlaylists', 'name img');
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  user.likedPlaylists.map((playlist) => {
+    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  });
 
   res.status(200).json({
     status: 'success',

@@ -123,6 +123,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 // Is logged in
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  console.log(req.cookies);
   if (req.cookies.jwt) {
     // 1) Verify token
     const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
