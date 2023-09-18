@@ -4,18 +4,6 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 
-// Multer
-// const storage = multer.diskStorage({
-//   destination(req, file, cb) {
-//     cb(null, './public/users');
-//   },
-//   filename(req, file, cb) {
-//     const ext = file.mimetype.split('/')[1];
-
-//     cb(null, `artist-${req.body.name.replace(/ /g, '-').toLowerCase()}.${ext}`);
-//   },
-// });
-
 const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {

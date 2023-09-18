@@ -38,13 +38,6 @@ router.post(
 // Playlists
 router.use('/:userId/playlists', playlistRouter);
 
-// Manage likes
-// router
-//   .route('/likes')
-//   .get(authController.protect, userController.getLikedSongs)
-//   .post(authController.protect, userController.likeSong)
-//   .delete(authController.protect, userController.unlikeSong);
-
 router
   .route('/likes/add')
   .post(authController.protect, userController.likeSong);

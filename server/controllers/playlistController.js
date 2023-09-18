@@ -38,7 +38,6 @@ exports.getAllPlaylists = catchAsync(async (req, res, next) => {
   // 1) Get user's playlists
   let filter = {};
   if (req.params.userId) filter = { user: req.params.userId };
-  console.log(req.params, filter);
 
   // 2) Get playlists from DB
   const playlist = await Playlist.find(filter);
@@ -175,8 +174,8 @@ exports.likePlaylist = catchAsync(async (req, res, next) => {
   ).populate('likedPlaylists', 'name img');
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.likedPlaylists.map((playlist) => {
-    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  user.likedPlaylists.map((el) => {
+    el.img = `${serverUrl}public/playlists/${el.img}`;
   });
 
   res.status(200).json({
@@ -196,8 +195,8 @@ exports.dislikePlaylist = catchAsync(async (req, res, next) => {
   ).populate('likedPlaylists', 'name img');
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.likedPlaylists.map((playlist) => {
-    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  user.likedPlaylists.map((el) => {
+    el.img = `${serverUrl}public/playlists/${el.img}`;
   });
 
   res.status(200).json({

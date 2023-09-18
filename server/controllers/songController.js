@@ -1,7 +1,6 @@
 const multer = require('multer');
 const sharp = require('sharp');
 const fs = require('fs');
-const { log } = require('console');
 const Song = require('../models/songModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
@@ -9,7 +8,6 @@ const AppError = require('../utils/appError');
 const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
-  // console.log(file);
   if (file.mimetype.split('/')[0] === 'image') {
     cb(null, true);
   } else if (file.mimetype.split('/')[0] === 'audio') {
@@ -95,7 +93,6 @@ exports.getLikedSongs = catchAsync(async (req, res, next) => {
 });
 
 exports.getSong = catchAsync(async (req, res, next) => {
-  // $inc increases plays field every time this route hits
   const song = await Song.findByIdAndUpdate(
     req.params.id,
     { $inc: { plays: 1 } },
@@ -117,7 +114,6 @@ exports.getSong = catchAsync(async (req, res, next) => {
 });
 
 exports.createSong = catchAsync(async (req, res, next) => {
-  // 1) Modify req.boy
   req.body.song = req.files.song[0].filename;
   req.body.img = req.files.img[0].filename;
   req.body.artist = req.user.id;

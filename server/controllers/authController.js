@@ -10,13 +10,6 @@ const signToken = (id) =>
     expiresIn: '30d',
   });
 
-// const generateCookie = (res, token) => {
-//   res.cookie('jwt', token, {
-//     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-//     // secure: true,
-//   });
-// };
-
 const createSendToken = (user, statusCode, req, res) => {
   // Generate token
   const token = signToken(user.id);
@@ -171,8 +164,6 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
 exports.restrictTo =
   (...roles) =>
   (req, res, next) => {
-    console.log(roles);
-    console.log(req.user.role);
     if (!roles.includes(req.user.role)) {
       return next(
         new AppError('⛔ You do not have permission to perform this action!')
@@ -186,12 +177,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // 1) Get user from DB using email
   const user = await User.findOne({ email: req.body.email });
   if (!user)
-    return next(new AppError('🤷‍♂️ There is no user with that email', 404));
+    return next(new AppError('🤷‍ There is no user with that email', 404));
 
   // 2) Generate random reset token
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
-  console.log('for', resetToken);
 
   // 3) Send token to user's email
   await new Email(user).sendResetToken(resetToken);
@@ -252,7 +242,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
   // 1) Change active property to false
-  const user = await User.findByIdAndUpdate(req.user.id, { active: false });
+  await User.findByIdAndUpdate(req.user.id, { active: false });
 
   res.status(204).json({
     status: 'success',

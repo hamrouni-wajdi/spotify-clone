@@ -14,35 +14,27 @@ const searchRouter = require('./routes/searchRoutes');
 
 const app = express();
 
-app.enable('trust proxy');
-
 app.use(
   cors({
     origin: 'https://maqsud-spotify.vercel.app',
     credentials: true,
   })
 );
+
 app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(express.json({ limit: '10kb' }));
 app.use(cookieParser());
 app.use(mongoSanitize());
 app.use(xss());
 
-// Static folder
 app.use('/public', express.static('public'));
 
-// Routes
 app.use('/api/v1/songs', songRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/playlists', playlistRouter);
 app.use('/api/v1/search', searchRouter);
 
-// Unhandled routes
 app.all('*', (req, res, next) => {
-  res.status(404).json({
-    status: 'fail',
-    message: `Can't find ${req.originalUrl} on this server`,
-  });
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });
 

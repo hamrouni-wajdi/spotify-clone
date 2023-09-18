@@ -22,10 +22,6 @@ const songSchema = new mongoose.Schema(
       type: String,
       required: [true, 'A song must have a cover img'],
     },
-    // duration: {
-    //     type: Number,
-    //     required: [true, 'A song must have a duration'],
-    // },
     genre: {
       type: String,
       enaum: [
@@ -56,16 +52,6 @@ const songSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
-
-// Query middlewares
-// songSchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: 'artist',
-//     select: 'name photo',
-//   });
-//
-//   next();
-// });
 
 const Song = new mongoose.model('Song', songSchema);
 

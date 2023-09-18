@@ -23,11 +23,7 @@ mongoose.connect(DB).then(() => {
   console.log(chalk.hex('#78dce8').bold('DATABASE CONNECTION SUCCESSFUL'));
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello, world');
-});
-
-const server = app.listen(process.env.PORT || 3000, () => {
+const server = app.listen(process.env.PORT || 8000, () => {
   console.log(
     chalk.hex('#78dce8').bold(`LISTENING ON PORT ${process.env.PORT}`)
   );
