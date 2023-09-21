@@ -5,6 +5,7 @@ import {
   isLoggedIn,
   likeSong,
   loginUser,
+  resetPassword,
   signupUser,
   unfollowArtist,
   updatePassword,
@@ -33,6 +34,11 @@ export const userSlice = createSlice({
       // Is auth
       .addCase(isLoggedIn.fulfilled, (state, action) => {
         state.data = action.payload.data;
+        state.auth = true;
+      })
+      // Reset password
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.data = action.payload.data.user;
         state.auth = true;
       })
       // Like song

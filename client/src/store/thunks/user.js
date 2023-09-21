@@ -102,7 +102,6 @@ export const unfollowArtist = createAsyncThunk(
 // Form
 export const updateUser = createAsyncThunk("user/updateUser", async (data) => {
   try {
-    console.log("user olala", data);
     const res = await axios.patch("/users/updateMe", data);
 
     return res.data.data;
@@ -110,6 +109,19 @@ export const updateUser = createAsyncThunk("user/updateUser", async (data) => {
     throw err;
   }
 });
+
+export const resetPassword = createAsyncThunk(
+  "user/resetPassword",
+  async (data) => {
+    try {
+      const res = await axios.patch(`/users/resetPassword/${data.id}`, data);
+
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  },
+);
 
 export const updatePassword = createAsyncThunk(
   "user/updatePassword",
