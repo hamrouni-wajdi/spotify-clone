@@ -208,9 +208,9 @@ exports.resetTokenTemplate = (resetToken) => {
       </p>
       <p class="paragraph">
         To reset your password, simply click the button below and follow the
-        instructions:s
+        instructions
       </p>
-      <a class="link" href="${resetToken}">Reset your password</a>
+      <a class="link" href="http://localhost:3000/resetPassword/6629fed7f997e6e01ad86b3f${resetToken}">Reset your password</a>
       <p class="paragraph">
         If you didn't request a password reset, please ignore this email.
       </p>

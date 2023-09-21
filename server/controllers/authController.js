@@ -62,7 +62,23 @@ exports.login = catchAsync(async (req, res, next) => {
   // 2) Get the user from DB
   const user = await User.findOne({ email })
     .select('+password')
-    .populate('followedArtists', 'name img');
+    .populate('followedArtists', 'name img role')
+    .populate('likedPlaylists', 'name img')
+    .populate('likedSongs');
+
+  user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  user.followedArtists.map((artist) => {
+    artist.img = `${serverUrl}public/users/${artist.img}`;
+  });
+  user.likedPlaylists.map((playlist) => {
+    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  });
+  user.likedSongs.map((song) => {
+    song.song = `${serverUrl}public/songs/${song.song}`;
+    song.img = `${serverUrl}public/songs/${song.img}`;
+  });
 
   // 3) Check passwords are correct
   if (!user || !(await user.checkPassword(password, user.password))) {
@@ -97,7 +113,13 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 3) If still user exists
   const user = await User.findById(decoded.id);
-  if (!user) return next(new AppError());
+  if (!user)
+    return next(
+      new AppError(
+        'The user belonging to this token does no longer exist.',
+        401
+      )
+    );
 
   // 4) Check user changed password after the token was issued
   if (user.changedPasswordAfter(decoded.iat)) {
@@ -201,11 +223,26 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   const user = await User.findOne({
     passwordResetToken: resetToken,
     passwordResetExpires: { $gt: Date.now() },
-  });
+  })
+    .populate('followedArtists', 'name img role')
+    .populate('likedPlaylists', 'name img')
+    .populate('likedSongs');
 
   if (!user) {
     return next(new AppError('🚫 Token is invalid or expired', 400));
   }
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  user.followedArtists.map((artist) => {
+    artist.img = `${serverUrl}public/users/${artist.img}`;
+  });
+  user.likedPlaylists.map((playlist) => {
+    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  });
+  user.likedSongs.map((song) => {
+    song.song = `${serverUrl}public/songs/${song.song}`;
+    song.img = `${serverUrl}public/songs/${song.img}`;
+  });
 
   // 3) Update user password
   user.password = req.body.password;
@@ -216,7 +253,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   // 4) Update passwordChangedAt
   // 5) Log user in
-
   createSendToken(user, 200, req, res);
 });
 
