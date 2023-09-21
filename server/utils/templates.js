@@ -25,7 +25,7 @@ exports.welcomeTemplate = () => {
       }
 
       body {
-        color: #000;
+        color: #080f18;
         background-color: #f7f7f7;
         padding: 10rem 0;
         font-family: "Montserrat", sans-serif;
@@ -64,24 +64,6 @@ exports.welcomeTemplate = () => {
         font-weight: 600;
         padding-bottom: 16px;
       }
-
-      a:link,
-      a:visited {
-        display: inline-block;
-        font-size: 18px;
-        font-weight: bold;
-        text-transform: uppercase;
-        background-color: #000;
-        color: #fff;
-        text-decoration: none;
-        padding: 16px 32px;
-        border-radius: 50px;
-        transition: all 0.2s;
-      }
-
-      a:hover {
-        background-color: #222;
-      }
     </style>
   </head>
   <body>
@@ -111,7 +93,7 @@ exports.welcomeTemplate = () => {
         and sign in using your email and password. Once you're signed in, you
         can start exploring and listening to your favorite music right away! 🎶
       </p>
-      <a href="#">Confirm your account</a>
+      <p>Made with ❤️ by <a color="black" href="https://github.com/maqsudtolipov">Maqsud</a></p>
     </div>
   </body>
 </html>
@@ -145,7 +127,7 @@ exports.resetTokenTemplate = (resetToken) => {
       }
 
       body {
-        color: #000;
+        color: #080f18;
         background-color: #f7f7f7;
         padding: 10rem 0;
         font-family: "Montserrat", sans-serif;
@@ -186,8 +168,8 @@ exports.resetTokenTemplate = (resetToken) => {
         padding-bottom: 16px;
       }
 
-      a:link,
-      a:visited {
+      .link:link,
+      .link:visited {
         display: inline-block;
         font-size: 18px;
         font-weight: bold;
@@ -201,7 +183,7 @@ exports.resetTokenTemplate = (resetToken) => {
         margin-bottom: 32px;
       }
 
-      a:hover {
+      .link:hover {
         background-color: #222;
       }
     </style>
@@ -228,10 +210,11 @@ exports.resetTokenTemplate = (resetToken) => {
         To reset your password, simply click the button below and follow the
         instructions:s
       </p>
-      <a href="${resetToken}">Reset your password</a>
+      <a class="link" href="${resetToken}">Reset your password</a>
       <p class="paragraph">
         If you didn't request a password reset, please ignore this email.
       </p>
+      <p>Made with ❤️ by <a color="black" href="https://github.com/maqsudtolipov">Maqsud</a></p>
     </div>
   </body>
 </html>

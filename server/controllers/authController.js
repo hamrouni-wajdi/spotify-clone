@@ -24,9 +24,7 @@ const createSendToken = (user, statusCode, req, res) => {
   };
   res.cookie('jwt', token, cookieOptions);
 
-  user.photo = `${req.protocol}://${req.get('host')}/public/users/${
-    user.photo
-  }`;
+  user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
   user.password = undefined;
 
   // Send response

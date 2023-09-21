@@ -5,23 +5,22 @@ module.exports = class Email {
   constructor(user) {
     this.to = user.email;
     this.name = user.name;
-    this.from = `Maqsud Tolipov - spotify.clone`;
   }
 
   newTransport() {
     return nodemailer.createTransport({
-      host: 'sandbox.smtp.mailtrap.io',
-      port: 2525,
+      host: 'smtp-relay.brevo.com',
+      port: 587,
       auth: {
-        user: process.env.NMAILER_USER,
-        pass: process.env.NMAILER_PASS,
+        user: process.env.BREVO_USER,
+        pass: process.env.BREVO_PASS,
       },
     });
   }
 
   async send(subject, html) {
     const mailOptions = {
-      from: this.from,
+      from: process.env.BREVO_USER,
       to: this.to,
       subject,
       html,
