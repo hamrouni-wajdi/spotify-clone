@@ -16,6 +16,7 @@ import Profile from "./components/app/Profile/Profile";
 import Search from "./components/app/Search/Search";
 import LikedSongs from "./components/app/Playlist/LikedSongs";
 import Reset from "./components/auth/Reset";
+import Forgot from "./components/auth/Forgot";
 
 function MainApp() {
   const [loading, setLoading] = useState(true);
@@ -118,6 +119,7 @@ function MainApp() {
           ></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgotPassword" element={<Forgot />} />
           <Route path="/resetPassword/:id" element={<Reset />} />
         </Routes>
       </div>

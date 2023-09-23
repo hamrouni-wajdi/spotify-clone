@@ -110,6 +110,20 @@ export const updateUser = createAsyncThunk("user/updateUser", async (data) => {
   }
 });
 
+export const forgotPassword = createAsyncThunk(
+  "user/forgotPassword",
+  async (data) => {
+    try {
+      const res = await axios.post("users/forgotPassword", data);
+
+      console.log(res.data);
+      return res.data;
+    } catch (err) {
+      throw err;
+    }
+  },
+);
+
 export const resetPassword = createAsyncThunk(
   "user/resetPassword",
   async (data) => {

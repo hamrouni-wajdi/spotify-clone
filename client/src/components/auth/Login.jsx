@@ -23,6 +23,9 @@ const Login = (props) => {
         <div className="auth">
           <form className="auth-form" onSubmit={login}>
             <img className="auth-form__logo" src={logo} alt="" />
+            <Link to="/forgotPassword" className="auth-form__link">
+              Forgot password?
+            </Link>
             <Link to="/signup" className="auth-form__link">
               Sign Up here
             </Link>
