@@ -29,8 +29,8 @@ const Reset = () => {
         <div className="auth">
           <form className="auth-form" onSubmit={formSubmitHandler}>
             <img className="auth-form__logo" src={logo} alt="" />
-            <input type="text" placeholder="Password" required />
-            <input type="text" placeholder="Confirm Password" required />
+            <input type="password" placeholder="Password" required />
+            <input type="password" placeholder="Confirm Password" required />
             <button type="submit">Update password</button>
           </form>
         </div>

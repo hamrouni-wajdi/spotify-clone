@@ -31,13 +31,13 @@ const Signup = (props) => {
             <input type="text" name="name" placeholder="Name" required />
             <input type="text" name="email" placeholder="Email" required />
             <input
-              type="text"
+              type="password"
               name="password"
               placeholder="Password"
               required
             />
             <input
-              type="text"
+              type="password"
               name="passwordConfirm"
               placeholder="Password Confirm"
               required

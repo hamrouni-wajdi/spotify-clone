@@ -2,13 +2,20 @@ import "./Profile.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePassword, updateUser } from "../../../store/thunks/user";
 import { useRef } from "react";
+import axios from "../../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  // Redux
   const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
 
+  // Refs
   const formInfoRef = useRef();
   const formPassRef = useRef();
+
+  // Router
+  const navigate = useNavigate();
 
   const formInfoHandler = (e) => {
     e.preventDefault();
@@ -29,6 +36,11 @@ const Profile = () => {
     };
 
     dispatch(updatePassword(data));
+  };
+
+  const logoutHandler = async () => {
+    navigate("/login");
+    const res = await axios.get("users/logout");
   };
 
   return (
@@ -67,6 +79,9 @@ const Profile = () => {
                 <input type="password" name="confirmPassword" />
                 <button type="submit">Update</button>
               </form>
+              <p onClick={logoutHandler} style={{ color: "#ef4444" }}>
+                🫡 Log out
+              </p>
             </div>
           </div>
         </div>

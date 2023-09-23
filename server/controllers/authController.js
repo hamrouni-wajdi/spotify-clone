@@ -66,9 +66,8 @@ exports.login = catchAsync(async (req, res, next) => {
     .populate('likedPlaylists', 'name img')
     .populate('likedSongs');
 
-  user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
-
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
+
   user.followedArtists.map((artist) => {
     artist.img = `${serverUrl}public/users/${artist.img}`;
   });
@@ -87,6 +86,14 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // 4) Sign token and send to the user
   createSendToken(user, 200, req, res);
+});
+
+exports.logout = catchAsync(async (req, res, next) => {
+  res.cookie('jwt', 'loggedOut', {
+    expires: new Date(Date.now() - 10000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {

@@ -28,7 +28,7 @@ const Login = (props) => {
               Sign Up here
             </Link>
             <input type="text" placeholder="Email" required />
-            <input type="text" placeholder="Password" required />
+            <input type="password" placeholder="Password" required />
             <Link to="/forgotPassword" className="auth-form__link">
               Forgot password?
             </Link>
