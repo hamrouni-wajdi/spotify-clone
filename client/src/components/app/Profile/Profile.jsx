@@ -79,8 +79,11 @@ const Profile = () => {
                 <input type="password" name="confirmPassword" />
                 <button type="submit">Update</button>
               </form>
-              <p onClick={logoutHandler} style={{ color: "#ef4444" }}>
-                🫡 Log out
+              <p
+                onClick={logoutHandler}
+                style={{ color: "#ef4444", cursor: "pointer" }}
+              >
+                ✈️ Log out
               </p>
             </div>
           </div>

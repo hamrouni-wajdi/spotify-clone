@@ -53,7 +53,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.photo = `${serverUrl}public/users/${user.photo}`;
+  user.img = `${serverUrl}public/users/${user.img}`;
 
   res.status(200).json({
     status: 'success',
