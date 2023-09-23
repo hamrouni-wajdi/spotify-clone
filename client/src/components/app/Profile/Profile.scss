@@ -59,35 +59,35 @@
       gap: 8px 16px;
       padding-bottom: 32px;
 
-
-
       label {
         justify-self: end;
       }
 
       input {
-        min-width: 35rem;
-        justify-self: start;
         font-size: inherit;
         color: #fff;
         background-color: #121212;
         border: none;
-        padding: 8px 16px;
         border-radius: 50px;
-        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline: 2px solid rgba(255, 255, 255, 0.1);
+
+        min-width: 35rem;
+        padding: 8px 16px;
+        justify-self: start;
       }
 
       button {
-        cursor: pointer;
-        font-weight: inherit;
         font-size: inherit;
+        font-weight: inherit;
         color: #fff;
         background-color: var(--main-cl);
         border: none;
-        padding: 8px 16px;
         border-radius: 50px;
-        grid-column: 2;
+        cursor: pointer;
+
+        padding: 8px 16px;
         justify-self: start;
+        grid-column: 2;
       }
     }
   }

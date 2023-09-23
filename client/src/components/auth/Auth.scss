@@ -13,6 +13,7 @@
 .auth-form {
   background-color: #242424;
   border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5);
 
   display: flex;
   flex-direction: column;
@@ -42,17 +43,22 @@
     color: #fff;
     background-color: #121212;
     border: none;
-    padding: 8px 16px;
     border-radius: 50px;
+    outline: 2px solid rgba(255, 255, 255, 0.1);
+
+    min-width: 24rem;
+    padding: 8px 16px;
   }
 
   button {
-    font-weight: inherit;
     font-size: inherit;
+    font-weight: inherit;
     color: #fff;
-    background-color: var(--main-cl);
+    background-color: #1DB954;
     border: none;
-    padding: 8px 16px;
     border-radius: 50px;
+    cursor: pointer;
+
+    padding: 8px 16px;
   }
 }
