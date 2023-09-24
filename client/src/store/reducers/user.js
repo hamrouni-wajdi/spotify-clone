@@ -8,7 +8,7 @@ import {
   resetPassword,
   signupUser,
   unfollowArtist,
-  updatePassword,
+  becomeArtist,
   updateUser,
 } from "../thunks/user";
 import { dislikePlaylist, likePlaylist } from "../thunks/playlist";
@@ -43,7 +43,6 @@ export const userSlice = createSlice({
       })
       // Like song
       .addCase(likeSong.fulfilled, (state, action) => {
-        console.log("likesong", action.payload);
         state.data.likedSongs = action.payload;
       })
       // Dislike song
@@ -52,16 +51,15 @@ export const userSlice = createSlice({
       })
       // Follow user
       .addCase(followArtist.fulfilled, (state, action) => {
-        console.log("case follow", action.payload);
         state.data.followedArtists = action.payload;
       }) // Follow user
       .addCase(unfollowArtist.fulfilled, (state, action) => {
-        console.log("case unfollow", action.payload);
-
         state.data.followedArtists = action.payload;
+      }) // Become an Artist
+      .addCase(becomeArtist.fulfilled, (state, action) => {
+        state.data.role = "artist";
       }) // Update user
       .addCase(updateUser.fulfilled, (state, action) => {
-        console.log("Updated user", action.payload);
         state.data = action.payload.user;
       }) // Like playlist
       .addCase(likePlaylist.fulfilled, (state, action) => {

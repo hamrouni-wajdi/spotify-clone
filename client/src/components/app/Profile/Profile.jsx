@@ -1,6 +1,10 @@
 import "./Profile.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePassword, updateUser } from "../../../store/thunks/user";
+import {
+  updatePassword,
+  updateUser,
+  becomeArtist,
+} from "../../../store/thunks/user";
 import { useRef } from "react";
 import axios from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
@@ -36,6 +40,10 @@ const Profile = () => {
     };
 
     dispatch(updatePassword(data));
+  };
+
+  const becomeArtistHandler = () => {
+    dispatch(becomeArtist());
   };
 
   const logoutHandler = async () => {
@@ -79,6 +87,14 @@ const Profile = () => {
                 <input type="password" name="confirmPassword" />
                 <button type="submit">Update</button>
               </form>
+              {user.role === "user" && (
+                <p
+                  onClick={becomeArtistHandler}
+                  style={{ color: "#22c55e", cursor: "pointer" }}
+                >
+                  🎤 Become an Artist
+                </p>
+              )}
               <p
                 onClick={logoutHandler}
                 style={{ color: "#ef4444", cursor: "pointer" }}

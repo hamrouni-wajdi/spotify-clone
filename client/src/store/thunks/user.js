@@ -113,6 +113,16 @@ export const unfollowArtist = createAsyncThunk(
 );
 
 // Form
+export const becomeArtist = createAsyncThunk("user/becomeArtist", async () => {
+  try {
+    await axios.patch("/users/becomeArtist");
+
+    toast.success("Now you're an artist");
+  } catch (err) {
+    throw err;
+  }
+});
+
 export const updateUser = createAsyncThunk("user/updateUser", async (data) => {
   try {
     const res = await axios.patch("/users/updateMe", data);
@@ -159,7 +169,7 @@ export const updatePassword = createAsyncThunk(
   "user/updatePassword",
   async (data) => {
     try {
-      const res = await axios.patch("/users/updatePassword", data);
+      await axios.patch("/users/updatePassword", data);
 
       toast.success("Updated password");
     } catch (err) {
