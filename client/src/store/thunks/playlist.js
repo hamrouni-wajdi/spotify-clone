@@ -4,35 +4,35 @@ import { toast } from "react-toastify";
 
 export const getPlaylist = createAsyncThunk(
   "playlist/getPlaylist",
-  async (id) => {
+  async (id, { rejectWithValue }) => {
     try {
       const res = await axios.get(`/playlists/${id}`);
 
       return res.data.data;
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      return rejectWithValue(err);
     }
   },
 );
 
 export const updatePlaylist = createAsyncThunk(
   "playlist/editPlaylist",
-  async ({ data, id }) => {
+  async ({ data, id }, { rejectWithValue }) => {
     try {
       const res = await axios.patch(`/playlists/${id}`, data);
 
       toast.success("Playlist updated");
 
       return res.data.data;
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      return rejectWithValue(err);
     }
   },
 );
 
 export const likePlaylist = createAsyncThunk(
   "playlist/likePlaylist",
-  async (id) => {
+  async (id, { rejectWithValue }) => {
     try {
       const res = await axios.post(`/playlists/likes/add`, {
         playlist: id,
@@ -49,7 +49,7 @@ export const likePlaylist = createAsyncThunk(
 
 export const dislikePlaylist = createAsyncThunk(
   "playlist/dislikePlaylist",
-  async (id) => {
+  async (id, { rejectWithValue }) => {
     try {
       const res = await axios.post(`/playlists/likes/remove`, {
         playlist: id,
