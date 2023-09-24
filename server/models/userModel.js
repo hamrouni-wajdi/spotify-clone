@@ -83,7 +83,7 @@ const userSchema = new mongoose.Schema(
       default: true,
       select: false,
     },
-    passwordChangedAt: { type: Date, select: false },
+    passwordChangedAt: { type: Date },
     passwordResetToken: String,
     passwordResetExpires: Date,
   },
@@ -129,12 +129,15 @@ userSchema.methods.checkPassword = async function (pass, realPass) {
   return await bcrypt.compare(pass, realPass);
 };
 
-userSchema.methods.changedPasswordAfter = function (JWTissuedTime) {
+userSchema.methods.changedPasswordAfter = function (JWTissuedTime, where) {
   if (this.passwordChangedAt) {
+    console.log(this.passwordChangedAt);
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
       10
     );
+
+    console.log(where, JWTissuedTime, changedTimestamp);
 
     return JWTissuedTime < changedTimestamp;
   }

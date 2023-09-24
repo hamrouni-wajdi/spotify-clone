@@ -122,6 +122,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 2) Verify the token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  console.log('protect', decoded);
 
   // 3) If still user exists
   const user = await User.findById(decoded.id);
@@ -133,8 +134,10 @@ exports.protect = catchAsync(async (req, res, next) => {
       )
     );
 
+  console.log('protect', user);
+
   // 4) Check user changed password after the token was issued
-  if (user.changedPasswordAfter(decoded.iat)) {
+  if (user.changedPasswordAfter(decoded.iat, 'protect')) {
     return next(
       new AppError(
         '🔐 Your password has been changed. Please log in again.',
@@ -157,6 +160,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       req.cookies.jwt,
       process.env.JWT_SECRET
     );
+    console.log('protect', decoded);
 
     // 2) If still user exists
     const user = await User.findById(decoded.id)
@@ -185,8 +189,10 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       song.img = `${serverUrl}public/songs/${song.img}`;
     });
 
+    console.log('login', user);
+
     // 3) Check user changed password after the token was issued
-    if (user.changedPasswordAfter(decoded.iat)) {
+    if (user.changedPasswordAfter(decoded.iat, 'login')) {
       return next(
         new AppError(
           '🔐 Your password has been changed. Please log in again.',
