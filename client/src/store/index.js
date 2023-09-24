@@ -13,4 +13,8 @@ export const store = configureStore({
     playlist: playlistReducer,
     queue: queueReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 export const loginUser = createAsyncThunk(
   "user/login",
-  async ({ email, password }) => {
+  async ({ email, password }, { rejectWithValue }) => {
     try {
       const res = await axios.post("/users/login", {
         email,
@@ -15,7 +15,7 @@ export const loginUser = createAsyncThunk(
 
       return { data: res.data.data.user, auth: true };
     } catch (err) {
-      throw err;
+      return rejectWithValue(err);
     }
   },
 );

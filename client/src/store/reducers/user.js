@@ -28,7 +28,7 @@ export const userSlice = createSlice({
         state.auth = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        toast.error("Incorrect email or password");
+        toast.error(action.payload.response.data.message);
       })
       // Sign up
       .addCase(signupUser.fulfilled, (state, action) => {
