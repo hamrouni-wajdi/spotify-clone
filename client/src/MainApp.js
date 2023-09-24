@@ -17,6 +17,8 @@ import Search from "./components/app/Search/Search";
 import LikedSongs from "./components/app/Playlist/LikedSongs";
 import Reset from "./components/auth/Reset";
 import Forgot from "./components/auth/Forgot";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MainApp() {
   const [loading, setLoading] = useState(true);
@@ -122,6 +124,7 @@ function MainApp() {
           <Route path="/forgotPassword" element={<Forgot />} />
           <Route path="/resetPassword/:id" element={<Reset />} />
         </Routes>
+        <ToastContainer theme="dark" />
       </div>
     </BrowserRouter>
   );
