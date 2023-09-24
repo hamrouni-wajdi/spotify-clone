@@ -74,44 +74,44 @@ exports.getAllSongs = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getLikedSongs = catchAsync(async (req, res, next) => {
-  const songs = await Song.find();
+// exports.getLikedSongs = catchAsync(async (req, res, next) => {
+//   const songs = await Song.find();
+//
+//   const serverUrl = `${req.protocol}://${req.get('host')}/`;
+//   songs.map((song) => {
+//     song.song = `${serverUrl}public/songs/${song.song}`;
+//     song.img = `${serverUrl}public/songs/${song.img}`;
+//   });
+//
+//   res.status(200).json({
+//     status: 'success',
+//     results: songs.length,
+//     data: {
+//       songs,
+//     },
+//   });
+// });
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  songs.map((song) => {
-    song.song = `${serverUrl}public/songs/${song.song}`;
-    song.img = `${serverUrl}public/songs/${song.img}`;
-  });
-
-  res.status(200).json({
-    status: 'success',
-    results: songs.length,
-    data: {
-      songs,
-    },
-  });
-});
-
-exports.getSong = catchAsync(async (req, res, next) => {
-  const song = await Song.findByIdAndUpdate(
-    req.params.id,
-    { $inc: { plays: 1 } },
-    { new: true }
-  );
-
-  if (!song) return next(new AppError('No song found with given id', 404));
-
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  song.song = `${serverUrl}public/songs/${song.song}`;
-  song.img = `${serverUrl}public/songs/${song.img}`;
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      song,
-    },
-  });
-});
+// exports.getSong = catchAsync(async (req, res, next) => {
+//   const song = await Song.findByIdAndUpdate(
+//     req.params.id,
+//     { $inc: { plays: 1 } },
+//     { new: true }
+//   );
+//
+//   if (!song) return next(new AppError('No song found with given id', 404));
+//
+//   const serverUrl = `${req.protocol}://${req.get('host')}/`;
+//   song.song = `${serverUrl}public/songs/${song.song}`;
+//   song.img = `${serverUrl}public/songs/${song.img}`;
+//
+//   res.status(200).json({
+//     status: 'success',
+//     data: {
+//       song,
+//     },
+//   });
+// });
 
 exports.createSong = catchAsync(async (req, res, next) => {
   req.body.song = req.files.song[0].filename;

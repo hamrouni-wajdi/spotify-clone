@@ -40,14 +40,14 @@ exports.getAllPlaylists = catchAsync(async (req, res, next) => {
   if (req.params.userId) filter = { user: req.params.userId };
 
   // 2) Get playlists from DB
-  const playlist = await Playlist.find(filter);
+  const playlists = await Playlist.find(filter);
 
   // 3) Send res
   res.status(200).json({
     status: 'success',
-    length: playlist.length,
+    length: playlists.length,
     data: {
-      playlist,
+      playlists,
     },
   });
 });

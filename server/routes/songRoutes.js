@@ -4,9 +4,9 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-router
-  .route('/liked')
-  .get(authController.protect, songController.getLikedSongs);
+// router
+//   .route('/liked')
+//   .get(authController.protect, songController.getLikedSongs);
 
 router
   .route('/')
@@ -22,7 +22,7 @@ router
 
 router
   .route('/:id')
-  .get(authController.protect, songController.getSong)
+  // .get(authController.protect, songController.getSong)
   .patch(songController.updateSong)
   .delete(
     authController.protect,
