@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getArtist } from "../thunks/artist";
+import { loginUser } from "../thunks/user";
+import { toast } from "react-toastify";
 
 const artistSlice = createSlice({
   name: "artist",
@@ -8,9 +10,13 @@ const artistSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getArtist.fulfilled, (state, action) => {
-      state.artist = action.payload;
-    });
+    builder
+      .addCase(getArtist.fulfilled, (state, action) => {
+        state.artist = action.payload;
+      })
+      .addCase(getArtist.rejected, (state, action) => {
+        toast.error(action.payload.response.data.message);
+      });
   },
 });
 
