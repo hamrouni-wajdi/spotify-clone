@@ -8,6 +8,7 @@ import {
 import { useRef } from "react";
 import axios from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   // Redux
@@ -47,8 +48,10 @@ const Profile = () => {
   };
 
   const logoutHandler = async () => {
-    navigate("/login");
     const res = await axios.get("users/logout");
+    toast.success(res.data.message);
+    navigate("/");
+    navigate(0);
   };
 
   return (
@@ -70,7 +73,13 @@ const Profile = () => {
               <h2>Update your information</h2>
               <form ref={formInfoRef} onSubmit={formInfoHandler}>
                 <label htmlFor="name">Name</label>
-                <input type="text" name="name" placeholder={user.name} />
+                <input
+                  type="text"
+                  name="name"
+                  minLength="3"
+                  maxLength="24"
+                  placeholder={user.name}
+                />
                 <label htmlFor="email">Email</label>
                 <input type="text" name="email" placeholder={user.email} />
                 <label htmlFor="photo">Photo</label>
@@ -80,11 +89,26 @@ const Profile = () => {
               <h2>Update your password</h2>
               <form ref={formPassRef} onSubmit={formPassHandler}>
                 <label htmlFor="oldPassword">Old password</label>
-                <input type="password" name="oldPassword" />
+                <input
+                  type="password"
+                  name="oldPassword"
+                  minLength="8"
+                  maxLength="16"
+                />
                 <label htmlFor="newPassword">New password</label>
-                <input type="password" name="newPassword" />
+                <input
+                  type="password"
+                  name="newPassword"
+                  minLength="8"
+                  maxLength="16"
+                />
                 <label htmlFor="confirmPassword">Confirm password</label>
-                <input type="password" name="confirmPassword" />
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  minLength="8"
+                  maxLength="16"
+                />
                 <button type="submit">Update</button>
               </form>
               {user.role === "user" && (

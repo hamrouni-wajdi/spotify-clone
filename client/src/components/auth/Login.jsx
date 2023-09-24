@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/thunks/user";
 import { Link, Navigate } from "react-router-dom";
 
-const Login = (props) => {
+const Login = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 

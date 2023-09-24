@@ -35,10 +35,13 @@ export const userSlice = createSlice({
         state.data = action.payload.data;
         state.auth = true;
       })
-      // Is auth
+      // Is loggedIn
       .addCase(isLoggedIn.fulfilled, (state, action) => {
         state.data = action.payload.data;
         state.auth = true;
+      })
+      .addCase(isLoggedIn.rejected, (state, action) => {
+        toast.error(action.payload.response.data.message);
       }) // Update user
       .addCase(updateUser.fulfilled, (state, action) => {
         state.data = action.payload.user;

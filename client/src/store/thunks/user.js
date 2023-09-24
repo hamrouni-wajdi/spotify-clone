@@ -40,17 +40,20 @@ export const signupUser = createAsyncThunk(
   },
 );
 
-export const isLoggedIn = createAsyncThunk("user/isLoggedIn", async () => {
-  try {
-    const res = await axios.get("/users/isLoggedIn");
+export const isLoggedIn = createAsyncThunk(
+  "user/isLoggedIn",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axios.get("/users/isLoggedIn");
 
-    toast.success("Welcome back");
+      toast.success("Welcome back");
 
-    return { data: res.data.data.user, auth: true };
-  } catch (e) {
-    throw e;
-  }
-});
+      return { data: res.data.data.user, auth: true };
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  },
+);
 
 // Like/dislike
 export const likeSong = createAsyncThunk("song/likeSong", async (id) => {
@@ -171,7 +174,7 @@ export const updatePassword = createAsyncThunk(
 
       toast.success("Updated password");
     } catch (err) {
-      throw err;
+      toast.error(err.response.data.message);
     }
   },
 );
