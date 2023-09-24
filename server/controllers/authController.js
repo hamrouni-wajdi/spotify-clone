@@ -66,6 +66,10 @@ exports.login = catchAsync(async (req, res, next) => {
     .populate('likedPlaylists', 'name img')
     .populate('likedSongs');
 
+  if (!user) {
+    return next(new AppError('No user found with email: ' + email, 404));
+  }
+
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
 
   user.followedArtists.map((artist) => {
