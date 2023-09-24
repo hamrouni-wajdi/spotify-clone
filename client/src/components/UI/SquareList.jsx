@@ -1,17 +1,23 @@
 import "./SquareList.scss";
 import { Link } from "react-router-dom";
 
-const squareList = ({ list, artist }) => {
+const squareList = ({ list, artist, home }) => {
   return (
-    <div className="square-list">
+    <div className={`square-list ${home ? "square-list--home" : ""}`}>
       {list.map((el) => (
         <Link
           to={artist ? `/artist/${el.id}` : `/playlist/${el.id}`}
-          className={"square-card " + (artist && "square-card--artist")}
+          className={`square-card ${artist ? "square-card--artist" : ""} ${
+            el.id === "650fffb62d99f057eff75b75" ? "vip" : ""
+          } ${el.user?.id === "650fffb62d99f057eff75b75" ? "vip" : ""}`}
         >
           <img src={el.img} alt={el.name} />
           <div className="square-card__name">{el.name}</div>
-          {artist ? <div>Artist</div> : <div>By {el.user.name}</div>}
+          {artist ? (
+            <div>Artist</div>
+          ) : (
+            <div>{home ? "Playlist" : `By ${el.user.name}`}</div>
+          )}
         </Link>
       ))}
     </div>

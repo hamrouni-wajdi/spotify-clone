@@ -36,7 +36,12 @@ const List = (props) => {
     <div className="list">
       {props.list &&
         props.list.map((el, i) => (
-          <div className="list-item" key={el.id}>
+          <div
+            className={`list-item ${
+              el.artist.id === "650fffb62d99f057eff75b75" ? "vip" : ""
+            }`}
+            key={el.id}
+          >
             {currentId !== el.id ? (
               <span className="list__num">{i + 1}</span>
             ) : (

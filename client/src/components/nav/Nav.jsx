@@ -46,14 +46,10 @@ const Nav = (props) => {
               .map((el) => (
                 <NavLink
                   to={(isArtist(el) ? "/artist/" : "/playlist/") + el.id}
-                  className={(isActive) => {
-                    return (
-                      // "saved__link" +
-                      // (isArtist(el) ? " saved__link--artist" : "") +
-                      // (isActive ? " red" : "")
-
-                      `saved__link ${isArtist(el) ? "saved__link--artist" : ""}`
-                    );
+                  className={() => {
+                    return `saved__link ${
+                      isArtist(el) ? "saved__link--artist" : ""
+                    } ${el.id === "650fffb62d99f057eff75b75" ? "vip" : ""}`;
                   }}
                 >
                   <img src={el.img} alt={el.name} />

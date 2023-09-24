@@ -1,8 +1,11 @@
 .square-list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
 
+  &--home {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 
 .square-card,
@@ -21,8 +24,6 @@
     box-shadow: 0 8px 24px rgba(0,0,0,.5);
   }
 
-
-
   &--artist img {
     border-radius: 500px;
   }
@@ -37,3 +38,8 @@
   color: #fff !important;
   margin-bottom: 4px;
 }
+
+.square-card--artist img {
+  border-radius: 500px;
+}
+
