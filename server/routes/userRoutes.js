@@ -14,6 +14,11 @@ router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:resetToken', authController.resetPassword);
 
 router.patch(
+  '/becomeArtist',
+  authController.protect,
+  userController.becomeArtist
+);
+router.patch(
   '/updatePassword',
   authController.protect,
   authController.updatePassword

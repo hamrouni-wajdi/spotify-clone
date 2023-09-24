@@ -63,6 +63,21 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.becomeArtist = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { role: 'artist' },
+    {
+      new: true,
+    }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: user.role,
+  });
+});
+
 exports.getArtist = catchAsync(async (req, res, next) => {
   const artist = await User.findById(req.params.id).populate('songs');
 
