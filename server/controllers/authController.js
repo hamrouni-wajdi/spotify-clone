@@ -98,7 +98,7 @@ exports.logout = catchAsync(async (req, res, next) => {
     expires: new Date(Date.now() - 10000),
     httpOnly: true,
   });
-  res.status(200).json({ status: 'success' });
+  res.status(200).json({ status: 'success', message: '✌️ See you soon!' });
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -122,7 +122,6 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 2) Verify the token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log('protect', decoded);
 
   // 3) If still user exists
   const user = await User.findById(decoded.id);
@@ -133,8 +132,6 @@ exports.protect = catchAsync(async (req, res, next) => {
         401
       )
     );
-
-  console.log('protect', user);
 
   // 4) Check user changed password after the token was issued
   if (user.changedPasswordAfter(decoded.iat, 'protect')) {
@@ -160,7 +157,6 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       req.cookies.jwt,
       process.env.JWT_SECRET
     );
-    console.log('protect', decoded);
 
     // 2) If still user exists
     const user = await User.findById(decoded.id)
@@ -189,8 +185,6 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       song.img = `${serverUrl}public/songs/${song.img}`;
     });
 
-    console.log('login', user);
-
     // 3) Check user changed password after the token was issued
     if (user.changedPasswordAfter(decoded.iat, 'login')) {
       return next(
@@ -209,7 +203,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
   } else {
     res.status(401).json({
       status: 'error',
-      message: '🍪 There is no cookie',
+      message: '🍪 Please log in first',
     });
   }
 });
@@ -316,6 +310,5 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 
   res.status(204).json({
     status: 'success',
-    data: null,
   });
 });
