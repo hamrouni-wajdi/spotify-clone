@@ -145,18 +145,17 @@ exports.unfollowArtist = catchAsync(async (req, res, next) => {
   });
 });
 
-// Likes
-exports.getLikedSongs = catchAsync(async (req, res, next) => {
-  // REVIEW: If logged in used is artist user info is populated twice
-  const user = await User.findById(req.user.id).populate('likedSongs');
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      songs: user.likedSongs,
-    },
-  });
-});
+// // Likes
+// exports.getLikedSongs = catchAsync(async (req, res, next) => {
+//   const user = await User.findById(req.user.id).populate('likedSongs');
+//
+//   res.status(200).json({
+//     status: 'success',
+//     data: {
+//       songs: user.likedSongs,
+//     },
+//   });
+// });
 
 exports.likeSong = catchAsync(async (req, res, next) => {
   const { song } = req.body;
