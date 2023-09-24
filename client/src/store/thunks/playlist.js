@@ -5,9 +5,7 @@ export const getPlaylist = createAsyncThunk(
   "playlist/getPlaylist",
   async (id) => {
     try {
-      // const res = await axios.get(`/playlists/${id}`);
       const res = await axios.get(`/playlists/${id}`);
-      console.log(res);
 
       return res.data.data;
     } catch (e) {
@@ -21,6 +19,8 @@ export const updatePlaylist = createAsyncThunk(
   async ({ data, id }) => {
     try {
       const res = await axios.patch(`/playlists/${id}`, data);
+
+      toast.success("Playlist updated");
 
       return res.data.data;
     } catch (e) {
@@ -37,6 +37,8 @@ export const likePlaylist = createAsyncThunk(
         playlist: id,
       });
 
+      toast.success("Saved to Your Library");
+
       return res.data.playlists;
     } catch (e) {
       throw e;
@@ -51,6 +53,8 @@ export const dislikePlaylist = createAsyncThunk(
       const res = await axios.post(`/playlists/likes/remove`, {
         playlist: id,
       });
+
+      toast.success("Removed from Your Library");
 
       return res.data.playlists;
     } catch (e) {

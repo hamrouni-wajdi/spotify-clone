@@ -5,7 +5,6 @@ const playerSlice = createSlice({
   initialState: { isPlaying: true },
   reducers: {
     playPause: (state) => {
-      console.log("play hey");
       state.isPlaying = !state.isPlaying;
     },
   },
