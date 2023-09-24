@@ -14,8 +14,8 @@ export const loginUser = createAsyncThunk(
       toast.success("Logged in successfully");
 
       return { data: res.data.data.user, auth: true };
-    } catch (e) {
-      throw e;
+    } catch (err) {
+      throw err;
     }
   },
 );

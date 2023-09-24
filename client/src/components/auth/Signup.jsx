@@ -3,6 +3,7 @@ import logo from "../../img/logo.svg";
 import { Link, Navigate } from "react-router-dom";
 import { signupUser } from "../../store/thunks/user";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const Signup = (props) => {
   const user = useSelector((state) => state.user);
@@ -16,7 +17,8 @@ const Signup = (props) => {
     const password = e.target[2].value;
     const passwordConfirm = e.target[3].value;
 
-    dispatch(signupUser({ name, email, password, passwordConfirm }));
+    if (password !== passwordConfirm) toast.warn("Passwords do not match");
+    else dispatch(signupUser({ name, email, password, passwordConfirm }));
   };
 
   return (
@@ -28,17 +30,28 @@ const Signup = (props) => {
             <Link to="/login" className="auth-form__link">
               Log In here
             </Link>
-            <input type="text" name="name" placeholder="Name" required />
+            <input
+              type="text"
+              name="name"
+              minLength="3"
+              maxLength="24"
+              placeholder="Name"
+              required
+            />
             <input type="text" name="email" placeholder="Email" required />
             <input
               type="password"
               name="password"
+              minLength="8"
+              maxLength="16"
               placeholder="Password"
               required
             />
             <input
               type="password"
               name="passwordConfirm"
+              minLength="8"
+              maxLength="16"
               placeholder="Password Confirm"
               required
             />

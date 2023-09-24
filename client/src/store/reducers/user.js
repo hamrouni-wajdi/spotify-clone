@@ -12,6 +12,7 @@ import {
   updateUser,
 } from "../thunks/user";
 import { dislikePlaylist, likePlaylist } from "../thunks/playlist";
+import { toast } from "react-toastify";
 
 export const userSlice = createSlice({
   name: "user",
@@ -25,6 +26,9 @@ export const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.data = action.payload.data;
         state.auth = true;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        toast.error("Incorrect email or password");
       })
       // Sign up
       .addCase(signupUser.fulfilled, (state, action) => {
