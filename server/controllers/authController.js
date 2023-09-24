@@ -4,6 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const Email = require('../utils/email');
+const { promisify } = require('util');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -120,7 +121,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // 2) Verify the token
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
   // 3) If still user exists
   const user = await User.findById(decoded.id);
@@ -152,14 +153,23 @@ exports.protect = catchAsync(async (req, res, next) => {
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
   if (req.cookies.jwt) {
     // 1) Verify token
-    const decoded = jwt.verify(req.cookies.jwt, process.env.JWT_SECRET);
+    const decoded = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET
+    );
 
     // 2) If still user exists
     const user = await User.findById(decoded.id)
       .populate('followedArtists', 'name img role')
       .populate('likedPlaylists', 'name img')
       .populate('likedSongs');
-    if (!user) return next(new AppError());
+    if (!user)
+      return next(
+        new AppError(
+          '🔐 The user belonging to this token does no longer exist.',
+          401
+        )
+      );
 
     user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
 
