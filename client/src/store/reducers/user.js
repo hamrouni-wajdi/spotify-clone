@@ -39,11 +39,17 @@ export const userSlice = createSlice({
       .addCase(isLoggedIn.fulfilled, (state, action) => {
         state.data = action.payload.data;
         state.auth = true;
+      }) // Update user
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.data = action.payload.user;
       })
       // Reset password
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.data = action.payload.data.user;
         state.auth = true;
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        toast.error(action.payload.response.data.message);
       })
       // Like song
       .addCase(likeSong.fulfilled, (state, action) => {
@@ -62,9 +68,6 @@ export const userSlice = createSlice({
       }) // Become an Artist
       .addCase(becomeArtist.fulfilled, (state, action) => {
         state.data.role = "artist";
-      }) // Update user
-      .addCase(updateUser.fulfilled, (state, action) => {
-        state.data = action.payload.user;
       }) // Like playlist
       .addCase(likePlaylist.fulfilled, (state, action) => {
         state.data.likedPlaylists = action.payload;

@@ -3,6 +3,7 @@ import logo from "../../img/logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../../store/thunks/user";
 import { Link, Navigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Reset = () => {
   // Redux
@@ -19,8 +20,8 @@ const Reset = () => {
 
     const password = e.target[0].value;
     const passwordConfirm = e.target[1].value;
-
-    dispatch(resetPassword({ id, password, passwordConfirm }));
+    if (password !== passwordConfirm) toast.warn("Passwords do not match");
+    else dispatch(resetPassword({ id, password, passwordConfirm }));
   };
 
   return (
