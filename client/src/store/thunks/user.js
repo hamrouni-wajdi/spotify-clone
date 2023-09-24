@@ -139,13 +139,11 @@ export const forgotPassword = createAsyncThunk(
   "user/forgotPassword",
   async (data) => {
     try {
-      const res = await axios.post("users/forgotPassword", data);
+      await axios.post("users/forgotPassword", data);
 
       toast.success("Email sent");
-
-      return res.data;
     } catch (err) {
-      throw err;
+      toast.error(err.response.data.message);
     }
   },
 );

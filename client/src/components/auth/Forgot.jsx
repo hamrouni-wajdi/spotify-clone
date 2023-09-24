@@ -11,12 +11,10 @@ const Forgot = () => {
 
   // Handlers
   const formSubmitHandler = (e) => {
-    // console.log(id);
     e.preventDefault();
 
     const email = e.target[0].value;
 
-    // dispatch(resetPassword({ id, password, passwordConfirm }));
     dispatch(forgotPassword({ email }));
   };
 
