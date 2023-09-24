@@ -4,6 +4,7 @@ import { IoSearch } from "react-icons/io5";
 import { useState } from "react";
 import List from "../../UI/List";
 import SquareList from "../../UI/SquareList";
+import { toast } from "react-toastify";
 
 const Search = () => {
   // State
@@ -14,27 +15,30 @@ const Search = () => {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const res = await axios.get(
-      `/search/${queryType}?name=${e.target[0].value}`,
-    );
+    try {
+      const res = await axios.get(
+        `/search/${queryType}?name=${e.target[0].value}`,
+      );
 
-    console.log(res.data.data);
-
-    if (queryType === "song") {
-      setResults({
-        type: "song",
-        list: res.data.data,
-      });
-    } else if (queryType === "artist") {
-      setResults({
-        type: "artist",
-        list: res.data.data,
-      });
-    } else if (queryType === "playlist") {
-      setResults({
-        type: "playlist",
-        list: res.data.data,
-      });
+      if (queryType === "song") {
+        setResults({
+          type: "song",
+          list: res.data.data,
+        });
+      } else if (queryType === "artist") {
+        setResults({
+          type: "artist",
+          list: res.data.data,
+        });
+      } else if (queryType === "playlist") {
+        setResults({
+          type: "playlist",
+          list: res.data.data,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data.message);
     }
   };
 
