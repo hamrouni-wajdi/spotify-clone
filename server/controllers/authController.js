@@ -56,7 +56,7 @@ exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return next(new AppError('Please provide email and password', 400));
+    return next(new AppError('🚫 Please provide email and password', 400));
   }
 
   // 2) Get the user from DB
@@ -67,7 +67,7 @@ exports.login = catchAsync(async (req, res, next) => {
     .populate('likedSongs');
 
   if (!user) {
-    return next(new AppError('No user found with email: ' + email, 404));
+    return next(new AppError('🤷‍ No user found with email: ' + email, 404));
   }
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
@@ -85,7 +85,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // 3) Check passwords are correct
   if (!user || !(await user.checkPassword(password, user.password))) {
-    return next(new AppError('Incorrect email or password', 401));
+    return next(new AppError('🔐 Incorrect email or password', 401));
   }
 
   // 4) Sign token and send to the user
@@ -127,7 +127,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   if (!user)
     return next(
       new AppError(
-        'The user belonging to this token does no longer exist.',
+        '🔐 The user belonging to this token does no longer exist.',
         401
       )
     );
@@ -135,7 +135,10 @@ exports.protect = catchAsync(async (req, res, next) => {
   // 4) Check user changed password after the token was issued
   if (user.changedPasswordAfter(decoded.iat)) {
     return next(
-      new AppError('🔐 Your password has been changed. Please log in again.')
+      new AppError(
+        '🔐 Your password has been changed. Please log in again.',
+        401
+      )
     );
   }
 
@@ -175,7 +178,10 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
     // 3) Check user changed password after the token was issued
     if (user.changedPasswordAfter(decoded.iat)) {
       return next(
-        new AppError('🔐 Your password has been changed. Please log in again.')
+        new AppError(
+          '🔐 Your password has been changed. Please log in again.',
+          401
+        )
       );
     }
 
@@ -197,7 +203,10 @@ exports.restrictTo =
   (req, res, next) => {
     if (!roles.includes(req.user.role)) {
       return next(
-        new AppError('⛔ You do not have permission to perform this action!')
+        new AppError(
+          '⛔ You do not have permission to perform this action!',
+          401
+        )
       );
     }
 
