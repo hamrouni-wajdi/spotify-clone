@@ -13,17 +13,18 @@ router
   .route('/:id')
   .get(authController.protect, playlistController.getPlaylist)
   .patch(
+    authController.protect,
     playlistController.uploadPlaylistImg,
     playlistController.resizePlaylistImg,
     playlistController.updatePlaylist
   )
-  .delete(playlistController.deletePlaylist);
+  .delete(authController.protect, playlistController.deletePlaylist);
 
 // Manage songs in playlist
 router
   .route('/:id/song')
-  .post(playlistController.addSong)
-  .delete(playlistController.deleteSong);
+  .post(authController.protect, playlistController.addSong)
+  .delete(authController.protect, playlistController.deleteSong);
 
 router
   .route('/likes/add')

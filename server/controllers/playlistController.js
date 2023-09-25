@@ -85,6 +85,11 @@ exports.createPlaylist = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('playlists');
 
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  user.playlists.map((playlist) => {
+    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  });
+
   // 2) Send res
   res.status(200).json({
     status: 'success',
@@ -124,9 +129,19 @@ exports.updatePlaylist = catchAsync(async (req, res, next) => {
 exports.deletePlaylist = catchAsync(async (req, res, next) => {
   // 1) Update Playlist
   const playlist = await Playlist.findByIdAndDelete(req.params.id);
-
   if (!playlist)
     return next(new AppError('❓ No playlist found with that id', 404));
+
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $pull: { playlists: req.params.id } },
+    { runValidators: true, new: true }
+  );
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  user.playlists.map((playlist) => {
+    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  });
 
   // 2) Send res
   res.status(204).json({

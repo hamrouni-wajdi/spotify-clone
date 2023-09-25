@@ -74,6 +74,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
 
+  user.img = `${serverUrl}public/users/${user.img}`;
   user.playlists.map((playlist) => {
     playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
   });
