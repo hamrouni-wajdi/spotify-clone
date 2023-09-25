@@ -2,21 +2,27 @@ import "./Nav.scss";
 import "./NavLibrary.scss";
 import likedSongsImg from "../../img/likedSongs.jpeg";
 import {
+  IoAddCircleOutline,
   IoHomeOutline,
   IoLibraryOutline,
   IoPersonCircleOutline,
   IoSearch,
 } from "react-icons/io5";
-import { useEffect } from "react";
+import { createPlaylist } from "../../store/thunks/user";
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Nav = (props) => {
   // Redux
   const user = useSelector((state) => state.user.data);
+  const dispatch = useDispatch();
 
   // Handlers
   const isArtist = (el) => el.role === "artist";
+
+  const createPlaylistHandler = () => {
+    dispatch(createPlaylist());
+  };
 
   return (
     <div className="nav">
@@ -34,6 +40,10 @@ const Nav = (props) => {
         <div className="library__header">
           <IoLibraryOutline />
           <span>Library</span>
+          <IoAddCircleOutline
+            style={{ marginLeft: "auto", fontSize: 28, cursor: "pointer" }}
+            onClick={createPlaylistHandler}
+          />
         </div>
         {user.id && (
           <div className="saved">
@@ -41,7 +51,11 @@ const Nav = (props) => {
               <img src={likedSongsImg} alt="Heart" />
               <span>📌 - Liked Songs</span>
             </Link>
-            {[...user.likedPlaylists, ...user.followedArtists]
+            {[
+              ...user.likedPlaylists,
+              ...user.followedArtists,
+              ...user.playlists,
+            ]
               .sort((a, b) => (a.name > b.name ? 1 : -1))
               .map((el) => (
                 <NavLink

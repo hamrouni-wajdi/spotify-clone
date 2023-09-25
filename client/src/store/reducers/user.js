@@ -10,6 +10,7 @@ import {
   unfollowArtist,
   becomeArtist,
   updateUser,
+  createPlaylist,
 } from "../thunks/user";
 import { dislikePlaylist, likePlaylist } from "../thunks/playlist";
 import { toast } from "react-toastify";
@@ -70,7 +71,10 @@ export const userSlice = createSlice({
         state.data.followedArtists = action.payload;
       }) // Become an Artist
       .addCase(becomeArtist.fulfilled, (state, action) => {
-        state.data.role = "artist";
+        state.data.playlists = action.payload;
+      }) // Create playlist
+      .addCase(createPlaylist.fulfilled, (state, action) => {
+        state.data.user = action.payload;
       }) // Like playlist
       .addCase(likePlaylist.fulfilled, (state, action) => {
         state.data.likedPlaylists = action.payload;

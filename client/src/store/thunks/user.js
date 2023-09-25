@@ -1,6 +1,7 @@
 import axios from "../../api/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { retry } from "@reduxjs/toolkit/query";
 
 export const loginUser = createAsyncThunk(
   "user/login",
@@ -51,6 +52,59 @@ export const isLoggedIn = createAsyncThunk(
       return { data: res.data.data.user, auth: true };
     } catch (err) {
       return rejectWithValue(err);
+    }
+  },
+);
+
+export const updateUser = createAsyncThunk("user/updateUser", async (data) => {
+  try {
+    const res = await axios.patch("/users/updateMe", data);
+
+    toast.success("Your data updated ");
+
+    return res.data.data;
+  } catch (err) {
+    throw err;
+  }
+});
+
+export const forgotPassword = createAsyncThunk(
+  "user/forgotPassword",
+  async (data) => {
+    try {
+      await axios.post("users/forgotPassword", data);
+
+      toast.success("Email sent");
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
+  },
+);
+
+export const resetPassword = createAsyncThunk(
+  "user/resetPassword",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await axios.patch(`/users/resetPassword/${data.id}`, data);
+
+      toast.success("Reset password");
+
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const updatePassword = createAsyncThunk(
+  "user/updatePassword",
+  async (data) => {
+    try {
+      await axios.patch("/users/updatePassword", data);
+
+      toast.success("Updated password");
+    } catch (err) {
+      toast.error(err.response.data.message);
     }
   },
 );
@@ -126,55 +180,18 @@ export const becomeArtist = createAsyncThunk("user/becomeArtist", async () => {
   }
 });
 
-export const updateUser = createAsyncThunk("user/updateUser", async (data) => {
-  try {
-    const res = await axios.patch("/users/updateMe", data);
-
-    toast.success("Your data updated ");
-
-    return res.data.data;
-  } catch (err) {
-    throw err;
-  }
-});
-
-export const forgotPassword = createAsyncThunk(
-  "user/forgotPassword",
-  async (data) => {
+// Playlist
+export const createPlaylist = createAsyncThunk(
+  "user/createPlaylist",
+  async () => {
     try {
-      await axios.post("users/forgotPassword", data);
+      const res = await axios.post("/playlists");
 
-      toast.success("Email sent");
+      toast.success("Playlist created");
+
+      return res.data.data.user.playlists;
     } catch (err) {
-      toast.error(err.response.data.message);
-    }
-  },
-);
-
-export const resetPassword = createAsyncThunk(
-  "user/resetPassword",
-  async (data, { rejectWithValue }) => {
-    try {
-      const res = await axios.patch(`/users/resetPassword/${data.id}`, data);
-
-      toast.success("Reset password");
-
-      return res.data;
-    } catch (err) {
-      return rejectWithValue(err);
-    }
-  },
-);
-
-export const updatePassword = createAsyncThunk(
-  "user/updatePassword",
-  async (data) => {
-    try {
-      await axios.patch("/users/updatePassword", data);
-
-      toast.success("Updated password");
-    } catch (err) {
-      toast.error(err.response.data.message);
+      throw err;
     }
   },
 );
