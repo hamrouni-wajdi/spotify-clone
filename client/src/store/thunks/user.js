@@ -195,3 +195,18 @@ export const createPlaylist = createAsyncThunk(
     }
   },
 );
+
+export const deletePlaylist = createAsyncThunk(
+  "user/deletePlaylist",
+  async (id) => {
+    try {
+      const res = await axios.delete(`/playlists/${id}`);
+
+      toast.success("Playlist deleted");
+
+      return res.data.data.user.playlists;
+    } catch (err) {
+      throw err;
+    }
+  },
+);

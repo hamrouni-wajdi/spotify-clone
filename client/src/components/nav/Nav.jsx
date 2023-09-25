@@ -59,6 +59,7 @@ const Nav = (props) => {
               .sort((a, b) => (a.name > b.name ? 1 : -1))
               .map((el) => (
                 <NavLink
+                  key={el.id}
                   to={(isArtist(el) ? "/artist/" : "/playlist/") + el.id}
                   className={() => {
                     return `saved__link ${

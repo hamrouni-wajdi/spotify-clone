@@ -17,7 +17,11 @@ import { useDispatch, useSelector } from "react-redux";
 import List from "../../UI/List";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { replaceQueue } from "../../../store/reducers/queue";
-import { likeSong, updateUser } from "../../../store/thunks/user";
+import {
+  deletePlaylist,
+  likeSong,
+  updateUser,
+} from "../../../store/thunks/user";
 
 const Playlist = () => {
   // State
@@ -61,6 +65,11 @@ const Playlist = () => {
     const formData = new FormData(formRef.current);
 
     dispatch(updatePlaylist({ data: formData, id: playlist.id }));
+    navigate(0);
+  };
+
+  const deletePlaylistHandler = (id) => {
+    dispatch(deletePlaylist(id));
     navigate(0);
   };
 
@@ -151,6 +160,15 @@ const Playlist = () => {
                 placeholder="Add an optional description"
               ></textarea>
               <button>Save</button>
+              <button
+                style={{ background: "#EF4444", marginLeft: 8 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  deletePlaylistHandler(playlist.id);
+                }}
+              >
+                Delete
+              </button>
             </div>
           </form>
         </div>
