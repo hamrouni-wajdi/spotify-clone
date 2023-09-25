@@ -19,6 +19,7 @@ import Reset from "./components/auth/Reset";
 import Forgot from "./components/auth/Forgot";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Admin from "./components/admin/Admin";
 
 function MainApp() {
   const [loading, setLoading] = useState(true);
@@ -106,6 +107,19 @@ function MainApp() {
               </>
             }
           />
+          <Route
+            path="/admin"
+            element={
+              <>
+                <Nav />
+                <App>
+                  <Admin />
+                </App>
+
+                <Player />
+              </>
+            }
+          ></Route>
           <Route
             path="/profile"
             element={

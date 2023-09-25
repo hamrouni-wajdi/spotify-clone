@@ -5,6 +5,7 @@ import {
   IoAddCircleOutline,
   IoHomeOutline,
   IoLibraryOutline,
+  IoMusicalNoteOutline,
   IoPersonCircleOutline,
   IoSearch,
 } from "react-icons/io5";
@@ -75,6 +76,12 @@ const Nav = (props) => {
         )}
       </div>
       <div className="nav__block">
+        {user?.role === "artist" && (
+          <Link to="/admin" className="nav-link">
+            <IoMusicalNoteOutline />
+            <span>Admin</span>
+          </Link>
+        )}
         <Link to="/profile" className="nav-link">
           <IoPersonCircleOutline />
           <span>Profile</span>
