@@ -78,14 +78,18 @@ exports.getPlaylist = catchAsync(async (req, res, next) => {
 
 exports.createPlaylist = catchAsync(async (req, res, next) => {
   // 1) Create a new Playlist
-  req.body.user = req.user.id;
-  const playlist = await Playlist.create(req.body);
+  const playlist = await Playlist.create({ user: req.user.id });
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { $addToSet: { playlists: playlist.id } },
+    { runValidators: true, new: true }
+  ).populate('playlists');
 
   // 2) Send res
   res.status(200).json({
     status: 'success',
     data: {
-      playlist,
+      user,
     },
   });
 });

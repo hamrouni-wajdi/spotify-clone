@@ -63,6 +63,7 @@ exports.login = catchAsync(async (req, res, next) => {
   // 2) Get the user from DB
   const user = await User.findOne({ email })
     .select('+password')
+    .populate('playlists')
     .populate('followedArtists', 'name img role')
     .populate('likedPlaylists', 'name img')
     .populate('likedSongs');
@@ -73,6 +74,9 @@ exports.login = catchAsync(async (req, res, next) => {
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
 
+  user.playlists.map((playlist) => {
+    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  });
   user.followedArtists.map((artist) => {
     artist.img = `${serverUrl}public/users/${artist.img}`;
   });
@@ -160,6 +164,7 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
 
     // 2) If still user exists
     const user = await User.findById(decoded.id)
+      .populate('playlists')
       .populate('followedArtists', 'name img role')
       .populate('likedPlaylists', 'name img')
       .populate('likedSongs');
@@ -171,9 +176,12 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
         )
       );
 
-    user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
-
     const serverUrl = `${req.protocol}://${req.get('host')}/`;
+
+    user.img = `${serverUrl}public/users/${user.img}`;
+    user.playlists.map((playlist) => {
+      playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+    });
     user.followedArtists.map((artist) => {
       artist.img = `${serverUrl}public/users/${artist.img}`;
     });
@@ -254,6 +262,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     passwordResetToken: resetToken,
     passwordResetExpires: { $gt: Date.now() },
   })
+    .populate('playlists')
     .populate('followedArtists', 'name img role')
     .populate('likedPlaylists', 'name img')
     .populate('likedSongs');

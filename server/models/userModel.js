@@ -32,6 +32,14 @@ const userSchema = new mongoose.Schema(
         message: 'You can not like more than 50 songs',
       },
     },
+    playlists: {
+      type: [
+        {
+          type: mongoose.Schema.ObjectId,
+          ref: 'Playlist',
+        },
+      ],
+    },
     likedPlaylists: {
       type: [
         {

@@ -4,9 +4,10 @@ const playlistSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      minLength: 4,
+      minLength: [3, 'Name must be more that 3 characters'],
+      maxLength: [24, 'Name must be less than 24 characters'],
       trim: true,
-      required: [true, 'Please specify playlist name'],
+      default: 'Your playlist',
     },
     description: {
       type: String,
@@ -29,8 +30,8 @@ const playlistSchema = new mongoose.Schema(
         },
       ],
       validate: {
-        validator: (arr) => arr.length <= 50,
-        message: 'You can not add more than 50 songs to your playlist',
+        validator: (arr) => arr.length <= 30,
+        message: 'You can not add more than 30 songs to your playlist',
       },
     },
   },
