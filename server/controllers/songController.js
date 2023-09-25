@@ -57,7 +57,7 @@ exports.saveSongFile = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllSongs = catchAsync(async (req, res, next) => {
-  const songs = await Song.find();
+  const songs = await Song.find({ artist: req.user.id });
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
   songs.map((song) => {

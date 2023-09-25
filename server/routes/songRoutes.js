@@ -10,7 +10,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(songController.getAllSongs)
+  .get(authController.protect, songController.getAllSongs)
   .post(
     authController.protect,
     authController.restrictTo('artist'),
