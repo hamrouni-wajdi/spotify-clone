@@ -70,7 +70,7 @@ const Playlist = () => {
 
   const deletePlaylistHandler = (id) => {
     dispatch(deletePlaylist(id));
-    navigate(0);
+    navigate("/");
   };
 
   const likePlaylistHandler = (id) => dispatch(likePlaylist(id));

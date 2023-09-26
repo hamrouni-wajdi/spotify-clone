@@ -2,9 +2,16 @@ import "./Admin.scss";
 
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSongs, updateSong, uploadSong } from "../../store/thunks/admin";
+import {
+  deleteSong,
+  getSongs,
+  updateSong,
+  uploadSong,
+} from "../../store/thunks/admin";
 import List from "../UI/List";
 import { IoCloseCircle } from "react-icons/io5";
+import { deletePlaylist } from "../../store/thunks/user";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
   // State
@@ -20,6 +27,9 @@ const Admin = () => {
   const { songs } = useSelector((state) => state.admin);
 
   const dispatch = useDispatch();
+
+  // Router
+  const navigate = useNavigate();
 
   // Effects
   useEffect(() => {
@@ -58,6 +68,11 @@ const Admin = () => {
 
     const formData = new FormData(editFormRef.current);
     dispatch(updateSong({ data: formData, id: song.id }));
+  };
+
+  const deleteSongHandler = (id) => {
+    dispatch(deleteSong(id));
+    navigate(0);
   };
 
   return (
@@ -117,10 +132,19 @@ const Admin = () => {
             onSubmit={editFormSubmitHandler}
           >
             <img src={song.img} />
-            {/*<input type="file" name="img" id="img" placeholder="Img" />*/}
+            <input type="file" name="img" id="img" placeholder="Img" />
             <label htmlFor="name">Name</label>
             <input type="text" name="name" id="name" placeholder={song.name} />
-            <button>Upload</button>
+            <button>Update</button>
+            <button
+              style={{ background: "#EF4444" }}
+              onClick={(e) => {
+                e.preventDefault();
+                deleteSongHandler(song.id);
+              }}
+            >
+              Delete
+            </button>
           </form>
         </div>
       )}

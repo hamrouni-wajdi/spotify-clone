@@ -134,7 +134,7 @@ exports.updateSong = catchAsync(async (req, res, next) => {
     return next(new AppError('You can not update a song file', 400));
 
   const data = {};
-  if (req.file) {
+  if (req.files) {
     data.img = req.files.img[0].filename;
   }
   if (req.body.name) data.name = req.body.name;
