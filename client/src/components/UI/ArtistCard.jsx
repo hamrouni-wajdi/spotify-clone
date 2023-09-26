@@ -10,7 +10,7 @@ const ArtistCard = ({ artist }) => {
       <Link
         to={`/artist/${artist.id}`}
         className={`card-artist ${
-          artist.id === "650fffb62d99f057eff75b75" ? "vip" : ""
+          artist.id === "6513505bef35c9d633139956" ? "vip" : ""
         }`}
       >
         <img src={artist?.img} alt="" />

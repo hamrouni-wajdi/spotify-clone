@@ -8,8 +8,8 @@ const squareList = ({ list, artist, home }) => {
         <Link
           to={artist ? `/artist/${el.id}` : `/playlist/${el.id}`}
           className={`square-card ${artist ? "square-card--artist" : ""} ${
-            el.id === "650fffb62d99f057eff75b75" ? "vip" : ""
-          } ${el.user?.id === "650fffb62d99f057eff75b75" ? "vip" : ""}`}
+            el.id === "6513505bef35c9d633139956" ? "vip" : ""
+          } ${el.user?.id === "6513505bef35c9d633139956" ? "vip" : ""}`}
         >
           <img src={el.img} alt={el.name} />
           <div className="square-card__name">{el.name}</div>
