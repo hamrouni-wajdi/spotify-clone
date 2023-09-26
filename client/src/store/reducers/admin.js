@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getSongs } from "../thunks/admin";
+import { getSongs, uploadSong } from "../thunks/admin";
+import { updatePlaylist } from "../thunks/playlist";
+import { toast } from "react-toastify";
 
 const adminSlice = createSlice({
   name: "playlist",
@@ -12,6 +14,12 @@ const adminSlice = createSlice({
       // Get playlist
       .addCase(getSongs.fulfilled, (state, action) => {
         state.songs = action.payload;
+      }) // Upload song
+      .addCase(uploadSong.fulfilled, (state, action) => {
+        state.songs = [...state.songs, action.payload];
+      })
+      .addCase(uploadSong.rejected, (state, action) => {
+        toast.error(action.payload.response.data.message);
       });
   },
 });
