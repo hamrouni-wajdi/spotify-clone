@@ -161,9 +161,7 @@ exports.addSong = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    data: {
-      playlist,
-    },
+    message: `Song added to ${playlist.name}`,
   });
 });
 
