@@ -3,6 +3,7 @@ import { IoEllipsisHorizontal, IoHeart, IoHeartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCurrent, replaceQueue } from "../../store/reducers/queue";
 import { dislikeSong, likeSong } from "../../store/thunks/user";
+import axios from "../../api/axios";
 
 const List = (props) => {
   // ⚛ Redux
@@ -61,7 +62,8 @@ const List = (props) => {
             >
               {el.name}
             </span>
-            <span>{el.artist.name}</span>
+            <span className="list__artist-name">{el.artist.name}</span>
+            <span className="list__count">{el.plays}</span>
             {userLikedSong(el.id) ? (
               <IoHeart onClick={() => dislikeSongHandler(el)} />
             ) : (

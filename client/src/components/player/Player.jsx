@@ -15,6 +15,7 @@ import { dislikeSong, likeSong } from "../../store/thunks/user";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { playPause } from "../../store/reducers/player";
 import { nextSong, prevSong } from "../../store/reducers/queue";
+import axios from "../../api/axios";
 
 const Player = () => {
   // ⚛ Redux
@@ -82,6 +83,14 @@ const Player = () => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    // This increases song play count
+    const increaseCount = async () => {
+      if (song) await axios.get(`/songs/${song.id}`);
+    };
+    increaseCount();
+  }, [song]);
 
   const likeSongHandler = () => dispatch(likeSong(song.id));
 

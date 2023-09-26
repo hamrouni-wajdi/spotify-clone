@@ -12,6 +12,12 @@
 
 html {
   font-size: 62.5%;
+
+  // I started project on 1920 screen and after i Bought macbook this fixed scaling issues
+  // I will fix it later
+  @media (max-width: 1440px) {
+    font-size: 50%;
+  }
 }
 
 body {
