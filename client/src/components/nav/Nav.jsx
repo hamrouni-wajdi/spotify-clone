@@ -65,7 +65,7 @@ const Nav = (props) => {
                   className={() => {
                     return `saved__link ${
                       isArtist(el) ? "saved__link--artist" : ""
-                    } ${el.id === "650fffb62d99f057eff75b75" ? "vip" : ""}`;
+                    } ${el.id === "6513505bef35c9d633139956" ? "vip" : ""}`;
                   }}
                 >
                   <img src={el.img} alt={el.name} />
