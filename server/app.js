@@ -17,7 +17,10 @@ const app = express();
 app.use(
   cors({
     // origin: 'https://maqsud-spotify.vercel.app',
-    origin: 'http://localhost:3000',
+    origin:
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000'
+        : 'https://maqsud-spotify.vercel.app',
     credentials: true,
   })
 );
