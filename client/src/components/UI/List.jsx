@@ -71,8 +71,8 @@ const List = (props) => {
           props.list.map((el, i) => (
             <div
               className={`list-item ${
-                el.artist?.id === "6513505bef35c9d633139956" ? "vip" : ""
-              }`}
+                el.artist.id === "6513505bef35c9d633139956" ? "vip" : ""
+              } ${el.artist === "6513505bef35c9d633139956" ? "vip" : ""}`}
               key={el.id}
             >
               {currentId !== el.id ? (
