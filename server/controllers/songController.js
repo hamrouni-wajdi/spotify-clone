@@ -110,12 +110,20 @@ exports.createSong = catchAsync(async (req, res, next) => {
   req.body.img = req.files.img[0].filename;
   req.body.artist = req.user.id;
 
-  const newSong = await Song.create(req.body);
+  if (req.body.song || req.body.img || req.body.name) {
+    return next(new AppError('👎 Something is missing', 400));
+  }
+
+  const song = await Song.create(req.body);
+
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  song.song = `${serverUrl}public/songs/${song.song}`;
+  song.img = `${serverUrl}public/songs/${song.img}`;
 
   res.status(200).json({
     status: 'success',
     data: {
-      song: newSong,
+      song: song,
     },
   });
 });
