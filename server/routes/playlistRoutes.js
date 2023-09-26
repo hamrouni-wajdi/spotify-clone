@@ -22,7 +22,7 @@ router
 
 // Manage songs in playlist
 router
-  .route('/:id/song')
+  .route('/:id/song/:song')
   .post(authController.protect, playlistController.addSong)
   .delete(authController.protect, playlistController.deleteSong);
 

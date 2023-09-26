@@ -5,6 +5,8 @@ import {
   IoHeart,
   IoHeartOutline,
   IoPencil,
+  IoTrain,
+  IoTrash,
 } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCurrent, replaceQueue } from "../../store/reducers/queue";
@@ -53,8 +55,13 @@ const List = (props) => {
   const closeModalHandler = () => setModal(false);
 
   const addSongToPlaylistHandler = async (id, songId) => {
-    const res = await axios.post(`playlists/${id}/song`, { song: songId });
+    const res = await axios.post(`playlists/${id}/song/${songId}`);
     toast.success(res.data.message);
+  };
+
+  const removeSongFromPlaylistHandler = async (id, songId) => {
+    const res = await axios.delete(`playlists/${id}/song/${songId}`);
+    toast.success("Song removed");
   };
 
   return (
@@ -99,13 +106,21 @@ const List = (props) => {
                 />
               )}
               <span>
-                {props.admin ? (
+                {props.admin && (
                   <IoPencil onClick={() => props.handler(el.id)} />
-                ) : (
-                  <IoEllipsisHorizontal
-                    onClick={() => openModalHandler(el.id)}
-                  />
                 )}
+                {!props.admin &&
+                  (props.onPlaylist ? (
+                    <IoTrash
+                      onClick={() =>
+                        removeSongFromPlaylistHandler(props.pId, el.id)
+                      }
+                    />
+                  ) : (
+                    <IoEllipsisHorizontal
+                      onClick={() => openModalHandler(el.id)}
+                    />
+                  ))}
               </span>
             </div>
           ))}

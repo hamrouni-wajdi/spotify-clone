@@ -155,7 +155,7 @@ exports.addSong = catchAsync(async (req, res, next) => {
   // 1) Update playlist
   const playlist = await Playlist.findByIdAndUpdate(
     req.params.id,
-    { $addToSet: { songs: req.body.song } },
+    { $addToSet: { songs: req.params.song } },
     { runValidators: true, new: true }
   );
 
@@ -169,7 +169,7 @@ exports.deleteSong = catchAsync(async (req, res, next) => {
   // 1) Update playlist
   const playlist = await Playlist.findByIdAndUpdate(
     req.params.id,
-    { $pull: { songs: req.body.song } },
+    { $pull: { songs: req.params.song } },
     { runValidators: true, new: true }
   );
 

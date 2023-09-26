@@ -22,6 +22,8 @@ import {
   likeSong,
   updateUser,
 } from "../../../store/thunks/user";
+import axios from "../../../api/axios";
+import { toast } from "react-toastify";
 
 const Playlist = () => {
   // State
@@ -128,7 +130,7 @@ const Playlist = () => {
           </div>
 
           <div className="playlist__songs">
-            <List list={playlist.songs} />
+            <List list={playlist.songs} onPlaylist={true} pId={playlist.id} />
           </div>
         </div>
       ) : (
