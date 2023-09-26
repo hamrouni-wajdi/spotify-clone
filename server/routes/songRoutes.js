@@ -23,7 +23,13 @@ router
 router
   .route('/:id')
   .get(authController.protect, songController.getSong)
-  .patch(songController.updateSong)
+  .patch(
+    authController.protect,
+    authController.restrictTo('artist'),
+    songController.uploadSongFiles,
+    songController.resizeSongImg,
+    songController.updateSong
+  )
   .delete(
     authController.protect,
     authController.restrictTo('artist', 'admin'),

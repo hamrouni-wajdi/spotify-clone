@@ -110,7 +110,7 @@ exports.createSong = catchAsync(async (req, res, next) => {
   req.body.img = req.files.img[0].filename;
   req.body.artist = req.user.id;
 
-  if (req.body.song || req.body.img || req.body.name) {
+  if (!req.body.song || !req.body.img || !req.body.name) {
     return next(new AppError('👎 Something is missing', 400));
   }
 
@@ -130,9 +130,16 @@ exports.createSong = catchAsync(async (req, res, next) => {
 
 exports.updateSong = catchAsync(async (req, res, next) => {
   // Prevent updating song file
-  if (req.body.song) return next(new Error('You can not update a song file'));
+  if (req.body.song)
+    return next(new AppError('You can not update a song file', 400));
 
-  const song = await Song.findByIdAndUpdate(req.params.id, req.body, {
+  const data = {};
+  if (req.file) {
+    data.img = req.files.img[0].filename;
+  }
+  if (req.body.name) data.name = req.body.name;
+
+  const song = await Song.findByIdAndUpdate(req.params.id, data, {
     runValidators: true,
     new: true,
   });
