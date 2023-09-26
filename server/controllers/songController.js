@@ -92,26 +92,18 @@ exports.getAllSongs = catchAsync(async (req, res, next) => {
 //   });
 // });
 
-// exports.getSong = catchAsync(async (req, res, next) => {
-//   const song = await Song.findByIdAndUpdate(
-//     req.params.id,
-//     { $inc: { plays: 1 } },
-//     { new: true }
-//   );
-//
-//   if (!song) return next(new AppError('No song found with given id', 404));
-//
-//   const serverUrl = `${req.protocol}://${req.get('host')}/`;
-//   song.song = `${serverUrl}public/songs/${song.song}`;
-//   song.img = `${serverUrl}public/songs/${song.img}`;
-//
-//   res.status(200).json({
-//     status: 'success',
-//     data: {
-//       song,
-//     },
-//   });
-// });
+// This functoin for increasing number of plays
+exports.getSong = catchAsync(async (req, res, next) => {
+  const song = await Song.findByIdAndUpdate(req.params.id, {
+    $inc: { plays: 1 },
+  });
+
+  console.log('song', song.plays);
+
+  res.status(200).json({
+    status: 'success',
+  });
+});
 
 exports.createSong = catchAsync(async (req, res, next) => {
   req.body.song = req.files.song[0].filename;

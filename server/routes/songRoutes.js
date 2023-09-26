@@ -22,7 +22,7 @@ router
 
 router
   .route('/:id')
-  // .get(authController.protect, songController.getSong)
+  .get(authController.protect, songController.getSong)
   .patch(songController.updateSong)
   .delete(
     authController.protect,
