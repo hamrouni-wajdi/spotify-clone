@@ -49,7 +49,7 @@ export const deleteSong = createAsyncThunk("user/deleteSong", async (id) => {
   try {
     await axios.delete(`/songs/${id}`);
 
-    toast.success("Playlist deleted");
+    toast.success("Song deleted");
   } catch (err) {
     throw err;
   }

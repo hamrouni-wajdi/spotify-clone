@@ -26,7 +26,6 @@
     padding: 2.4rem;
 
     span {
-      mix-blend-mode: difference;
       font-weight: bold;
       font-size: 6.4rem;
       color: #fff;
@@ -34,6 +33,10 @@
 
       margin-right: 8px;
     }
+  }
+
+  &__card:last-child {
+    color: #fff;
   }
 
   &__list {

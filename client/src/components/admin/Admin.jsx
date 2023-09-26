@@ -72,27 +72,29 @@ const Admin = () => {
 
   const deleteSongHandler = (id) => {
     dispatch(deleteSong(id));
-    navigate(0);
   };
 
   return (
     <>
-      <div className="admin">
-        <div className="admin__header">
-          <div className="admin__card">
-            <span>7</span> songs
+      {songs && (
+        <div className="admin">
+          <div className="admin__header">
+            <div className="admin__card">
+              <span>{songs.length}</span> songs
+            </div>
+            <div className="admin__card">
+              <span>{songs.reduce((acc, song) => acc + song.plays, 0)}</span>{" "}
+              plays
+            </div>
+            <div className="admin__card" onClick={openModalHandler}>
+              <span>+</span> upload new
+            </div>
           </div>
-          <div className="admin__card">
-            <span>4562</span> plays
-          </div>
-          <div className="admin__card" onClick={openModalHandler}>
-            <span>+</span> upload new
+          <div className="admin__list">
+            <List list={songs} admin={true} handler={openEditModalHandler} />
           </div>
         </div>
-        <div className="admin__list">
-          <List list={songs} admin={true} handler={openEditModalHandler} />
-        </div>
-      </div>
+      )}
 
       {songs && modal && (
         <div className="admin-modal">
