@@ -1,5 +1,10 @@
 import "./List.scss";
-import { IoEllipsisHorizontal, IoHeart, IoHeartOutline } from "react-icons/io5";
+import {
+  IoEllipsisHorizontal,
+  IoHeart,
+  IoHeartOutline,
+  IoPencil,
+} from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCurrent, replaceQueue } from "../../store/reducers/queue";
 import { dislikeSong, likeSong } from "../../store/thunks/user";
@@ -39,7 +44,7 @@ const List = (props) => {
         props.list.map((el, i) => (
           <div
             className={`list-item ${
-              el.artist.id === "650fffb62d99f057eff75b75" ? "vip" : ""
+              el.artist?.id === "650fffb62d99f057eff75b75" ? "vip" : ""
             }`}
             key={el.id}
           >
@@ -62,7 +67,7 @@ const List = (props) => {
             >
               {el.name}
             </span>
-            <span className="list__artist-name">{el.artist.name}</span>
+            <span className="list__artist-name">{el.artist?.name}</span>
             <span className="list__count">{el.plays}</span>
             {userLikedSong(el.id) ? (
               <IoHeart onClick={() => dislikeSongHandler(el)} />
@@ -73,7 +78,11 @@ const List = (props) => {
               />
             )}
             <span>
-              <IoEllipsisHorizontal />
+              {props.admin ? (
+                <IoPencil onClick={() => props.handler(el.id)} />
+              ) : (
+                <IoEllipsisHorizontal />
+              )}
             </span>
           </div>
         ))}

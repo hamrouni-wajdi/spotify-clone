@@ -8,7 +8,6 @@ export const getSongs = createAsyncThunk(
     try {
       const res = await axios.get(`/songs`);
 
-      console.log("song", res.data.data.songs);
       return res.data.data.songs;
     } catch (err) {
       return rejectWithValue(err);
@@ -17,12 +16,27 @@ export const getSongs = createAsyncThunk(
 );
 
 export const uploadSong = createAsyncThunk(
-  "playlist/uploadSong",
+  "admin/uploadSong",
   async ({ data }, { rejectWithValue }) => {
     try {
       const res = await axios.post(`/songs`, data);
 
       toast.success("Song uploaded");
+
+      return res.data.data.song;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const updateSong = createAsyncThunk(
+  "admin/updateSong",
+  async ({ data, id }, { rejectWithValue }) => {
+    try {
+      const res = await axios.patch(`/songs/${id}`, data);
+
+      toast.success("Song updated");
 
       return res.data.data.song;
     } catch (err) {
