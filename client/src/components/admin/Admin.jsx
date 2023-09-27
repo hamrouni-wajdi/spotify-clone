@@ -61,6 +61,7 @@ const Admin = () => {
 
     const formData = new FormData(formRef.current);
     dispatch(uploadSong({ data: formData }));
+    setEditModal(false);
   };
 
   const editFormSubmitHandler = (e) => {
@@ -68,6 +69,7 @@ const Admin = () => {
 
     const formData = new FormData(editFormRef.current);
     dispatch(updateSong({ data: formData, id: song.id }));
+    setEditModal(false);
   };
 
   const deleteSongHandler = (id) => {
