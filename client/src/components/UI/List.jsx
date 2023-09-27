@@ -98,7 +98,7 @@ const List = (props) => {
               </span>
               <Link
                 to={`/artist/${el.artist.id}`}
-                className="player-song__artist"
+                className="list__artist-name"
               >
                 {el.artist.name}
               </Link>

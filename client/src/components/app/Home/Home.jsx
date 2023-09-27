@@ -18,9 +18,7 @@ const Home = () => {
   return (
     user.id && (
       <>
-        <div className="app-header__img">
-          <img src="https://images.unsplash.com/photo-1693487048787-a19cc08ded79?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=80" />
-        </div>
+        <div className="app-header__img"> </div>
         <div className="app-header">
           <h1 className="h1" onClick={() => toast.success("Wow crazy")}>
             Good evening, wanna listen some music !?

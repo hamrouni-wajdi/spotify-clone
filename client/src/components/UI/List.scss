@@ -4,7 +4,11 @@
     text-align: center;
   }
 
-  &__artist-name {
+  &__artist-name,
+  &__artist-name:link,
+  &__artist-name:visited {
+    color: inherit;
+    text-decoration: none;
     text-align: left;
   }
 

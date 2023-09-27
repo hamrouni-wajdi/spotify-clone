@@ -1,16 +1,18 @@
 .app-header {
   padding: 24px 24px 0 24px;
   margin-bottom: 16px;
+  background-image: linear-gradient(
+    to bottom,
+                  rgba(186, 192, 242, 0.25),
+    #121212 32rem
+  );
 
   &__img {
-    img {
-
-    width: 100%;
-      height: 34vh;
-      object-fit: cover;
-      object-position: 0 -6.4rem;
-
-    }
+    background-image: url("https://images.unsplash.com/photo-1693487048787-a19cc08ded79?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=80");
+    height: 34vh;
+    background-size: cover;
+    background-position: 0 -6.4rem;
+    background-attachment: fixed;
   }
 
   &__list {
