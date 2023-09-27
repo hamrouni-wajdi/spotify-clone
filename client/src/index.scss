@@ -1,5 +1,7 @@
 :root {
   --main-cl: #1db954;
+  --toastify-toast-width: 32rem;
+  --toastify-toast-min-height: 5.8rem;
 }
 
 *,
@@ -48,3 +50,4 @@ body {
 button {
   cursor: pointer;
 }
+

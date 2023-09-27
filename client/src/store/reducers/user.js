@@ -47,7 +47,8 @@ export const userSlice = createSlice({
         toast.error(action.payload.response.data.message);
       }) // Update user
       .addCase(updateUser.fulfilled, (state, action) => {
-        state.data = action.payload.user;
+        state.data.name = action.payload.user.name;
+        state.data.img = action.payload.user.img;
       })
       // Reset password
       .addCase(resetPassword.fulfilled, (state, action) => {

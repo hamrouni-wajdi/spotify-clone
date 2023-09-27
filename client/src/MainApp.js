@@ -138,7 +138,13 @@ function MainApp() {
           <Route path="/forgotPassword" element={<Forgot />} />
           <Route path="/resetPassword/:id" element={<Reset />} />
         </Routes>
-        <ToastContainer theme="dark" />
+        <ToastContainer
+          theme="dark"
+          closeOnClick
+          style={{
+            opacity: 0.8,
+          }}
+        />
       </div>
     </BrowserRouter>
   );

@@ -26,7 +26,6 @@ const Profile = () => {
     e.preventDefault();
 
     const formData = new FormData(formInfoRef.current);
-    console.log(formData);
 
     dispatch(updateUser(formData));
   };
@@ -50,7 +49,7 @@ const Profile = () => {
   const logoutHandler = async () => {
     const res = await axios.get("users/logout");
     toast.success(res.data.message);
-    navigate("/");
+    navigate("/login");
     navigate(0);
   };
 
