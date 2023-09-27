@@ -72,7 +72,11 @@
       color: #fff;
     }
 
-    &__artist {
+    &__artist,
+    &__artist:link,
+    &__artist:visited{
+      text-decoration: none;
+      color: inherit;
       font-size: 11px;
       font-weight: 400;
     }

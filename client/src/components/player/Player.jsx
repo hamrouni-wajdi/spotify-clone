@@ -16,6 +16,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { playPause } from "../../store/reducers/player";
 import { nextSong, prevSong } from "../../store/reducers/queue";
 import axios from "../../api/axios";
+import { Link } from "react-router-dom";
 
 const Player = () => {
   // ⚛ Redux
@@ -184,7 +185,12 @@ const Player = () => {
             <img src={song.img} alt="" />
             <div className="player-song__context">
               <span className="player-song__name">{song.name}</span>
-              <span className="player-song__artist">{song.artist.name}</span>
+              <Link
+                to={`/artist/${song.artist.id}`}
+                className="player-song__artist"
+              >
+                {song.artist?.name}
+              </Link>
             </div>
             {userLikedSong() === true ? (
               <IoHeart

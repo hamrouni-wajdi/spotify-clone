@@ -14,6 +14,7 @@ import { dislikeSong, likeSong } from "../../store/thunks/user";
 import axios from "../../api/axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const List = (props) => {
   // State
@@ -95,7 +96,12 @@ const List = (props) => {
               >
                 {el.name}
               </span>
-              <span className="list__artist-name">{el.artist?.name}</span>
+              <Link
+                to={`/artist/${el.artist.id}`}
+                className="player-song__artist"
+              >
+                {el.artist.name}
+              </Link>
               <span className="list__count">{el.plays}</span>
               {userLikedSong(el.id) ? (
                 <IoHeart onClick={() => dislikeSongHandler(el)} />
