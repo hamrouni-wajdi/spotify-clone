@@ -12,56 +12,53 @@ import SquareList from "../../UI/SquareList";
 const img =
   "https://images.unsplash.com/photo-1684654488308-2229de99e7a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
 
-const Home = (props) => {
+const Home = () => {
   const user = useSelector((state) => state.user.data);
-
-  const latest = [1, 2, 3, 4];
-  const list = [1, 2, 3, 4, 5];
 
   return (
     user.id && (
-      <div className="app-header">
-        <h1 className="h1" onClick={() => toast.success("Wow crazy")}>
-          👋 Hi {user.name}
-        </h1>
-        <div className="app-header__latest">
-          <Link to="/likedSongs" className="app-header__latest-card">
-            <img src={likedSongsImg} alt="Heart" />
-            <div className="app-header__latest-card-name">
-              <span>Liked Songs</span>
-              <IoPlayCircle className="app-header__latest-card-btn" />
-            </div>
-          </Link>
-          {latest.map((el) => (
-            <div className="app-header__latest-card">
-              <img src={img} />
-              <div className="app-header__latest-card-name">
-                <span>Artist Name</span>
-                <IoPlayCircle className="app-header__latest-card-btn" />
-              </div>
-            </div>
-          ))}
+      <>
+        <div className="app-header__img">
+          <img src="https://images.unsplash.com/photo-1693487048787-a19cc08ded79?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=80" />
         </div>
-        <h2 className="h2">Your Favourite Artists</h2>
-        <SquareList list={user.followedArtists} artist={true} home={true} />
+        <div className="app-header">
+          <h1 className="h1" onClick={() => toast.success("Wow crazy")}>
+            Good evening, wanna listen some music !?
+          </h1>
 
-        <h2 className="h2">Your Favourite Playlists</h2>
-        <SquareList list={user.likedPlaylists} home={true} />
+          <h2 className="h2">
+            {user.followedArtists.length === 0
+              ? "Your favourite artists will appear here..."
+              : "Your favourite artists"}
+          </h2>
+          <SquareList
+            list={user.followedArtists.slice(0, 5)}
+            artist={true}
+            home={true}
+          />
 
-        {/*<h2 className="h2">Top Artists</h2>*/}
-        {/*<div className="app-header__list">*/}
-        {/*  {list.map((el) => (*/}
-        {/*    <ArtistCard />*/}
-        {/*  ))}*/}
-        {/*</div>*/}
+          <h2 className="h2">
+            {user.likedPlaylists.length === 0
+              ? "Your favourite playlists will appear here..."
+              : "Your favourite playlists"}
+          </h2>
+          <SquareList list={user.likedPlaylists.slice(0, 5)} home={true} />
 
-        {/*<h2 className="h2">Top Playlists</h2>*/}
-        {/*<div className="app-header__list">*/}
-        {/*  {list.map((el) => (*/}
-        {/*    <PlaylistCard />*/}
-        {/*  ))}*/}
-        {/*</div>*/}
-      </div>
+          {/*<h2 className="h2">Top Artists</h2>*/}
+          {/*<div className="app-header__list">*/}
+          {/*  {list.map((el) => (*/}
+          {/*    <ArtistCard />*/}
+          {/*  ))}*/}
+          {/*</div>*/}
+
+          {/*<h2 className="h2">Top Playlists</h2>*/}
+          {/*<div className="app-header__list">*/}
+          {/*  {list.map((el) => (*/}
+          {/*    <PlaylistCard />*/}
+          {/*  ))}*/}
+          {/*</div>*/}
+        </div>
+      </>
     )
   );
 };

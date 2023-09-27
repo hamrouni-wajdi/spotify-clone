@@ -1,55 +1,15 @@
 .app-header {
-   //background-image: linear-gradient(to bottom, #242424, #121212);
-
-  padding: 84px 24px 0 24px;
+  padding: 24px 24px 0 24px;
   margin-bottom: 16px;
 
-  &__latest {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px 24px;
-    margin-bottom: 24px;
-  }
-
-  &__latest-card {
-    background-color: rgba(255, 255, 255, 0.1);
-    overflow: hidden;
-    border-radius: 4px;
-    cursor: pointer;
-
-    display: grid;
-    grid-template-columns: auto 1fr;
-
-    &:hover {
-      transition: 0.3s;
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    &:hover &-btn {
-      opacity: 1;
-      transition: 0.3s;
-    }
-
+  &__img {
     img {
+
+    width: 100%;
+      height: 34vh;
       object-fit: cover;
-      width: 80px;
-      height: 80px;
-    }
+      object-position: 0 -6.4rem;
 
-    &-name {
-      color: #fff;
-      text-decoration: none;
-
-      padding: 0 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    &-btn {
-      opacity: 0;
-      font-size: 48px;
-      color: #1db954;
     }
   }
 
