@@ -129,7 +129,7 @@ const List = (props) => {
       {modal && (
         <div className="list-modal">
           <div className="list-modal__header">
-            <h2>Upload a new song</h2>
+            <h2>Save song to</h2>
             <div className="list-modal__close">
               <IoCloseCircle onClick={closeModalHandler} />
             </div>

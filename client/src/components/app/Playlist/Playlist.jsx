@@ -4,6 +4,7 @@ import {
   IoHeart,
   IoHeartOutline,
   IoPauseCircle,
+  IoPencil,
   IoPlayCircle,
 } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
@@ -80,14 +81,14 @@ const Playlist = () => {
   const dislikePlaylistHandler = (id) => dispatch(dislikePlaylist(id));
 
   const userLikedPlaylist = (id) => {
-    let res = likedPlaylists.find((obj) => obj.id === id);
+    let pl = likedPlaylists.find((obj) => obj.id === id);
 
-    return res ? true : false;
+    return pl ? true : false;
   };
 
   return (
     <>
-      {playlist ? (
+      {userId && playlist ? (
         <div className="playlist">
           <div className="playlist__header">
             <div className="playlist__image">
@@ -95,9 +96,7 @@ const Playlist = () => {
             </div>
             <div className="playlist__info">
               <p className="playlist__info--type">Playlist</p>
-              <h1 className="playlist__name" onClick={openModalHandler}>
-                {playlist.name}
-              </h1>
+              <h1 className="playlist__name">{playlist.name}</h1>
               <div></div>
               <div className="playlist__user">
                 <img className="playlist__user-img" src={playlist.user.img} />
@@ -116,15 +115,25 @@ const Playlist = () => {
 
           <div className="playlist-nav">
             <IoPlayCircle onClick={() => replaceQueueHandler(playlist.songs)} />
-            {userLikedPlaylist(playlist.id) ? (
-              <IoHeart
-                className="heart heart--active"
-                onClick={() => dislikePlaylistHandler(playlist.id)}
-              />
-            ) : (
-              <IoHeartOutline
-                className="heart"
-                onClick={() => likePlaylistHandler(playlist.id)}
+            {playlist.user.id !== userId &&
+              (userLikedPlaylist(playlist.id) ? (
+                <IoHeart
+                  className="heart heart--active"
+                  onClick={() => dislikePlaylistHandler(playlist.id)}
+                />
+              ) : (
+                <IoHeartOutline
+                  className="heart"
+                  onClick={() => likePlaylistHandler(playlist.id)}
+                />
+              ))}
+            {playlist.user.id === userId && (
+              <IoPencil
+                onClick={openModalHandler}
+                style={{
+                  fontSize: "3.2rem",
+                  color: "#fff",
+                }}
               />
             )}
           </div>
