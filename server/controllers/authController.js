@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const fs = require('fs');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
@@ -314,7 +315,10 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
 
 exports.deleteMe = catchAsync(async (req, res, next) => {
   // 1) Change active property to false
-  await User.findByIdAndUpdate(req.user.id, { active: false });
+  const user = await User.findByIdAndUpdate(req.user.id, { active: false });
+
+  if (user.img !== 'default.jpg')
+    fs.unlink(`public/users/${playlist.img}`, (err) => console.log(err));
 
   res.status(204).json({
     status: 'success',

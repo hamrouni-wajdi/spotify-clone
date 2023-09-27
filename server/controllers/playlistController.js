@@ -4,6 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Playlist = require('../models/playlistModel');
 const User = require('../models/userModel');
+const fs = require('fs');
 
 // Multer
 const storage = multer.memoryStorage();
@@ -137,6 +138,8 @@ exports.deletePlaylist = catchAsync(async (req, res, next) => {
   if (!playlist)
     return next(new AppError('❓ No playlist found with that id', 404));
 
+  if (playlist.img !== 'default.png') fs.unlink(`public/playlists/${playlist.img}`, (err) => console.log(err));
+
   const user = await User.findByIdAndUpdate(
     req.user.id,
     { $pull: { playlists: req.params.id } },
@@ -170,7 +173,7 @@ exports.addSong = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteSong = catchAsync(async (req, res, next) => {
+exports.removeSong = catchAsync(async (req, res, next) => {
   // 1) Update playlist
   const playlist = await Playlist.findByIdAndUpdate(
     req.params.id,

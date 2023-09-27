@@ -159,12 +159,8 @@ exports.deleteSong = catchAsync(async (req, res, next) => {
 
   if (!song) return next(new AppError('No song found with given id', 404));
 
-  // delete song file from storage
-  fs.unlink(`./songs/${song.song}`, (err) => {
-    if (err) {
-      console.log(err);
-    }
-  });
+  fs.unlink(`public/songs/${song.song}`, (err) => console.log(err));
+  fs.unlink(`public/songs/${song.img}`, (err) => console.log(err));
 
   res.status(204).json({
     status: 'success',

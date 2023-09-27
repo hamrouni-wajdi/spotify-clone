@@ -24,7 +24,7 @@ router
 router
   .route('/:id/song/:song')
   .post(authController.protect, playlistController.addSong)
-  .delete(authController.protect, playlistController.deleteSong);
+  .delete(authController.protect, playlistController.removeSong);
 
 router
   .route('/likes/add')
