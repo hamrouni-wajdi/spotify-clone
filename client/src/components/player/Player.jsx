@@ -214,7 +214,11 @@ const Player = () => {
                 className="player__icon-btn"
                 onClick={togglePlayPauseHandler}
               >
-                {isPlaying ? <IoPauseCircle /> : <IoPlayCircle />}
+                {isPlaying ? (
+                  <IoPauseCircle className="spinner" />
+                ) : (
+                  <IoPlayCircle />
+                )}
               </button>
               <IoPlaySkipForwardSharp onClick={handleNext} />
               {repeatSong ? (
