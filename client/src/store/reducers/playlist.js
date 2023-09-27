@@ -19,7 +19,8 @@ const playlistSlice = createSlice({
         toast.error(action.payload.response.data.message);
       }) // Update playlist
       .addCase(updatePlaylist.fulfilled, (state, action) => {
-        state.playlist = action.payload.playlist;
+        state.playlist.name = action.payload.playlist.name;
+        state.playlist.img = action.payload.playlist.img;
       })
       .addCase(updatePlaylist.rejected, (state, action) => {
         toast.error(action.payload.response.data.message);

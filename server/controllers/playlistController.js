@@ -42,6 +42,11 @@ exports.getAllPlaylists = catchAsync(async (req, res, next) => {
   // 2) Get playlists from DB
   const playlists = await Playlist.find(filter);
 
+  const serverUrl = `${req.protocol}://${req.get('host')}/`;
+  playlists.map((playlist) => {
+    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
+  });
+
   // 3) Send res
   res.status(200).json({
     status: 'success',
@@ -136,7 +141,7 @@ exports.deletePlaylist = catchAsync(async (req, res, next) => {
     req.user.id,
     { $pull: { playlists: req.params.id } },
     { runValidators: true, new: true }
-  );
+  ).populate('playlists');
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
   user.playlists.map((playlist) => {
@@ -144,9 +149,9 @@ exports.deletePlaylist = catchAsync(async (req, res, next) => {
   });
 
   // 2) Send res
-  res.status(204).json({
+  res.status(200).json({
     status: 'success',
-    data: null,
+    data: user,
   });
 });
 

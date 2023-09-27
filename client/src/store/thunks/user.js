@@ -181,6 +181,21 @@ export const becomeArtist = createAsyncThunk("user/becomeArtist", async () => {
 });
 
 // Playlist
+export const getAllPlaylists = createAsyncThunk(
+  "user/getAllPlaylists",
+  async () => {
+    try {
+      const res = await axios.get("/playlists");
+
+      toast.success("Playlist created");
+
+      return res.data.data.playlists;
+    } catch (err) {
+      throw err;
+    }
+  },
+);
+
 export const createPlaylist = createAsyncThunk(
   "user/createPlaylist",
   async () => {
@@ -203,8 +218,7 @@ export const deletePlaylist = createAsyncThunk(
       const res = await axios.delete(`/playlists/${id}`);
 
       toast.success("Playlist deleted");
-
-      return res.data.data.user.playlists;
+      return res.data.data.playlists;
     } catch (err) {
       throw err;
     }

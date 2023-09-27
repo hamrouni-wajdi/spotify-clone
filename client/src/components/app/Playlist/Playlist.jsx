@@ -20,6 +20,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { replaceQueue } from "../../../store/reducers/queue";
 import {
   deletePlaylist,
+  getAllPlaylists,
   likeSong,
   updateUser,
 } from "../../../store/thunks/user";
@@ -46,7 +47,7 @@ const Playlist = () => {
   // Effects
   useEffect(() => {
     dispatch(getPlaylist(id));
-  }, [id]);
+  }, []);
 
   // Handlers
   const replaceQueueHandler = (songs) => {
@@ -62,13 +63,14 @@ const Playlist = () => {
     setModal(false);
   };
 
-  const formSubmitHandler = (e) => {
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(formRef.current);
 
-    dispatch(updatePlaylist({ data: formData, id: playlist.id }));
-    navigate(0);
+    await dispatch(updatePlaylist({ data: formData, id: playlist.id }));
+    await dispatch(getAllPlaylists());
+    setModal(false);
   };
 
   const deletePlaylistHandler = (id) => {
@@ -97,7 +99,7 @@ const Playlist = () => {
             <div className="playlist__info">
               <p className="playlist__info--type">Playlist</p>
               <h1 className="playlist__name">{playlist.name}</h1>
-              <div></div>
+              {/*{playlist.description && <p>{playlist.description}</p>}*/}
               <div className="playlist__user">
                 <img className="playlist__user-img" src={playlist.user.img} />
                 <Link

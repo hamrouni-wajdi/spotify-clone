@@ -12,6 +12,7 @@ import {
   updateUser,
   createPlaylist,
   deletePlaylist,
+  getAllPlaylists,
 } from "../thunks/user";
 import { dislikePlaylist, likePlaylist } from "../thunks/playlist";
 import { toast } from "react-toastify";
@@ -75,6 +76,9 @@ export const userSlice = createSlice({
         state.data.role = "artist";
       }) // Create playlist
       .addCase(createPlaylist.fulfilled, (state, action) => {
+        state.data.playlists = action.payload;
+      }) // Get All playlists
+      .addCase(getAllPlaylists.fulfilled, (state, action) => {
         state.data.playlists = action.payload;
       }) // Delete playlist
       .addCase(deletePlaylist.fulfilled, (state, action) => {
