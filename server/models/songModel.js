@@ -8,7 +8,7 @@ const songSchema = new mongoose.Schema(
       trim: true,
       unique: true,
       minLength: [3, 'Song name must be more that 3 characters'],
-      maxLength: [24, 'Song name must be less than 24 characters'],
+      maxLength: [30, 'Song name must be at most 30 characters'],
     },
     artist: {
       type: mongoose.Schema.ObjectId,

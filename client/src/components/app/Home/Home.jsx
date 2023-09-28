@@ -18,7 +18,7 @@ const Home = () => {
   return (
     user.id && (
       <>
-        <div className="app-header__img"> </div>
+        <div className="app-header__img" />
         <div className="app-header">
           <h1 className="h1" onClick={() => toast.success("Wow crazy")}>
             Good evening, wanna listen some music !?
@@ -41,20 +41,6 @@ const Home = () => {
               : "Your favourite playlists"}
           </h2>
           <SquareList list={user.likedPlaylists.slice(0, 5)} home={true} />
-
-          {/*<h2 className="h2">Top Artists</h2>*/}
-          {/*<div className="app-header__list">*/}
-          {/*  {list.map((el) => (*/}
-          {/*    <ArtistCard />*/}
-          {/*  ))}*/}
-          {/*</div>*/}
-
-          {/*<h2 className="h2">Top Playlists</h2>*/}
-          {/*<div className="app-header__list">*/}
-          {/*  {list.map((el) => (*/}
-          {/*    <PlaylistCard />*/}
-          {/*  ))}*/}
-          {/*</div>*/}
         </div>
       </>
     )

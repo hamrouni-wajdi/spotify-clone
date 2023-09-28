@@ -22,8 +22,9 @@
   }
 
   &__image {
-    height: 23.2rem;
-    width: 23.2rem;
+    height: 24rem;
+    width: 24rem;
+    min-width: 24rem;
 
     img {
       height: 100%;
@@ -45,6 +46,10 @@
     font-weight: 700;
     letter-spacing: -1px;
     margin-bottom: 1.2rem;
+  }
+
+  &__des {
+    margin-bottom: 1.6rem;
   }
 
   &__user {

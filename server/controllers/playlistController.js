@@ -96,6 +96,7 @@ exports.updatePlaylist = catchAsync(async (req, res, next) => {
   const data = {};
   if (req.file) data.img = req.file.filename;
   if (req.body.name) data.name = req.body.name;
+  if (req.body.description) data.description = req.body.description;
 
   const playlist = await Playlist.findByIdAndUpdate(req.params.id, data, {
     new: true,

@@ -70,6 +70,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError(`🤷‍ No user found with email: ${email}`, 404));
   }
 
+  user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
   fileLocation(req, user.playlists, 'playlists', true);
   fileLocation(req, user.followedArtists, 'users', true);
   fileLocation(req, user.likedPlaylists, 'playlists', true);
@@ -154,6 +155,8 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
         )
       );
     }
+
+    user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
     fileLocation(req, user.playlists, 'playlists', true);
     fileLocation(req, user.followedArtists, 'users', true);
     fileLocation(req, user.likedPlaylists, 'playlists', true);

@@ -99,7 +99,9 @@ const Playlist = () => {
             <div className="playlist__info">
               <p className="playlist__info--type">Playlist</p>
               <h1 className="playlist__name">{playlist.name}</h1>
-              {/*{playlist.description && <p>{playlist.description}</p>}*/}
+              {playlist.description && (
+                <p className="playlist__des">{playlist.description}</p>
+              )}
               <div className="playlist__user">
                 <img className="playlist__user-img" src={playlist.user.img} />
                 <Link

@@ -5,13 +5,14 @@ const playlistSchema = new mongoose.Schema(
     name: {
       type: String,
       minLength: [3, 'Name must be more that 3 characters'],
-      maxLength: [24, 'Name must be less than 24 characters'],
+      maxLength: [30, 'Name must be at most 30 characters'],
       trim: true,
       default: 'Your playlist',
     },
     description: {
       type: String,
       trim: true,
+      maxLength: [300, 'Description must be at most 300 characters'],
     },
     img: {
       type: String,

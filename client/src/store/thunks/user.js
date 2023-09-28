@@ -187,8 +187,6 @@ export const getAllPlaylists = createAsyncThunk(
     try {
       const res = await axios.get("/playlists");
 
-      toast.success("Playlist created");
-
       return res.data.data.playlists;
     } catch (err) {
       throw err;

@@ -58,6 +58,7 @@ const List = (props) => {
   const addSongToPlaylistHandler = async (id, songId) => {
     const res = await axios.post(`playlists/${id}/song/${songId}`);
     toast.success(res.data.message);
+    setModal(false);
   };
 
   const removeSongFromPlaylistHandler = async (id, songId) => {
