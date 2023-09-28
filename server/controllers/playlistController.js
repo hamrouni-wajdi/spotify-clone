@@ -5,8 +5,8 @@ const AppError = require('../utils/appError');
 const Playlist = require('../models/playlistModel');
 const User = require('../models/userModel');
 const fs = require('fs');
+const fileLocation = require('../utils/fileLocation');
 
-// Multer
 const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
@@ -36,19 +36,13 @@ const upload = multer({ storage, fileFilter });
 exports.uploadPlaylistImg = upload.single('img');
 
 exports.getAllPlaylists = catchAsync(async (req, res, next) => {
-  // 1) Get user's playlists
   let filter = {};
   if (req.params.userId) filter = { user: req.params.userId };
 
-  // 2) Get playlists from DB
   const playlists = await Playlist.find(filter);
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  playlists.map((playlist) => {
-    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
-  });
+  fileLocation(req, playlists, 'playlists', true);
 
-  // 3) Send res
   res.status(200).json({
     status: 'success',
     length: playlists.length,
@@ -67,10 +61,7 @@ exports.getPlaylist = catchAsync(async (req, res, next) => {
     return next(new AppError('❓ No playlist found with that id', 404));
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  playlist.songs.map((song) => {
-    song.song = `${serverUrl}public/songs/${song.song}`;
-    song.img = `${serverUrl}public/songs/${song.img}`;
-  });
+  fileLocation(req, playlist.songs, 'songs', true, true);
   playlist.user.img = `${serverUrl}public/users/${playlist.user.img}`;
   playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
 
@@ -83,7 +74,6 @@ exports.getPlaylist = catchAsync(async (req, res, next) => {
 });
 
 exports.createPlaylist = catchAsync(async (req, res, next) => {
-  // 1) Create a new Playlist
   const playlist = await Playlist.create({ user: req.user.id });
   const user = await User.findByIdAndUpdate(
     req.user.id,
@@ -91,10 +81,7 @@ exports.createPlaylist = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('playlists');
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.playlists.map((playlist) => {
-    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
-  });
+  fileLocation(req, user.playlists, 'playlists', true);
 
   // 2) Send res
   res.status(200).json({
@@ -106,8 +93,6 @@ exports.createPlaylist = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePlaylist = catchAsync(async (req, res, next) => {
-  // 1) Update Playlist
-
   const data = {};
   if (req.file) data.img = req.file.filename;
   if (req.body.name) data.name = req.body.name;
@@ -123,7 +108,6 @@ exports.updatePlaylist = catchAsync(async (req, res, next) => {
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
   playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
 
-  // 2) Send res
   res.status(200).json({
     status: 'success',
     data: {
@@ -133,12 +117,12 @@ exports.updatePlaylist = catchAsync(async (req, res, next) => {
 });
 
 exports.deletePlaylist = catchAsync(async (req, res, next) => {
-  // 1) Update Playlist
   const playlist = await Playlist.findByIdAndDelete(req.params.id);
   if (!playlist)
     return next(new AppError('❓ No playlist found with that id', 404));
 
-  if (playlist.img !== 'default.png') fs.unlink(`public/playlists/${playlist.img}`, (err) => console.log(err));
+  if (playlist.img !== 'default.png')
+    fs.unlink(`public/playlists/${playlist.img}`, (err) => console.log(err));
 
   const user = await User.findByIdAndUpdate(
     req.user.id,
@@ -146,21 +130,15 @@ exports.deletePlaylist = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('playlists');
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.playlists.map((playlist) => {
-    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
-  });
+  fileLocation(req, user.playlists, 'playlists', true);
 
-  // 2) Send res
   res.status(200).json({
     status: 'success',
     data: user,
   });
 });
 
-// Manage songs in playlist
 exports.addSong = catchAsync(async (req, res, next) => {
-  // 1) Update playlist
   const playlist = await Playlist.findByIdAndUpdate(
     req.params.id,
     { $addToSet: { songs: req.params.song } },
@@ -174,7 +152,6 @@ exports.addSong = catchAsync(async (req, res, next) => {
 });
 
 exports.removeSong = catchAsync(async (req, res, next) => {
-  // 1) Update playlist
   const playlist = await Playlist.findByIdAndUpdate(
     req.params.id,
     { $pull: { songs: req.params.song } },
@@ -198,10 +175,7 @@ exports.likePlaylist = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('likedPlaylists', 'name img');
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.likedPlaylists.map((el) => {
-    el.img = `${serverUrl}public/playlists/${el.img}`;
-  });
+  fileLocation(req, user.likedPlaylists, 'playlists', true);
 
   res.status(200).json({
     status: 'success',
@@ -212,17 +186,13 @@ exports.likePlaylist = catchAsync(async (req, res, next) => {
 exports.dislikePlaylist = catchAsync(async (req, res, next) => {
   const { playlist } = req.body;
 
-  // REVIEW: If logged in used is artist user info is populated twice
   const user = await User.findByIdAndUpdate(
     req.user.id,
     { $pull: { likedPlaylists: playlist } },
     { runValidators: true, new: true }
   ).populate('likedPlaylists', 'name img');
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.likedPlaylists.map((el) => {
-    el.img = `${serverUrl}public/playlists/${el.img}`;
-  });
+  fileLocation(req, user.likedPlaylists, 'playlists', true);
 
   res.status(200).json({
     status: 'success',
