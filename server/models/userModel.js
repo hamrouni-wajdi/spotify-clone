@@ -47,10 +47,6 @@ const userSchema = new mongoose.Schema(
           ref: 'Playlist',
         },
       ],
-      validate: {
-        validator: (arr) => arr.length <= 50,
-        message: 'You can not like more than 50 songs',
-      },
     },
     followedArtists: {
       type: [
@@ -59,14 +55,10 @@ const userSchema = new mongoose.Schema(
           ref: 'User',
         },
       ],
-      validate: {
-        validator: (arr) => arr.length <= 50,
-        message: 'You can not like more than 50 songs',
-      },
     },
     role: {
       type: String,
-      enum: ['user', 'artist', 'admin'],
+      enum: ['user', 'artist'],
       default: 'user',
     },
     password: {
@@ -101,63 +93,52 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Virtual populate
 userSchema.virtual('songs', {
   ref: 'Song',
   foreignField: 'artist',
   localField: '_id',
 });
 
-// Query middlewares
 userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
   next();
 });
 
-// Document middlewares
 userSchema.pre('save', async function (next) {
-  // Run if the password is modified
   if (!this.isModified('password')) return next();
 
   this.password = await bcrypt.hash(this.password, 10);
   this.passwordConfirm = undefined;
-  next();
+  return next();
 });
 
 userSchema.pre('save', function (next) {
-  // Only run this function if password was actually modified
   if (!this.isModified('password') || this.isNew) return next();
 
   this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
-// Schema methods
 userSchema.methods.checkPassword = async function (pass, realPass) {
   return await bcrypt.compare(pass, realPass);
 };
 
-userSchema.methods.changedPasswordAfter = function (JWTissuedTime, where) {
+userSchema.methods.changedPasswordAfter = function (JWTIssuedTime, where) {
   if (this.passwordChangedAt) {
-    console.log(this.passwordChangedAt);
     const changedTimestamp = parseInt(
       this.passwordChangedAt.getTime() / 1000,
       10
     );
 
-    console.log(where, JWTissuedTime, changedTimestamp);
-
-    return JWTissuedTime < changedTimestamp;
+    return JWTIssuedTime < changedTimestamp;
   }
 
   return false;
 };
 
 userSchema.methods.createPasswordResetToken = function () {
-  // 1) Generate token
   const resetToken = crypto.randomBytes(12).toString('hex');
 
-  // 2) Hash token and save it to user schema
   this.passwordResetToken = crypto
     .createHash('sha256')
     .update(resetToken)
@@ -165,7 +146,6 @@ userSchema.methods.createPasswordResetToken = function () {
 
   this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
-  // 3) Return resetToken
   return resetToken;
 };
 

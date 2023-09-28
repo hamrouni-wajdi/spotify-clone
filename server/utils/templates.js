@@ -1,5 +1,4 @@
-exports.welcomeTemplate = () => {
-  return `
+exports.welcomeTemplate = () => `
   <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -97,12 +96,9 @@ exports.welcomeTemplate = () => {
     </div>
   </body>
 </html>
+`;
 
-  `;
-};
-
-exports.resetTokenTemplate = (resetToken) => {
-  return `<!DOCTYPE html>
+exports.resetTokenTemplate = (resetToken) => `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -219,4 +215,3 @@ exports.resetTokenTemplate = (resetToken) => {
   </body>
 </html>
 `;
-};

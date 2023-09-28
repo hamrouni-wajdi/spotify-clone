@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const templates = require('./templates.js');
+const templates = require('./templates');
 
 module.exports = class Email {
   constructor(user) {

@@ -16,7 +16,6 @@ const app = express();
 
 app.use(
   cors({
-    // origin: 'https://maqsud-spotify.vercel.app',
     origin:
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000'

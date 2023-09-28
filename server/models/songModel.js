@@ -7,7 +7,8 @@ const songSchema = new mongoose.Schema(
       required: [true, 'A song must have a name'],
       trim: true,
       unique: true,
-      minLength: 3,
+      minLength: [3, 'Song name must be more that 3 characters'],
+      maxLength: [24, 'Song name must be less than 24 characters'],
     },
     artist: {
       type: mongoose.Schema.ObjectId,
@@ -16,28 +17,12 @@ const songSchema = new mongoose.Schema(
     },
     song: {
       type: String,
-      required: [true, 'A song must have a song'],
+      required: [true, 'A song must have a song file'],
     },
     img: {
       type: String,
       required: [true, 'A song must have a cover img'],
     },
-    // genre: {
-    //   type: String,
-    //   enaum: [
-    //     'pop',
-    //     'hip-hop',
-    //     'rock',
-    //     'electronic',
-    //     'latin',
-    //     'indie',
-    //     'classic',
-    //     'k-pop',
-    //     'country',
-    //     'metal',
-    //   ],
-    //   required: [true, 'Please select song genre'],
-    // },
     plays: {
       type: Number,
       default: 0,
