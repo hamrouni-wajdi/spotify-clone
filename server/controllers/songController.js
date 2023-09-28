@@ -60,7 +60,6 @@ exports.saveSongFile = catchAsync(async (req, res, next) => {
 exports.getAllSongs = catchAsync(async (req, res, next) => {
   const songs = await Song.find({ artist: req.user.id });
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
   fileLocation(req, songs, 'songs', true, true);
 
   res.status(200).json({
@@ -73,7 +72,7 @@ exports.getAllSongs = catchAsync(async (req, res, next) => {
 });
 
 exports.getSong = catchAsync(async (req, res, next) => {
-  const song = await Song.findByIdAndUpdate(req.params.id, {
+  await Song.findByIdAndUpdate(req.params.id, {
     $inc: { plays: 1 },
   });
 
@@ -100,7 +99,7 @@ exports.createSong = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
-      song: song,
+      song,
     },
   });
 });

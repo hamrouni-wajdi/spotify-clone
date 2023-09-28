@@ -3,6 +3,7 @@ const sharp = require('sharp');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
+const fileLocation = require('../utils/fileLocation');
 
 const storage = multer.memoryStorage();
 
@@ -33,14 +34,12 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
 });
 
 exports.updateMe = catchAsync(async (req, res, next) => {
-  // 1) Check if user posted their password
   if (req.body.password || req.body.passwordConfirm) {
     return next(
       new AppError('🚫 This route is not for password updates.', 400)
     );
   }
 
-  // 2) Update user data
   const userData = {};
 
   if (req.body.name) userData.name = req.body.name;
@@ -85,11 +84,7 @@ exports.getArtist = catchAsync(async (req, res, next) => {
     return next(new AppError('No artist found with that ID', 404));
   }
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  artist.songs.map((song) => {
-    song.song = `${serverUrl}public/songs/${song.song}`;
-    song.img = `${serverUrl}public/songs/${song.img}`;
-  });
+  fileLocation(req, artist.songs, 'songs', true, true);
 
   res.status(200).json({
     status: 'success',
@@ -134,28 +129,13 @@ exports.unfollowArtist = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('followedArtists', 'name img role');
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.followedArtists.map((artist) => {
-    artist.img = `${serverUrl}public/users/${artist.img}`;
-  });
+  fileLocation(req, user.followedArtists, 'users', true);
 
   res.status(200).json({
     status: 'success',
     data: user.followedArtists,
   });
 });
-
-// // Likes
-// exports.getLikedSongs = catchAsync(async (req, res, next) => {
-//   const user = await User.findById(req.user.id).populate('likedSongs');
-//
-//   res.status(200).json({
-//     status: 'success',
-//     data: {
-//       songs: user.likedSongs,
-//     },
-//   });
-// });
 
 exports.likeSong = catchAsync(async (req, res, next) => {
   const { song } = req.body;
@@ -166,11 +146,7 @@ exports.likeSong = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('likedSongs');
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.likedSongs.map((song) => {
-    song.song = `${serverUrl}public/songs/${song.song}`;
-    song.img = `${serverUrl}public/songs/${song.img}`;
-  });
+  fileLocation(req, user.likedSongs, 'songs', true, true);
 
   res.status(200).json({
     status: 'success',
@@ -187,11 +163,7 @@ exports.dislikeSong = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('likedSongs');
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.likedSongs.map((song) => {
-    song.song = `${serverUrl}public/songs/${song.song}`;
-    song.img = `${serverUrl}public/songs/${song.img}`;
-  });
+  fileLocation(req, user.likedSongs, 'songs', true, true);
 
   res.status(200).json({
     status: 'success',
