@@ -4,6 +4,7 @@ const fs = require('fs');
 const Song = require('../models/songModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const fileLocation = require('../utils/fileLocation');
 
 const storage = multer.memoryStorage();
 
@@ -60,10 +61,7 @@ exports.getAllSongs = catchAsync(async (req, res, next) => {
   const songs = await Song.find({ artist: req.user.id });
 
   const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  songs.map((song) => {
-    song.song = `${serverUrl}public/songs/${song.song}`;
-    song.img = `${serverUrl}public/songs/${song.img}`;
-  });
+  fileLocation(req, songs, 'songs', true, true);
 
   res.status(200).json({
     status: 'success',
@@ -74,31 +72,10 @@ exports.getAllSongs = catchAsync(async (req, res, next) => {
   });
 });
 
-// exports.getLikedSongs = catchAsync(async (req, res, next) => {
-//   const songs = await Song.find();
-//
-//   const serverUrl = `${req.protocol}://${req.get('host')}/`;
-//   songs.map((song) => {
-//     song.song = `${serverUrl}public/songs/${song.song}`;
-//     song.img = `${serverUrl}public/songs/${song.img}`;
-//   });
-//
-//   res.status(200).json({
-//     status: 'success',
-//     results: songs.length,
-//     data: {
-//       songs,
-//     },
-//   });
-// });
-
-// This functoin for increasing number of plays
 exports.getSong = catchAsync(async (req, res, next) => {
   const song = await Song.findByIdAndUpdate(req.params.id, {
     $inc: { plays: 1 },
   });
-
-  console.log('song', song.plays);
 
   res.status(200).json({
     status: 'success',
@@ -129,7 +106,6 @@ exports.createSong = catchAsync(async (req, res, next) => {
 });
 
 exports.updateSong = catchAsync(async (req, res, next) => {
-  // Prevent updating song file
   if (req.body.song)
     return next(new AppError('You can not update a song file', 400));
 
