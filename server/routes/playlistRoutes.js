@@ -6,7 +6,7 @@ const router = express.Router({ mergeParams: true });
 
 router
   .route('/')
-  .get(playlistController.getAllPlaylists)
+  .get(authController.protect, playlistController.getAllPlaylists)
   .post(authController.protect, playlistController.createPlaylist);
 
 router

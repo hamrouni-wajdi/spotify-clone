@@ -3,8 +3,8 @@
   margin-bottom: 16px;
   background-image: linear-gradient(
     to bottom,
-                  rgba(186, 192, 242, 0.25),
-    #121212 32rem
+    rgba(186, 192, 242, 0.25),
+    #121212 25vh
   );
   min-height: 100vh;
 
@@ -13,7 +13,6 @@
     height: 34vh;
     background-size: cover;
     background-position: 0 -6.4rem;
-    background-attachment: fixed;
   }
 
   &__list {

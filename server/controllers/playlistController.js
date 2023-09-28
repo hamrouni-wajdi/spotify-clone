@@ -36,10 +36,12 @@ const upload = multer({ storage, fileFilter });
 exports.uploadPlaylistImg = upload.single('img');
 
 exports.getAllPlaylists = catchAsync(async (req, res, next) => {
-  let filter = {};
-  if (req.params.userId) filter = { user: req.params.userId };
+  const filter = {};
+  if (req.user.id) filter.user = req.user.id.userId;
+  console.log(filter);
 
-  const playlists = await Playlist.find(filter);
+  const playlists = await Playlist.find({ user: req.user.id });
+  console.log('playlists', playlists, req.user.id);
 
   fileLocation(req, playlists, 'playlists', true);
 

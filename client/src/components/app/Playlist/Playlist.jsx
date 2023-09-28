@@ -104,12 +104,9 @@ const Playlist = () => {
               )}
               <div className="playlist__user">
                 <img className="playlist__user-img" src={playlist.user.img} />
-                <Link
-                  className="playlist__user-name"
-                  to={`/user/${playlist.user.id}`}
-                >
+                <span className="playlist__user-name">
                   {playlist.user.name}
-                </Link>
+                </span>
                 <span className="playlist__user-songs">
                   {playlist.songs.length} songs
                 </span>
