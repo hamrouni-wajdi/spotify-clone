@@ -51,8 +51,7 @@ const Playlist = () => {
 
   // Handlers
   const replaceQueueHandler = (songs) => {
-    console.log(songs);
-    dispatch(replaceQueue({ songs }));
+    if (songs.length > 0) dispatch(replaceQueue({ songs }));
   };
 
   const openModalHandler = () => {

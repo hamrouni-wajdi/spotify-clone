@@ -44,8 +44,7 @@ const Artist = () => {
   };
 
   const replaceQueueHandler = (songs) => {
-    console.log(songs);
-    dispatch(replaceQueue({ songs }));
+    if (songs.length > 0) dispatch(replaceQueue({ songs }));
   };
 
   return (
