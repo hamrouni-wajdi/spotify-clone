@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const fs = require('fs');
+const { promisify } = require('util');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const Email = require('../utils/email');
-const { promisify } = require('util');
+const fileLocation = require('../utils/fileLocation');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -13,10 +14,8 @@ const signToken = (id) =>
   });
 
 const createSendToken = (user, statusCode, req, res) => {
-  // Generate token
   const token = signToken(user.id);
 
-  // Generate cookie
   const cookieOptions = {
     expires: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
     httpOnly: true,
@@ -29,7 +28,6 @@ const createSendToken = (user, statusCode, req, res) => {
   user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
   user.password = undefined;
 
-  // Send response
   res.status(statusCode).json({
     status: 'success',
     token,
@@ -54,7 +52,6 @@ exports.signUp = catchAsync(async (req, res, next) => {
 });
 
 exports.login = catchAsync(async (req, res, next) => {
-  // 1) Check email and password in request
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -70,30 +67,18 @@ exports.login = catchAsync(async (req, res, next) => {
     .populate('likedSongs');
 
   if (!user) {
-    return next(new AppError('🤷‍ No user found with email: ' + email, 404));
+    return next(new AppError(`🤷‍ No user found with email: ${email}`, 404));
   }
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.playlists.map((playlist) => {
-    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
-  });
-  user.followedArtists.map((artist) => {
-    artist.img = `${serverUrl}public/users/${artist.img}`;
-  });
-  user.likedPlaylists.map((playlist) => {
-    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
-  });
-  user.likedSongs.map((song) => {
-    song.song = `${serverUrl}public/songs/${song.song}`;
-    song.img = `${serverUrl}public/songs/${song.img}`;
-  });
+  fileLocation(req, user.playlists, 'playlists', true);
+  fileLocation(req, user.followedArtists, 'users', true);
+  fileLocation(req, user.likedPlaylists, 'playlists', true);
+  fileLocation(req, user.likedSongs, 'songs', true, true);
 
-  // 3) Check passwords are correct
   if (!user || !(await user.checkPassword(password, user.password))) {
     return next(new AppError('🔐 Incorrect email or password', 401));
   }
 
-  // 4) Sign token and send to the user
   createSendToken(user, 200, req, res);
 });
 
@@ -108,7 +93,6 @@ exports.logout = catchAsync(async (req, res, next) => {
 exports.protect = catchAsync(async (req, res, next) => {
   let token;
 
-  // 1) Check if the token exists and save it
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer ')
@@ -124,20 +108,18 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  // 2) Verify the token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-  // 3) If still user exists
   const user = await User.findById(decoded.id);
-  if (!user)
+  if (!user) {
     return next(
       new AppError(
         '🔐 The user belonging to this token does no longer exist.',
         401
       )
     );
+  }
 
-  // 4) Check user changed password after the token was issued
   if (user.changedPasswordAfter(decoded.iat, 'protect')) {
     return next(
       new AppError(
@@ -147,53 +129,36 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  // 5) Grant access
   req.user = user;
-
   next();
 });
 
-// Is logged in
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
   if (req.cookies.jwt) {
-    // 1) Verify token
     const decoded = await promisify(jwt.verify)(
       req.cookies.jwt,
       process.env.JWT_SECRET
     );
 
-    // 2) If still user exists
     const user = await User.findById(decoded.id)
       .populate('playlists')
       .populate('followedArtists', 'name img role')
       .populate('likedPlaylists', 'name img')
       .populate('likedSongs');
-    if (!user)
+
+    if (!user) {
       return next(
         new AppError(
           '🔐 The user belonging to this token does no longer exist.',
           401
         )
       );
+    }
+    fileLocation(req, user.playlists, 'playlists', true);
+    fileLocation(req, user.followedArtists, 'users', true);
+    fileLocation(req, user.likedPlaylists, 'playlists', true);
+    fileLocation(req, user.likedSongs, 'songs', true, true);
 
-    const serverUrl = `${req.protocol}://${req.get('host')}/`;
-
-    user.img = `${serverUrl}public/users/${user.img}`;
-    user.playlists.map((playlist) => {
-      playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
-    });
-    user.followedArtists.map((artist) => {
-      artist.img = `${serverUrl}public/users/${artist.img}`;
-    });
-    user.likedPlaylists.map((playlist) => {
-      playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
-    });
-    user.likedSongs.map((song) => {
-      song.song = `${serverUrl}public/songs/${song.song}`;
-      song.img = `${serverUrl}public/songs/${song.img}`;
-    });
-
-    // 3) Check user changed password after the token was issued
     if (user.changedPasswordAfter(decoded.iat, 'login')) {
       return next(
         new AppError(
@@ -203,7 +168,6 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       );
     }
 
-    // 4) Grant access
     res.status(200).json({
       status: 'success',
       data: { user },
@@ -232,16 +196,13 @@ exports.restrictTo =
   };
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
-  // 1) Get user from DB using email
   const user = await User.findOne({ email: req.body.email });
   if (!user)
     return next(new AppError('🤷‍ There is no user with that email', 404));
 
-  // 2) Generate random reset token
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 
-  // 3) Send token to user's email
   await new Email(user).sendResetToken(resetToken);
 
   res.status(200).json({
@@ -251,13 +212,11 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
-  // 1) Hash the token form request
   const resetToken = crypto
     .createHash('sha256')
     .update(req.params.resetToken)
     .digest('hex');
 
-  // 2) Get the user based using token
   const user = await User.findOne({
     passwordResetToken: resetToken,
     passwordResetExpires: { $gt: Date.now() },
@@ -271,54 +230,39 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     return next(new AppError('🚫 Token is invalid or expired', 400));
   }
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.followedArtists.map((artist) => {
-    artist.img = `${serverUrl}public/users/${artist.img}`;
-  });
-  user.likedPlaylists.map((playlist) => {
-    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
-  });
-  user.likedSongs.map((song) => {
-    song.song = `${serverUrl}public/songs/${song.song}`;
-    song.img = `${serverUrl}public/songs/${song.img}`;
-  });
+  fileLocation(req, user.playlists, 'playlists', true);
+  fileLocation(req, user.followedArtists, 'users', true);
+  fileLocation(req, user.likedPlaylists, 'playlists', true);
+  fileLocation(req, user.likedSongs, 'songs', true, true);
 
-  // 3) Update user password
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
   await user.save();
 
-  // 4) Update passwordChangedAt
-  // 5) Log user in
   createSendToken(user, 200, req, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
-  // 1) Get user from DB
   const user = await User.findById(req.user.id).select('+password');
 
-  // 2) Check if posted password is correct
   if (!(await user.checkPassword(req.body.currentPassword, user.password))) {
     return next(new AppError('🔐 Your password is incorrect', 401));
   }
 
-  // 3) Update password
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
 
-  // 4) Log user in
   createSendToken(user, 201, req, res);
 });
 
-exports.deleteMe = catchAsync(async (req, res, next) => {
-  // 1) Change active property to false
+exports.deleteMe = catchAsync(async (req, res) => {
   const user = await User.findByIdAndUpdate(req.user.id, { active: false });
 
   if (user.img !== 'default.jpg')
-    fs.unlink(`public/users/${playlist.img}`, (err) => console.log(err));
+    fs.unlink(`public/users/${user.img}`, (err) => console.log(err));
 
   res.status(204).json({
     status: 'success',
