@@ -47,7 +47,7 @@ const Playlist = () => {
   // Effects
   useEffect(() => {
     dispatch(getPlaylist(id));
-  }, []);
+  }, [id]);
 
   // Handlers
   const replaceQueueHandler = (songs) => {

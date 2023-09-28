@@ -3,6 +3,7 @@ const Song = require('../models/songModel');
 const Playlist = require('../models/playlistModel');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
+const fileLocatoin = require('../utils/fileLocation');
 
 exports.searchSong = catchAsync(async (req, res, next) => {
   const { name } = req.query;
@@ -13,11 +14,7 @@ exports.searchSong = catchAsync(async (req, res, next) => {
 
   if (songs.length === 0) return next(new AppError('No song found', 404));
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  songs.forEach((song) => {
-    song.song = `${serverUrl}public/songs/${song.song}`;
-    song.img = `${serverUrl}public/songs/${song.img}`;
-  });
+  fileLocatoin(req, songs, 'songs', true, true);
 
   res.status(200).json({
     status: 'success',
@@ -35,10 +32,7 @@ exports.searchPlaylist = catchAsync(async (req, res, next) => {
   if (playlists.length === 0)
     return next(new AppError('No playlist found', 404));
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  playlists.forEach((playlist) => {
-    playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
-  });
+  fileLocatoin(req, playlists, 'playlists', true);
 
   res.status(200).json({
     status: 'success',
@@ -56,10 +50,7 @@ exports.searchArtist = catchAsync(async (req, res, next) => {
 
   if (artists.length === 0) return next(new AppError('No artist found', 404));
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  artists.forEach((artist) => {
-    artist.img = `${serverUrl}public/users/${artist.img}`;
-  });
+  fileLocatoin(req, artists, 'users', true);
 
   res.status(200).json({
     status: 'success',
