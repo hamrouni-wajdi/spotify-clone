@@ -1,7 +1,6 @@
 const express = require('express');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
-const playlistRouter = require('./playlistRoutes');
 
 const router = express.Router();
 
@@ -32,7 +31,6 @@ router.patch(
 );
 router.delete('/deleteMe', authController.protect, authController.deleteMe);
 
-// User
 router.get('/:id', authController.protect, userController.getArtist);
 router.post('/follow/:id', authController.protect, userController.followArtist);
 router.post(
@@ -40,9 +38,6 @@ router.post(
   authController.protect,
   userController.unfollowArtist
 );
-
-// Playlists
-router.use('/:userId/playlists', playlistRouter);
 
 router
   .route('/likes/add')

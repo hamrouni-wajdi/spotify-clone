@@ -20,7 +20,6 @@ router
   )
   .delete(authController.protect, playlistController.deletePlaylist);
 
-// Manage songs in playlist
 router
   .route('/:id/song/:song')
   .post(authController.protect, playlistController.addSong)
