@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getSongs, uploadSong } from "../thunks/admin";
-import { updatePlaylist } from "../thunks/playlist";
 import { toast } from "react-toastify";
 
 const adminSlice = createSlice({
