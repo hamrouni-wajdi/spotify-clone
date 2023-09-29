@@ -1,4 +1,5 @@
 import "./Admin.scss";
+import "./../UI/Modal.scss";
 
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -85,16 +86,16 @@ const Admin = () => {
       )}
 
       {modal && (
-        <div className="admin-modal">
-          <div className="admin-modal__header">
+        <div className="modal modal--admin">
+          <div className="modal__header">
             <h2>Upload a new song</h2>
-            <div className="admin-modal__close">
+            <div className="modal__close">
               <IoCloseCircle onClick={closeModalHandler} />
             </div>
           </div>
           <form
             ref={formRef}
-            className="admin-modal__form"
+            className="modal__form"
             onSubmit={formSubmitHandler}
           >
             <label htmlFor="img">Img</label>
@@ -109,16 +110,16 @@ const Admin = () => {
       )}
 
       {song && editModal && (
-        <div className="admin-modal">
-          <div className="admin-modal__header">
+        <div className="modal modal--admin">
+          <div className="modal__header">
             <h2>Upload a new song</h2>
-            <div className="admin-modal__close">
+            <div className="modal__close">
               <IoCloseCircle onClick={closeEditModalHandler} />
             </div>
           </div>
           <form
             ref={editFormRef}
-            className="admin-modal__form"
+            className="modal__form"
             onSubmit={editFormSubmitHandler}
           >
             <img src={song.img} alt="Song cover" />
