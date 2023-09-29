@@ -38,10 +38,8 @@ exports.uploadPlaylistImg = upload.single('img');
 exports.getAllPlaylists = catchAsync(async (req, res, next) => {
   const filter = {};
   if (req.user.id) filter.user = req.user.id.userId;
-  console.log(filter);
 
   const playlists = await Playlist.find({ user: req.user.id });
-  console.log('playlists', playlists, req.user.id);
 
   fileLocation(req, playlists, 'playlists', true);
 

@@ -70,7 +70,6 @@ const Player = () => {
 
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
-      console.log(e.code === "Space");
       if (e.code === "Space") {
         dispatch(playPause());
       }

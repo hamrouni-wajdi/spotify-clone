@@ -9,13 +9,11 @@ const queueSlice = createSlice({
   },
   reducers: {
     replaceQueue: (state, action) => {
-      console.log(action.payload);
       state.list = action.payload.songs;
       state.current = action.payload.i || 0;
       state.currentId = action.payload.id || state.list[0].id;
     },
     changeCurrent: (state, action) => {
-      console.log("payload", action.payload);
       state.current = action.payload.i;
       state.currentId = action.payload.id;
     },
