@@ -10,8 +10,8 @@ const Home = () => {
   return (
     user.id && (
       <>
-        <div className="app-header__img" />
-        <div className="app-header">
+        <div className="home__img" />
+        <div className="home">
           <h1 className="h1" onClick={() => toast.success("Wow crazy")}>
             Good evening, wanna listen some music !?
           </h1>
