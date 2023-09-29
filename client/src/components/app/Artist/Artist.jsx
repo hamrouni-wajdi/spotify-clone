@@ -48,7 +48,10 @@ const Artist = () => {
               <img src={badgeImg} alt="Verified badge" /> Verified Artist
             </span>
             <h1 className="artist__name">{artist.name}</h1>
-            <p>1,323 listeners</p>
+            <p>
+              {artist.songs.reduce((acc, song) => acc + song.plays, 0)}{" "}
+              listeners
+            </p>
           </div>
 
           <div className="artist__nav">
