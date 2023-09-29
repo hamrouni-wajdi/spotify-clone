@@ -14,47 +14,31 @@ import { deletePlaylist } from "../../store/thunks/user";
 import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
-  // State
   const [song, setSong] = useState({});
   const [modal, setModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
 
-  // Ref
+  const { songs } = useSelector((state) => state.admin);
+  const dispatch = useDispatch();
+
   const formRef = useRef();
   const editFormRef = useRef();
 
-  // Redux
-  const { songs } = useSelector((state) => state.admin);
-
-  const dispatch = useDispatch();
-
-  // Router
-  const navigate = useNavigate();
-
-  // Effects
   useEffect(() => {
     dispatch(getSongs());
   }, []);
 
-  // Handlers
-  const openModalHandler = () => {
-    setModal(true);
-  };
+  const openModalHandler = () => setModal(true);
 
-  const closeModalHandler = () => {
-    setModal(false);
-  };
+  const closeModalHandler = () => setModal(false);
 
   const openEditModalHandler = (id) => {
     const song = songs.find((song) => song.id === id);
     setSong(song);
-
     setEditModal(true);
   };
 
-  const closeEditModalHandler = () => {
-    setEditModal(false);
-  };
+  const closeEditModalHandler = () => setEditModal(false);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -86,7 +70,7 @@ const Admin = () => {
               <span>{songs.length}</span> songs
             </div>
             <div className="admin__card">
-              <span>{songs.reduce((acc, song) => acc + song.plays, 0)}</span>{" "}
+              <span>{songs.reduce((acc, song) => acc + song.plays, 0)}</span>
               plays
             </div>
             <div className="admin__card" onClick={openModalHandler}>
@@ -99,7 +83,7 @@ const Admin = () => {
         </div>
       )}
 
-      {songs && modal && (
+      {modal && (
         <div className="admin-modal">
           <div className="admin-modal__header">
             <h2>Upload a new song</h2>
@@ -136,7 +120,7 @@ const Admin = () => {
             className="admin-modal__form"
             onSubmit={editFormSubmitHandler}
           >
-            <img src={song.img} />
+            <img src={song.img} alt="Song cover" />
             <input type="file" name="img" id="img" placeholder="Img" />
             <label htmlFor="name">Name</label>
             <input type="text" name="name" id="name" placeholder={song.name} />

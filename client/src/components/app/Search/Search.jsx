@@ -7,11 +7,9 @@ import SquareList from "../../UI/SquareList";
 import { toast } from "react-toastify";
 
 const Search = () => {
-  // State
   const [queryType, setQueryType] = useState("song");
   const [results, setResults] = useState(null);
 
-  // Handlers
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 

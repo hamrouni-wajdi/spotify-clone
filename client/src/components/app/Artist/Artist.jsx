@@ -1,6 +1,6 @@
 import "./Artist.scss";
 import badgeImg from "./../../../img/verify.png";
-import { IoPauseCircle, IoPlayCircle } from "react-icons/io5";
+import { IoPlayCircle } from "react-icons/io5";
 import List from "../../UI/List";
 import { useDispatch, useSelector } from "react-redux";
 import { getArtist } from "../../../store/thunks/artist";
@@ -8,31 +8,22 @@ import { replaceQueue } from "../../../store/reducers/queue";
 import { followArtist, unfollowArtist } from "../../../store/thunks/user";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { playPause } from "../../../store/reducers/player";
 
 const Artist = () => {
   const { artist } = useSelector((state) => state.artist);
   const { followedArtists } = useSelector((state) => state.user.data);
-  const { isPlaying } = useSelector((state) => state.player);
   const dispatch = useDispatch();
 
-  // React router
   const { id } = useParams();
 
-  // Effects
   useEffect(() => {
     dispatch(getArtist(id));
   }, [id]);
 
-  // Handler functions
-  const playPauseHandler = () => {
-    dispatch(playPause());
-  };
-
   const userFollowedArtist = (id) => {
     let res = followedArtists.find((obj) => obj.id === id);
 
-    return res ? true : false;
+    return !!res;
   };
 
   const followArtistHandler = () => {
@@ -60,11 +51,6 @@ const Artist = () => {
           </div>
 
           <div className="artist__nav">
-            {/*{isPlaying ? (*/}
-            {/*  <IoPauseCircle onClick={playPauseHandler} />*/}
-            {/*) : (*/}
-            {/*  <IoPlayCircle onClick={playPauseHandler} />*/}
-            {/*)}*/}
             <IoPlayCircle onClick={() => replaceQueueHandler(artist.songs)} />
             {!userFollowedArtist(artist.id) ? (
               <button onClick={followArtistHandler}>Follow</button>

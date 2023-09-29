@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./MainApp.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { isLoggedIn } from "./store/thunks/user";
 import Nav from "./components/nav/Nav";
 import Player from "./components/player/Player";
@@ -17,15 +17,14 @@ import Search from "./components/app/Search/Search";
 import LikedSongs from "./components/app/Playlist/LikedSongs";
 import Reset from "./components/auth/Reset";
 import Forgot from "./components/auth/Forgot";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./components/admin/Admin";
 import Loading from "./components/UI/Loading";
 
 function MainApp() {
-  // Redux
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(isLoggedIn());

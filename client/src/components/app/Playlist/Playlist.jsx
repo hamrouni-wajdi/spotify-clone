@@ -3,7 +3,6 @@ import {
   IoCloseCircle,
   IoHeart,
   IoHeartOutline,
-  IoPauseCircle,
   IoPencil,
   IoPlayCircle,
 } from "react-icons/io5";
@@ -16,35 +15,23 @@ import {
 } from "../../../store/thunks/playlist";
 import { useDispatch, useSelector } from "react-redux";
 import List from "../../UI/List";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { replaceQueue } from "../../../store/reducers/queue";
-import {
-  deletePlaylist,
-  getAllPlaylists,
-  likeSong,
-  updateUser,
-} from "../../../store/thunks/user";
-import axios from "../../../api/axios";
-import { toast } from "react-toastify";
+import { deletePlaylist, getAllPlaylists } from "../../../store/thunks/user";
 
 const Playlist = () => {
-  // State
   const [modal, setModal] = useState(false);
 
-  // Ref
-  const formRef = useRef();
-
-  // Redux
   const userId = useSelector((state) => state.user.data.id);
   const { playlist } = useSelector((state) => state.playlist);
   const likedPlaylists = useSelector((state) => state.user.data.likedPlaylists);
   const dispatch = useDispatch();
 
-  // Router
+  const formRef = useRef();
+
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // Effects
   useEffect(() => {
     dispatch(getPlaylist(id));
   }, [id]);
@@ -84,7 +71,7 @@ const Playlist = () => {
   const userLikedPlaylist = (id) => {
     let pl = likedPlaylists.find((obj) => obj.id === id);
 
-    return pl ? true : false;
+    return !!pl;
   };
 
   return (
@@ -102,7 +89,11 @@ const Playlist = () => {
                 <p className="playlist__des">{playlist.description}</p>
               )}
               <div className="playlist__user">
-                <img className="playlist__user-img" src={playlist.user.img} />
+                <img
+                  className="playlist__user-img"
+                  src={playlist.user.img}
+                  alt="user"
+                />
                 <span className="playlist__user-name">
                   {playlist.user.name}
                 </span>
@@ -146,7 +137,7 @@ const Playlist = () => {
         <div>loading</div>
       )}
 
-      {playlist && modal && (
+      {modal && (
         <div className="playlist-modal">
           <div className="playlist-modal__header">
             <h2>Edit playlist info</h2>

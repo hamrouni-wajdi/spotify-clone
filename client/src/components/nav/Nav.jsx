@@ -13,12 +13,10 @@ import { createPlaylist } from "../../store/thunks/user";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-const Nav = (props) => {
-  // Redux
+const Nav = () => {
   const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
 
-  // Handlers
   const isArtist = (el) => el.role === "artist";
 
   const createPlaylistHandler = () => {

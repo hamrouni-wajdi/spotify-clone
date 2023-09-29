@@ -2,6 +2,8 @@ import "./SquareList.scss";
 import { Link } from "react-router-dom";
 
 const squareList = ({ list, artist, home }) => {
+  // Good luck on understanding the logic 🤣
+
   return (
     <div className={`square-list ${home ? "square-list--home" : ""}`}>
       {list.map((el) => (

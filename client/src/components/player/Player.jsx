@@ -19,29 +19,23 @@ import axios from "../../api/axios";
 import { Link } from "react-router-dom";
 
 const Player = () => {
-  // ⚛ Redux
-  const currentIndex = useSelector((state) => state.queue.current);
-  const queue = useSelector((state) => state.queue.list);
-  const song = queue[currentIndex];
-  // const { song } = useSelector((state) => state.song);
-  const { likedSongs } = useSelector((state) => state.user.data);
-  const { isPlaying } = useSelector((state) => state.player);
-  const dispatch = useDispatch();
-
-  // Ref
-  const audioRef = useRef();
-  const progressRef = useRef();
-  const playAnimationRef = useRef();
-  const volumeRef = useRef();
-
-  // State
-  // const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(100);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [repeatSong, setRepeatSong] = useState(false);
 
-  // We need this function above because it is being called in useEffect
+  const currentIndex = useSelector((state) => state.queue.current);
+  const queue = useSelector((state) => state.queue.list);
+  const song = queue[currentIndex];
+  const { likedSongs } = useSelector((state) => state.user.data);
+  const { isPlaying } = useSelector((state) => state.player);
+  const dispatch = useDispatch();
+
+  const audioRef = useRef();
+  const progressRef = useRef();
+  const playAnimationRef = useRef();
+  const volumeRef = useRef();
+
   const repeat = useCallback(() => {
     const time = audioRef.current.currentTime;
     setCurrentTime(time);
@@ -55,7 +49,6 @@ const Player = () => {
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, [audioRef, duration, progressRef, setCurrentTime]);
 
-  // Effect
   useEffect(() => {
     // Prevent useEffect triggered before audio is loaded
     if (audioRef.current === undefined) return;
@@ -75,7 +68,6 @@ const Player = () => {
     }
   }, [volume, audioRef]);
 
-  // Widow event to play payse audio
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
       console.log(e.code === "Space");
@@ -86,7 +78,6 @@ const Player = () => {
   }, []);
 
   useEffect(() => {
-    // This increases song play count
     const increaseCount = async () => {
       if (song) await axios.get(`/songs/${song.id}`);
     };
@@ -99,15 +90,7 @@ const Player = () => {
 
   // Music player
   const togglePlayPauseHandler = () => {
-    // setIsPlaying((pre) => !pre);
     dispatch(playPause());
-    // if (navigator && navigator.mediaSession) {
-    //   navigator.mediaSession.metadata = new MediaMetadata({
-    //     title: `${song.name}`,
-    //     artist: "Maqsud's Spotify",
-    //     artwork: [{ src: song.img }],
-    //   });
-    // }
   };
 
   const progressChangeHandler = () => {
@@ -166,7 +149,6 @@ const Player = () => {
     return "00:00";
   };
 
-  //-- Like
   const userLikedSong = () => {
     let likedSong = likedSongs.find((likedSong) => likedSong.id === song.id);
     return !!likedSong;

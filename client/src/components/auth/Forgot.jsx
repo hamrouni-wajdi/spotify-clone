@@ -2,14 +2,12 @@ import "./Auth.scss";
 import logo from "../../img/logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword } from "../../store/thunks/user";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Forgot = () => {
-  // Redux
   const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
 
-  // Handlers
   const formSubmitHandler = (e) => {
     e.preventDefault();
 

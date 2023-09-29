@@ -2,7 +2,7 @@ import "./Auth.scss";
 import logo from "../../img/logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/thunks/user";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const Login = () => {
   const user = useSelector((state) => state.user);

@@ -5,7 +5,6 @@ import {
   IoHeart,
   IoHeartOutline,
   IoPencil,
-  IoTrain,
   IoTrash,
 } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,11 +16,9 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const List = (props) => {
-  // State
   const [songId, setSongId] = useState("");
   const [modal, setModal] = useState(false);
 
-  // ⚛ Redux
   const { likedSongs, playlists } = useSelector((state) => state.user.data);
   const { currentId } = useSelector((state) => state.queue);
   const dispatch = useDispatch();
@@ -36,7 +33,7 @@ const List = (props) => {
   const userLikedSong = (id) => {
     let res = likedSongs.find((obj) => obj.id === id);
 
-    return res ? true : false;
+    return !!res;
   };
 
   // 💚 like song
@@ -62,7 +59,7 @@ const List = (props) => {
   };
 
   const removeSongFromPlaylistHandler = async (id, songId) => {
-    const res = await axios.delete(`playlists/${id}/song/${songId}`);
+    await axios.delete(`playlists/${id}/song/${songId}`);
     toast.success("Song removed");
   };
 

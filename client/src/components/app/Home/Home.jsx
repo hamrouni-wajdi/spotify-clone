@@ -1,16 +1,8 @@
-import ArtistCard from "../../UI/ArtistCard";
-import PlaylistCard from "../../UI/PlaylistCard";
 import "./Home.scss";
 
-import { IoPlayCircle } from "react-icons/io5";
 import { useSelector } from "react-redux";
-
-import likedSongsImg from "../../../img/likedSongs.jpeg";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import SquareList from "../../UI/SquareList";
-const img =
-  "https://images.unsplash.com/photo-1684654488308-2229de99e7a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80";
 
 const Home = () => {
   const user = useSelector((state) => state.user.data);

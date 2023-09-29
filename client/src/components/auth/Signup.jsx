@@ -5,7 +5,7 @@ import { signupUser } from "../../store/thunks/user";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-const Signup = (props) => {
+const Signup = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 

@@ -2,20 +2,16 @@ import "./Auth.scss";
 import logo from "../../img/logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../../store/thunks/user";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Reset = () => {
-  // Redux
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  // Router
   const { id } = useParams();
 
-  // Handlers
   const formSubmitHandler = (e) => {
-    console.log(id);
     e.preventDefault();
 
     const password = e.target[0].value;

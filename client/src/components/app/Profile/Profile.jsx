@@ -11,15 +11,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Profile = () => {
-  // Redux
   const user = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
 
-  // Refs
   const formInfoRef = useRef();
   const formPassRef = useRef();
 
-  // Router
   const navigate = useNavigate();
 
   const formInfoHandler = (e) => {
