@@ -1,4 +1,6 @@
 import "./Playlist.scss";
+import "./../../UI/Modal.scss";
+
 import {
   IoCloseCircle,
   IoHeart,
@@ -37,7 +39,6 @@ const Playlist = () => {
     dispatch(getPlaylist(id));
   }, [id]);
 
-  // Handlers
   const replaceQueueHandler = (songs) => {
     if (songs.length > 0) dispatch(replaceQueue({ songs }));
   };
@@ -80,11 +81,11 @@ const Playlist = () => {
       {userId && playlist ? (
         <div className="playlist">
           <div className="playlist__header">
-            <div className="playlist__image">
+            <div className="playlist__img">
               <img src={playlist.img} alt="Playlist cover" />
             </div>
-            <div className="playlist__info">
-              <p className="playlist__info--type">Playlist</p>
+            <div>
+              <p>Playlist</p>
               <h1 className="playlist__name">{playlist.name}</h1>
               {playlist.description && (
                 <p className="playlist__des">{playlist.description}</p>
@@ -105,7 +106,7 @@ const Playlist = () => {
             </div>
           </div>
 
-          <div className="playlist-nav">
+          <div className="playlist__nav">
             <IoPlayCircle onClick={() => replaceQueueHandler(playlist.songs)} />
             {playlist.user.id !== userId &&
               (userLikedPlaylist(playlist.id) ? (
@@ -139,19 +140,19 @@ const Playlist = () => {
       )}
 
       {modal && (
-        <div className="playlist-modal">
-          <div className="playlist-modal__header">
+        <div className="modal modal--playlist">
+          <div className="modal__header">
             <h2>Edit playlist info</h2>
-            <div className="playlist-modal__close">
+            <div className="modal__close">
               <IoCloseCircle onClick={closeModalHandler} />
             </div>
           </div>
           <form
-            className="playlist-modal__form"
+            className="modal__form"
             ref={formRef}
             onSubmit={formSubmitHandler}
           >
-            <div className="playlist-modal__img">
+            <div className="modal__img">
               <img src={playlist.img} alt="Playlist cover" />
               <input type="file" name="img" />
             </div>
@@ -164,7 +165,7 @@ const Playlist = () => {
               ></textarea>
               <button>Save</button>
               <button
-                style={{ background: "#EF4444", marginLeft: 8 }}
+                style={{ background: "#EF4444" }}
                 onClick={(e) => {
                   e.preventDefault();
                   deletePlaylistHandler(playlist.id);

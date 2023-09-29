@@ -1,13 +1,11 @@
 .playlist {
-  height: 100%;
-
   &__header {
+    color: #fff;
     background: #339af0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, .5)),
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)),
       url("https://images.unsplash.com/photo-1680587590161-3a1dd77a7609?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2532&q=80");
     background-position: top;
     background-size: cover;
-    color: #fff;
 
     height: 30vh;
     max-height: 400px;
@@ -19,23 +17,16 @@
     gap: 2.4rem;
   }
 
-  &__image {
+  &__img {
     height: 24rem;
     width: 24rem;
     min-width: 24rem;
 
     img {
+      box-shadow: 0 1.6rem 4.8rem rgba(0, 0, 0, 0.5);
+
       height: 100%;
       width: 100%;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
-    }
-  }
-
-  &__info {
-    &--type {
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.6;
     }
   }
 
@@ -43,6 +34,7 @@
     font-size: 6.4rem;
     font-weight: 700;
     letter-spacing: -1px;
+
     margin-bottom: 1.2rem;
   }
 
@@ -53,41 +45,39 @@
   &__user {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.8rem;
 
     &-img {
-      height: 24px;
-      width: 24px;
       border-radius: 50%;
+
+      height: 2.4rem;
+      width: 2.4rem;
     }
 
-    &-name{
-      color: #fff;
+    &-name {
       font-weight: 600;
-    }
-
-    &-name:hover,
-    &-name:active {
-      text-decoration: underline;
     }
 
     &-songs::before {
       content: "•";
-      margin-right: 8px;
       font-weight: bold;
+
+      margin-right: 0.8rem;
     }
   }
 
-  &-nav {
+  &__nav {
+    background-image: linear-gradient(to bottom, rgba(2, 75, 98, 0.5), #121212);
+
+    padding: 2.4rem;
+
     display: flex;
     align-items: center;
-    gap: 24px;
-    padding: 2.4rem;
-    background-image: linear-gradient(to bottom, rgba(2, 75, 98, 0.5), #121212);
+    gap: 2.4rem;
 
     svg {
       font-size: 7.2rem;
-      color: #1db954ff;
+      color: #1db954;
       cursor: pointer;
 
       &:hover {
@@ -114,95 +104,28 @@
   }
 
   &__songs {
-    padding: 0 24px;
-  }
-}
-
-.playlist-modal {
-  color: #fff;
-  background: #282828;
-  border-radius: 9px;
-  box-shadow: 0 0 40px 20px rgba(0, 0, 0, 0.5);
-
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50rem;
-  padding: 2.4rem;
-
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-
-    h2 {
-      font-size: 1.5rem;
-    }
-  }
-
-  &__close {
-    font-size: 24px;
-    cursor: pointer;
-  }
-
-  &__form {
-    display: grid;
-    grid-template-columns: 18rem auto;
-    column-gap: 16px;
-
-    input,
-    textarea {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid transparent;
-      border-radius: 4px;
-      color: #fff;
-      font-family: inherit;
-      font-size: 14px;
-      padding: 12px;
-      width: 100%;
-    }
-
-    textarea {
-      margin-top: 16px;
-      height: 12rem;
-    }
-  }
-
-  &__img {
-    grid-row: 1/3;
-
-    img {
-      width: 18rem;
-      height: 18rem;
-      box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1);
-      margin-bottom: 16px;
-    }
-  }
-
-  button {
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 700;
-    background-color: #fff;
-    color: #000;
-    border: none;
-    padding: 8px 24px;
-    border-radius: 50px;
-    margin-top: 16px;
+    padding: 0 2.4rem;
   }
 }
 
 // Only for likedSongs
 .likedSongs {
-.playlist__header{
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25)), url("https://images.unsplash.com/photo-1644665068900-a5c4e97364c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2312&q=80");
-  background-size: 120%;
-  background-position: top left;
-}
+  .playlist__header {
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.25)
+      ),
+      url("https://images.unsplash.com/photo-1644665068900-a5c4e97364c8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2312&q=80");
+    background-size: 120%;
+    background-position: top left;
+  }
 
-  .playlist-nav {
-    background-image: linear-gradient(to bottom, rgba(216, 153, 169, 0.5), #121212);
+  .playlist__nav {
+    background-image: linear-gradient(
+      to bottom,
+      rgba(216, 153, 169, 0.5),
+      #121212
+    );
   }
 }

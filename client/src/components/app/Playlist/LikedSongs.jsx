@@ -17,17 +17,15 @@ const Playlist = () => {
       {likedSongs ? (
         <div className="playlist likedSongs">
           <div className="playlist__header">
-            <div className="playlist__info">
-              <p className="playlist__info--type">Playlist</p>
+            <div>
               <h1 className="playlist__name">Liked Songs</h1>
-              <div></div>
               <div className="playlist__user">
                 <span>You have {likedSongs.length} songs</span>
               </div>
             </div>
           </div>
 
-          <div className="playlist-nav">
+          <div className="playlist__nav">
             <IoPlayCircle onClick={() => replaceQueueHandler(likedSongs)} />
           </div>
 
