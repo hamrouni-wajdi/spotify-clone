@@ -20,10 +20,9 @@ import Forgot from "./components/auth/Forgot";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./components/admin/Admin";
+import Loading from "./components/UI/Loading";
 
 function MainApp() {
-  const [loading, setLoading] = useState(true);
-
   // Redux
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -32,107 +31,107 @@ function MainApp() {
     dispatch(isLoggedIn());
   }, []);
 
-  useEffect(() => {
-    if (user.auth === true) {
-      setLoading(false);
-    }
-  }, [user]);
-
   return (
     <BrowserRouter>
       <div className="main-app">
+        {user.auth === true ? (
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Nav />
+                  <App>
+                    <Home />
+                  </App>
+
+                  <Player />
+                </>
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                <>
+                  <Nav />
+                  <App>
+                    <Search />
+                  </App>
+
+                  <Player />
+                </>
+              }
+            />
+            <Route
+              path="/artist/:id"
+              element={
+                <>
+                  <Nav />
+                  <App>
+                    <Artist />
+                  </App>
+
+                  <Player />
+                </>
+              }
+            />
+            <Route
+              path="/likedSongs"
+              element={
+                <>
+                  <Nav />
+                  <App>
+                    <LikedSongs />
+                  </App>
+
+                  <Player />
+                </>
+              }
+            />
+            <Route
+              path="/playlist/:id"
+              element={
+                <>
+                  <Nav />
+                  <App>
+                    <Playlist />
+                  </App>
+
+                  <Player />
+                </>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <>
+                  <Nav />
+                  <App>
+                    <Admin />
+                  </App>
+
+                  <Player />
+                </>
+              }
+            ></Route>
+            <Route
+              path="/profile"
+              element={
+                <>
+                  <Nav />
+                  <App>
+                    <Profile />
+                  </App>
+
+                  <Player />
+                </>
+              }
+            ></Route>
+          </Routes>
+        ) : (
+          <Loading />
+        )}
         <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Nav />
-                <App>
-                  <Home />
-                </App>
-
-                <Player />
-              </>
-            }
-          />
-          <Route
-            path="/search"
-            element={
-              <>
-                <Nav />
-                <App>
-                  <Search />
-                </App>
-
-                <Player />
-              </>
-            }
-          />
-          <Route
-            path="/artist/:id"
-            element={
-              <>
-                <Nav />
-                <App>
-                  <Artist />
-                </App>
-
-                <Player />
-              </>
-            }
-          />
-          <Route
-            path="/likedSongs"
-            element={
-              <>
-                <Nav />
-                <App>
-                  <LikedSongs />
-                </App>
-
-                <Player />
-              </>
-            }
-          />
-          <Route
-            path="/playlist/:id"
-            element={
-              <>
-                <Nav />
-                <App>
-                  <Playlist />
-                </App>
-
-                <Player />
-              </>
-            }
-          />
-          <Route
-            path="/admin"
-            element={
-              <>
-                <Nav />
-                <App>
-                  <Admin />
-                </App>
-
-                <Player />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/profile"
-            element={
-              <>
-                <Nav />
-                <App>
-                  <Profile />
-                </App>
-
-                <Player />
-              </>
-            }
-          ></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<Forgot />} />
