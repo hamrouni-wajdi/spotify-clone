@@ -128,7 +128,7 @@ function MainApp() {
             ></Route>
           </Routes>
         ) : (
-          <Loading />
+          <Loading main={true} />
         )}
         <Routes>
           <Route path="/login" element={<Login />} />

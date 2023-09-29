@@ -10,8 +10,7 @@ import {
 } from "../../store/thunks/admin";
 import List from "../UI/List";
 import { IoCloseCircle } from "react-icons/io5";
-import { deletePlaylist } from "../../store/thunks/user";
-import { useNavigate } from "react-router-dom";
+import Loading from "../UI/Loading";
 
 const Admin = () => {
   const [song, setSong] = useState({});
@@ -63,7 +62,7 @@ const Admin = () => {
 
   return (
     <>
-      {songs && (
+      {songs ? (
         <div className="admin">
           <div className="admin__header">
             <div className="admin__card">
@@ -81,6 +80,8 @@ const Admin = () => {
             <List list={songs} admin={true} handler={openEditModalHandler} />
           </div>
         </div>
+      ) : (
+        <Loading />
       )}
 
       {modal && (

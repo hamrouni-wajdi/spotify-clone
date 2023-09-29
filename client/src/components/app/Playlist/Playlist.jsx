@@ -18,6 +18,7 @@ import List from "../../UI/List";
 import { useNavigate, useParams } from "react-router-dom";
 import { replaceQueue } from "../../../store/reducers/queue";
 import { deletePlaylist, getAllPlaylists } from "../../../store/thunks/user";
+import Loading from "../../UI/Loading";
 
 const Playlist = () => {
   const [modal, setModal] = useState(false);
@@ -134,7 +135,7 @@ const Playlist = () => {
           </div>
         </div>
       ) : (
-        <div>loading</div>
+        <Loading />
       )}
 
       {modal && (

@@ -8,6 +8,7 @@ import { replaceQueue } from "../../../store/reducers/queue";
 import { followArtist, unfollowArtist } from "../../../store/thunks/user";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import Loading from "../../UI/Loading";
 
 const Artist = () => {
   const { artist } = useSelector((state) => state.artist);
@@ -70,7 +71,7 @@ const Artist = () => {
           </div>
         </div>
       ) : (
-        <h1>Loading...</h1>
+        <Loading />
       )}
     </>
   );
