@@ -9,7 +9,7 @@
     height: 30vh;
     max-height: 40rem;
     min-height: 34rem;
-    padding: 0 2.4rem 6rem 2.4rem;
+    padding: 0 2.4rem 6.4rem 2.4rem;
 
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -18,11 +18,15 @@
   }
 
   &__card {
-    font-size: 2.4rem4px;
+    font-size: 2rem;
     background-color: #121212;
     border-radius: 9px;
 
     padding: 2.4rem;
+
+    &:last-child {
+      color: #fff;
+    }
 
     span {
       font-weight: bold;
@@ -30,12 +34,8 @@
       color: #fff;
       animation: shadow 10s infinite;
 
-      margin-right: 8px;
+      margin-right: 0.8re ;
     }
-  }
-
-  &__card:last-child {
-    color: #fff;
   }
 
   &__list {
@@ -44,8 +44,9 @@
       rgba(224, 69, 137, 0.25),
       #121212 25vh
     );
-    padding: 24px;
+
     min-height: 70vh;
+    padding: 2.4rem;
   }
 }
 
