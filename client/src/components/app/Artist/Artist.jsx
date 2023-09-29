@@ -63,12 +63,12 @@ const Artist = () => {
             )}
           </div>
 
-          <div className="artist-songs">
-            <div className="artist-songs__list">
+          <div className="artist__songs">
+            <div>
               <h2 className="h2">Popular</h2>
               <List list={artist.songs} />
             </div>
-            <div className="artist-songs__liked">
+            <div>
               <h2 className="h2">Liked Songs</h2>
             </div>
           </div>
