@@ -25,7 +25,7 @@ export const userSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder
+    builder // Login user
       .addCase(loginUser.fulfilled, (state, action) => {
         state.data = action.payload.data;
         state.auth = true;
@@ -69,11 +69,11 @@ export const userSlice = createSlice({
       // Follow user
       .addCase(followArtist.fulfilled, (state, action) => {
         state.data.followedArtists = action.payload;
-      }) // Follow user
+      }) // Unfollow user
       .addCase(unfollowArtist.fulfilled, (state, action) => {
         state.data.followedArtists = action.payload;
       }) // Become an Artist
-      .addCase(becomeArtist.fulfilled, (state, action) => {
+      .addCase(becomeArtist.fulfilled, (state) => {
         state.data.role = "artist";
       }) // Create playlist
       .addCase(createPlaylist.fulfilled, (state, action) => {

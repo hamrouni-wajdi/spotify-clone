@@ -32,7 +32,7 @@ export const updatePlaylist = createAsyncThunk(
 
 export const likePlaylist = createAsyncThunk(
   "playlist/likePlaylist",
-  async (id, { rejectWithValue }) => {
+  async (id) => {
     try {
       const res = await axios.post(`/playlists/likes/add`, {
         playlist: id,
@@ -41,15 +41,15 @@ export const likePlaylist = createAsyncThunk(
       toast.success("Saved to Your Library");
 
       return res.data.playlists;
-    } catch (e) {
-      throw e;
+    } catch (err) {
+      console.log(err);
     }
   },
 );
 
 export const dislikePlaylist = createAsyncThunk(
   "playlist/dislikePlaylist",
-  async (id, { rejectWithValue }) => {
+  async (id) => {
     try {
       const res = await axios.post(`/playlists/likes/remove`, {
         playlist: id,
@@ -58,8 +58,8 @@ export const dislikePlaylist = createAsyncThunk(
       toast.success("Removed from Your Library");
 
       return res.data.playlists;
-    } catch (e) {
-      throw e;
+    } catch (err) {
+      console.log(err);
     }
   },
 );

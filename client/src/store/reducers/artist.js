@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getArtist } from "../thunks/artist";
-import { loginUser } from "../thunks/user";
 import { toast } from "react-toastify";
 
 const artistSlice = createSlice({

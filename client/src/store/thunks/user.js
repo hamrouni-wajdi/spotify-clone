@@ -1,7 +1,6 @@
 import axios from "../../api/axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { retry } from "@reduxjs/toolkit/query";
 
 export const loginUser = createAsyncThunk(
   "user/login",
@@ -138,7 +137,7 @@ export const dislikeSong = createAsyncThunk("song/dislikeSong", async (id) => {
   }
 });
 
-// Follow artist
+// Artist
 export const followArtist = createAsyncThunk(
   "user/followArtist",
   async (id) => {
@@ -169,7 +168,6 @@ export const unfollowArtist = createAsyncThunk(
   },
 );
 
-// Form
 export const becomeArtist = createAsyncThunk("user/becomeArtist", async () => {
   try {
     await axios.patch("/users/becomeArtist");
@@ -194,6 +192,7 @@ export const getAllPlaylists = createAsyncThunk(
   },
 );
 
+// Playlist
 export const createPlaylist = createAsyncThunk(
   "user/createPlaylist",
   async () => {

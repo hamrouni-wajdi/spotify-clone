@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getPlaylist, updatePlaylist } from "../thunks/playlist";
-import { loginUser } from "../thunks/user";
 import { toast } from "react-toastify";
 
 const playlistSlice = createSlice({
