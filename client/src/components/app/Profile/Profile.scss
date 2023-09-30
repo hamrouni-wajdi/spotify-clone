@@ -20,14 +20,13 @@
     align-items: flex-end;
     gap: 16px;
 
-    height: 30vh;
-    max-height: 40rem;
-    min-height: 34rem;
+    height: 36rem;
     padding: 0 2.4rem 2.4rem 2.4rem;
   }
 
   &__photo img {
     height: 19rem;
+
     border-radius: 50%;
   }
 
@@ -35,6 +34,7 @@
     font-size: 7.2rem;
     font-weight: 700;
     letter-spacing: -1px;
+
     margin-bottom: 1.2rem;
   }
 
@@ -44,21 +44,22 @@
       rgba(185, 138, 178, 0.25),
       #121212 25vh
     );
+
     padding: 2.4rem;
-    min-height: 16rem;
   }
 
   &__form {
     h2 {
-      padding-bottom: 16px;
+      padding-bottom: 2.4rem;
     }
 
     form {
+      padding-bottom: 3.2rem;
+
       display: grid;
+      grid-template-columns: 24rem 1fr;
       align-items: center;
-      grid-template-columns: 200px 1fr;
-      gap: 8px 16px;
-      padding-bottom: 32px;
+      gap: 1.6rem 2.4rem;
 
       label {
         justify-self: end;
@@ -69,11 +70,12 @@
         color: #fff;
         background-color: #121212;
         border: none;
-        border-radius: 50px;
+        border-radius: 5rem;
         outline: 2px solid rgba(255, 255, 255, 0.1);
 
-        min-width: 35rem;
-        padding: 8px 16px;
+        width: 35rem;
+        padding: 1.2rem 1.6rem;
+
         justify-self: start;
       }
 
@@ -83,12 +85,13 @@
         color: #fff;
         background-color: #1db954;
         border: none;
-        border-radius: 50px;
+        border-radius: 5rem;
         cursor: pointer;
 
-        padding: 8px 16px;
-        justify-self: start;
+        padding: .8rem 1.6rem;
+
         grid-column: 2;
+        justify-self: start;
       }
     }
   }
