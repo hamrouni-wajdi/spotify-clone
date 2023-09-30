@@ -50,11 +50,12 @@
 
   &--list {
     .modal__list {
+      height: 24rem;
+      overflow-y: scroll;
+
       display: flex;
       flex-direction: column;
       gap: 0.8rem;
-      height: 24rem;
-      overflow-y: scroll;
     }
 
     .modal__item {
@@ -62,8 +63,8 @@
 
       &:hover {
         background-color: rgba(255, 255, 255, 0.1);
-        cursor: pointer;
         border-radius: 3px;
+        cursor: pointer;
       }
     }
   }

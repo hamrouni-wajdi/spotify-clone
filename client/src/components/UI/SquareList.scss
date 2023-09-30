@@ -1,7 +1,7 @@
 .square-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 18px;
+  gap: 2.4rem;
 
   &--home {
     grid-template-columns: repeat(5, 1fr);
@@ -15,17 +15,17 @@
   color: inherit;
   background: #181818;
   border-radius: 9px;
-  padding: 16px;
+  padding: 1.6rem;
   width: 100%;
 
   img {
     width: 100%;
-    margin-bottom: 16px;
-    box-shadow: 0 8px 24px rgba(0,0,0,.5);
+    margin-bottom: 1.6rem;
+    box-shadow: 0 .8rem 2.4rem rgba(0,0,0,.5);
   }
 
   &--artist img {
-    border-radius: 500px;
+    border-radius: 50rem;
   }
 
   &:hover {
