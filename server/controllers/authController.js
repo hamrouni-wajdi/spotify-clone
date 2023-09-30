@@ -46,7 +46,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
   const user = await User.create(userData);
 
-  await new Email(user).sendWelcome();
+  // await new Email(user).sendWelcome();
 
   createSendToken(user, 201, req, res);
 });
@@ -205,7 +205,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 
-  await new Email(user).sendResetToken(resetToken);
+  // await new Email(user).sendResetToken(resetToken);
 
   res.status(200).json({
     status: 'success',
