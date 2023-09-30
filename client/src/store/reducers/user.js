@@ -13,6 +13,7 @@ import {
   createPlaylist,
   deletePlaylist,
   getAllPlaylists,
+  logoutUser,
 } from "../thunks/user";
 import { dislikePlaylist, likePlaylist } from "../thunks/playlist";
 import { toast } from "react-toastify";
@@ -57,6 +58,9 @@ export const userSlice = createSlice({
       })
       .addCase(resetPassword.rejected, (state, action) => {
         toast.error(action.payload.response.data.message);
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.auth = false;
       })
       // Like song
       .addCase(likeSong.fulfilled, (state, action) => {

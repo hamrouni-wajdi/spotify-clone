@@ -4,6 +4,7 @@ import {
   updatePassword,
   updateUser,
   becomeArtist,
+  logoutUser,
 } from "../../../store/thunks/user";
 import { useRef } from "react";
 import axios from "../../../api/axios";
@@ -43,10 +44,8 @@ const Profile = () => {
     dispatch(becomeArtist());
   };
 
-  const logoutHandler = async () => {
-    const res = await axios.get("users/logout");
-    await toast.success(res.data.message);
-    navigate(0);
+  const logoutHandler = () => {
+    dispatch(logoutUser());
   };
 
   return (
