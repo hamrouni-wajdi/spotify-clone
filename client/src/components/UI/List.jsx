@@ -69,7 +69,7 @@ const List = (props) => {
         {props.list &&
           props.list.map((el, i) => (
             <div
-              className={`list-item ${
+              className={`list__item ${
                 el.artist.id === "6513505bef35c9d633139956" ? "vip" : ""
               } ${el.artist === "6513505bef35c9d633139956" ? "vip" : ""}`}
               key={el.id}
@@ -87,8 +87,7 @@ const List = (props) => {
               <img src={el.img} alt="Song cover" />
               <span
                 className={
-                  (currentId === el.id ? "list--green" : "") +
-                  " list-item__name"
+                  (currentId === el.id ? "list--green" : "") + " list__name"
                 }
                 onClick={() => playSongHandler(i, el.id)}
               >
@@ -131,18 +130,18 @@ const List = (props) => {
       </div>
 
       {modal && (
-        <div className="list-modal">
-          <div className="list-modal__header">
+        <div className="modal modal--list">
+          <div className="modal__header">
             <h2>Save song to</h2>
-            <div className="list-modal__close">
+            <div className="modal__close">
               <IoCloseCircle onClick={closeModalHandler} />
             </div>
           </div>
-          <ul className="list-modal__list">
+          <ul className="modal__list">
             {playlists.map((p, i) => (
               <li
                 key={i}
-                className="list-modal__item"
+                className="modal__item"
                 onClick={() => addSongToPlaylistHandler(p.id, songId)}
               >
                 {p.name}

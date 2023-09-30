@@ -48,6 +48,26 @@
     }
   }
 
+  &--list {
+    .modal__list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      height: 24rem;
+      overflow-y: scroll;
+    }
+
+    .modal__item {
+      padding: 1.2rem;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        border-radius: 3px;
+      }
+    }
+  }
+
   &__header {
     margin-bottom: 1.6rem;
 
