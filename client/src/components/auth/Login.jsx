@@ -21,10 +21,10 @@ const Login = () => {
     <>
       {!user.auth ? (
         <div className="auth">
-          <form className="auth-form" onSubmit={login}>
-            <img className="auth-form__logo" src={logo} alt="" />
+          <form className="auth__form" onSubmit={login}>
+            <img className="auth__form-logo" src={logo} alt="" />
 
-            <Link to="/signup" className="auth-form__link">
+            <Link to="/signup" className="auth__form-link">
               Sign Up here
             </Link>
             <input type="text" placeholder="Email" required />
@@ -35,7 +35,7 @@ const Login = () => {
               placeholder="Password"
               required
             />
-            <Link to="/forgotPassword" className="auth-form__link">
+            <Link to="/forgotPassword" className="auth__form-link">
               Forgot password?
             </Link>
             <button type="submit">Log In</button>
