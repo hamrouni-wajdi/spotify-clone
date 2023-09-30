@@ -25,9 +25,9 @@ const Signup = () => {
     <>
       {!user.auth ? (
         <div className="auth">
-          <form className="auth-form" onSubmit={signup}>
-            <img className="auth-form__logo" src={logo} alt="" />
-            <Link to="/login" className="auth-form__link">
+          <form className="auth__form" onSubmit={signup}>
+            <img className="auth__form-logo" src={logo} alt="" />
+            <Link to="/login" className="auth__form-link">
               Log In here
             </Link>
             <input

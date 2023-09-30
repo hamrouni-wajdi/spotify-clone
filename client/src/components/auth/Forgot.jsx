@@ -20,8 +20,8 @@ const Forgot = () => {
     <>
       {!user.auth ? (
         <div className="auth">
-          <form className="auth-form" onSubmit={formSubmitHandler}>
-            <img className="auth-form__logo" src={logo} alt="" />
+          <form className="auth__form" onSubmit={formSubmitHandler}>
+            <img className="auth__form-logo" src={logo} alt="" />
             <input type="email" placeholder="Email" required />
             <button type="submit">Send token</button>
           </form>
