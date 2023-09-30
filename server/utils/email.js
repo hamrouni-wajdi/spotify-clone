@@ -9,8 +9,8 @@ module.exports = class Email {
 
   newTransport() {
     return nodemailer.createTransport({
-      host: 'smtp-relay.brevo.com',
-      port: 587,
+      host: process.env.SMPT_SERVER,
+      port: process.env.SMPT_PORT,
       auth: {
         user: process.env.BREVO_USER,
         pass: process.env.BREVO_PASS,
