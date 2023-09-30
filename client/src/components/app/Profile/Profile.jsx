@@ -46,7 +46,6 @@ const Profile = () => {
   const logoutHandler = async () => {
     const res = await axios.get("users/logout");
     toast.success(res.data.message);
-    navigate("/login");
     navigate(0);
   };
 
