@@ -162,25 +162,25 @@ const Player = () => {
     <div className="player">
       {song ? (
         <>
-          <div className="player-song">
+          <div className="player__song">
             <img src={song.img} alt="" />
-            <div className="player-song__context">
-              <span className="player-song__name">{song.name}</span>
+            <div className="player__song-context">
+              <span className="player__song-name">{song.name}</span>
               <Link
                 to={`/artist/${song.artist.id}`}
-                className="player-song__artist"
+                className="player__song-artist"
               >
-                {song.artist?.name}
+                {song.artist.name}
               </Link>
             </div>
             {userLikedSong() === true ? (
               <IoHeart
-                className="player-song__like player-song__like--green"
+                className="player__song__like player__song__like--active"
                 onClick={dislikeSongHandler}
               />
             ) : (
               <IoHeartOutline
-                className="player-song__like"
+                className="player__song__like"
                 onClick={likeSongHandler}
               />
             )}
@@ -218,7 +218,7 @@ const Player = () => {
               )}
             </div>
             <div className="player__range">
-              <span className="player-song__time">
+              <span className="player__range-time">
                 {formatTime(currentTime)}
               </span>
               <input
@@ -227,7 +227,7 @@ const Player = () => {
                 defaultValue={0}
                 onChange={progressChangeHandler}
               />
-              <span className="player-song__time">{formatTime(duration)}</span>
+              <span className="player__range-time">{formatTime(duration)}</span>
             </div>
           </div>
           <div className="player__volume">
