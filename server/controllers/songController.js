@@ -117,16 +117,17 @@ exports.updateSong = catchAsync(async (req, res, next) => {
   if (req.body.song)
     return next(new AppError('You can not update a song file', 400));
 
-  const imgKit = await imagekit.upload({
-    file: req.files.img[0].buffer,
-    fileName: req.files.img[0].filename,
-    folder: 'spotify/songs',
-  });
-
   const data = {};
-  if (imgKit.url) {
+
+  if (req.file) {
+    const imgKit = await imagekit.upload({
+      file: req.file.buffer,
+      fileName: req.file.filename,
+      folder: 'spotify/songs',
+    });
     data.img = imgKit.url;
   }
+
   if (req.body.name) data.name = req.body.name;
 
   const song = await Song.findByIdAndUpdate(req.params.id, data, {

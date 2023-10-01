@@ -39,18 +39,21 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     );
   }
 
-  const imgKit = await imagekit.upload({
-    file: req.file.buffer,
-    fileName: req.file.filename,
-    folder: 'spotify/users',
-  });
+  const data = {};
 
-  const userData = {};
-  if (req.body.name) userData.name = req.body.name;
-  if (req.body.email) userData.email = req.body.email;
-  if (imgKit.url) userData.img = imgKit.url;
+  if (req.file) {
+    const imgKit = await imagekit.upload({
+      file: req.file.buffer,
+      fileName: req.file.filename,
+      folder: 'spotify/users',
+    });
+    data.img = imgKit.url;
+  }
 
-  const user = await User.findByIdAndUpdate(req.user.id, userData, {
+  if (req.body.name) data.name = req.body.name;
+  if (req.body.email) data.email = req.body.email;
+
+  const user = await User.findByIdAndUpdate(req.user.id, data, {
     new: true,
     runValidators: true,
   });

@@ -23,11 +23,11 @@ exports.resizePlaylistImg = catchAsync(async (req, res, next) => {
 
   req.file.filename = `playlist-${req.params.id}-${Date.now()}.jpeg`;
 
+  console.log('buffer', req.file);
   req.file.buffer = await sharp(req.file.buffer)
     .resize(512, 512)
     .toFormat('jpeg')
     .toBuffer();
-
   next();
 });
 
@@ -84,14 +84,17 @@ exports.createPlaylist = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePlaylist = catchAsync(async (req, res, next) => {
-  const imgKit = await imagekit.upload({
-    file: req.file.buffer,
-    fileName: req.file.filename,
-    folder: 'spotify/playlists',
-  });
-
   const data = {};
-  if (imgKit.url) data.img = imgKit.url;
+
+  if (req.file) {
+    const imgKit = await imagekit.upload({
+      file: req.file.buffer,
+      fileName: req.file.filename,
+      folder: 'spotify/playlists',
+    });
+    data.img = imgKit.url;
+  }
+
   if (req.body.name) data.name = req.body.name;
   if (req.body.description) data.description = req.body.description;
 
