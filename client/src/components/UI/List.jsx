@@ -26,6 +26,7 @@ const List = (props) => {
   const playSongHandler = (i, id) => {
     const songs = props.list;
 
+    if (id === "65195ebfd44961eafcf4c9c2") toast("🦄 I GOT YOU!");
     dispatch(changeCurrent({ i, id }));
     dispatch(replaceQueue({ songs, i, id }));
   };
