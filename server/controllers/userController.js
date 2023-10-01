@@ -107,11 +107,6 @@ exports.followArtist = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('followedArtists', 'name img role');
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.followedArtists.map((artist) => {
-    artist.img = `${serverUrl}public/users/${artist.img}`;
-  });
-
   res.status(200).json({
     status: 'success',
     data: user.followedArtists,
