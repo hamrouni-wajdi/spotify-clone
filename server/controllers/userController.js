@@ -1,9 +1,9 @@
 const multer = require('multer');
-const sharp = require('sharp');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const fileLocation = require('../utils/fileLocation');
+const imagekit = require('../utils/ImageKit');
 
 const storage = multer.memoryStorage();
 
@@ -19,16 +19,10 @@ const upload = multer({ storage, fileFilter });
 
 exports.uploadPhoto = upload.single('photo');
 
-exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
+exports.renamseUserImg = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
-
-  await sharp(req.file.buffer)
-    .resize(520, 520)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toFile(`public/users/${req.file.filename}`);
 
   next();
 });
@@ -40,19 +34,23 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     );
   }
 
-  const userData = {};
+  const imgKit = await imagekit.upload({
+    file: req.file.buffer,
+    fileName: req.file.filename,
+    folder: 'spotify/users',
+  });
 
+  console.log(imgKit);
+
+  const userData = {};
   if (req.body.name) userData.name = req.body.name;
   if (req.body.email) userData.email = req.body.email;
-  if (req.file) userData.img = req.file.filename;
+  if (imgKit.url) userData.img = imgKit.url;
 
   const user = await User.findByIdAndUpdate(req.user.id, userData, {
     new: true,
     runValidators: true,
   });
-
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  user.img = `${serverUrl}public/users/${user.img}`;
 
   res.status(200).json({
     status: 'success',

@@ -25,7 +25,6 @@ const createSendToken = (user, statusCode, req, res) => {
   };
   res.cookie('jwt', token, cookieOptions);
 
-  user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
   user.password = undefined;
 
   res.status(statusCode).json({
@@ -159,11 +158,11 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       );
     }
 
-    user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
-    fileLocation(req, user.playlists, 'playlists', true);
-    fileLocation(req, user.followedArtists, 'users', true);
-    fileLocation(req, user.likedPlaylists, 'playlists', true);
-    fileLocation(req, user.likedSongs, 'songs', true, true);
+    // user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
+    // fileLocation(req, user.playlists, 'playlists', true);
+    // fileLocation(req, user.followedArtists, 'users', true);
+    // fileLocation(req, user.likedPlaylists, 'playlists', true);
+    // fileLocation(req, user.likedSongs, 'songs', true, true);
 
     if (user.changedPasswordAfter(decoded.iat, 'login')) {
       return next(
