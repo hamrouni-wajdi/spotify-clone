@@ -40,8 +40,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     folder: 'spotify/users',
   });
 
-  console.log(imgKit);
-
   const userData = {};
   if (req.body.name) userData.name = req.body.name;
   if (req.body.email) userData.email = req.body.email;
@@ -81,8 +79,6 @@ exports.getArtist = catchAsync(async (req, res, next) => {
   if (!artist || artist.role !== 'artist') {
     return next(new AppError('No artist found with that ID', 404));
   }
-
-  fileLocation(req, artist.songs, 'songs', true, true);
 
   res.status(200).json({
     status: 'success',
@@ -127,8 +123,6 @@ exports.unfollowArtist = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('followedArtists', 'name img role');
 
-  fileLocation(req, user.followedArtists, 'users', true);
-
   res.status(200).json({
     status: 'success',
     data: user.followedArtists,
@@ -144,8 +138,6 @@ exports.likeSong = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('likedSongs');
 
-  fileLocation(req, user.likedSongs, 'songs', true, true);
-
   res.status(200).json({
     status: 'success',
     songs: user.likedSongs,
@@ -160,8 +152,6 @@ exports.dislikeSong = catchAsync(async (req, res, next) => {
     { $pull: { likedSongs: song } },
     { runValidators: true, new: true }
   ).populate('likedSongs');
-
-  fileLocation(req, user.likedSongs, 'songs', true, true);
 
   res.status(200).json({
     status: 'success',

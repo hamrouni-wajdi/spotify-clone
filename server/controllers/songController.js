@@ -5,6 +5,7 @@ const Song = require('../models/songModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const fileLocation = require('../utils/fileLocation');
+const imagekit = require('../utils/ImageKit');
 
 const storage = multer.memoryStorage();
 
@@ -36,12 +37,6 @@ exports.resizeSongImg = catchAsync(async (req, res, next) => {
 
   req.files.img[0].filename = `img-${req.user.id}-${Date.now()}.jpeg`;
 
-  await sharp(req.files.img[0].buffer)
-    .resize(520, 520)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toFile(`public/songs/${req.files.img[0].filename}`);
-
   next();
 });
 
@@ -49,18 +44,12 @@ exports.saveSongFile = catchAsync(async (req, res, next) => {
   if (!req.files.song) return next();
 
   req.files.song[0].filename = `song-${req.user.id}-${Date.now()}.mp3`;
-  fs.writeFileSync(
-    `public/songs/${req.files.song[0].filename}`,
-    req.files.song[0].buffer
-  );
 
   next();
 });
 
 exports.getAllSongs = catchAsync(async (req, res, next) => {
   const songs = await Song.find({ artist: req.user.id });
-
-  fileLocation(req, songs, 'songs', true, true);
 
   res.status(200).json({
     status: 'success',
@@ -82,19 +71,34 @@ exports.getSong = catchAsync(async (req, res, next) => {
 });
 
 exports.createSong = catchAsync(async (req, res, next) => {
-  req.body.song = req.files.song[0].filename;
-  req.body.img = req.files.img[0].filename;
-  req.body.artist = req.user.id;
-
-  if (!req.body.song || !req.body.img || !req.body.name) {
+  if (
+    !req.files.song[0].filename ||
+    !req.files.img[0].filename ||
+    !req.body.name
+  ) {
     return next(new AppError('👎 Something is missing', 400));
   }
 
-  const song = await Song.create(req.body);
+  const imgKit = await imagekit.upload({
+    file: req.files.img[0].buffer,
+    fileName: req.files.img[0].filename,
+    folder: 'spotify/songs',
+  });
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  song.song = `${serverUrl}public/songs/${song.song}`;
-  song.img = `${serverUrl}public/songs/${song.img}`;
+  const songKit = await imagekit.upload({
+    file: req.files.song[0].buffer,
+    fileName: req.files.song[0].filename,
+    folder: 'spotify/songs',
+  });
+
+  const songData = {};
+
+  songData.name = req.body.name;
+  songData.artist = req.user.id;
+  songData.img = imgKit.url;
+  songData.song = songKit.url;
+
+  const song = await Song.create(songData);
 
   res.status(200).json({
     status: 'success',
@@ -108,9 +112,15 @@ exports.updateSong = catchAsync(async (req, res, next) => {
   if (req.body.song)
     return next(new AppError('You can not update a song file', 400));
 
+  const imgKit = await imagekit.upload({
+    file: req.files.img[0].buffer,
+    fileName: req.files.img[0].filename,
+    folder: 'spotify/songs',
+  });
+
   const data = {};
-  if (req.files.img) {
-    data.img = req.files.img[0].filename;
+  if (imgKit.url) {
+    data.img = imgKit.url;
   }
   if (req.body.name) data.name = req.body.name;
 

@@ -6,7 +6,6 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
 const Email = require('../utils/email');
-const fileLocation = require('../utils/fileLocation');
 
 const signToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -68,11 +67,6 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user) {
     return next(new AppError(`🤷‍ No user found with email: ${email}`, 404));
   }
-
-  fileLocation(req, user.playlists, 'playlists', true);
-  fileLocation(req, user.followedArtists, 'users', true);
-  fileLocation(req, user.likedPlaylists, 'playlists', true);
-  fileLocation(req, user.likedSongs, 'songs', true, true);
 
   if (!user || !(await user.checkPassword(password, user.password))) {
     return next(new AppError('🔐 Incorrect email or password', 401));
@@ -158,12 +152,6 @@ exports.isLoggedIn = catchAsync(async (req, res, next) => {
       );
     }
 
-    // user.img = `${req.protocol}://${req.get('host')}/public/users/${user.img}`;
-    // fileLocation(req, user.playlists, 'playlists', true);
-    // fileLocation(req, user.followedArtists, 'users', true);
-    // fileLocation(req, user.likedPlaylists, 'playlists', true);
-    // fileLocation(req, user.likedSongs, 'songs', true, true);
-
     if (user.changedPasswordAfter(decoded.iat, 'login')) {
       return next(
         new AppError(
@@ -234,11 +222,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   if (!user) {
     return next(new AppError('🚫 Token is invalid or expired', 400));
   }
-
-  fileLocation(req, user.playlists, 'playlists', true);
-  fileLocation(req, user.followedArtists, 'users', true);
-  fileLocation(req, user.likedPlaylists, 'playlists', true);
-  fileLocation(req, user.likedSongs, 'songs', true, true);
 
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;

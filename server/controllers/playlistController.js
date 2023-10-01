@@ -6,6 +6,7 @@ const Playlist = require('../models/playlistModel');
 const User = require('../models/userModel');
 const fs = require('fs');
 const fileLocation = require('../utils/fileLocation');
+const imagekit = require('../utils/ImageKit');
 
 const storage = multer.memoryStorage();
 
@@ -17,16 +18,10 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-exports.resizePlaylistImg = catchAsync(async (req, res, next) => {
+exports.renamePlaylistImg = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
   req.file.filename = `playlist-${req.params.id}-${Date.now()}.jpeg`;
-
-  await sharp(req.file.buffer)
-    .resize(520, 520)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toFile(`public/playlists/${req.file.filename}`);
 
   next();
 });
@@ -40,8 +35,6 @@ exports.getAllPlaylists = catchAsync(async (req, res, next) => {
   if (req.user.id) filter.user = req.user.id.userId;
 
   const playlists = await Playlist.find({ user: req.user.id });
-
-  fileLocation(req, playlists, 'playlists', true);
 
   res.status(200).json({
     status: 'success',
@@ -60,11 +53,6 @@ exports.getPlaylist = catchAsync(async (req, res, next) => {
   if (!playlist)
     return next(new AppError('❓ No playlist found with that id', 404));
 
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  fileLocation(req, playlist.songs, 'songs', true, true);
-  playlist.user.img = `${serverUrl}public/users/${playlist.user.img}`;
-  playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
-
   res.status(200).json({
     status: 'success',
     data: {
@@ -81,8 +69,6 @@ exports.createPlaylist = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('playlists');
 
-  fileLocation(req, user.playlists, 'playlists', true);
-
   // 2) Send res
   res.status(200).json({
     status: 'success',
@@ -93,8 +79,14 @@ exports.createPlaylist = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePlaylist = catchAsync(async (req, res, next) => {
+  const imgKit = await imagekit.upload({
+    file: req.file.buffer,
+    fileName: req.file.filename,
+    folder: 'spotify/users',
+  });
+
   const data = {};
-  if (req.file) data.img = req.file.filename;
+  if (imgKit.url) data.img = imgKit.url;
   if (req.body.name) data.name = req.body.name;
   if (req.body.description) data.description = req.body.description;
 
@@ -105,9 +97,6 @@ exports.updatePlaylist = catchAsync(async (req, res, next) => {
 
   if (!playlist)
     return next(new AppError('❓ No playlist found with that id', 404));
-
-  const serverUrl = `${req.protocol}://${req.get('host')}/`;
-  playlist.img = `${serverUrl}public/playlists/${playlist.img}`;
 
   res.status(200).json({
     status: 'success',
@@ -122,16 +111,11 @@ exports.deletePlaylist = catchAsync(async (req, res, next) => {
   if (!playlist)
     return next(new AppError('❓ No playlist found with that id', 404));
 
-  if (playlist.img !== 'default.png')
-    fs.unlink(`public/playlists/${playlist.img}`, (err) => console.log(err));
-
   const user = await User.findByIdAndUpdate(
     req.user.id,
     { $pull: { playlists: req.params.id } },
     { runValidators: true, new: true }
   ).populate('playlists');
-
-  fileLocation(req, user.playlists, 'playlists', true);
 
   res.status(200).json({
     status: 'success',
@@ -176,8 +160,6 @@ exports.likePlaylist = catchAsync(async (req, res, next) => {
     { runValidators: true, new: true }
   ).populate('likedPlaylists', 'name img');
 
-  fileLocation(req, user.likedPlaylists, 'playlists', true);
-
   res.status(200).json({
     status: 'success',
     playlists: user.likedPlaylists,
@@ -192,8 +174,6 @@ exports.dislikePlaylist = catchAsync(async (req, res, next) => {
     { $pull: { likedPlaylists: playlist } },
     { runValidators: true, new: true }
   ).populate('likedPlaylists', 'name img');
-
-  fileLocation(req, user.likedPlaylists, 'playlists', true);
 
   res.status(200).json({
     status: 'success',
