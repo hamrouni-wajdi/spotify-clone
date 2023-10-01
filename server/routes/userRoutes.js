@@ -26,7 +26,7 @@ router.patch(
   '/updateMe',
   authController.protect,
   userController.uploadPhoto,
-  userController.renamseUserImg,
+  userController.resizeUserImg,
   userController.updateMe
 );
 router.delete('/deleteMe', authController.protect, authController.deleteMe);

@@ -12,7 +12,7 @@ router
     authController.restrictTo('artist'),
     songController.uploadSongFiles,
     songController.resizeSongImg,
-    songController.saveSongFile,
+    songController.renameSongFile,
     songController.createSong
   );
 

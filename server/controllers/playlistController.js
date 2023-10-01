@@ -18,10 +18,15 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-exports.renamePlaylistImg = catchAsync(async (req, res, next) => {
+exports.resizePlaylistImg = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
   req.file.filename = `playlist-${req.params.id}-${Date.now()}.jpeg`;
+
+  req.file.buffer = await sharp(req.file.buffer)
+    .resize(512, 512)
+    .toFormat('jpeg')
+    .toBuffer();
 
   next();
 });

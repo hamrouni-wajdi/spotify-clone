@@ -2,7 +2,7 @@ const multer = require('multer');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
-const fileLocation = require('../utils/fileLocation');
+const sharp = require('sharp');
 const imagekit = require('../utils/ImageKit');
 
 const storage = multer.memoryStorage();
@@ -19,10 +19,15 @@ const upload = multer({ storage, fileFilter });
 
 exports.uploadPhoto = upload.single('photo');
 
-exports.renamseUserImg = catchAsync(async (req, res, next) => {
+exports.resizeUserImg = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
+
+  req.file.buffer = await sharp(req.file.buffer)
+    .resize(512, 512)
+    .toFormat('jpeg')
+    .toBuffer();
 
   next();
 });

@@ -37,10 +37,15 @@ exports.resizeSongImg = catchAsync(async (req, res, next) => {
 
   req.files.img[0].filename = `img-${req.user.id}-${Date.now()}.jpeg`;
 
+  req.files.img[0].buffer = await sharp(req.files.img[0].buffer)
+    .resize(512, 512)
+    .toFormat('jpeg')
+    .toBuffer();
+
   next();
 });
 
-exports.saveSongFile = catchAsync(async (req, res, next) => {
+exports.renameSongFile = catchAsync(async (req, res, next) => {
   if (!req.files.song) return next();
 
   req.files.song[0].filename = `song-${req.user.id}-${Date.now()}.mp3`;
