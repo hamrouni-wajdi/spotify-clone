@@ -18,7 +18,8 @@ const userSchema = new mongoose.Schema(
     },
     img: {
       type: String,
-      default: 'default.jpg',
+      default:
+        'https://ik.imagekit.io/8cs4gpobr/spotify/users/default.jpg?updatedAt=1696157096636',
     },
     likedSongs: {
       type: [
