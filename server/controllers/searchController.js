@@ -14,8 +14,6 @@ exports.searchSong = catchAsync(async (req, res, next) => {
 
   if (songs.length === 0) return next(new AppError('No song found', 404));
 
-  fileLocatoin(req, songs, 'songs', true, true);
-
   res.status(200).json({
     status: 'success',
     data: songs,
@@ -32,8 +30,6 @@ exports.searchPlaylist = catchAsync(async (req, res, next) => {
   if (playlists.length === 0)
     return next(new AppError('No playlist found', 404));
 
-  fileLocatoin(req, playlists, 'playlists', true);
-
   res.status(200).json({
     status: 'success',
     data: playlists,
@@ -49,8 +45,6 @@ exports.searchArtist = catchAsync(async (req, res, next) => {
   });
 
   if (artists.length === 0) return next(new AppError('No artist found', 404));
-
-  fileLocatoin(req, artists, 'users', true);
 
   res.status(200).json({
     status: 'success',
