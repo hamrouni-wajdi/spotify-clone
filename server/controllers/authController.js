@@ -196,7 +196,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
 
-  // await new Email(user).sendResetToken(resetToken);
+  await new Email(user).sendResetToken(resetToken);
 
   res.status(200).json({
     status: 'success',
