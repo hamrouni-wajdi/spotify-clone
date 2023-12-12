@@ -3,16 +3,17 @@ import logo from "../../img/logo.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/thunks/user";
 import { Link, Navigate } from "react-router-dom";
+import { useState } from "react";
 
 const Login = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const login = (e) => {
-    e.preventDefault();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const email = e.target[0].value;
-    const password = e.target[1].value;
+  const handleLogin = (e) => {
+    e.preventDefault();
 
     dispatch(loginUser({ email, password }));
   };
@@ -21,19 +22,24 @@ const Login = () => {
     <>
       {!user.auth ? (
         <div className="auth">
-          <form className="auth__form" onSubmit={login}>
-            <img className="auth__form-logo" src={logo} alt="" />
-
+          <form className="auth__form" onSubmit={handleLogin}>
+            <img className="auth__form-logo" src={logo} alt="Spotify logo" />
             <Link to="/signup" className="auth__form-link">
               Sign Up here
             </Link>
-            <input type="text" placeholder="Email" required />
+            <input
+              type="text"
+              placeholder="Email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <input
               type="password"
               minLength="8"
               maxLength="16"
               placeholder="Password"
               required
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Link to="/forgotPassword" className="auth__form-link">
               Forgot password?
