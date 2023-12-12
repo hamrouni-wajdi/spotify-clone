@@ -14,7 +14,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!isValidEmail(email)) {
@@ -50,7 +50,7 @@ const Login = () => {
             <Link to="/forgotPassword" className="auth__form-link">
               Forgot password?
             </Link>
-            <button type="submit">Log In</button>
+            <button type="submit">{user.loading ? "Loading" : "Login"}</button>
           </form>
         </div>
       ) : (

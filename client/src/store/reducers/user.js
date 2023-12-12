@@ -23,21 +23,35 @@ export const userSlice = createSlice({
   initialState: {
     data: {},
     auth: null,
+    loading: false,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder // Login user
+      .addCase(loginUser.pending, (state, action) => {
+        state.loading = true;
+      })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.data = action.payload.data;
         state.auth = true;
+        state.loading = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.loading = true;
         toast.error(action.payload.response.data.message);
       })
       // Sign up
+      .addCase(signupUser.pending, (state, action) => {
+        state.loading = true;
+      })
       .addCase(signupUser.fulfilled, (state, action) => {
         state.data = action.payload.data;
         state.auth = true;
+        state.loading = false;
+      })
+      .addCase(signupUser.rejected, (state, action) => {
+        state.loading = false;
+        toast.error(action.payload.response.data.message);
       })
       // Is loggedIn
       .addCase(isLoggedIn.fulfilled, (state, action) => {
@@ -52,13 +66,19 @@ export const userSlice = createSlice({
         state.data.img = action.payload.user.img;
       })
       // Reset password
+      .addCase(resetPassword.pending, (state, action) => {
+        state.loading = true;
+      })
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.data = action.payload.data.user;
         state.auth = true;
+        state.loading = false;
       })
       .addCase(resetPassword.rejected, (state, action) => {
+        state.loading = false;
         toast.error(action.payload.response.data.message);
       })
+      // Log out
       .addCase(logoutUser.fulfilled, (state) => {
         state.auth = false;
       })

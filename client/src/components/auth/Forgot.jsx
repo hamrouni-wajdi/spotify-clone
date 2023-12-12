@@ -12,6 +12,7 @@ const Forgot = () => {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ const Forgot = () => {
               required
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button type="submit">Send token</button>
+            <button type="submit">{loading ? "Loading" : "Send Token"}</button>
           </form>
         </div>
       ) : (

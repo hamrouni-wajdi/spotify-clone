@@ -40,7 +40,9 @@ const Reset = () => {
               required
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
-            <button type="submit">Update password</button>
+            <button type="submit">
+              {user.loading ? "Loading" : "Update password"}
+            </button>
           </form>
         </div>
       ) : (

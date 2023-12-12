@@ -71,7 +71,9 @@ const Signup = () => {
               required
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
-            <button type="submit">Sign Up</button>
+            <button type="submit">
+              {user.loading ? "Loading" : "Sign Up"}
+            </button>
           </form>
         </div>
       ) : (

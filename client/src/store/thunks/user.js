@@ -15,6 +15,7 @@ export const loginUser = createAsyncThunk(
 
       return { data: res.data.data.user, auth: true };
     } catch (err) {
+      console.log(err);
       return rejectWithValue(err);
     }
   },
@@ -22,7 +23,7 @@ export const loginUser = createAsyncThunk(
 
 export const signupUser = createAsyncThunk(
   "user/signup",
-  async ({ name, email, password, passwordConfirm }) => {
+  async ({ name, email, password, passwordConfirm }, { rejectWithValue }) => {
     try {
       const res = await axios.post("/users/signup", {
         name,
@@ -34,8 +35,8 @@ export const signupUser = createAsyncThunk(
       toast.success("Welcome to spotify!");
 
       return { data: res.data.data.user, auth: true };
-    } catch (e) {
-      throw e;
+    } catch (err) {
+      return rejectWithValue(err);
     }
   },
 );
