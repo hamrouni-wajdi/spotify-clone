@@ -1,43 +1,43 @@
 import "./Search.scss";
 import axios from "../../../api/axios";
 import { IoSearch } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import List from "../../UI/List";
 import SquareList from "../../UI/SquareList";
 import { toast } from "react-toastify";
 
 const Search = () => {
+  const [query, setQuery] = useState("");
   const [queryType, setQueryType] = useState("song");
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState({
+    type: "song",
+    results: [],
+  });
+  const [error, setError] = useState(false);
 
-  const formSubmitHandler = async (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (query.length < 3) return;
+    const controller = new AbortController();
 
-    try {
-      const res = await axios.get(
-        `/search/${queryType}?name=${e.target[0].value}`,
-      );
+    const fetcher = async () => {
+      try {
+        const res = await axios.get(`/search/${queryType}?name=${query}`, {
+          signal: controller.signal,
+        });
 
-      if (queryType === "song") {
-        setResults({
-          type: "song",
-          list: res.data.data,
-        });
-      } else if (queryType === "artist") {
-        setResults({
-          type: "artist",
-          list: res.data.data,
-        });
-      } else if (queryType === "playlist") {
-        setResults({
-          type: "playlist",
-          list: res.data.data,
-        });
+        setResults({ type: queryType, list: res.data.data });
+        setError(false);
+      } catch (e) {
+        setResults({ type: queryType, list: [] });
+        setError(true);
       }
-    } catch (err) {
-      toast.error(err.response.data.message);
-    }
-  };
+    };
+    fetcher();
+
+    return () => {
+      controller.abort();
+    };
+  }, [query, queryType]);
 
   const changeTagHandler = (tag) => {
     setQueryType(tag);
@@ -46,8 +46,12 @@ const Search = () => {
   return (
     <div className="search">
       <div className="search__nav">
-        <form onSubmit={formSubmitHandler}>
-          <input type="text" placeholder="What your want to listen to?" />
+        <form onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="text"
+            placeholder="What your want to listen to?"
+            onChange={(e) => setQuery(e.target.value)}
+          />
           <IoSearch className="search__icon" />
         </form>
       </div>
@@ -77,11 +81,22 @@ const Search = () => {
           Playlist
         </li>
       </ul>
-      {results?.type === "song" && <List list={results.list} search={true} />}
-      {results?.type === "artist" && (
+
+      {error && (
+        <h2
+          style={{
+            textAlign: "center",
+          }}
+        >
+          😔 Could not find a match. Try another one.
+        </h2>
+      )}
+
+      {results.type === "song" && <List list={results.list} search={true} />}
+      {results.type === "artist" && (
         <SquareList list={results.list} artist={true} />
       )}
-      {results?.type === "playlist" && <SquareList list={results.list} />}
+      {results.type === "playlist" && <SquareList list={results.list} />}
     </div>
   );
 };
