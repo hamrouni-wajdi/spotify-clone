@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/thunks/user";
 import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
+import isValidEmail from "./isValidEmail";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const user = useSelector((state) => state.user);
@@ -14,6 +16,10 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
+
+    if (!isValidEmail(email)) {
+      return toast.warn("Email is not valid");
+    }
 
     dispatch(loginUser({ email, password }));
   };

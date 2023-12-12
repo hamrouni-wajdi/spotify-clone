@@ -5,6 +5,7 @@ import { signupUser } from "../../store/thunks/user";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import isValidEmail from "./isValidEmail";
 
 const Signup = () => {
   const user = useSelector((state) => state.user);
@@ -18,8 +19,13 @@ const Signup = () => {
   const handleSignup = (e) => {
     e.preventDefault();
 
-    if (password !== passwordConfirm) toast.warn("Passwords do not match");
-    else dispatch(signupUser({ name, email, password, passwordConfirm }));
+    if (password !== passwordConfirm)
+      return toast.warn("Passwords do not match");
+    else if (!isValidEmail(email)) {
+      return toast.warn("Email is not valid");
+    }
+
+    dispatch(signupUser({ name, email, password, passwordConfirm }));
   };
 
   return (

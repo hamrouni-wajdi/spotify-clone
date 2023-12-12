@@ -4,6 +4,8 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import { forgotPassword } from "../../store/thunks/user";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
+import isValidEmail from "./isValidEmail";
+import { toast } from "react-toastify";
 
 const Forgot = () => {
   const user = useSelector((state) => state.user.data);
@@ -13,6 +15,10 @@ const Forgot = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
+    if (!isValidEmail(email)) {
+      return toast.warn("Email is not valid");
+    }
 
     dispatch(forgotPassword({ email }));
   };
