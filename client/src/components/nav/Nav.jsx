@@ -26,14 +26,14 @@ const Nav = () => {
   return (
     <div className="nav">
       <div className="nav__block">
-        <Link to={"/"} className="nav-link">
+        <NavLink to={"/"} className="nav__link">
           <IoHomeOutline />
           <span>Home</span>
-        </Link>
-        <Link to="/search" className="nav-link">
+        </NavLink>
+        <NavLink to="/search" className="nav__link">
           <IoSearch />
           <span>Search</span>
-        </Link>
+        </NavLink>
       </div>
       <div className="library">
         <div className="library__header">
@@ -75,15 +75,15 @@ const Nav = () => {
       </div>
       <div className="nav__block">
         {user?.role === "artist" && (
-          <Link to="/admin" className="nav-link">
+          <NavLink to="/admin" className={`nav__link`}>
             <IoMusicalNoteOutline />
             <span>Admin</span>
-          </Link>
+          </NavLink>
         )}
-        <Link to="/profile" className="nav-link">
+        <NavLink to="/profile" className="nav__link">
           <IoPersonCircleOutline />
           <span>Profile</span>
-        </Link>
+        </NavLink>
       </div>
     </div>
   );

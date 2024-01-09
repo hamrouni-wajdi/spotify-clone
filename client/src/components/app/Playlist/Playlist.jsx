@@ -136,7 +136,7 @@ const Playlist = () => {
           </div>
         </div>
       ) : (
-        <Loading />
+        <Loading fullHeight={true} />
       )}
 
       {modal && (

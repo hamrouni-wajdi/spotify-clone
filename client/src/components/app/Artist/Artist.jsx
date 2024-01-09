@@ -74,7 +74,7 @@ const Artist = () => {
           </div>
         </div>
       ) : (
-        <Loading />
+        <Loading fullHeight={true} />
       )}
     </>
   );

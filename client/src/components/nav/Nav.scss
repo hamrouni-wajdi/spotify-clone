@@ -18,8 +18,8 @@
     padding: .8rem;
   }
 
-  &-link:link,
-  &-link:visited {
+  &__link:link,
+  &__link:visited {
     font-size: 1.8rem;
     font-weight: 700;
     text-decoration: none;
@@ -42,4 +42,8 @@
       color: inherit;
     }
   }
+}
+
+.nav__link.active {
+  color: #fff;
 }

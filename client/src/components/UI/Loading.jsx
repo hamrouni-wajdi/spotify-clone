@@ -2,10 +2,10 @@ import "./Loading.scss";
 import loadingSvg from "./../../img/loading.svg";
 import { Link } from "react-router-dom";
 
-const Loading = ({ main }) => {
+const Loading = ({ main = false, fullHeight = false }) => {
   return (
-    <div className="loading">
-      <img src={loadingSvg} alt="Loading spinner" />
+    <div className={`loading ${fullHeight && "full-height"}`}>
+      <img src={loadingSvg} alt="" />
       {main && (
         <p>
           If it takes too long,&nbsp;
