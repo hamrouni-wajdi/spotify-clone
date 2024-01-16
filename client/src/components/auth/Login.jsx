@@ -6,6 +6,8 @@ import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import isValidEmail from "./isValidEmail";
 import { toast } from "react-toastify";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
 
 const Login = () => {
   const user = useSelector((state) => state.user);
@@ -33,24 +35,22 @@ const Login = () => {
             <Link to="/signup" className="auth__form-link">
               Sign Up here
             </Link>
-            <input
-              type="text"
+            <Input
+              type="email"
               placeholder="Email"
-              required
+              required={true}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <input
+            <Input
               type="password"
-              minLength="8"
-              maxLength="16"
               placeholder="Password"
-              required
+              required={true}
               onChange={(e) => setPassword(e.target.value)}
             />
             <Link to="/forgotPassword" className="auth__form-link">
               Forgot password?
             </Link>
-            <button type="submit">{user.loading ? "Loading" : "Login"}</button>
+            <Button type="submit">{user.loading ? "Loading" : "Login"}</Button>
           </form>
         </div>
       ) : (

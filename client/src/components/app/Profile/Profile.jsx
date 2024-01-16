@@ -10,6 +10,8 @@ import { useRef } from "react";
 import axios from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Button from "../../UI/Button";
+import Input from "../../UI/Input";
 
 const Profile = () => {
   const user = useSelector((state) => state.user.data);
@@ -67,7 +69,7 @@ const Profile = () => {
               <h2>Update your information</h2>
               <form ref={formInfoRef} onSubmit={formInfoHandler}>
                 <label htmlFor="name">Name</label>
-                <input
+                <Input
                   type="text"
                   name="name"
                   minLength="3"
@@ -75,35 +77,35 @@ const Profile = () => {
                   placeholder={user.name}
                 />
                 <label htmlFor="email">Email</label>
-                <input type="text" name="email" placeholder={user.email} />
+                <Input type="text" name="email" placeholder={user.email} />
                 <label htmlFor="photo">Photo</label>
-                <input type="file" name="photo" accept="image/*" />
-                <button type="submit">Update</button>
+                <Input type="file" name="photo" accept="image/*" />
+                <Button type="submit">Update</Button>
               </form>
               <h2>Update your password</h2>
               <form ref={formPassRef} onSubmit={formPassHandler}>
                 <label htmlFor="oldPassword">Old password</label>
-                <input
+                <Input
                   type="password"
                   name="oldPassword"
                   minLength="8"
                   maxLength="16"
                 />
                 <label htmlFor="newPassword">New password</label>
-                <input
+                <Input
                   type="password"
                   name="newPassword"
                   minLength="8"
                   maxLength="16"
                 />
                 <label htmlFor="confirmPassword">Confirm password</label>
-                <input
+                <Input
                   type="password"
                   name="confirmPassword"
                   minLength="8"
                   maxLength="16"
                 />
-                <button type="submit">Update</button>
+                <Button type="submit">Update</Button>
               </form>
               {user.role === "user" && (
                 <p

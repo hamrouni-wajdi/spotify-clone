@@ -5,6 +5,7 @@ import { resetPassword } from "../../store/thunks/user";
 import { Navigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import Button from "../UI/Button";
 
 const Reset = () => {
   const user = useSelector((state) => state.user);
@@ -40,9 +41,9 @@ const Reset = () => {
               required
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
-            <button type="submit">
+            <Button type="submit">
               {user.loading ? "Loading" : "Update password"}
-            </button>
+            </Button>
           </form>
         </div>
       ) : (

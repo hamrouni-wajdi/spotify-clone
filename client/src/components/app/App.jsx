@@ -28,8 +28,6 @@ const App = (props) => {
           />
         </div>
       </div>
-      {/*<Home />*/}
-      {/*<Artist />*/}
       {props.children}
     </div>
   );

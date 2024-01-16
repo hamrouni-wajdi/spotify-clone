@@ -66,30 +66,10 @@
       }
 
       input {
-        font-size: inherit;
-        color: #fff;
-        background-color: #121212;
-        border: none;
-        border-radius: 5rem;
-        outline: 2px solid rgba(255, 255, 255, 0.1);
-
         width: 35rem;
-        padding: 1.2rem 1.6rem;
-
-        justify-self: start;
       }
 
       button {
-        font-size: inherit;
-        font-weight: inherit;
-        color: #fff;
-        background-color: #1db954;
-        border: none;
-        border-radius: 5rem;
-        cursor: pointer;
-
-        padding: .8rem 1.6rem;
-
         grid-column: 2;
         justify-self: start;
       }

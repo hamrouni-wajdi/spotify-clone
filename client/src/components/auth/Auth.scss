@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    //gap: .8rem;
+    gap: 1.6rem;
 
     &-logo {
       width: 16rem;
@@ -35,8 +35,6 @@
       text-decoration: underline;
       cursor: pointer;
 
-      margin-bottom: 1.6rem;
-
       &:hover {
         color: #fff;
       }
@@ -47,34 +45,7 @@
       font-size: 1.4rem;
       color: #fff;
 
-
       align-self: flex-start;
-      margin-bottom: .8rem;
-    }
-
-    input {
-      font-size: inherit;
-      color: #fff;
-      background-color: #121212;
-      border: none;
-      border-radius: 5rem;
-      outline: 2px solid rgba(255, 255, 255, 0.1);
-
-      min-width: 24rem;
-      padding: 1.2rem 2.4rem;
-      margin-bottom: 1.6rem;
-    }
-
-    button {
-      font-size: inherit;
-      font-weight: inherit;
-      color: #fff;
-      background-color: #1DB954;
-      border: none;
-      border-radius: 5rem;
-      cursor: pointer;
-
-      padding: 1.2rem 2.4rem;
     }
   }
 }

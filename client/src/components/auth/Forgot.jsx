@@ -6,6 +6,8 @@ import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import isValidEmail from "./isValidEmail";
 import { toast } from "react-toastify";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
 
 const Forgot = () => {
   const user = useSelector((state) => state.user.data);
@@ -30,13 +32,13 @@ const Forgot = () => {
         <div className="auth">
           <form className="auth__form" onSubmit={handleFormSubmit}>
             <img className="auth__form-logo" src={logo} alt="Spotify logo" />
-            <input
+            <Input
               type="email"
               placeholder="Email"
-              required
+              required={true}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <button type="submit">{loading ? "Loading" : "Send Token"}</button>
+            <Button type="submit">{loading ? "Loading" : "Send Token"}</Button>
           </form>
         </div>
       ) : (

@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import isValidEmail from "./isValidEmail";
+import Button from "../UI/Button";
+import Input from "../UI/Input";
 
 const Signup = () => {
   const user = useSelector((state) => state.user);
@@ -16,6 +18,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
+  // TODO: Validate all inputs
   const handleSignup = (e) => {
     e.preventDefault();
 
@@ -37,43 +40,36 @@ const Signup = () => {
             <Link to="/login" className="auth__form-link">
               Log In here
             </Link>
-            <input
-              type="text"
+            <Input
               name="name"
-              minLength="3"
-              maxLength="24"
               placeholder="Name"
-              required
+              required={true}
               onChange={(e) => setName(e.target.value)}
             />
-            <input
-              type="text"
+            <Input
+              type={email}
               name="email"
               placeholder="Email"
-              required
+              required={true}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <input
+            <Input
               type="password"
               name="password"
-              minLength="8"
-              maxLength="16"
               placeholder="Password"
-              required
+              required={true}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <input
+            <Input
               type="password"
               name="passwordConfirm"
-              minLength="8"
-              maxLength="16"
               placeholder="Password Confirm"
-              required
+              required={true}
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
-            <button type="submit">
+            <Button type="submit">
               {user.loading ? "Loading" : "Sign Up"}
-            </button>
+            </Button>
           </form>
         </div>
       ) : (
