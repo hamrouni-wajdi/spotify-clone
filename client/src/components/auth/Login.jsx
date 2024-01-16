@@ -6,6 +6,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import isValidEmail from "./isValidEmail";
 import { toast } from "react-toastify";
+import Button from "../UI/Button";
 
 const Login = () => {
   const user = useSelector((state) => state.user);
@@ -50,7 +51,7 @@ const Login = () => {
             <Link to="/forgotPassword" className="auth__form-link">
               Forgot password?
             </Link>
-            <button type="submit">{user.loading ? "Loading" : "Login"}</button>
+            <Button type="submit">{user.loading ? "Loading" : "Login"}</Button>
           </form>
         </div>
       ) : (

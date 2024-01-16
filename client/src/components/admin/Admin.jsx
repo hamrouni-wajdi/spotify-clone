@@ -12,6 +12,7 @@ import {
 import List from "../UI/List";
 import { IoCloseCircle } from "react-icons/io5";
 import Loading from "../UI/Loading";
+import Button from "../UI/Button";
 
 const Admin = () => {
   const [song, setSong] = useState({});
@@ -104,7 +105,9 @@ const Admin = () => {
             <input type="file" name="song" id="song" />
             <label htmlFor="name">Name</label>
             <input type="text" name="name" id="name" placeholder="Song name" />
-            <button>Upload</button>
+            <Button type="submit" color="white" fullWidth={true}>
+              Upload
+            </Button>
           </form>
         </div>
       )}
@@ -126,16 +129,20 @@ const Admin = () => {
             <input type="file" name="img" id="img" placeholder="Img" />
             <label htmlFor="name">Name</label>
             <input type="text" name="name" id="name" placeholder={song.name} />
-            <button>Update</button>
-            <button
-              style={{ background: "#EF4444" }}
+
+            <Button type="submit" color="white" fullWidth={true}>
+              Update
+            </Button>
+            <Button
+              color="red"
+              fullWidth={true}
               onClick={(e) => {
                 e.preventDefault();
                 deleteSongHandler(song.id);
               }}
             >
               Delete
-            </button>
+            </Button>
           </form>
         </div>
       )}

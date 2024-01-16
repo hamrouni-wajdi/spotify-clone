@@ -10,6 +10,7 @@ import { useRef } from "react";
 import axios from "../../../api/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Button from "../../UI/Button";
 
 const Profile = () => {
   const user = useSelector((state) => state.user.data);
@@ -78,7 +79,7 @@ const Profile = () => {
                 <input type="text" name="email" placeholder={user.email} />
                 <label htmlFor="photo">Photo</label>
                 <input type="file" name="photo" accept="image/*" />
-                <button type="submit">Update</button>
+                <Button type="submit">Update</Button>
               </form>
               <h2>Update your password</h2>
               <form ref={formPassRef} onSubmit={formPassHandler}>
@@ -103,7 +104,7 @@ const Profile = () => {
                   minLength="8"
                   maxLength="16"
                 />
-                <button type="submit">Update</button>
+                <Button type="submit">Update</Button>
               </form>
               {user.role === "user" && (
                 <p

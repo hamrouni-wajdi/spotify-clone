@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import isValidEmail from "./isValidEmail";
+import Button from "../UI/Button";
 
 const Signup = () => {
   const user = useSelector((state) => state.user);
@@ -71,9 +72,9 @@ const Signup = () => {
               required
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
-            <button type="submit">
+            <Button type="submit">
               {user.loading ? "Loading" : "Sign Up"}
-            </button>
+            </Button>
           </form>
         </div>
       ) : (

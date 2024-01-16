@@ -21,6 +21,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { replaceQueue } from "../../../store/reducers/queue";
 import { deletePlaylist, getAllPlaylists } from "../../../store/thunks/user";
 import Loading from "../../UI/Loading";
+import Button from "../../UI/Button";
 
 const Playlist = () => {
   const [modal, setModal] = useState(false);
@@ -163,16 +164,20 @@ const Playlist = () => {
                 cols="30"
                 placeholder="Add an optional description"
               ></textarea>
-              <button>Save</button>
-              <button
-                style={{ background: "#EF4444" }}
+              <Button type="submit" color="white" fullWidth={true}>
+                Save
+              </Button>
+              <Button
+                color="red"
+                fullWidth={true}
                 onClick={(e) => {
                   e.preventDefault();
+                  console.log("sdfds");
                   deletePlaylistHandler(playlist.id);
                 }}
               >
                 Delete
-              </button>
+              </Button>
             </div>
           </form>
         </div>
