@@ -12,6 +12,7 @@ import {
 import { createPlaylist } from "../../store/thunks/user";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import LibraryLink from "./LibraryLink";
 
 const Nav = () => {
   const user = useSelector((state) => state.user.data);
@@ -46,10 +47,22 @@ const Nav = () => {
         </div>
         {user.id && (
           <div className="saved">
-            <Link to="/likedSongs" className="saved__link">
-              <img src={likedSongsImg} alt="Heart" />
-              <span>📌 - Liked Songs</span>
-            </Link>
+            <LibraryLink
+              isArtist={false}
+              to="/likedSongs"
+              img={likedSongsImg}
+              pinned={true}
+            >
+              Liked Songs
+            </LibraryLink>
+            <LibraryLink
+              isArtist={true}
+              artistName={"Lol"}
+              to="/likedSongs"
+              img={likedSongsImg}
+            >
+              Some One
+            </LibraryLink>
             {[
               ...user.likedPlaylists,
               ...user.followedArtists,
@@ -57,18 +70,14 @@ const Nav = () => {
             ]
               .sort((a, b) => (a.name > b.name ? 1 : -1))
               .map((el) => (
-                <NavLink
+                <LibraryLink
                   key={el.id}
+                  isArtist={isArtist(el)}
                   to={(isArtist(el) ? "/artist/" : "/playlist/") + el.id}
-                  className={() => {
-                    return `saved__link ${
-                      isArtist(el) ? "saved__link--artist" : ""
-                    } ${el.id === "6513505bef35c9d633139956" ? "vip" : ""}`;
-                  }}
+                  img={el.img}
                 >
-                  <img src={el.img} alt={el.name} />
-                  <span>{el.name}</span>
-                </NavLink>
+                  {el.name}
+                </LibraryLink>
               ))}
           </div>
         )}

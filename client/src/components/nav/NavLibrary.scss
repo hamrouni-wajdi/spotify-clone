@@ -30,46 +30,5 @@
 
   display: flex;
   flex-direction: column;
-  padding: 0 .8rem;
-
-  &__link,
-  &__link:link,
-  &__link:visited {
-    font: inherit;
-    text-decoration: none;
-    color: inherit;
-    border-radius: 6px;
-
-    padding: 1.2rem;
-
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 1.6rem;
-
-    img {
-      width: 6.4rem;
-    }
-
-    span {
-      font-weight: 500;
-      color: #fff;
-    }
-
-    &:hover {
-      background: #181818;
-    }
-  }
-
-  &__link[aria-current="page"] {
-    background: #232323;
-  }
-
-  &__link--artist img {
-    border-radius: 5rem !important;
-  }
-
-  &__link--active {
-    background-color: #282828;
-  }
+  padding: 0 1.2rem;
 }
