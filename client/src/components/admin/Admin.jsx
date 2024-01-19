@@ -13,7 +13,6 @@ import List from "../UI/List";
 import { IoCloseCircle } from "react-icons/io5";
 import Loading from "../UI/Loading";
 import Button from "../UI/Button";
-import Input from "../UI/Input";
 
 const Admin = () => {
   const [song, setSong] = useState({});
