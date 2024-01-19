@@ -55,14 +55,6 @@ const Nav = () => {
             >
               Liked Songs
             </LibraryLink>
-            <LibraryLink
-              isArtist={true}
-              artistName={"Lol"}
-              to="/likedSongs"
-              img={likedSongsImg}
-            >
-              Some One
-            </LibraryLink>
             {[
               ...user.likedPlaylists,
               ...user.followedArtists,
