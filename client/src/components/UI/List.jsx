@@ -14,6 +14,7 @@ import axios from "../../api/axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import { RiEditCircleLine } from "react-icons/all";
 
 const List = (props) => {
   const [songId, setSongId] = useState("");
@@ -111,7 +112,7 @@ const List = (props) => {
               )}
               <span>
                 {props.admin && (
-                  <IoPencil onClick={() => props.handler(el.id)} />
+                  <RiEditCircleLine onClick={() => props.handler(el.id)} />
                 )}
                 {!props.admin &&
                   (props.onPlaylist ? (

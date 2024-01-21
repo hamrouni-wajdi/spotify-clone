@@ -1,6 +1,7 @@
 import "./Input.scss";
 
 const Input = ({
+  id = "",
   type = "text",
   name = "",
   minLength = "",
@@ -12,6 +13,7 @@ const Input = ({
   return (
     <input
       className="input"
+      id={id}
       type={type}
       name={name}
       placeholder={placeholder}

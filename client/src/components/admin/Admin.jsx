@@ -13,13 +13,15 @@ import List from "../UI/List";
 import { IoCloseCircle } from "react-icons/io5";
 import Loading from "../UI/Loading";
 import Button from "../UI/Button";
+import ModalWrapper from "../UI/ModalWrapper";
+import Input from "../UI/Input";
 
 const Admin = () => {
   const [song, setSong] = useState({});
-  const [modal, setModal] = useState(false);
-  const [editModal, setEditModal] = useState(false);
+  const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
 
-  const { songs } = useSelector((state) => state.admin);
+  const { songs, isUploading } = useSelector((state) => state.admin);
   const dispatch = useDispatch();
 
   const formRef = useRef();
@@ -29,37 +31,94 @@ const Admin = () => {
     dispatch(getSongs());
   }, []);
 
-  const openModalHandler = () => setModal(true);
-
-  const closeModalHandler = () => setModal(false);
-
-  const openEditModalHandler = (id) => {
-    const song = songs.find((song) => song.id === id);
-    setSong(song);
-    setEditModal(true);
-  };
-
-  const closeEditModalHandler = () => setEditModal(false);
-
+  // Upload song handlers
+  const handleOpenModal = () => setUploadModalOpen(true);
+  const handleCloseModal = () => setUploadModalOpen(false);
   const formSubmitHandler = (e) => {
     e.preventDefault();
 
     const formData = new FormData(formRef.current);
     dispatch(uploadSong({ data: formData }));
-    setModal(false);
   };
 
+  // Edit song handlers
+  const handleOpenEditModal = (id) => {
+    const song = songs.find((song) => song.id === id);
+    setSong(song);
+    setEditModalOpen(true);
+  };
+  const handleCloseEditModal = () => setEditModalOpen(false);
   const editFormSubmitHandler = (e) => {
     e.preventDefault();
 
     const formData = new FormData(editFormRef.current);
     dispatch(updateSong({ data: formData, id: song.id }));
-    setEditModal(false);
+    setEditModalOpen(false);
   };
 
   const deleteSongHandler = (id) => {
     dispatch(deleteSong(id));
-    setEditModal(false);
+    setEditModalOpen(false);
+  };
+
+  const uploadModal = () => {
+    // NOTE: If upload is successful or cancelled then modal will be closed
+    if (isUploading === "idle" || isUploading === "uploading")
+      return (
+        <ModalWrapper
+          heading="Upload song"
+          open={uploadModalOpen}
+          handleClose={handleCloseModal}
+        >
+          <form ref={formRef} onSubmit={formSubmitHandler}>
+            <label htmlFor="img">Img</label>
+            <Input id="img" type="file" name="img" placeholder="Img" />
+
+            <label htmlFor="song">Song</label>
+            <Input type="file" name="song" id="song" />
+
+            <label htmlFor="name">Name</label>
+            <Input type="text" name="name" id="name" placeholder="Song name" />
+
+            <Button type="submit" color="white" fullWidth={true}>
+              {isUploading === "idle" && "Upload"}
+              {isUploading === "uploading" && "Uploading"}
+            </Button>
+          </form>
+        </ModalWrapper>
+      );
+  };
+
+  const editModal = () => {
+    return (
+      <ModalWrapper
+        heading="Update song"
+        open={editModalOpen}
+        handleClose={handleCloseEditModal}
+      >
+        <form ref={editFormRef} onSubmit={editFormSubmitHandler}>
+          <img src={song.img} alt="Song cover" />
+          <Input type="file" name="img" placeholder="Img" />
+
+          <label htmlFor="name">Name</label>
+          <Input id="name" type="text" name="name" placeholder={song.name} />
+
+          <Button type="submit" color="white" fullWidth={true}>
+            Update
+          </Button>
+          <Button
+            color="red"
+            fullWidth={true}
+            onClick={(e) => {
+              e.preventDefault();
+              deleteSongHandler(song.id);
+            }}
+          >
+            Delete
+          </Button>
+        </form>
+      </ModalWrapper>
+    );
   };
 
   return (
@@ -74,50 +133,27 @@ const Admin = () => {
               <span>{songs.reduce((acc, song) => acc + song.plays, 0)}</span>
               plays
             </div>
-            <div className="admin__card" onClick={openModalHandler}>
+            <div className="admin__card" onClick={handleOpenModal}>
               <span>+</span> upload new
             </div>
           </div>
           <div className="admin__list">
-            <List list={songs} admin={true} handler={openEditModalHandler} />
+            <List list={songs} admin={true} handler={handleOpenEditModal} />
           </div>
         </div>
       ) : (
         <Loading />
       )}
 
-      {modal && (
-        <div className="modal modal--admin">
-          <div className="modal__header">
-            <h2>Upload a new song</h2>
-            <div className="modal__close">
-              <IoCloseCircle onClick={closeModalHandler} />
-            </div>
-          </div>
-          <form
-            ref={formRef}
-            className="modal__form"
-            onSubmit={formSubmitHandler}
-          >
-            <label htmlFor="img">Img</label>
-            <input type="file" name="img" id="img" placeholder="Img" />
-            <label htmlFor="song">Song</label>
-            <input type="file" name="song" id="song" />
-            <label htmlFor="name">Name</label>
-            <input type="text" name="name" id="name" placeholder="Song name" />
-            <Button type="submit" color="white" fullWidth={true}>
-              Upload
-            </Button>
-          </form>
-        </div>
-      )}
+      {uploadModal()}
+      {editModal()}
 
-      {song && editModal && (
+      {song && editModalOpen && "bad" === "good" && (
         <div className="modal modal--admin">
           <div className="modal__header">
             <h2>Upload a new song</h2>
             <div className="modal__close">
-              <IoCloseCircle onClick={closeEditModalHandler} />
+              <IoCloseCircle onClick={handleCloseEditModal} />
             </div>
           </div>
           <form
