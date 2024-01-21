@@ -15,10 +15,11 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { RiEditCircleLine } from "react-icons/all";
+import ModalWrapper from "./ModalWrapper";
 
 const List = (props) => {
   const [songId, setSongId] = useState("");
-  const [modal, setModal] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const { likedSongs, playlists } = useSelector((state) => state.user.data);
   const { currentId } = useSelector((state) => state.queue);
@@ -47,17 +48,18 @@ const List = (props) => {
     dispatch(dislikeSong(song.id));
   };
 
+  // Model handlers
   const openModalHandler = (id) => {
-    setModal(true);
+    setModalOpen(true);
     setSongId(id);
   };
 
-  const closeModalHandler = () => setModal(false);
+  const closeModalHandler = () => setModalOpen(false);
 
   const addSongToPlaylistHandler = async (id, songId) => {
     const res = await axios.post(`playlists/${id}/song/${songId}`);
     toast.success(res.data.message);
-    setModal(false);
+    setModalOpen(false);
   };
 
   const removeSongFromPlaylistHandler = async (id, songId) => {
@@ -131,7 +133,7 @@ const List = (props) => {
           ))}
       </div>
 
-      {modal && (
+      {modalOpen && "bad" === "good" && (
         <div className="modal modal--list">
           <div className="modal__header">
             <h2>Save song to</h2>
@@ -152,6 +154,25 @@ const List = (props) => {
           </ul>
         </div>
       )}
+
+      <ModalWrapper
+        heading="Save song to"
+        open={modalOpen}
+        type="list"
+        handleClose={closeModalHandler}
+      >
+        <ul className="modal__list">
+          {playlists.map((p, i) => (
+            <li
+              key={i}
+              className="modal-wrapper__item"
+              onClick={() => addSongToPlaylistHandler(p.id, songId)}
+            >
+              {p.name}
+            </li>
+          ))}
+        </ul>
+      </ModalWrapper>
     </>
   );
 };
