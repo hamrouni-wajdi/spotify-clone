@@ -9,6 +9,7 @@ import { followArtist, unfollowArtist } from "../../../store/thunks/user";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import Loading from "../../UI/Loading";
+import {RiPlayCircleFill} from "react-icons/ri";
 
 const Artist = () => {
   const { artist } = useSelector((state) => state.artist);
@@ -55,7 +56,7 @@ const Artist = () => {
           </div>
 
           <div className="artist__nav">
-            <IoPlayCircle onClick={() => replaceQueueHandler(artist.songs)} />
+            <RiPlayCircleFill onClick={() => replaceQueueHandler(artist.songs)} />
             {!userFollowedArtist(artist.id) ? (
               <button onClick={followArtistHandler}>Follow</button>
             ) : (

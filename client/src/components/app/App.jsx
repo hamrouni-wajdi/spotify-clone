@@ -3,6 +3,7 @@ import "./App.scss";
 import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {RiArrowLeftSLine, RiArrowRightSLine} from "react-icons/ri";
 
 const App = (props) => {
   const { data } = useSelector((state) => state.user);
@@ -13,10 +14,10 @@ const App = (props) => {
       <div className="app__nav">
         <div className="app__nav__history">
           <div className="app__nav__history-icon">
-            <IoChevronBackOutline onClick={() => navigate(-1)} />
+            <RiArrowLeftSLine onClick={() => navigate(-1)} />
           </div>
           <div className="app__nav__history-icon">
-            <IoChevronForwardOutline onClick={() => navigate(1)} />
+            <RiArrowRightSLine onClick={() => navigate(1)} />
           </div>
         </div>
         <div className="app__nav__profile">

@@ -22,6 +22,7 @@ import { replaceQueue } from "../../../store/reducers/queue";
 import { deletePlaylist, getAllPlaylists } from "../../../store/thunks/user";
 import Loading from "../../UI/Loading";
 import Button from "../../UI/Button";
+import {RiEditCircleLine} from "react-icons/ri";
 
 const Playlist = () => {
   const [modal, setModal] = useState(false);
@@ -122,7 +123,7 @@ const Playlist = () => {
                 />
               ))}
             {playlist.user.id === userId && (
-              <IoPencil
+              <RiEditCircleLine
                 onClick={openModalHandler}
                 style={{
                   fontSize: "3.2rem",

@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
+import {RiLogoutBoxLine} from "react-icons/ri";
 
 const Profile = () => {
   const user = useSelector((state) => state.user.data);
@@ -119,7 +120,7 @@ const Profile = () => {
                 onClick={logoutHandler}
                 style={{ color: "#ef4444", cursor: "pointer" }}
               >
-                ✈️ Log out
+                <RiLogoutBoxLine /> Log out
               </p>
             </div>
           </div>

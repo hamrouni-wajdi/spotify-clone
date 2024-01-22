@@ -1,18 +1,11 @@
 import "./Nav.scss";
 import "./NavLibrary.scss";
 import likedSongsImg from "../../img/likedSongs.jpeg";
-import {
-  IoAddCircleOutline,
-  IoHomeOutline,
-  IoLibraryOutline,
-  IoMusicalNoteOutline,
-  IoPersonCircleOutline,
-  IoSearch,
-} from "react-icons/io5";
 import { createPlaylist } from "../../store/thunks/user";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LibraryLink from "./LibraryLink";
+import {RiAddFill, RiBook3Line, RiHome4Line, RiMusicLine, RiSearchLine, RiUserLine} from "react-icons/ri";
 
 const Nav = () => {
   const user = useSelector((state) => state.user.data);
@@ -28,19 +21,19 @@ const Nav = () => {
     <div className="nav">
       <div className="nav__block">
         <NavLink to={"/"} className="nav__link">
-          <IoHomeOutline />
+          <RiHome4Line />
           <span>Home</span>
         </NavLink>
         <NavLink to="/search" className="nav__link">
-          <IoSearch />
+          <RiSearchLine />
           <span>Search</span>
         </NavLink>
       </div>
       <div className="library">
         <div className="library__header">
-          <IoLibraryOutline />
+          <RiBook3Line />
           <span>Library</span>
-          <IoAddCircleOutline
+          <RiAddFill
             style={{ marginLeft: "auto", fontSize: 28, cursor: "pointer" }}
             onClick={createPlaylistHandler}
           />
@@ -77,12 +70,12 @@ const Nav = () => {
       <div className="nav__block">
         {user?.role === "artist" && (
           <NavLink to="/admin" className={`nav__link`}>
-            <IoMusicalNoteOutline />
+            <RiMusicLine />
             <span>Admin</span>
           </NavLink>
         )}
         <NavLink to="/profile" className="nav__link">
-          <IoPersonCircleOutline />
+          <RiUserLine />
           <span>Profile</span>
         </NavLink>
       </div>

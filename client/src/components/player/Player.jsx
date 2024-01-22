@@ -17,6 +17,19 @@ import { playPause } from "../../store/reducers/player";
 import { nextSong, prevSong } from "../../store/reducers/queue";
 import axios from "../../api/axios";
 import { Link } from "react-router-dom";
+import {
+  RiHeart2Fill,
+  RiHeart2Line,
+  RiPauseCircleFill,
+  RiPlayCircleFill,
+  RiRepeatOneLine,
+  RiShuffleLine,
+  RiSkipBackMiniFill,
+  RiSkipForwardMiniFill,
+  RiVolumeDownLine,
+  RiVolumeMuteLine,
+  RiVolumeUpLine,
+} from "react-icons/ri";
 
 const Player = () => {
   const [volume, setVolume] = useState(100);
@@ -174,12 +187,12 @@ const Player = () => {
               </Link>
             </div>
             {userLikedSong() === true ? (
-              <IoHeart
+              <RiHeart2Fill
                 className="player__song__like player__song__like--active"
                 onClick={dislikeSongHandler}
               />
             ) : (
-              <IoHeartOutline
+              <RiHeart2Line
                 className="player__song__like"
                 onClick={likeSongHandler}
               />
@@ -195,26 +208,26 @@ const Player = () => {
             />
 
             <div className="player__icons">
-              <IoShuffle />
-              <IoPlaySkipBackSharp onClick={handlePrev} />
+              <RiShuffleLine />
+              <RiSkipBackMiniFill onClick={handlePrev} />
               <button
                 className="player__icon-btn"
                 onClick={togglePlayPauseHandler}
               >
                 {isPlaying ? (
-                  <IoPauseCircle className="spinner" />
+                  <RiPauseCircleFill className="spinner" />
                 ) : (
-                  <IoPlayCircle />
+                  <RiPlayCircleFill />
                 )}
               </button>
-              <IoPlaySkipForwardSharp onClick={handleNext} />
+              <RiSkipForwardMiniFill onClick={handleNext} />
               {repeatSong ? (
-                <IoRepeat
+                <RiRepeatOneLine
                   className={"player__repeat"}
                   onClick={repeatSongHandler}
                 />
               ) : (
-                <IoRepeat onClick={repeatSongHandler} />
+                <RiRepeatOneLine onClick={repeatSongHandler} />
               )}
             </div>
             <div className="player__range">
@@ -231,7 +244,13 @@ const Player = () => {
             </div>
           </div>
           <div className="player__volume">
-            <IoVolumeMediumOutline />
+            {Number(volume) === 0 ? (
+              <RiVolumeMuteLine />
+            ) : Number(volume) < 50 ? (
+              <RiVolumeDownLine />
+            ) : (
+              <RiVolumeUpLine />
+            )}
             <input
               ref={volumeRef}
               type="range"

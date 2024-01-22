@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 // import { RiEditCircleLine } from "react-icons/all";
 import ModalWrapper from "./ModalWrapper";
-import {RiEditCircleLine} from "react-icons/ri";
+import {RiDeleteBin6Line, RiEditCircleLine, RiHeart2Fill, RiHeart2Line, RiMoreLine} from "react-icons/ri";
 
 const List = (props) => {
   const [songId, setSongId] = useState("");
@@ -106,9 +106,9 @@ const List = (props) => {
               </Link>
               <span className="list__count">{el.plays}</span>
               {userLikedSong(el.id) ? (
-                <IoHeart onClick={() => dislikeSongHandler(el)} />
+                <RiHeart2Fill onClick={() => dislikeSongHandler(el)} />
               ) : (
-                <IoHeartOutline
+                <RiHeart2Line
                   style={{ color: "#fff" }}
                   onClick={() => likeSongHandler(el)}
                 />
@@ -119,13 +119,13 @@ const List = (props) => {
                 )}
                 {!props.admin &&
                   (props.onPlaylist ? (
-                    <IoTrash
+                    <RiDeleteBin6Line
                       onClick={() =>
                         removeSongFromPlaylistHandler(props.pId, el.id)
                       }
                     />
                   ) : (
-                    <IoEllipsisHorizontal
+                    <RiMoreLine
                       onClick={() => openModalHandler(el.id)}
                     />
                   ))}
@@ -133,28 +133,6 @@ const List = (props) => {
             </div>
           ))}
       </div>
-
-      {modalOpen && "bad" === "good" && (
-        <div className="modal modal--list">
-          <div className="modal__header">
-            <h2>Save song to</h2>
-            <div className="modal__close">
-              <IoCloseCircle onClick={closeModalHandler} />
-            </div>
-          </div>
-          <ul className="modal__list">
-            {playlists.map((p, i) => (
-              <li
-                key={i}
-                className="modal__item"
-                onClick={() => addSongToPlaylistHandler(p.id, songId)}
-              >
-                {p.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
 
       <ModalWrapper
         heading="Save song to"
