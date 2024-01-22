@@ -82,14 +82,6 @@ const Player = () => {
   }, [volume, audioRef]);
 
   useEffect(() => {
-    document.addEventListener("keydown", (e) => {
-      if (e.code === "Space") {
-        dispatch(playPause());
-      }
-    });
-  }, []);
-
-  useEffect(() => {
     const increaseCount = async () => {
       if (song) await axios.get(`/songs/${song.id}`);
     };
