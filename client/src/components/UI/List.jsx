@@ -14,8 +14,9 @@ import axios from "../../api/axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import { RiEditCircleLine } from "react-icons/all";
+// import { RiEditCircleLine } from "react-icons/all";
 import ModalWrapper from "./ModalWrapper";
+import {RiEditCircleLine} from "react-icons/ri";
 
 const List = (props) => {
   const [songId, setSongId] = useState("");
