@@ -34,12 +34,14 @@ export const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.data = action.payload.data;
         state.auth = true;
-        state.loading = true;
+        state.loading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.loading = true;
+        state.loading = false;
+
         toast.error(action.payload.response.data.message);
       })
+
       // Sign up
       .addCase(signupUser.pending, (state, action) => {
         state.loading = true;
@@ -51,8 +53,10 @@ export const userSlice = createSlice({
       })
       .addCase(signupUser.rejected, (state, action) => {
         state.loading = false;
+
         toast.error(action.payload.response.data.message);
       })
+
       // Is loggedIn
       .addCase(isLoggedIn.fulfilled, (state, action) => {
         state.data = action.payload.data;
@@ -60,11 +64,14 @@ export const userSlice = createSlice({
       })
       .addCase(isLoggedIn.rejected, (state, action) => {
         toast.error(action.payload.response.data.message);
-      }) // Update user
+      })
+
+      // Update user
       .addCase(updateUser.fulfilled, (state, action) => {
         state.data.name = action.payload.user.name;
         state.data.img = action.payload.user.img;
       })
+
       // Reset password
       .addCase(resetPassword.pending, (state, action) => {
         state.loading = true;
@@ -76,42 +83,61 @@ export const userSlice = createSlice({
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.loading = false;
+
         toast.error(action.payload.response.data.message);
       })
+
       // Log out
       .addCase(logoutUser.fulfilled, (state) => {
         state.auth = false;
       })
+
       // Like song
       .addCase(likeSong.fulfilled, (state, action) => {
         state.data.likedSongs = action.payload;
       })
+
       // Dislike song
       .addCase(dislikeSong.fulfilled, (state, action) => {
         state.data.likedSongs = action.payload;
       })
+
       // Follow user
       .addCase(followArtist.fulfilled, (state, action) => {
         state.data.followedArtists = action.payload;
-      }) // Unfollow user
+      })
+
+      // Unfollow user
       .addCase(unfollowArtist.fulfilled, (state, action) => {
         state.data.followedArtists = action.payload;
-      }) // Become an Artist
+      })
+
+      // Become an Artist
       .addCase(becomeArtist.fulfilled, (state) => {
         state.data.role = "artist";
-      }) // Create playlist
-      .addCase(createPlaylist.fulfilled, (state, action) => {
-        state.data.playlists = action.payload;
-      }) // Get All playlists
+      })
+
+      // Get All playlists
       .addCase(getAllPlaylists.fulfilled, (state, action) => {
         state.data.playlists = action.payload;
-      }) // Delete playlist
+      })
+
+      // Create playlist
+      .addCase(createPlaylist.fulfilled, (state, action) => {
+        state.data.playlists = action.payload;
+      })
+
+      // Delete playlist
       .addCase(deletePlaylist.fulfilled, (state, action) => {
         state.data.playlists = action.payload;
-      }) // Like playlist
+      })
+
+      // Like playlist
       .addCase(likePlaylist.fulfilled, (state, action) => {
         state.data.likedPlaylists = action.payload;
-      }) // Dislike playlist
+      })
+
+      // Dislike playlist
       .addCase(dislikePlaylist.fulfilled, (state, action) => {
         state.data.likedPlaylists = action.payload;
       });

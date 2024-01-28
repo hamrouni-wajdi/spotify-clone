@@ -6,6 +6,7 @@ import { Navigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import Button from "../UI/Button";
+import Input from "../UI/Input.jsx";
 
 const Reset = () => {
   const user = useSelector((state) => state.user);
@@ -29,13 +30,13 @@ const Reset = () => {
         <div className="auth">
           <form className="auth__form" onSubmit={handleFormSubmit}>
             <img className="auth__form-logo" src={logo} alt="Spotify logo" />
-            <input
+            <Input
               type="password"
               placeholder="Password"
               required
               onChange={(e) => setPassword(e.target.value)}
             />
-            <input
+            <Input
               type="password"
               placeholder="Confirm Password"
               required
