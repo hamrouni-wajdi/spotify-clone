@@ -1,4 +1,10 @@
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  redirect,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 import "./MainApp.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,15 +43,18 @@ function AppRoutes() {
 
   useEffect(() => {
     dispatch(isLoggedIn());
+
+    if (user.auth === false) redirect("/login");
   }, []);
 
   return (
     <BrowserRouter>
       {user.auth === "idle" && <Loading main={true} fullHeight={true} />}
 
-      <div className="main-app">
-        {user.auth === true && (
+      {user.auth === true && (
+        <div className="main-app">
           <Routes>
+            <Route path="*" element={<Navigate to='/' />} />
             <Route
               path="/"
               element={
@@ -138,16 +147,18 @@ function AppRoutes() {
               }
             ></Route>
           </Routes>
-        )}
-        {user.auth === false && <Navigate to='/login' />}
+        </div>
+      )}
 
+      {user.auth === false && (
         <Routes>
+          <Route path="*" element={<Navigate to='/login' />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<Forgot />} />
           <Route path="/resetPassword/:id" element={<Reset />} />
         </Routes>
-      </div>
+      )}
 
       <ToastContainer
         theme="dark"

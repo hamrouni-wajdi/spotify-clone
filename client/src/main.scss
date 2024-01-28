@@ -41,3 +41,15 @@ button {
   cursor: pointer;
 }
 
+// Temporary
+.note {
+  max-width: 80vw;
+  padding: 1rem;
+  border-radius: 3px;
+
+  position: absolute;
+  bottom: 3rem;
+
+  font-size: 1.4rem;
+  background-color: #121212;
+}

@@ -36,7 +36,7 @@ const Signup = () => {
       {!user.auth ? (
         <div className="auth">
           <form className="auth__form" onSubmit={handleSignup}>
-            <img className="auth__form-logo" src={logo} alt="Spotify logo" />
+            <img className="auth__form-logo" src={logo} alt="Spotify logo"/>
             <Link to="/login" className="auth__form-link">
               Log In here
             </Link>
@@ -71,9 +71,14 @@ const Signup = () => {
               {user.loading ? "Loading" : "Sign Up"}
             </Button>
           </form>
+
+          <p className="note">
+            ☝🏻 Please note that authentication may take a few minutes. As the server spins down a free web service that
+            goes 15 minutes without receiving inbound traffic, it takes some time to start.
+          </p>
         </div>
       ) : (
-        <Navigate to={"/"} />
+        <Navigate to={"/"}/>
       )}
     </>
   );
