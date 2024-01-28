@@ -206,7 +206,7 @@ exports.resetTokenTemplate = (resetToken) => `<!DOCTYPE html>
         To reset your password, simply click the button below and follow the
         instructions
       </p>
-      <a class="link" href="http://localhost:3000/resetPassword/${resetToken}">Reset your password</a>
+      <a class="link" href="https://maqsud-spotify.vercel.app/resetPassword/${resetToken}">Reset your password</a>
       <p class="paragraph">
         If you didn't request a password reset, please ignore this email.
       </p>
