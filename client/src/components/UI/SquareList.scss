@@ -11,16 +11,18 @@
 .square-card,
 .square-card:link,
 .square-card:visited {
+  width: 100%;
+  padding: 1.6rem;
+
   text-decoration: none;
   color: inherit;
   background: #181818;
   border-radius: 9px;
-  padding: 1.6rem;
-  width: 100%;
 
   img {
     width: 100%;
     margin-bottom: 1.6rem;
+
     box-shadow: 0 .8rem 2.4rem rgba(0,0,0,.5);
   }
 
@@ -34,9 +36,10 @@
 }
 
 .square-card__name {
+  margin-bottom: 4px;
+
   font-weight: bold !important;
   color: #fff !important;
-  margin-bottom: 4px;
 }
 
 .square-card--artist img {

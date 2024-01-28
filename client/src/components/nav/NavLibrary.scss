@@ -1,15 +1,12 @@
 .library {
+  height: 100%;
+  padding: 1.2rem 0;
+
   background-color: #121212;
   border-radius: 9px;
   overflow: hidden;
 
-  padding: 1.2rem 0;
-  height: 100%;
-
   &__header {
-    font-size: 1.8rem;
-    font-weight: 700;
-
     height: 4rem;
     padding: 0.6rem 2.4rem;
     margin-bottom: 1.2rem;
@@ -17,6 +14,9 @@
     display: flex;
     align-items: center;
     gap: 1.6rem;
+
+    font-size: 1.8rem;
+    font-weight: 700;
 
     svg {
       font-size: 2.4rem;
@@ -26,9 +26,9 @@
 
 .saved {
   height: calc(100% - 52px);
-  overflow-y: scroll;
 
   display: flex;
   flex-direction: column;
   padding: 0 1.2rem;
+  overflow-y: scroll;
 }
