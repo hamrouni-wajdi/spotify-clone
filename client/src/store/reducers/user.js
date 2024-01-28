@@ -22,7 +22,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState: {
     data: {},
-    auth: null,
+    auth: 'idle',
     loading: false,
   },
   reducers: {},
@@ -38,6 +38,7 @@ export const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
+        state.auth = false;
 
         toast.error(action.payload.response.data.message);
       })
@@ -63,6 +64,8 @@ export const userSlice = createSlice({
         state.auth = true;
       })
       .addCase(isLoggedIn.rejected, (state, action) => {
+        state.auth = false;
+
         toast.error(action.payload.response.data.message);
       })
 

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 
 import "./MainApp.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,14 +26,25 @@ function AppRoutes() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  /*
+  if idle
+    show loading
+  true
+    open app
+  false
+    open login screen
+   */
+
   useEffect(() => {
     dispatch(isLoggedIn());
   }, []);
 
   return (
     <BrowserRouter>
+      {user.auth === "idle" && <Loading main={true} fullHeight={true} />}
+
       <div className="main-app">
-        {user.auth === true ? (
+        {user.auth === true && (
           <Routes>
             <Route
               path="/"
@@ -127,23 +138,24 @@ function AppRoutes() {
               }
             ></Route>
           </Routes>
-        ) : (
-          <Loading main={true} />
         )}
+        {user.auth === false && <Navigate to='/login' />}
+
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<Forgot />} />
           <Route path="/resetPassword/:id" element={<Reset />} />
         </Routes>
-        <ToastContainer
-          theme="dark"
-          closeOnClick
-          style={{
-            opacity: 0.8,
-          }}
-        />
       </div>
+
+      <ToastContainer
+        theme="dark"
+        closeOnClick
+        style={{
+          opacity: 0.8,
+        }}
+      />
     </BrowserRouter>
   );
 }
