@@ -131,41 +131,43 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 exports.isLoggedIn = catchAsync(async (req, res, next) => {
-  if (req.cookies.jwt) {
-    const decoded = await promisify(jwt.verify)(
-      req.cookies.jwt,
-      process.env.JWT_SECRET
-    );
-
-    const user = await User.findById(decoded.id)
-      .populate('playlists')
-      .populate('followedArtists', 'name img role')
-      .populate('likedPlaylists', 'name img')
-      .populate('likedSongs');
-
-    if (!user) {
-      return next(
-        new AppError(
-          '🔐 The user belonging to this token does no longer exist.',
-          401
-        )
+  try {
+    if (req.cookies.jwt) {
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
       );
-    }
 
-    if (user.changedPasswordAfter(decoded.iat, 'login')) {
-      return next(
-        new AppError(
-          '🔐 Your password has been changed. Please log in again.',
-          401
-        )
-      );
-    }
+      const user = await User.findById(decoded.id)
+        .populate('playlists')
+        .populate('followedArtists', 'name img role')
+        .populate('likedPlaylists', 'name img')
+        .populate('likedSongs');
 
-    res.status(200).json({
-      status: 'success',
-      data: { user },
-    });
-  } else {
+      if (!user) {
+        return next(
+          new AppError(
+            '🔐 The user belonging to this token does no longer exist.',
+            401
+          )
+        );
+      }
+
+      if (user.changedPasswordAfter(decoded.iat, 'login')) {
+        return next(
+          new AppError(
+            '🔐 Your password has been changed. Please log in again.',
+            401
+          )
+        );
+      }
+
+      res.status(200).json({
+        status: 'success',
+        data: { user },
+      });
+    }
+  } catch (err) {
     res.status(401).json({
       status: 'error',
       message: '🍪 Please log in first',
