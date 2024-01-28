@@ -4,7 +4,6 @@ import { IoSearch } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import List from "../../UI/List";
 import SquareList from "../../UI/SquareList";
-import { toast } from "react-toastify";
 
 const Search = () => {
   const [query, setQuery] = useState("");

@@ -6,7 +6,6 @@ import {
   Routes,
 } from "react-router-dom";
 
-import "./MainApp.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { isLoggedIn } from "./store/thunks/user";
