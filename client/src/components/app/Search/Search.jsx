@@ -16,7 +16,6 @@ const Search = () => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (query.length < 3) return;
     const controller = new AbortController();
 
     const fetcher = async () => {
