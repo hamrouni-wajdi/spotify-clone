@@ -8,27 +8,35 @@ import isValidEmail from "./isValidEmail";
 import { toast } from "react-toastify";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
+import axios from "../../api/axios.js";
 
 const Forgot = () => {
-  const user = useSelector((state) => state.user.data);
-  const dispatch = useDispatch();
+  const {auth} = useSelector((state) => state.user.data);
 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     if (!isValidEmail(email)) {
       return toast.warn("Email is not valid");
     }
 
-    dispatch(forgotPassword({ email }));
+    try {
+      await axios.post("users/forgotPassword", { email });
+      toast.success("Email sent");
+    } catch (err) {
+      toast.error(err.message)
+    } finally {
+      setLoading(false)
+    }
   };
 
   return (
     <>
-      {!user.auth ? (
+      {!auth ? (
         <div className="auth">
           <form className="auth__form" onSubmit={handleFormSubmit}>
             <img className="auth__form-logo" src={logo} alt="Spotify logo" />
@@ -38,7 +46,7 @@ const Forgot = () => {
               required={true}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Button type="submit">{loading ? "Loading" : "Send Token"}</Button>
+            <Button type="submit" isLoading={loading}>Send Token</Button>
           </form>
         </div>
       ) : (
