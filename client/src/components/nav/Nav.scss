@@ -36,6 +36,10 @@
       font-size: 2.8rem;
     }
 
+    .fill {
+      display: none;
+    }
+
     a:link,
     a:visited {
       text-decoration: none;
@@ -44,6 +48,15 @@
   }
 }
 
+// Icons change between outline and fill based on active class
 .nav__link.active {
   color: #fff;
+
+  .fill {
+    display: inline-block;
+  }
+
+  .line {
+    display: none;
+  }
 }

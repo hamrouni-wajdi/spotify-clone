@@ -5,7 +5,14 @@ import { createPlaylist } from "../../store/thunks/user";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LibraryLink from "./LibraryLink";
-import {RiAddFill, RiBook3Line, RiHome4Line, RiMusicLine, RiSearchLine, RiUserLine} from "react-icons/ri";
+import {
+  RiAddFill, RiBook3Fill,
+  RiBook3Line, RiHome4Fill,
+  RiHome4Line, RiMusicFill,
+  RiMusicLine, RiSearchFill,
+  RiSearchLine, RiUserFill,
+  RiUserLine,
+} from "react-icons/ri";
 
 const Nav = () => {
   const user = useSelector((state) => state.user.data);
@@ -21,14 +28,18 @@ const Nav = () => {
     <div className="nav">
       <div className="nav__block">
         <NavLink to={"/"} className="nav__link">
-          <RiHome4Line />
+          <RiHome4Line className='line' />
+          <RiHome4Fill className='fill' />
           <span>Home</span>
         </NavLink>
+
         <NavLink to="/search" className="nav__link">
-          <RiSearchLine />
+          <RiSearchLine className='line' />
+          <RiSearchFill className='fill' />
           <span>Search</span>
         </NavLink>
       </div>
+
       <div className="library">
         <div className="library__header">
           <RiBook3Line />
@@ -38,6 +49,7 @@ const Nav = () => {
             onClick={createPlaylistHandler}
           />
         </div>
+
         {user.id && (
           <div className="saved">
             <LibraryLink
@@ -67,15 +79,19 @@ const Nav = () => {
           </div>
         )}
       </div>
+
       <div className="nav__block">
         {user?.role === "artist" && (
           <NavLink to="/admin" className={`nav__link`}>
-            <RiMusicLine />
+            <RiMusicLine className='line'/>
+            <RiMusicFill className='fill'/>
             <span>Admin</span>
           </NavLink>
         )}
+
         <NavLink to="/profile" className="nav__link">
-          <RiUserLine />
+          <RiUserLine className='line' />
+          <RiUserFill className='fill'/>
           <span>Profile</span>
         </NavLink>
       </div>

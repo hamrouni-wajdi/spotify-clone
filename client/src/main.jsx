@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import MainApp from "./MainApp";
+import AppRoutes from "./AppRoutes.jsx";
 import "./main.scss";
 
 import { Provider } from "react-redux";
@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <MainApp />
+      <AppRoutes />
     </Provider>
   </React.StrictMode>,
 );
