@@ -1,9 +1,11 @@
 import "./Button.scss";
+import btnLoading from '../../img/btnLoading.svg'
 
 const Button = ({
   type = "button",
   color = "",
   fullWidth = false,
+  isLoading = false,
   onClick,
   children,
 }) => {
@@ -13,7 +15,7 @@ const Button = ({
       type={type}
       onClick={onClick}
     >
-      {children}
+      {isLoading ? <img src={btnLoading}/> : children}
     </button>
   );
 };

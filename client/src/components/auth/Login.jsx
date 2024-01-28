@@ -8,6 +8,7 @@ import isValidEmail from "./isValidEmail";
 import { toast } from "react-toastify";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
+import Loading from "../UI/Loading.jsx";
 
 const Login = () => {
   const user = useSelector((state) => state.user);
@@ -31,7 +32,7 @@ const Login = () => {
       {!user.auth ? (
         <div className="auth">
           <form className="auth__form" onSubmit={handleLogin}>
-            <img className="auth__form-logo" src={logo} alt="Spotify logo" />
+            <img className="auth__form-logo" src={logo} alt="Spotify logo"/>
             <Link to="/signup" className="auth__form-link">
               Sign Up here
             </Link>
@@ -50,11 +51,12 @@ const Login = () => {
             <Link to="/forgotPassword" className="auth__form-link">
               Forgot password?
             </Link>
-            <Button type="submit">{user.loading ? "Loading" : "Login"}</Button>
+
+            <Button type="submit" isLoading={user.loading}>Login</Button>
           </form>
         </div>
       ) : (
-        <Navigate to={"/"} />
+        <Navigate to={"/"}/>
       )}
     </>
   );
