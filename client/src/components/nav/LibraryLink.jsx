@@ -1,6 +1,5 @@
 import "./LibraryLink.scss";
 import { NavLink } from "react-router-dom";
-import likedSongsImg from "../../img/likedSongs.jpeg";
 
 const LibraryLink = ({
   isArtist = true,

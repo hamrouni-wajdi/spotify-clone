@@ -1,15 +1,4 @@
 import "./Player.scss";
-import {
-  IoHeart,
-  IoHeartOutline,
-  IoPauseCircle,
-  IoPlayCircle,
-  IoPlaySkipBackSharp,
-  IoPlaySkipForwardSharp,
-  IoRepeat,
-  IoShuffle,
-  IoVolumeMediumOutline,
-} from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikeSong, likeSong } from "../../store/thunks/user";
 import { useCallback, useEffect, useRef, useState } from "react";
