@@ -22,7 +22,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState: {
     data: {},
-    auth: 'idle',
+    auth: false,
     loading: false,
   },
   reducers: {},

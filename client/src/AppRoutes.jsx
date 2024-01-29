@@ -1,10 +1,4 @@
-import {
-  BrowserRouter,
-  Navigate,
-  redirect,
-  Route,
-  Routes,
-} from "react-router-dom";
+import {BrowserRouter, Navigate, redirect, Route, Routes} from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -31,131 +25,40 @@ function AppRoutes() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  /*
-  if idle
-    show loading
-  true
-    open app
-  false
-    open login screen
-   */
-
   useEffect(() => {
     dispatch(isLoggedIn());
-
-    if (user.auth === false) redirect("/login");
   }, []);
 
   return (
     <BrowserRouter>
-      {user.auth === "idle" && <Loading main={true} fullHeight={true} />}
-
       {user.auth === true && (
-        <div className="main-app">
-          <Routes>
-            <Route path="*" element={<Navigate to='/' />} />
-            <Route
-              path="/"
-              element={
-                <>
-                  <Nav />
-                  <App>
-                    <Home />
-                  </App>
+        <main className="main">
+          <Nav />
 
-                  <Player />
-                </>
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                <>
-                  <Nav />
-                  <App>
-                    <Search />
-                  </App>
-
-                  <Player />
-                </>
-              }
-            />
-            <Route
-              path="/artist/:id"
-              element={
-                <>
-                  <Nav />
-                  <App>
-                    <Artist />
-                  </App>
-
-                  <Player />
-                </>
-              }
-            />
-            <Route
-              path="/likedSongs"
-              element={
-                <>
-                  <Nav />
-                  <App>
-                    <LikedSongs />
-                  </App>
-
-                  <Player />
-                </>
-              }
-            />
-            <Route
-              path="/playlist/:id"
-              element={
-                <>
-                  <Nav />
-                  <App>
-                    <Playlist />
-                  </App>
-
-                  <Player />
-                </>
-              }
-            />
-            <Route
-              path="/admin"
-              element={
-                <>
-                  <Nav />
-                  <App>
-                    <Admin />
-                  </App>
-
-                  <Player />
-                </>
-              }
-            ></Route>
-            <Route
-              path="/profile"
-              element={
-                <>
-                  <Nav />
-                  <App>
-                    <Profile />
-                  </App>
-
-                  <Player />
-                </>
-              }
-            ></Route>
-          </Routes>
-        </div>
+          {/* Components below should be re-viewed */}
+          <App>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/artist/:id" element={<Artist />} />
+              <Route path="/playlist/:id" element={<Playlist />} />
+              <Route path="/likedSongs" element={<LikedSongs />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </App>
+          <Player />
+        </main>
       )}
 
       {user.auth === false && (
         <Routes>
-          <Route path="*" element={<Navigate to='/login' />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgotPassword" element={<Forgot />} />
           <Route path="/resetPassword/:id" element={<Reset />} />
+          <Route path="*" element={<Loading main={true} fullHeight={true} />} />
         </Routes>
       )}
 
