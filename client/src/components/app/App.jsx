@@ -1,6 +1,4 @@
 import "./App.scss";
-
-import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {RiArrowLeftSLine, RiArrowRightSLine} from "react-icons/ri";

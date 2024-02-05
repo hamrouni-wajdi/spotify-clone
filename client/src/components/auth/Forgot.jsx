@@ -1,7 +1,6 @@
 import "./Auth.scss";
 import logo from "../../img/logo.svg";
-import { useDispatch, useSelector, useStore } from "react-redux";
-import { forgotPassword } from "../../store/thunks/user";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import isValidEmail from "./isValidEmail";

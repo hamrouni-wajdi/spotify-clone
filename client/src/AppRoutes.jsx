@@ -1,4 +1,4 @@
-import {BrowserRouter, Navigate, redirect, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";

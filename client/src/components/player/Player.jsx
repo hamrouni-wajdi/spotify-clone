@@ -70,6 +70,7 @@ const Player = () => {
     }
   }, [volume, audioRef]);
 
+  // Increases plays count of the song
   useEffect(() => {
     const increaseCount = async () => {
       if (song) await axios.get(`/songs/${song.id}`);

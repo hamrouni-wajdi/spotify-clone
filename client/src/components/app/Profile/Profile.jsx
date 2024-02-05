@@ -7,9 +7,6 @@ import {
   logoutUser,
 } from "../../../store/thunks/user";
 import { useRef } from "react";
-import axios from "../../../api/axios";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
 import {RiLogoutBoxLine} from "react-icons/ri";
@@ -20,8 +17,6 @@ const Profile = () => {
 
   const formInfoRef = useRef();
   const formPassRef = useRef();
-
-  const navigate = useNavigate();
 
   const formInfoHandler = (e) => {
     e.preventDefault();

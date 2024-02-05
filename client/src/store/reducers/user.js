@@ -28,7 +28,7 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder // Login user
-      .addCase(loginUser.pending, (state, action) => {
+      .addCase(loginUser.pending, (state) => {
         state.loading = true;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -44,7 +44,7 @@ export const userSlice = createSlice({
       })
 
       // Sign up
-      .addCase(signupUser.pending, (state, action) => {
+      .addCase(signupUser.pending, (state) => {
         state.loading = true;
       })
       .addCase(signupUser.fulfilled, (state, action) => {
@@ -76,7 +76,7 @@ export const userSlice = createSlice({
       })
 
       // Reset password
-      .addCase(resetPassword.pending, (state, action) => {
+      .addCase(resetPassword.pending, (state) => {
         state.loading = true;
       })
       .addCase(resetPassword.fulfilled, (state, action) => {

@@ -1,6 +1,6 @@
 import "./Auth.scss";
 import logo from "../../img/logo.svg";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../../store/thunks/user";
 import { Navigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";

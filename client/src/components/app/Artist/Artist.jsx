@@ -1,6 +1,5 @@
 import "./Artist.scss";
 import badgeImg from "./../../../img/verify.png";
-import { IoPlayCircle } from "react-icons/io5";
 import List from "../../UI/List";
 import { useDispatch, useSelector } from "react-redux";
 import { getArtist } from "../../../store/thunks/artist";

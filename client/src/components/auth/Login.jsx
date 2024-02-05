@@ -8,7 +8,6 @@ import isValidEmail from "./isValidEmail";
 import { toast } from "react-toastify";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
-import Loading from "../UI/Loading.jsx";
 
 const Login = () => {
   const user = useSelector((state) => state.user);

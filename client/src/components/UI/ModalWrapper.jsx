@@ -1,7 +1,6 @@
 import "./ModalWrapper.scss";
-import { IoCloseCircle } from "react-icons/io5";
 import { useRef } from "react";
-import {RiCloseCircleFill, RiCloseCircleLine} from "react-icons/ri";
+import { RiCloseCircleFill } from "react-icons/ri";
 
 const ModalWrapper = ({
   heading,
@@ -20,7 +19,10 @@ const ModalWrapper = ({
     >
       <header className="modal-wrapper__header">
         <h2>{heading}</h2>
-        <RiCloseCircleFill className="modal-wrapper__close" onClick={handleClose} />
+        <RiCloseCircleFill
+          className="modal-wrapper__close"
+          onClick={handleClose}
+        />
       </header>
       {children}
     </dialog>
