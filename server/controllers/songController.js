@@ -53,8 +53,20 @@ exports.renameSongFile = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.getAllSongs = catchAsync(async (req, res, next) => {
-  const songs = await Song.find({ artist: req.user.id });
+exports.getAllSongs = catchAsync(async (req, res) => {
+  let query = Song.find(req.query.personal && { artist: req.user.id });
+
+  // Sort
+  if (req.query.sort) {
+    query = query.sort(req.query.sort);
+  }
+
+  // Limit
+  if (req.query.limit) {
+    query = query.limit(req.query.limit);
+  }
+
+  const songs = await query;
 
   res.status(200).json({
     status: 'success',

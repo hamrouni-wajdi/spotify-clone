@@ -4,6 +4,7 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
+// Authentication
 router.post('/signup', authController.signUp);
 router.post('/login', authController.login);
 router.get('/isLoggedIn', authController.isLoggedIn);
@@ -12,11 +13,6 @@ router.get('/logout', authController.logout);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:resetToken', authController.resetPassword);
 
-router.patch(
-  '/becomeArtist',
-  authController.protect,
-  userController.becomeArtist
-);
 router.patch(
   '/updatePassword',
   authController.protect,
@@ -31,12 +27,18 @@ router.patch(
 );
 router.delete('/deleteMe', authController.protect, authController.deleteMe);
 
+// Artist control
 router.get('/:id', authController.protect, userController.getArtist);
 router.post('/follow/:id', authController.protect, userController.followArtist);
 router.post(
   '/unfollow/:id',
   authController.protect,
   userController.unfollowArtist
+);
+router.patch(
+  '/becomeArtist',
+  authController.protect,
+  userController.becomeArtist
 );
 
 router

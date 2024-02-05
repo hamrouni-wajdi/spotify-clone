@@ -1,12 +1,4 @@
 import "./List.scss";
-import {
-  IoCloseCircle,
-  IoEllipsisHorizontal,
-  IoHeart,
-  IoHeartOutline,
-  IoPencil,
-  IoTrash,
-} from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { changeCurrent, replaceQueue } from "../../store/reducers/queue";
 import { dislikeSong, likeSong } from "../../store/thunks/user";
@@ -14,7 +6,6 @@ import axios from "../../api/axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-// import { RiEditCircleLine } from "react-icons/all";
 import ModalWrapper from "./ModalWrapper";
 import {RiDeleteBin6Line, RiEditCircleLine, RiHeart2Fill, RiHeart2Line, RiMoreLine} from "react-icons/ri";
 

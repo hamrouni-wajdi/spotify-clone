@@ -5,7 +5,6 @@ import {
   IoCloseCircle,
   IoHeart,
   IoHeartOutline,
-  IoPencil,
   IoPlayCircle,
 } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";

@@ -92,9 +92,9 @@ const Search = () => {
 
       {results.type === "song" && <List list={results.list} search={true} />}
       {results.type === "artist" && (
-        <SquareList list={results.list} artist={true} />
+        <SquareList list={results.list} type='artist' />
       )}
-      {results.type === "playlist" && <SquareList list={results.list} />}
+      {results.type === "playlist" && <SquareList list={results.list} type='playlist' />}
     </div>
   );
 };

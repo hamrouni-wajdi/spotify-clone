@@ -6,7 +6,7 @@ export const getSongs = createAsyncThunk(
   "admin/getSongs",
   async (id, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`/songs`);
+      const res = await axios.get(`/songs?personal=true`);
 
       return res.data.data.songs;
     } catch (err) {
