@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const AppError = require('../utils/appError');
 
 const handleCastError = (err) => {
@@ -35,7 +34,7 @@ const sendErrorProd = (err, res) => {
       message: err.message,
     });
   } else {
-    console.log(chalk.hex('#ff6188').bold('ERROR 💥', err));
+    console.log('💥 ERROR');
 
     res.status(500).json({
       status: 'error',
