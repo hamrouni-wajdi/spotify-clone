@@ -13,13 +13,13 @@ process.on('uncaughtException', (err) => {
 
 const app = require('./app');
 
-const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DB_PASSWORD);
+const DB = process.env.DATABASE.replace('<password>', process.env.DB_PASSWORD);
 mongoose.connect(DB).then(() => {
   console.log('🐟 DATABASE CONNECTION SUCCESSFUL');
 });
 
-const server = app.listen(process.env.PORT || 8000, () => {
-  console.log(`🐟 LISTENING ON PORT ${process.env.PORT}`);
+const server = app.listen(process.env.PORT || 8080, () => {
+  console.log(`🐟 LISTENING ON PORT ${process.env.PORT || 8080}`);
 });
 
 process.on('unhandledRejection', (err) => {

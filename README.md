@@ -1,94 +1,60 @@
-<h1 align="center" id="title">Spotify</h1>
+# Spotify Clone
 
-<p align="center"><img src="https://i.ibb.co/BCQWZhs/Screenshot-2023-10-01-at-8-20-18-pm.png" alt="project-image"></p>
+![project-image](https://i.ibb.co/BCQWZhs/Screenshot-2023-10-01-at-8-20-18-pm.png)
 
-<p id="description">A full stack Spotify clone built using the MERN (MongoDB Express.js React.js Node.js) stack.</p>
+## Description
 
-<p align="center"><img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&amp;logo=node.js&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&amp;logo=sass&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" alt="shields"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&amp;logo=react&amp;logoColor=61DAFB" alt="shields"><img src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&amp;logo=redux&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&amp;logo=react-router&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&amp;logo=mongodb&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&amp;logo=vercel&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/WebStorm-000000?style=for-the-badge&amp;logo=WebStorm&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&amp;logo=eslint&amp;logoColor=white" alt="shields"><img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&amp;logo=prettier&amp;logoColor=F7BA3E" alt="shields"></p>
+This is a full stack Spotify clone built using the MERN (MongoDB, Express.js, React.js, Node.js) stack.
 
-<h2>🚀 Demo</h2>
+![shields](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![shields](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![shields](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
+![shields](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![shields](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
+![shields](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![shields](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![shields](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![shields](https://img.shields.io/badge/WebStorm-000000?style=for-the-badge&logo=WebStorm&logoColor=white)
+![shields](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
+![shields](https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E)
+
+## Demo
 
 [https://maqsud-spotify.vercel.app/signup](https://maqsud-spotify.vercel.app/signup)
 
-<h2>Project Screenshots:</h2>
+## Project Screenshots
 
-<img src="https://i.ibb.co/QCLvSyX/Screenshot-2023-10-01-at-8-31-15-pm.png" alt="project-screenshot" width="100%" height="400/">
+![project-screenshot](https://i.ibb.co/QCLvSyX/Screenshot-2023-10-01-at-8-31-15-pm.png)
 
-<img src="https://i.ibb.co/FD9b02f/Screenshot-2023-10-01-at-8-30-58-pm.png" alt="project-screenshot" width="100%" height="400/">
+![project-screenshot](https://i.ibb.co/FD9b02f/Screenshot-2023-10-01-at-8-30-58-pm.png)
 
-
-<h2>💻 Built with</h2>
+## Built with
 
 Technologies used in the project:
 
-*   React:
-a library for web and native user interfaces
-*  Redux: lets your React components read data from a Redux store, and dispatch actions to the store to update state.
-*   MongoDB: a document database designed for ease of application development and scaling
-*  Node.js: A JavaScript runtime environment used to run the server-side application.
-*  Express.js: A web application framework for Node.js used to build the server-side API.
-  
-<h2>🧐 Features</h2>
+- React: a library for web and native user interfaces
+- Redux: lets your React components read data from a Redux store, and dispatch actions to the store to update state.
+- MongoDB: a document database designed for ease of application development and scaling
+- Node.js: A JavaScript runtime environment used to run the server-side application.
+- Express.js: A web application framework for Node.js used to build the server-side API.
 
-Here're some of the project's best features:
+## Features
 
-*   User authentication and authorization
-*   Search functionality to find songs playlists and artists
-*   Create edit and delete playlists and songs
-*   Play songs and control playback (play pause skip etc.)
-*   Admin page for managing songs and see statistics
-*   Listen to songs in your queue
-*   Control player with MacBook Pro touch bar
+Here are some of the project's best features:
 
-<h2>🛠️ Installation Steps:</h2>
+- User authentication and authorization
+- Search functionality to find songs, playlists, and artists
+- Create, edit, and delete playlists and songs
+- Play songs and control playback (play, pause, skip, etc.)
+- Admin page for managing songs and seeing statistics
+- Listen to songs in your queue
+- Control player with MacBook Pro touch bar
 
-<p>1. Close the repository:</p>
+## Installation Steps
 
-```
-git clone https://github.com/maqsudtolipov/spotify-clone
-```
+Follow the instructions inside the `./client` and `./server` directories.
 
-<p>2. Navigate to the project directory:</p>
-
-```
-cd spotify-clone
-```
-
-<p>3. Install the dependencies:</p>
-
-```
-npm install
-```
-
-<p>4. Set up the environment variables:</p>
-
-* Create a `.env` file in the root directory
-* Add the following variables:
-* ```
-  DATABASE=YOUR MONGODB DATABASE URL
-  DB_PASSWORD=MONGODB PASSWORD
-  
-  JWT_SECRET=VERY SECRET WORD FOR HASHING
-  
-  // If you want to add email system
-  SMPT_SERVER=smtp-relay.brevo.com
-  SMPT_PORT=587
-
-  BREVO_USER=BREVO USERNAME
-  BREVO_PASS=BREVO PASS
-  ```
-
-<p>5. Start the development server both in client and server folders: </p>
-
-```
-npm start
-```
-
-<p>6. Open your browser and visit 
-`http://localhost:3000`</p>
-  
-
-<h2>🧑🏻‍💻 Contributing:</h2>
+## Contributing
 
 Contributions to this project are welcome! If you would like to contribute, please follow these steps:
 
@@ -100,6 +66,6 @@ Contributions to this project are welcome! If you would like to contribute, plea
 
 Please make sure to follow the code style and include tests for your changes.
 
-<h2>🛡️ License:</h2>
+## License
 
-This project is licensed under the MIT
+This project is licensed under the MIT License.

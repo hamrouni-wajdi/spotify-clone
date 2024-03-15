@@ -1,7 +1,7 @@
 # Setup Client
 ### Prerequisites
-- Node.js installed on your machine. Recommended version: >=16.
-- Make you sure inside `/client` directory.
+- Ensure that you have Node.js installed on your machine. It is recommended to have version 16 or higher.
+- Make sure you are in the `/client` directory.
 
 ### Setup
 Run the following command to install all the required packages:
@@ -9,8 +9,16 @@ Run the following command to install all the required packages:
 npm install
 ```
 
+### Environment Variables
+Create a `.env` file and fill it with the following data:
+
+| Name            | Description | Example |
+|-----------------|-------------|---------|
+| VITE_SERVER_URL | Server URL  | -       |
+
 ### Start
 To start the application, run the following command:
+
 ```
 npm run dev
 ```
