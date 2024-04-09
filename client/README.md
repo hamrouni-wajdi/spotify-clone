@@ -10,7 +10,7 @@ npm install
 ```
 
 ### Environment Variables
-Create a `.env` file and fill it with the following data:
+Create a `.env` file and fill it with the following data. You can use `template.env` as a template and get default values
 
 | Name            | Description | Example |
 |-----------------|-------------|---------|

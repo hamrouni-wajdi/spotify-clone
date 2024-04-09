@@ -15,7 +15,7 @@ npm install
 
 ## Environment Variables
 
-Create a `.env` file and fill it with the following data:
+Create a `.env` file and fill it with the following data. You can use `template.env` as a template and get default values
 
 | Name        | Description                   | Acquire                                                                                                                                                                                                    |
 | ----------- |-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -33,5 +33,5 @@ Create a `.env` file and fill it with the following data:
 To start the server application, run the following command:
 
 ```
-npm run start
+npm run dev
 ```

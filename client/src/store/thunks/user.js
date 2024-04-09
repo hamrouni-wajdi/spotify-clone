@@ -47,8 +47,6 @@ export const isLoggedIn = createAsyncThunk(
     try {
       const res = await axios.get("/users/isLoggedIn");
 
-      toast.success("Welcome back");
-
       return { data: res.data.data.user, auth: true };
     } catch (err) {
       return rejectWithValue(err);
