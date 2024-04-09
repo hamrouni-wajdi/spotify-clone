@@ -20,7 +20,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./components/admin/Admin";
 import Loading from "./components/UI/Loading";
-
 function AppRoutes() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
