@@ -2,6 +2,9 @@
 
 ![project-image](https://i.ibb.co/BCQWZhs/Screenshot-2023-10-01-at-8-20-18-pm.png)
 
+## Quick Note - New Version
+- If you are cloning this project please [use this commit](https://github.com/maqsudtolipov/spotify-clone/commit/31a04ddedd465d36cecafed184c899a67715c11e). I am right now adding changes to project as I learn new things, I want to make it 1-1 clone
+
 ## Description
 
 This is a full stack Spotify clone built using the MERN (MongoDB, Express.js, React.js, Node.js) stack.
