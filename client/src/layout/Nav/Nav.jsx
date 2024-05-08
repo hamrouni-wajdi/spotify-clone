@@ -1,4 +1,3 @@
-import "./Nav.scss";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
@@ -14,16 +13,32 @@ import {
 import Library from "./Library.jsx";
 import styled from "styled-components";
 
+const StyledNav = styled.nav`
+  height: 100%;
+  width: 34rem;
+  margin: 0.8rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  overflow: hidden;
+`;
+
 const Block = styled.div`
   padding: 1.2rem 2.4rem;
 
   background-color: var(--color-black);
-  border-radius: 9px;
+  border-radius: 8px;
 `;
+
 /**
  * @description Icon will be changed from outline to fill when link is active
  */
 const StyledLink = styled(NavLink)`
+  &:not(:last-child) {
+    margin-bottom: 0.8rem;
+  }
+
   &:link,
   &:visited {
     height: 4rem;
@@ -33,7 +48,7 @@ const StyledLink = styled(NavLink)`
     gap: 2rem;
 
     font-size: 1.6rem;
-    font-weight: 700;
+    font-weight: 600;
     color: inherit;
 
     svg {
@@ -63,7 +78,7 @@ const Nav = () => {
   const { role } = useSelector((state) => state.user.data);
 
   return (
-    <nav className="nav">
+    <StyledNav>
       <Block>
         <StyledLink to="/">
           <RiHome4Line className="line" />
@@ -79,38 +94,22 @@ const Nav = () => {
         </StyledLink>
       </Block>
 
-      <div className="nav__block">
-        <NavLink to="/" className="nav__link">
-          <RiHome4Line className="line" />
-          <RiHome4Fill className="fill" />
-          <span>Home</span>
-        </NavLink>
-
-        <NavLink to="/search" className="nav__link">
-          <RiSearchLine className="line" />
-          <RiSearchFill className="fill" />
-          <span>Search</span>
-        </NavLink>
-      </div>
-
       <Library />
 
-      <div className="nav__block">
-        {role === "artist" && (
-          <NavLink to="/admin" className="nav__link">
-            <RiMusicLine className="line" />
-            <RiMusicFill className="fill" />
-            <span>Admin</span>
-          </NavLink>
-        )}
+      <Block>
+        <StyledLink to="/admin">
+          <RiMusicLine className="line" />
+          <RiMusicFill className="fill" />
+          <span>Admin</span>
+        </StyledLink>
 
-        <NavLink to="/profile" className="nav__link">
+        <StyledLink to="/profile">
           <RiUserLine className="line" />
           <RiUserFill className="fill" />
           <span>Profile</span>
-        </NavLink>
-      </div>
-    </nav>
+        </StyledLink>
+      </Block>
+    </StyledNav>
   );
 };
 
