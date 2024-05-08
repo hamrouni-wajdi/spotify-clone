@@ -97,11 +97,13 @@ const Nav = () => {
       <Library />
 
       <Block>
-        <StyledLink to="/admin">
-          <RiMusicLine className="line" />
-          <RiMusicFill className="fill" />
-          <span>Admin</span>
-        </StyledLink>
+        {role === "admin" && (
+          <StyledLink to="/admin">
+            <RiMusicLine className="line" />
+            <RiMusicFill className="fill" />
+            <span>Admin</span>
+          </StyledLink>
+        )}
 
         <StyledLink to="/profile">
           <RiUserLine className="line" />
