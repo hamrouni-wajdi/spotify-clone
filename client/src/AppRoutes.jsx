@@ -3,7 +3,7 @@ import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { isLoggedIn } from "./store/thunks/user";
-import Nav from "./components/nav/Nav";
+import Nav from "./layout/Nav/Nav";
 import Player from "./components/player/Player";
 import App from "./components/app/App";
 import Home from "./components/app/Home/Home";

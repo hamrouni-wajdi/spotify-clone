@@ -6,6 +6,7 @@ import "./styles.scss";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import Maintenance from './pages/Maintenance.jsx';
+import GlobalStyles from "./styles/globalStyles.js";
 
 const isMaintenance = import.meta.env.VITE_MAINTENANCE
 
@@ -16,5 +17,7 @@ root.render(
     <Provider store={store}>
       <AppRoutes />
     </Provider>}
+
+    <GlobalStyles />
   </React.StrictMode>,
 );
