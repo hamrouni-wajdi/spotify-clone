@@ -10,7 +10,7 @@ import {
   RiUserFill,
   RiUserLine,
 } from "react-icons/ri";
-import Library from "./Library.jsx";
+import Library from "./Library/Library.jsx";
 import styled from "styled-components";
 
 const StyledNav = styled.nav`
@@ -75,7 +75,7 @@ const StyledLink = styled(NavLink)`
 `;
 
 const Nav = () => {
-  const { role } = useSelector((state) => state.user.data);
+  const role = useSelector((state) => state.user.data.role);
 
   return (
     <StyledNav>
@@ -97,11 +97,11 @@ const Nav = () => {
       <Library />
 
       <Block>
-        {role === "admin" && (
+        {role === "artist" && (
           <StyledLink to="/admin">
             <RiMusicLine className="line" />
             <RiMusicFill className="fill" />
-            <span>Admin</span>
+            <span>Artist</span>
           </StyledLink>
         )}
 

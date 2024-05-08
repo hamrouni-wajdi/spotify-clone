@@ -6,7 +6,9 @@ const GlobalStyles = createGlobalStyle`
 		--color-highlight: #1a1a1a;
 		--color-press: #000;
 		
-		--color-gray: #b3b3b3
+		--color-gray: #b3b3b3;
+		
+		--color-text-sub: #a7a7a7;
 	}
 
   * {
@@ -30,6 +32,7 @@ const GlobalStyles = createGlobalStyle`
   a,
   a:link,
   a:visited {
+	  color: inherit;
 	  text-decoration: none;
   }
 `;
