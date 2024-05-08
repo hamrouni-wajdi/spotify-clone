@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { RiPushpinFill } from "react-icons/ri";
 
 const StyledSavedLink = styled(NavLink)`
   padding: 0.8rem;
@@ -58,14 +59,28 @@ const Name = styled.p`
 
 // TODO: Make 14 base font size
 const Type = styled.span`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
   color: var(--color-text-sub);
   font-size: 1.4rem;
 `;
 
-const SavedLink = ({ item, children }) => {
+const Pin = styled(RiPushpinFill)`
+  color: var(--color-brand);
+  font-size: 1.2rem;
+`;
+
+/*
+ * TODO:
+ *  - Add pin feature
+ *  - Show playlist creator name
+ */
+const SavedLink = ({ item }) => {
   const isArtist = item.role === "artist";
   const link = (isArtist ? "/artist/" : "/playlist/") + item.id;
-  const pinned = false;
+  const pinned = true;
 
   return (
     <StyledSavedLink to={link} $active={false}>
@@ -73,7 +88,7 @@ const SavedLink = ({ item, children }) => {
       <Content>
         <Name>{item.name}</Name>
         <Type>
-          <span>{pinned ? "📌 - " : null}</span>
+          {pinned ? <Pin /> : null}
           <span>{isArtist ? "Artist" : "Playlist"}</span>
         </Type>
       </Content>
