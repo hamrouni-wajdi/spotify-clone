@@ -20,19 +20,17 @@ const StyledSavedLink = styled(NavLink)`
     background: #000;
   }
 
-  ${({ $active }) =>
-    $active &&
-    css`
-      background-color: rgba(255, 255, 255, 0.07);
+  &.active {
+    background-color: rgba(255, 255, 255, 0.07);
 
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
 
-      &:active {
-        background-color: rgba(255, 255, 255, 0.04);
-      }
-    `}
+    &:active {
+      background-color: rgba(255, 255, 255, 0.04);
+    }
+  }
 `;
 
 const Img = styled.img`
@@ -83,7 +81,7 @@ const SavedLink = ({ item }) => {
   const pinned = true;
 
   return (
-    <StyledSavedLink to={link} $active={false}>
+    <StyledSavedLink to={link}>
       <Img src={item.img} alt="Heart" $artist={isArtist} />
       <Content>
         <Name>{item.name}</Name>
