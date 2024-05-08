@@ -78,7 +78,7 @@ const Pin = styled(RiPushpinFill)`
 const SavedLink = ({ item }) => {
   const isArtist = item.role === "artist";
   const link = (isArtist ? "/artist/" : "/playlist/") + item.id;
-  const pinned = true;
+  const pinned = false;
 
   return (
     <StyledSavedLink to={link}>
