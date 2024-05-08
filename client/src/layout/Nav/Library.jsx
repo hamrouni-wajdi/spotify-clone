@@ -33,6 +33,10 @@ const HeaderTitle = styled.div`
   svg {
     font-size: 2.4rem;
   }
+
+  span {
+    flex-grow: 1;
+  }
 `;
 
 const AddButton = styled.button`
@@ -91,7 +95,7 @@ const Library = () => {
           <RiBook3Line />
           <span>Library</span>
           <AddButton onClick={handleCreatePlaylist}>
-            <RiAddFill />
+            <RiAddFill style={{ scale: "1.4" }} />
           </AddButton>
         </HeaderTitle>
       </Header>
