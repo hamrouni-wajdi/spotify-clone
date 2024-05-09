@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import History from "../features/Feed/History.jsx";
 import { useState } from "react";
-import FeedRow from "../features/Feed/FeedRow.jsx";
+import TopSongs from "../features/Feed/CustomFeeds/TopSongs.jsx";
 
 const StyledHome = styled.div`
   padding: calc(6.4rem + 0.8rem) 1.8rem 0;
@@ -34,13 +34,14 @@ const Home = () => {
   // );
   // const [topSongs, setTopSongs] = useState([]);
   // const [newReleases, setNewReleases] = useState([]);
-  //
+  // //
   // // FIXME: Refactor and fix data lost on re-render
   // useEffect(() => {
   //   const fetcher = async () => {
   //     const res = await axios.get(`/songs?sort=-plays&limit=5`);
   //     const res2 = await axios.get(`/songs?sort=-createdAt&limit=5`);
   //
+  //     console.log(res);
   //     setTopSongs(res.data.data.songs);
   //     setNewReleases(res2.data.data.songs);
   //   };
@@ -52,7 +53,7 @@ const Home = () => {
     <StyledHome className="home" $gradientColor={gradientColor}>
       <History setGradientColor={setGradientColor} />
 
-      <FeedRow />
+      <TopSongs />
       {/*<h2 className="h2">Top Songs</h2>*/}
       {/*<SquareList list={topSongs} type={"song"} />*/}
 

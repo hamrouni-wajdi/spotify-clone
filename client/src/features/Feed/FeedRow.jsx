@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import ArtistCard from "../../components/ArtistCard.jsx";
-import PlaylistCard from "../../components/PlaylistCard.jsx";
+import SongCard from "../../components/Card/SongCard.jsx";
 
 const RowHeading = styled.h2`
   font-size: 2.4rem;
@@ -16,21 +15,30 @@ const Row = styled.div`
   margin-bottom: 4rem;
 `;
 
-const FeedRow = () => {
+const FeedRow = ({ title, list, type }) => {
   return (
     <div>
-      <RowHeading>Your Favourite Artists</RowHeading>
-      <Row>
-        {[1, 2, 3, 4, 5, 6].map(() => (
-          <ArtistCard />
-        ))}
-      </Row>
-      <RowHeading>Top Playlists for you</RowHeading>
-      <Row>
-        {[1, 2, 3, 4, 5, 6].map(() => (
-          <PlaylistCard />
-        ))}
-      </Row>
+      <RowHeading>{title}</RowHeading>
+      {/*<Row>*/}
+      {/*  {list.map(() => (*/}
+      {/*    <ArtistCard />*/}
+      {/*  ))}*/}
+      {/*</Row>*/}
+
+      {type === "song" && (
+        <Row>
+          {list.map((el) => (
+            <SongCard data={el} />
+          ))}
+        </Row>
+      )}
+
+      {/*<RowHeading>Top Playlists for you</RowHeading>*/}
+      {/*<Row>*/}
+      {/*  {[1, 2, 3, 4, 5].map(() => (*/}
+      {/*    <PlaylistCard />*/}
+      {/*  ))}*/}
+      {/*</Row>*/}
     </div>
   );
 };

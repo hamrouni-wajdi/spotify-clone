@@ -83,12 +83,12 @@ const PlayButton = styled.button`
   }
 `;
 
-const Card = ({ imgBorder, img, name, description }) => {
+const Card = ({ imgBorder, img, name, description, onButtonClick }) => {
   return (
     <StyledCard>
       <ImgContainer>
         <Img src={img} $imgBorder={imgBorder} />
-        <PlayButton>
+        <PlayButton onClick={onButtonClick}>
           <RiPlayFill />
         </PlayButton>
       </ImgContainer>
