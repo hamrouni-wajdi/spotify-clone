@@ -2,6 +2,7 @@ import SavedLink from "./SavedLink.jsx";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import SavedSearch from "./SavedSearch.jsx";
+import { useState } from "react";
 
 const StyledSaved = styled.div`
   height: calc(100% - 12rem);
@@ -14,15 +15,24 @@ const Saved = () => {
     (state) => state.user.data,
   );
 
-  const sortedList = [...likedPlaylists, ...followedArtists, ...playlists].sort(
-    (a, b) => (a.name > b.name ? 1 : -1),
+  const [query, setQuery] = useState("");
+
+  const list = [...likedPlaylists, ...followedArtists, ...playlists];
+  const sortedList = list.sort((a, b) => (a.name > b.name ? 1 : -1));
+  const searchedList = list.filter((el) =>
+    el.name.toLowerCase().includes(query.toLowerCase()),
   );
+  const renderedList = query.length ? searchedList : sortedList;
+
+  const handleChangeQuery = (e) => {
+    setQuery(e.target.value);
+  };
 
   return (
     <StyledSaved className="saved">
-      <SavedSearch />
+      <SavedSearch onChangeQuery={handleChangeQuery} />
 
-      {sortedList?.map((item) => (
+      {renderedList?.map((item) => (
         <SavedLink key={item.id} item={item} />
       ))}
     </StyledSaved>

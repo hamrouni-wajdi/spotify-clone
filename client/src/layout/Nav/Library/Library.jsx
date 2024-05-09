@@ -3,7 +3,9 @@ import LibraryHeader from "./LibraryHeader.jsx";
 import Saved from "./Saved.jsx";
 
 const StyledLibrary = styled.div`
+  flex-grow: 1;
   overflow: hidden;
+
   background-color: var(--color-black);
   border-radius: 8px;
 `;

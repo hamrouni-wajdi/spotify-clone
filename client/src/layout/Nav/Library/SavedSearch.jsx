@@ -3,8 +3,13 @@ import { RiSearchLine } from "react-icons/ri";
 import { useState } from "react";
 
 const StyledSearch = styled.div`
+  padding: 0 0.8rem;
   margin-bottom: 0.8rem;
   position: relative;
+
+  & > svg {
+    left: 0.8rem;
+  }
 
   &.active {
     button {
@@ -12,7 +17,7 @@ const StyledSearch = styled.div`
     }
 
     input {
-      width: 100%;
+      width: auto;
       padding-left: 3.2rem;
       opacity: 1;
     }
@@ -24,7 +29,7 @@ const Button = styled.button`
   width: 3.2rem;
 
   position: absolute;
-  left: 0;
+  left: 0.8rem;
 
   color: #fff;
   background: transparent;
@@ -68,12 +73,16 @@ const Input = styled.input`
 `;
 
 // TODO: Make search functional
-const SavedSearch = () => {
+const SavedSearch = ({ onChangeQuery }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <StyledSearch className={isOpen ? "active" : ""}>
-      <Input type="text" />
+      <Input
+        type="text"
+        placeholder="Search in your Library"
+        onChange={onChangeQuery}
+      />
       <Icon />
       <Button onClick={() => setIsOpen(true)}>
         <Icon />
