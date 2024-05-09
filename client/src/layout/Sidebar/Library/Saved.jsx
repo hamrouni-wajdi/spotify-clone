@@ -16,36 +16,27 @@ const Saved = ({ activeTag }) => {
   );
   const [query, setQuery] = useState("");
 
-  const artistList = [...followedArtists];
-  const playlistList = [...likedPlaylists, ...playlists];
-  const list = activeTag
-    ? activeTag === "artists"
-      ? artistList
-      : playlistList
-    : [...artistList, ...playlistList];
-  const sortedList = list.sort((a, b) => (a.name > b.name ? 1 : -1));
-  const searchedList = list.filter((el) =>
-    el.name.toLowerCase().includes(query.toLowerCase()),
-  );
-  const renderedList = query.length ? searchedList : sortedList;
-
-  const handleChangeQuery = (e) => {
-    setQuery(e.target.value);
-  };
-
-  const handleClearQuery = () => {
-    setQuery("");
-  };
+  const sortedList =
+    // Filter out selected tab items
+    activeTag
+      ? activeTag === "artists"
+        ? followedArtists
+        : [...likedPlaylists, ...playlists]
+      : [...followedArtists, ...likedPlaylists, ...playlists]
+          // Search list by query
+          .filter((el) => el.name.toLowerCase().includes(query.toLowerCase()))
+          // Sort list alphabetically
+          .sort((a, b) => (a.name > b.name ? 1 : -1));
 
   return (
     <StyledSaved className="saved">
       <SavedSearch
         query={query}
-        onChangeQuery={handleChangeQuery}
-        onClearQuery={handleClearQuery}
+        onChangeQuery={(e) => setQuery(e.target.value)}
+        onClearQuery={() => setQuery("")}
       />
 
-      {renderedList?.map((item) => (
+      {sortedList?.map((item) => (
         <SavedLink key={item.id} item={item} />
       ))}
     </StyledSaved>
