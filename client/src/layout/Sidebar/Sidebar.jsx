@@ -102,12 +102,6 @@ const Sidebar = () => {
             <span>Artist</span>
           </StyledLink>
         )}
-
-        {/*<StyledLink to="/profile">*/}
-        {/*  <RiUserLine className="line" />*/}
-        {/*  <RiUserFill className="fill" />*/}
-        {/*  <span>Profile</span>*/}
-        {/*</StyledLink>*/}
       </Block>
     </StyledSidebar>
   );

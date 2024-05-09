@@ -14,7 +14,6 @@ const Saved = () => {
   const { likedPlaylists, followedArtists, playlists } = useSelector(
     (state) => state.user.data,
   );
-
   const [query, setQuery] = useState("");
 
   const list = [...likedPlaylists, ...followedArtists, ...playlists];
@@ -28,9 +27,16 @@ const Saved = () => {
     setQuery(e.target.value);
   };
 
+  const handleClearQuery = () => {
+    setQuery("");
+  };
+
   return (
     <StyledSaved className="saved">
-      <SavedSearch onChangeQuery={handleChangeQuery} />
+      <SavedSearch
+        onChangeQuery={handleChangeQuery}
+        onClearQuery={handleClearQuery}
+      />
 
       {renderedList?.map((item) => (
         <SavedLink key={item.id} item={item} />
