@@ -10,13 +10,19 @@ const StyledSaved = styled.div`
   overflow-y: scroll;
 `;
 
-const Saved = () => {
+const Saved = ({ activeTag }) => {
   const { likedPlaylists, followedArtists, playlists } = useSelector(
     (state) => state.user.data,
   );
   const [query, setQuery] = useState("");
 
-  const list = [...likedPlaylists, ...followedArtists, ...playlists];
+  const artistList = [...followedArtists];
+  const playlistList = [...likedPlaylists, ...playlists];
+  const list = activeTag
+    ? activeTag === "artists"
+      ? artistList
+      : playlistList
+    : [...artistList, ...playlistList];
   const sortedList = list.sort((a, b) => (a.name > b.name ? 1 : -1));
   const searchedList = list.filter((el) =>
     el.name.toLowerCase().includes(query.toLowerCase()),

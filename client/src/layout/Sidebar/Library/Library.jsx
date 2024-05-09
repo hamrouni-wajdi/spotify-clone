@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import LibraryHeader from "./LibraryHeader.jsx";
 import Saved from "./Saved.jsx";
+import { useState } from "react";
 
 const StyledLibrary = styled.div`
   flex-grow: 1;
@@ -11,10 +12,17 @@ const StyledLibrary = styled.div`
 `;
 
 const Library = () => {
+  const [activeTag, setActiveTag] = useState("");
+
+  const handleChangeTag = (tag) => {
+    if (tag === activeTag) setActiveTag("");
+    else setActiveTag(tag);
+  };
+
   return (
     <StyledLibrary>
-      <LibraryHeader />
-      <Saved />
+      <LibraryHeader activeTag={activeTag} onChangeTag={handleChangeTag} />
+      <Saved activeTag={activeTag} />
     </StyledLibrary>
   );
 };

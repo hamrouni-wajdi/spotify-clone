@@ -54,7 +54,7 @@ const AddButton = styled.button`
   }
 `;
 
-const LibraryHeader = () => {
+const LibraryHeader = ({ activeTag, onChangeTag }) => {
   const dispatch = useDispatch();
 
   const handleCreatePlaylist = () => {
@@ -70,7 +70,7 @@ const LibraryHeader = () => {
           <RiAddFill style={{ scale: "1.4" }} />
         </AddButton>
       </HeaderTitle>
-      <Tags />
+      <Tags activeTag={activeTag} onChangeTag={onChangeTag} />
     </Header>
   );
 };

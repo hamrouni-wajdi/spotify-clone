@@ -42,13 +42,23 @@ const Tag = styled.span`
     `}
 `;
 
-const Tags = () => {
+const Tags = ({ activeTag, onChangeTag }) => {
   return (
     <StyledTags>
-      <Tag role="button" $active>
+      <Tag
+        role="button"
+        $active={activeTag === "artists"}
+        onClick={() => onChangeTag("artists")}
+      >
+        Artists
+      </Tag>
+      <Tag
+        role="button"
+        $active={activeTag === "playlists"}
+        onClick={() => onChangeTag("playlists")}
+      >
         Playlists
       </Tag>
-      <Tag role="button">Artists</Tag>
     </StyledTags>
   );
 };
