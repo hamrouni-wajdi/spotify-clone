@@ -7,15 +7,10 @@ import Card from "./Card.jsx";
  * @constructor
  * @instance Card
  */
-const ArtistCard = () => {
-  return (
-    <Card
-      img="https://ik.imagekit.io/8cs4gpobr/spotify/users/user-65bb78fac2ead01c9898c4ce-1707134158527_ew3ALD6XK.jpeg"
-      imgBorder="round"
-      name="Linkin Park"
-      description="Artist"
-    />
-  );
+const ArtistCard = ({ data }) => {
+  const { img, name } = data;
+
+  return <Card img={img} imgBorder="round" name={name} description="Artist" />;
 };
 
 export default ArtistCard;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SongCard from "../../components/Card/SongCard.jsx";
+import ArtistCard from "../../components/Card/ArtistCard.jsx";
 
 const RowHeading = styled.h2`
   font-size: 2.4rem;
@@ -19,16 +20,19 @@ const FeedRow = ({ title, list, type }) => {
   return (
     <div>
       <RowHeading>{title}</RowHeading>
-      {/*<Row>*/}
-      {/*  {list.map(() => (*/}
-      {/*    <ArtistCard />*/}
-      {/*  ))}*/}
-      {/*</Row>*/}
 
       {type === "song" && (
         <Row>
           {list.map((el) => (
             <SongCard data={el} />
+          ))}
+        </Row>
+      )}
+
+      {type === "artist" && (
+        <Row>
+          {list.map((el) => (
+            <ArtistCard data={el} />
           ))}
         </Row>
       )}
