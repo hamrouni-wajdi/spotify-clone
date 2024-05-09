@@ -31,26 +31,6 @@ const Home = () => {
   // TODO: Fix performance, this re-renders whole app when gradient changes
   const [gradientColor, setGradientColor] = useState("#8b5cf6");
 
-  // const { followedArtists, likedPlaylists } = useSelector(
-  //   (state) => state.user.data,
-  // );
-  // const [topSongs, setTopSongs] = useState([]);
-  // const [newReleases, setNewReleases] = useState([]);
-  // //
-  // // FIXME: Refactor and fix data lost on re-render
-  // useEffect(() => {
-  //   const fetcher = async () => {
-  //     const res = await axios.get(`/songs?sort=-plays&limit=5`);
-  //     const res2 = await axios.get(`/songs?sort=-createdAt&limit=5`);
-  //
-  //     console.log(res);
-  //     setTopSongs(res.data.data.songs);
-  //     setNewReleases(res2.data.data.songs);
-  //   };
-  //
-  //   fetcher();
-  // }, []);
-
   return (
     <StyledHome className="home" $gradientColor={gradientColor}>
       <History setGradientColor={setGradientColor} />
@@ -58,20 +38,6 @@ const Home = () => {
       <TopSongs />
       <NewReleases />
       <FavouriteArtists />
-
-      {/*{followedArtists.length > 0 && (*/}
-      {/*  <>*/}
-      {/*    <h2 className="h2">Your favourite artists</h2>*/}
-      {/*    <SquareList list={followedArtists.slice(0, 5)} type="artist" />*/}
-      {/*  </>*/}
-      {/*)}*/}
-
-      {/*{likedPlaylists.length > 0 && (*/}
-      {/*  <>*/}
-      {/*    <h2 className="h2">Your favourite playlists</h2>*/}
-      {/*    <SquareList list={likedPlaylists.slice(0, 5)} type="playlist" />*/}
-      {/*  </>*/}
-      {/*)}*/}
     </StyledHome>
   );
 };

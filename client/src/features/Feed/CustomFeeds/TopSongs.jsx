@@ -9,7 +9,6 @@ const TopSongs = () => {
     const fetchSongs = async () => {
       const res = await axios.get("/songs?sort=-plays&limit=5");
       const data = res.data.data.songs;
-      console.log(data);
       setSongs(data);
     };
 

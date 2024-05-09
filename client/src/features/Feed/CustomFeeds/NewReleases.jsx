@@ -9,16 +9,13 @@ const NewReleases = () => {
     const fetchSongs = async () => {
       const res = await axios.get("/songs?sort=-createdAt&limit=5");
       const data = res.data.data.songs;
-      console.log(data);
       setSongs(data);
     };
 
     fetchSongs();
   }, []);
 
-  return (
-    <FeedRow title="Discover the newest releases" list={songs} type="song" />
-  );
+  return <FeedRow title="New releases for you" list={songs} type="song" />;
 };
 
 export default NewReleases;
