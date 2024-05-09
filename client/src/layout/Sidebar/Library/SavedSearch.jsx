@@ -75,7 +75,7 @@ const Input = styled.input`
   }
 `;
 
-const SavedSearch = ({ onChangeQuery, onClearQuery }) => {
+const SavedSearch = ({ query, onChangeQuery, onClearQuery }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseSearch = () => {
@@ -89,6 +89,7 @@ const SavedSearch = ({ onChangeQuery, onClearQuery }) => {
       <Input
         type="text"
         placeholder="Search in your Library"
+        value={query}
         onChange={onChangeQuery}
       />
       <Icon />

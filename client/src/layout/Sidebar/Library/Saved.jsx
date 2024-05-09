@@ -34,6 +34,7 @@ const Saved = () => {
   return (
     <StyledSaved className="saved">
       <SavedSearch
+        query={query}
         onChangeQuery={handleChangeQuery}
         onClearQuery={handleClearQuery}
       />
