@@ -1,9 +1,9 @@
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { isLoggedIn } from "./store/thunks/user";
-import Nav from "./layout/Nav/Nav";
+import Sidebar from "./layout/Sidebar/Sidebar.jsx";
 import Player from "./components/player/Player";
 import App from "./components/app/App";
 import Home from "./components/app/Home/Home";
@@ -20,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./components/admin/Admin";
 import Loading from "./components/UI/Loading";
+
 function AppRoutes() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ function AppRoutes() {
     <BrowserRouter>
       {user.auth === true && (
         <main className="main">
-          <Nav />
+          <Sidebar />
 
           {/* Components below should be re-viewed */}
           <App>

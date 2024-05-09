@@ -72,7 +72,7 @@ const Input = styled.input`
   }
 `;
 
-// TODO: Make search functional
+// TODO: Auto close input
 const SavedSearch = ({ onChangeQuery }) => {
   const [isOpen, setIsOpen] = useState(false);
 

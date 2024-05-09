@@ -13,7 +13,7 @@ import {
 import Library from "./Library/Library.jsx";
 import styled from "styled-components";
 
-const StyledNav = styled.nav`
+const StyledSidebar = styled.nav`
   height: 100%;
   width: 34rem;
   margin: 0.8rem;
@@ -74,11 +74,11 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-const Nav = () => {
+const Sidebar = () => {
   const role = useSelector((state) => state.user.data.role);
 
   return (
-    <StyledNav>
+    <StyledSidebar>
       <Block>
         <StyledLink to="/">
           <RiHome4Line className="line" />
@@ -111,8 +111,8 @@ const Nav = () => {
           <span>Profile</span>
         </StyledLink>
       </Block>
-    </StyledNav>
+    </StyledSidebar>
   );
 };
 
-export default Nav;
+export default Sidebar;
