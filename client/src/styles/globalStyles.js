@@ -3,6 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
 	:root {
 		--color-brand: #1ed760;
+		--color-brand-press: #169C46;
 		
 		--color-black: #121212;
 		--color-highlight: #1a1a1a;
@@ -35,6 +36,10 @@ const GlobalStyles = createGlobalStyle`
   a:visited {
 	  color: inherit;
 	  text-decoration: none;
+  }
+  
+  button {
+    border: 0;
   }
 `;
 export default GlobalStyles;

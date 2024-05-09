@@ -1,12 +1,12 @@
 import "./App.scss";
 import Nav from "../../layout/Nav/Nav.jsx";
 
-const App = (props) => {
+const App = ({ children }) => {
   return (
     <div className="app">
       <Nav />
 
-      {props.children}
+      {children}
     </div>
   );
 };
