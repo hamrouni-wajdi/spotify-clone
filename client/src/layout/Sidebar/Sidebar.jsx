@@ -18,7 +18,7 @@ const StyledSidebar = styled.nav`
 
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 0.8rem;
   overflow: hidden;
 `;
 
