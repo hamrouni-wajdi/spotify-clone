@@ -1,6 +1,7 @@
 import SavedLink from "./SavedLink.jsx";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import SavedSearch from "./SavedSearch.jsx";
 
 const StyledSaved = styled.div`
   height: calc(100% - 12rem);
@@ -19,6 +20,8 @@ const Saved = () => {
 
   return (
     <StyledSaved className="saved">
+      <SavedSearch />
+
       {sortedList?.map((item) => (
         <SavedLink key={item.id} item={item} />
       ))}
