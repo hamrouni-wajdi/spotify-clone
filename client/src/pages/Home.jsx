@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import History from "../features/Feed/History.jsx";
 import { useState } from "react";
+import FeedRow from "../features/Feed/FeedRow.jsx";
 
 const StyledHome = styled.div`
   padding: calc(6.4rem + 0.8rem) 1.8rem 0;
@@ -12,13 +13,13 @@ const StyledHome = styled.div`
     background-image: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0.6),
-        #121212 50vh
+        #121212 40vh
       ),
       linear-gradient(
         to bottom,
         ${$gradientColor},
-        ${$gradientColor} 50vh,
-        transparent 50vh,
+        ${$gradientColor} 40vh,
+        transparent 40vh,
         transparent 100%
       );
   `}
@@ -50,6 +51,8 @@ const Home = () => {
   return (
     <StyledHome className="home" $gradientColor={gradientColor}>
       <History setGradientColor={setGradientColor} />
+
+      <FeedRow />
       {/*<h2 className="h2">Top Songs</h2>*/}
       {/*<SquareList list={topSongs} type={"song"} />*/}
 
