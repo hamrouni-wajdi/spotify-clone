@@ -7,8 +7,6 @@ import {
   RiMusicLine,
   RiSearchFill,
   RiSearchLine,
-  RiUserFill,
-  RiUserLine,
 } from "react-icons/ri";
 import Library from "./Library/Library.jsx";
 import styled from "styled-components";
@@ -105,11 +103,11 @@ const Sidebar = () => {
           </StyledLink>
         )}
 
-        <StyledLink to="/profile">
-          <RiUserLine className="line" />
-          <RiUserFill className="fill" />
-          <span>Profile</span>
-        </StyledLink>
+        {/*<StyledLink to="/profile">*/}
+        {/*  <RiUserLine className="line" />*/}
+        {/*  <RiUserFill className="fill" />*/}
+        {/*  <span>Profile</span>*/}
+        {/*</StyledLink>*/}
       </Block>
     </StyledSidebar>
   );
