@@ -18,22 +18,32 @@ const Saved = ({ activeTag }) => {
 
   const sortedList =
     // Filter out selected tab items
-    activeTag
-      ? activeTag === "artists"
-        ? followedArtists
-        : [...likedPlaylists, ...playlists]
-      : [...followedArtists, ...likedPlaylists, ...playlists]
-          // Search list by query
-          .filter((el) => el.name.toLowerCase().includes(query.toLowerCase()))
-          // Sort list alphabetically
-          .sort((a, b) => (a.name > b.name ? 1 : -1));
+    (
+      activeTag
+        ? activeTag === "artists"
+          ? followedArtists
+          : [...likedPlaylists, ...playlists]
+        : [...followedArtists, ...likedPlaylists, ...playlists]
+    )
+      // Search list by query
+      .filter((el) => el.name.toLowerCase().includes(query.toLowerCase()))
+      // Sort list alphabetically
+      .sort((a, b) => (a.name > b.name ? 1 : -1));
+
+  const handleChangeQuery = (e) => {
+    setQuery(e.target.value);
+  };
+
+  const handleClearQuery = () => {
+    setQuery("");
+  };
 
   return (
     <StyledSaved className="saved">
       <SavedSearch
         query={query}
-        onChangeQuery={(e) => setQuery(e.target.value)}
-        onClearQuery={() => setQuery("")}
+        onChangeQuery={handleChangeQuery}
+        onClearQuery={handleClearQuery}
       />
 
       {sortedList?.map((item) => (
