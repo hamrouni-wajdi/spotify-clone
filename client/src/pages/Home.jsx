@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import History from "../features/Feed/History.jsx";
 import { useState } from "react";
 import TopSongs from "../features/Feed/CustomFeeds/TopSongs.jsx";
+import NewReleases from "../features/Feed/CustomFeeds/NewReleases.jsx";
 
 const StyledHome = styled.div`
   padding: calc(6.4rem + 0.8rem) 1.8rem 0;
@@ -54,11 +55,7 @@ const Home = () => {
       <History setGradientColor={setGradientColor} />
 
       <TopSongs />
-      {/*<h2 className="h2">Top Songs</h2>*/}
-      {/*<SquareList list={topSongs} type={"song"} />*/}
-
-      {/*<h2 className="h2">New Releases</h2>*/}
-      {/*<SquareList list={newReleases} type={"song"} />*/}
+      <NewReleases />
 
       {/*{followedArtists.length > 0 && (*/}
       {/*  <>*/}
