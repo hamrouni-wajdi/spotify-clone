@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ArtistCard from "../../components/ArtistCard.jsx";
+import PlaylistCard from "../../components/PlaylistCard.jsx";
 
 const RowHeading = styled.h2`
   font-size: 2.4rem;
@@ -10,6 +11,9 @@ const RowHeading = styled.h2`
 
 const Row = styled.div`
   display: flex;
+
+  //  TEMP
+  margin-bottom: 4rem;
 `;
 
 const FeedRow = () => {
@@ -21,9 +25,10 @@ const FeedRow = () => {
           <ArtistCard />
         ))}
       </Row>
+      <RowHeading>Top Playlists for you</RowHeading>
       <Row>
         {[1, 2, 3, 4, 5, 6].map(() => (
-          <ArtistCard />
+          <PlaylistCard />
         ))}
       </Row>
     </div>
