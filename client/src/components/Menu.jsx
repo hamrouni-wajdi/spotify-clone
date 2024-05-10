@@ -1,6 +1,7 @@
 import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
+import useOutsideClick from "../hooks/useOutsideClick.js";
 
 const StyledBody = styled.div`
   position: absolute;
@@ -35,6 +36,8 @@ const Open = ({ name, children }) => {
     useContext(MenuContext);
 
   const handleClick = (e) => {
+    e.stopPropagation();
+
     const viewportWidth = document.documentElement.clientWidth;
     const el = e.target.getBoundingClientRect();
 
@@ -50,12 +53,15 @@ const Open = ({ name, children }) => {
 };
 
 const Body = ({ name, children }) => {
-  const { menuName, position } = useContext(MenuContext);
+  const { menuName, position, closeMenu } = useContext(MenuContext);
+  const { ref } = useOutsideClick(closeMenu);
 
   if (name !== menuName) return null;
 
   return createPortal(
-    <StyledBody position={position}>{children}</StyledBody>,
+    <StyledBody ref={ref} position={position}>
+      {children}
+    </StyledBody>,
     document.body,
   );
 };

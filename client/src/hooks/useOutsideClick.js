@@ -10,13 +10,15 @@ const useOutsideClick = (handler) => {
 
   useEffect(() => {
     const handleClick = (e) => {
+      e.stopPropagation();
+      console.log("close");
       if (ref.current && !ref.current?.contains(e.target)) {
         handler();
       }
     };
 
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
+    document.addEventListener("click", handleClick, false);
+    return () => document.removeEventListener("click", handleClick, false);
   }, [ref, handler]);
 
   return { ref };
