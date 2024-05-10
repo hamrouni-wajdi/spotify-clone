@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Menu from "../../components/Menu.jsx";
 
 const StyledNav = styled.nav`
   padding: 1.6rem;
@@ -37,7 +38,7 @@ const NavigationButton = styled.div`
   }
 `;
 
-const Avatar = styled(Link)`
+const Avatar = styled.button`
   height: 3.2rem;
   width: 3.2rem;
   padding: 0.4rem;
@@ -71,9 +72,20 @@ const Nav = () => {
           <RiArrowRightSLine onClick={() => navigate(1)} />
         </NavigationButton>
       </Navigation>
-      <Avatar to="/profile">
-        <img src={img} alt={name} />
-      </Avatar>
+
+      <Menu>
+        <Menu.Open>
+          <Avatar to="/profile">
+            <img src={img} alt={name} />
+          </Avatar>
+        </Menu.Open>
+        <Menu.Body>
+          <li>Account</li>
+          <li>Profile</li>
+          <li>Settings</li>
+          <li>Log out</li>
+        </Menu.Body>
+      </Menu>
     </StyledNav>
   );
 };
