@@ -43,7 +43,6 @@ const GlobalStyles = createGlobalStyle`
   }
   
   ul {
-	  width: 20rem;
 	  list-style: none;
   }
 `;

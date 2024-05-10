@@ -58,8 +58,10 @@ const Avatar = styled.button`
   }
 `;
 
-const MenuList = styled.ul`
+const MenuList = styled.div`
+  width: 20rem;
   padding: 0.4rem;
+  color: #fff;
 `;
 
 const MenuItem = styled(Link)`
@@ -67,7 +69,7 @@ const MenuItem = styled(Link)`
   display: block;
 
   font-size: 1.4rem;
-  color: #fff;
+
   cursor: pointer;
 
   &:hover {
