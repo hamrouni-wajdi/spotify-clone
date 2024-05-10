@@ -41,5 +41,10 @@ const GlobalStyles = createGlobalStyle`
   button {
     border: 0;
   }
+  
+  ul {
+	  width: 20rem;
+	  list-style: none;
+  }
 `;
 export default GlobalStyles;
