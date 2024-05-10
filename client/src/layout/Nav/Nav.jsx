@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Menu from "../../components/Menu.jsx";
 
@@ -62,8 +62,9 @@ const MenuList = styled.ul`
   padding: 0.4rem;
 `;
 
-const MenuItem = styled.li`
+const MenuItem = styled(Link)`
   padding: 1.2rem 0.8rem 1.2rem 1.2rem;
+  display: block;
 
   font-size: 1.4rem;
   color: #fff;
@@ -103,10 +104,11 @@ const Nav = () => {
         </Menu.Open>
         <Menu.Body>
           <MenuList>
-            <MenuItem>Account</MenuItem>
-            <MenuItem>Profile</MenuItem>
-            <MenuItem $underline>Settings</MenuItem>
-            <MenuItem>Log out</MenuItem>
+            <MenuItem to="">Account</MenuItem>
+            <MenuItem to="profile" $underline>
+              Profile
+            </MenuItem>
+            <MenuItem to="">Log out</MenuItem>
           </MenuList>
         </Menu.Body>
       </Menu>
