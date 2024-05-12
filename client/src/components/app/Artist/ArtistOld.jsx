@@ -1,4 +1,3 @@
-import "./Artist.scss";
 import badgeImg from "./../../../img/verify.png";
 import List from "../../UI/List";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,9 +7,9 @@ import { followArtist, unfollowArtist } from "../../../store/thunks/user";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import Loading from "../../UI/Loading";
-import {RiPlayCircleFill} from "react-icons/ri";
+import { RiPlayCircleFill } from "react-icons/ri";
 
-const Artist = () => {
+const ArtistOld = () => {
   const { artist } = useSelector((state) => state.artist);
   const { followedArtists } = useSelector((state) => state.user.data);
   const dispatch = useDispatch();
@@ -55,7 +54,9 @@ const Artist = () => {
           </div>
 
           <div className="artist__nav">
-            <RiPlayCircleFill onClick={() => replaceQueueHandler(artist.songs)} />
+            <RiPlayCircleFill
+              onClick={() => replaceQueueHandler(artist.songs)}
+            />
             {!userFollowedArtist(artist.id) ? (
               <button onClick={followArtistHandler}>Follow</button>
             ) : (
@@ -80,4 +81,4 @@ const Artist = () => {
   );
 };
 
-export default Artist;
+export default ArtistOld;

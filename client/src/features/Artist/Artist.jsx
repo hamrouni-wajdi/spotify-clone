@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import badgeImg from "../../img/verify.png";
 import PlayButton from "../../components/PlayButton.jsx";
+import List from "../../components/UI/List.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { getArtist } from "../../store/thunks/artist.js";
 
 const StyledArtist = styled.div``;
 
@@ -79,7 +84,28 @@ const FollowButton = styled.button`
   }
 `;
 
-const Artistt = () => {
+const Content = styled.div`
+  padding: 0 1.8rem 1.8rem 1.8rem;
+`;
+
+const SongsHeading = styled.h2`
+  margin-bottom: 1.8rem;
+  color: #fff;
+  font-size: 2.4rem;
+  font-weight: 600;
+`;
+
+const Artist = () => {
+  const { artist } = useSelector((state) => state.artist);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getArtist(id));
+  }, [id]);
+
+  if (!artist) return <p>Loading...</p>;
+
   return (
     <StyledArtist>
       <Header>
@@ -88,16 +114,24 @@ const Artistt = () => {
           <span>Verified Artist</span>
         </Verified>
 
-        <ArtistName>Coldplay</ArtistName>
-        <ListenersCount>1938 listeners</ListenersCount>
+        <ArtistName>{artist.name}</ArtistName>
+        <ListenersCount>
+          {/* TODO: this should be calculated by backend in the future */}
+          {artist.songs.reduce((acc, song) => acc + song.plays, 0)} listeners
+        </ListenersCount>
       </Header>
 
       <Nav>
         <PlayButton size={5.6} iconSize={2.4} />
         <FollowButton>Follow</FollowButton>
       </Nav>
+
+      <Content>
+        <SongsHeading>Popular</SongsHeading>
+        <List list={artist.songs} />
+      </Content>
     </StyledArtist>
   );
 };
 
-export default Artistt;
+export default Artist;

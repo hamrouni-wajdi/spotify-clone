@@ -7,7 +7,6 @@ import Sidebar from "./layout/Sidebar/Sidebar.jsx";
 import Player from "./components/player/Player";
 import App from "./components/app/App";
 import Home from "./pages/Home.jsx";
-import Artist from "./components/app/Artist/Artist";
 import Playlist from "./components/app/Playlist/Playlist";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
@@ -20,7 +19,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./components/admin/Admin";
 import Loading from "./components/UI/Loading";
-import Artistt from "./features/Artist/Artistt.jsx";
+import Artist from "./features/Artist/Artist.jsx";
 
 function AppRoutes() {
   const user = useSelector((state) => state.user);
@@ -42,7 +41,6 @@ function AppRoutes() {
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<Search />} />
               <Route path="/artist/:id" element={<Artist />} />
-              <Route path="/artistt/:id" element={<Artistt />} />
               <Route path="/playlist/:id" element={<Playlist />} />
               <Route path="/likedSongs" element={<LikedSongs />} />
               <Route path="/admin" element={<Admin />} />
