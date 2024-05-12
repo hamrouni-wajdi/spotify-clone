@@ -20,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./components/admin/Admin";
 import Loading from "./components/UI/Loading";
+import Artistt from "./features/Artist/Artistt.jsx";
 
 function AppRoutes() {
   const user = useSelector((state) => state.user);
@@ -41,6 +42,7 @@ function AppRoutes() {
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<Search />} />
               <Route path="/artist/:id" element={<Artist />} />
+              <Route path="/artistt/:id" element={<Artistt />} />
               <Route path="/playlist/:id" element={<Playlist />} />
               <Route path="/likedSongs" element={<LikedSongs />} />
               <Route path="/admin" element={<Admin />} />

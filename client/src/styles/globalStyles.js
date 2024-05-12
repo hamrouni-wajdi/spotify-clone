@@ -39,6 +39,7 @@ const GlobalStyles = createGlobalStyle`
   }
   
   button {
+	  font-family: inherit;
     border: 0;
   }
   
