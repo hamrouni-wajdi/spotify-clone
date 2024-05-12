@@ -7,16 +7,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getArtist } from "../../store/thunks/artist.js";
 
-const StyledArtist = styled.div`
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #121212 40vh),
-    linear-gradient(
-      to bottom,
-      #a855f7,
-      #a855f7 40vh,
-      transparent 40vh,
-      transparent 100%
-    );
-`;
+const StyledArtist = styled.div``;
 
 const Header = styled.header`
   height: 30rem;
@@ -29,14 +20,12 @@ const Header = styled.header`
 
   // Gradient
   background-color: #916d4c;
-  opacity: 0.8;
   background-image: repeating-radial-gradient(
       circle at 0 0,
       transparent 0,
       #916d4c 10px
     ),
     repeating-linear-gradient(#57412d55, #57412d);
-  background-size: cover;
 `;
 
 const Verified = styled.div`
