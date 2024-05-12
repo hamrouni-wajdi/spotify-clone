@@ -7,7 +7,16 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getArtist } from "../../store/thunks/artist.js";
 
-const StyledArtist = styled.div``;
+const StyledArtist = styled.div`
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #121212 40vh),
+    linear-gradient(
+      to bottom,
+      #a855f7,
+      #a855f7 40vh,
+      transparent 40vh,
+      transparent 100%
+    );
+`;
 
 const Header = styled.header`
   height: 30rem;
@@ -17,12 +26,16 @@ const Header = styled.header`
   flex-direction: column;
 
   color: #fff;
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.1)
+
+  // Gradient
+  background-color: #916d4c;
+  opacity: 0.8;
+  background-image: repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      #916d4c 10px
     ),
-    url("https://images.unsplash.com/photo-1685521885212-e5fbac146446?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80");
+    repeating-linear-gradient(#57412d55, #57412d);
   background-size: cover;
 `;
 
@@ -51,12 +64,28 @@ const ListenersCount = styled.p`
   margin-top: 0.4rem;
 `;
 
+const Body = styled.div`
+  position: relative;
+`;
+
+const Gradient = styled.div`
+  width: 100%;
+  height: 24rem;
+  position: absolute;
+
+  // Gradient
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #121212),
+    linear-gradient(#916d4c, #916d4c);
+`;
+
 const Nav = styled.nav`
   padding: 1.8rem;
 
   display: flex;
   align-items: center;
   gap: 2.6rem;
+  position: relative;
+  z-index: 1000;
 `;
 
 const FollowButton = styled.button`
@@ -86,6 +115,8 @@ const FollowButton = styled.button`
 
 const Content = styled.div`
   padding: 0 1.8rem 1.8rem 1.8rem;
+  position: relative;
+  z-index: 1000;
 `;
 
 const SongsHeading = styled.h2`
@@ -121,15 +152,19 @@ const Artist = () => {
         </ListenersCount>
       </Header>
 
-      <Nav>
-        <PlayButton size={5.6} iconSize={2.4} />
-        <FollowButton>Follow</FollowButton>
-      </Nav>
+      <Body>
+        <Gradient />
 
-      <Content>
-        <SongsHeading>Popular</SongsHeading>
-        <List list={artist.songs} />
-      </Content>
+        <Nav>
+          <PlayButton size={5.6} iconSize={2.4} />
+          <FollowButton>Follow</FollowButton>
+        </Nav>
+
+        <Content>
+          <SongsHeading>Popular</SongsHeading>
+          <List list={artist.songs} />
+        </Content>
+      </Body>
     </StyledArtist>
   );
 };
