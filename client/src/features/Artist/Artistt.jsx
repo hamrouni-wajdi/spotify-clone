@@ -68,7 +68,7 @@ const FollowButton = styled.button`
   transition: all 0.1s;
 
   &:hover {
-    scale: 1.05;
+    scale: 1.02;
     border-color: #fff;
   }
 

@@ -14,12 +14,14 @@ const StyledPlayButton = styled.button`
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
   border-radius: 5rem;
 
+  transition: all 0.1s;
+
   svg {
     font-size: ${({ $iconSize }) => ($iconSize ? $iconSize + "rem" : "1.6rem")};
   }
 
   &:hover {
-    scale: 1.05;
+    scale: 1.04;
   }
 
   &:active {
