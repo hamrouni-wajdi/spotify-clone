@@ -4,7 +4,6 @@ import { useState } from "react";
 import TopSongs from "../features/Feed/CustomFeeds/TopSongs.jsx";
 import NewReleases from "../features/Feed/CustomFeeds/NewReleases.jsx";
 import FavouriteArtists from "../features/Feed/CustomFeeds/FavouriteArtists.jsx";
-import Footer from "../components/Footer.jsx";
 
 const StyledHome = styled.div`
   padding: calc(6.4rem + 0.8rem) 1.8rem 0;
@@ -39,8 +38,6 @@ const Home = () => {
       <TopSongs />
       <NewReleases />
       <FavouriteArtists />
-
-      <Footer />
     </StyledHome>
   );
 };

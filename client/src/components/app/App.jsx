@@ -1,5 +1,6 @@
 import Nav from "../../layout/Nav/Nav.jsx";
 import styled from "styled-components";
+import Footer from "../Footer.jsx";
 
 const StyledApp = styled.div`
   height: 100%;
@@ -17,8 +18,8 @@ const App = ({ children }) => {
   return (
     <StyledApp>
       <Nav />
-
       {children}
+      <Footer />
     </StyledApp>
   );
 };
