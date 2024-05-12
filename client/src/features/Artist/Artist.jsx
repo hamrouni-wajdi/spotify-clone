@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import badgeImg from "../../img/verify.png";
 import PlayButton from "../../components/PlayButton.jsx";
 import List from "../../components/UI/List.jsx";
@@ -6,6 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getArtist } from "../../store/thunks/artist.js";
+
+function tintColor(color, amount) {
+  return (
+    "#" +
+    color
+      .replace(/^#/, "")
+      .replace(/../g, (color) =>
+        (
+          "0" +
+          Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)
+        ).substr(-2),
+      )
+  );
+}
 
 const StyledArtist = styled.div``;
 
@@ -19,13 +33,18 @@ const Header = styled.header`
   color: #fff;
 
   // Gradient
-  background-color: #916d4c;
-  background-image: repeating-radial-gradient(
-      circle at 0 0,
-      transparent 0,
-      #916d4c 10px
-    ),
-    repeating-linear-gradient(#57412d55, #57412d);
+  ${({ $color = "#1ed760" }) => css`
+    background-color: ${$color};
+    background-image: repeating-radial-gradient(
+        circle at 0 0,
+        transparent 0,
+        ${$color} 10px
+      ),
+      repeating-linear-gradient(
+        ${tintColor($color, -10)},
+        ${tintColor($color, -30)}
+      );
+  `}
 `;
 
 const Verified = styled.div`
@@ -63,8 +82,10 @@ const Gradient = styled.div`
   position: absolute;
 
   // Gradient
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #121212),
-    linear-gradient(#916d4c, #916d4c);
+  ${({ $color = "#1ed760" }) => css`
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #121212),
+      linear-gradient(${$color}, ${$color});
+  `}
 `;
 
 const Nav = styled.nav`
@@ -128,7 +149,7 @@ const Artist = () => {
 
   return (
     <StyledArtist>
-      <Header>
+      <Header $color="#49796B">
         <Verified>
           <img src={badgeImg} alt="Verified badge" />
           <span>Verified Artist</span>
@@ -142,7 +163,7 @@ const Artist = () => {
       </Header>
 
       <Body>
-        <Gradient />
+        <Gradient $color="#49796B" />
 
         <Nav>
           <PlayButton size={5.6} iconSize={2.4} />
