@@ -5,7 +5,7 @@ import List from "../../components/UI/List.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { getArtist } from "../../store/thunks/artist.js";
+import { getArtist, selectArtist, selectArtistStatus } from "./artistSlice.js";
 
 function tintColor(color, amount) {
   return (
@@ -137,15 +137,16 @@ const SongsHeading = styled.h2`
 `;
 
 const Artist = () => {
-  const { artist } = useSelector((state) => state.artist);
   const { id } = useParams();
+  const artist = useSelector(selectArtist);
+  const status = useSelector(selectArtistStatus);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getArtist(id));
-  }, [id]);
+  }, [id, dispatch]);
 
-  if (!artist) return <p>Loading...</p>;
+  if (status !== "success") return <p>Loading...</p>;
 
   return (
     <StyledArtist>

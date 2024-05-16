@@ -19,7 +19,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Admin from "./components/admin/Admin";
 import Loading from "./components/UI/Loading";
-import Artist from "./features/Artist/Artist.jsx";
+import Artist from "./features/artist/Artist.jsx";
 
 function AppRoutes() {
   const user = useSelector((state) => state.user);
