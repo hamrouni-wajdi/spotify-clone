@@ -30,9 +30,9 @@ const StyledPlayButton = styled.button`
   }
 `;
 
-const PlayButton = ({ size, iconSize }) => {
+const PlayButton = ({ size, iconSize, onClick }) => {
   return (
-    <StyledPlayButton $size={size} $iconSize={iconSize}>
+    <StyledPlayButton $size={size} $iconSize={iconSize} onClick={onClick}>
       <RiPlayFill />
     </StyledPlayButton>
   );

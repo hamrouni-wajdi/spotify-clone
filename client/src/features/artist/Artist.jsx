@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getArtist, selectArtist, selectArtistStatus } from "./artistSlice.js";
+import { followArtist, unfollowArtist } from "../../store/thunks/user.js";
+import { replaceQueue } from "../../store/reducers/queue.js";
 
 function tintColor(color, amount) {
   return (
@@ -138,13 +140,23 @@ const SongsHeading = styled.h2`
 
 const Artist = () => {
   const { id } = useParams();
+
   const artist = useSelector(selectArtist);
   const status = useSelector(selectArtistStatus);
+  const { followedArtists } = useSelector((state) => state.user.data);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getArtist(id));
   }, [id, dispatch]);
+
+  // TODO: Server should handle this when user gets artist date
+  const isUserFollowed = (id) => !!followedArtists.find((obj) => obj.id === id);
+
+  const handlePlayArtist = () => {
+    if (artist.songs.length) dispatch(replaceQueue({ songs: artist.songs }));
+  };
 
   if (status !== "success") return <p>Loading...</p>;
 
@@ -167,8 +179,17 @@ const Artist = () => {
         <Gradient $color="#49796B" />
 
         <Nav>
-          <PlayButton size={5.6} iconSize={2.4} />
-          <FollowButton>Follow</FollowButton>
+          <PlayButton size={5.6} iconSize={2.4} onClick={handlePlayArtist} />
+
+          {isUserFollowed(id) ? (
+            <FollowButton onClick={() => dispatch(unfollowArtist(id))}>
+              Unfollow
+            </FollowButton>
+          ) : (
+            <FollowButton onClick={() => dispatch(followArtist(id))}>
+              Follow
+            </FollowButton>
+          )}
         </Nav>
 
         <Content>
