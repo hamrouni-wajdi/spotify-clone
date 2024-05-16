@@ -7,7 +7,7 @@ import Sidebar from "./layout/Sidebar/Sidebar.jsx";
 import Player from "./components/player/Player";
 import App from "./components/app/App";
 import Home from "./pages/Home.jsx";
-import Playlist from "./components/app/Playlist/Playlist";
+import Playlisto from "./components/app/Playlist/Playlisto.jsx";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Profile from "./components/app/Profile/Profile";
@@ -41,7 +41,7 @@ function AppRoutes() {
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<Search />} />
               <Route path="/artist/:id" element={<Artist />} />
-              <Route path="/playlist/:id" element={<Playlist />} />
+              <Route path="/playlist/:id" element={<Playlisto />} />
               <Route path="/likedSongs" element={<LikedSongs />} />
               <Route path="/admin" element={<Admin />} />
               <Route path="/profile" element={<Profile />} />

@@ -9,9 +9,9 @@ import {
 } from "react-icons/io5";
 import { useEffect, useRef, useState } from "react";
 import {
+  dislikePlaylist,
   getPlaylist,
   likePlaylist,
-  dislikePlaylist,
   updatePlaylist,
 } from "../../../store/thunks/playlist";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,9 +21,9 @@ import { replaceQueue } from "../../../store/reducers/queue";
 import { deletePlaylist, getAllPlaylists } from "../../../store/thunks/user";
 import Loading from "../../UI/Loading";
 import Button from "../../UI/Button";
-import {RiEditCircleLine} from "react-icons/ri";
+import { RiEditCircleLine } from "react-icons/ri";
 
-const Playlist = () => {
+const Playlisto = () => {
   const [modal, setModal] = useState(false);
 
   const userId = useSelector((state) => state.user.data.id);
@@ -83,10 +83,10 @@ const Playlist = () => {
         <div className="playlist">
           <div className="playlist__header">
             <div className="playlist__img">
-              <img src={playlist.img} alt="Playlist cover" />
+              <img src={playlist.img} alt="Playlisto cover" />
             </div>
             <div>
-              <p>Playlist</p>
+              <p>Playlisto</p>
               <h1 className="playlist__name">{playlist.name}</h1>
               {playlist.description && (
                 <p className="playlist__des">{playlist.description}</p>
@@ -154,7 +154,7 @@ const Playlist = () => {
             onSubmit={formSubmitHandler}
           >
             <div className="modal__img">
-              <img src={playlist.img} alt="Playlist cover" />
+              <img src={playlist.img} alt="Playlisto cover" />
               <input type="file" name="img" />
             </div>
             <div>
@@ -186,4 +186,4 @@ const Playlist = () => {
   );
 };
 
-export default Playlist;
+export default Playlisto;

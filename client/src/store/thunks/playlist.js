@@ -21,7 +21,7 @@ export const updatePlaylist = createAsyncThunk(
     try {
       const res = await axios.patch(`/playlists/${id}`, data);
 
-      toast.success("Playlist updated");
+      toast.success("Playlisto updated");
 
       return res.data.data;
     } catch (err) {

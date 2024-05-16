@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
-import History from "../features/Feed/History.jsx";
+import History from "../features/feed/History.jsx";
 import { useState } from "react";
-import TopSongs from "../features/Feed/CustomFeeds/TopSongs.jsx";
-import NewReleases from "../features/Feed/CustomFeeds/NewReleases.jsx";
-import FavouriteArtists from "../features/Feed/CustomFeeds/FavouriteArtists.jsx";
+import TopSongs from "../features/feed/customFeeds/TopSongs.jsx";
+import NewReleases from "../features/feed/customFeeds/NewReleases.jsx";
+import FavouriteArtists from "../features/feed/customFeeds/FavouriteArtists.jsx";
 
 const StyledHome = styled.div`
   padding: calc(6.4rem + 0.8rem) 1.8rem 0;
