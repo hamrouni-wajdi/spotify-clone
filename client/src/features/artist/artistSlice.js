@@ -2,13 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../api/axios.js";
 
 // Thunks
-export const getArtist = createAsyncThunk(
-  "artist/getArtist",
-  async (id, { rejectWithValue }) => {
-    const res = await axios.get(`/users/${id}`);
-    return res.data.data;
-  },
-);
+export const getArtist = createAsyncThunk("artist/getArtist", async (id) => {
+  const res = await axios.get(`/users/${id}`);
+  return res.data.data;
+});
 
 // Slice
 const initialState = {
@@ -27,8 +24,10 @@ const artistSlice = createSlice({
       })
       .addCase(getArtist.fulfilled, (state, action) => {
         state.status = "success";
-        console.log(action);
         state.data = action.payload;
+      })
+      .addCase(getArtist.rejected, (state, action) => {
+        state.status = "fail";
       }),
 });
 
