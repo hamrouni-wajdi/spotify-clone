@@ -9,9 +9,13 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import PlaylistNav from "./PlaylistNav.jsx";
+import List from "../../components/UI/List.jsx";
 
 const Body = styled.div`
   position: relative;
+
+  // TODO: Remove this when more content is added
+  min-height: 24rem;
 `;
 
 const Gradient = styled.div`
@@ -24,6 +28,12 @@ const Gradient = styled.div`
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #121212),
       linear-gradient(${$color}, ${$color});
   `}
+`;
+
+const Content = styled.div`
+  padding: 0 2rem 2rem 2rem;
+  position: relative;
+  z-index: 1000;
 `;
 
 const Playlist = () => {
@@ -39,6 +49,8 @@ const Playlist = () => {
   if (status === "fail") return <p>No playlist found with this id</p>;
   if (status !== "success") return <p>Loading...</p>;
 
+  console.log(playlist);
+
   return (
     <div>
       <PlaylistHeader playlist={playlist} />
@@ -46,60 +58,11 @@ const Playlist = () => {
       <Body>
         <Gradient />
         <PlaylistNav playlist={playlist} />
+
+        <Content>
+          <List list={playlist.songs} onPlaylist={true} pId={playlist.id} />
+        </Content>
       </Body>
-
-      {/*<div className="playlist__header">*/}
-      {/*  <div className="playlist__img">*/}
-      {/*    <img src={playlist.img} alt="Playlisto cover" />*/}
-      {/*  </div>*/}
-      {/*  <div>*/}
-      {/*    <p>Playlisto</p>*/}
-      {/*    <h1 className="playlist__name">{playlist.name}</h1>*/}
-      {/*    {playlist.description && (*/}
-      {/*      <p className="playlist__des">{playlist.description}</p>*/}
-      {/*    )}*/}
-      {/*    <div className="playlist__user">*/}
-      {/*      <img*/}
-      {/*        className="playlist__user-img"*/}
-      {/*        src={playlist.user.img}*/}
-      {/*        alt="user"*/}
-      {/*      />*/}
-      {/*      <span className="playlist__user-name">{playlist.user.name}</span>*/}
-      {/*      <span className="playlist__user-songs">*/}
-      {/*        {playlist.songs.length} songs*/}
-      {/*      </span>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
-
-      {/*<div className="playlist__nav">*/}
-      {/*  <IoPlayCircle onClick={() => replaceQueueHandler(playlist.songs)} />*/}
-      {/*  {playlist.user.id !== userId &&*/}
-      {/*    (userLikedPlaylist(playlist.id) ? (*/}
-      {/*      <IoHeart*/}
-      {/*        className="heart heart--active"*/}
-      {/*        onClick={() => dislikePlaylistHandler(playlist.id)}*/}
-      {/*      />*/}
-      {/*    ) : (*/}
-      {/*      <IoHeartOutline*/}
-      {/*        className="heart"*/}
-      {/*        onClick={() => likePlaylistHandler(playlist.id)}*/}
-      {/*      />*/}
-      {/*    ))}*/}
-      {/*  {playlist.user.id === userId && (*/}
-      {/*    <RiEditCircleLine*/}
-      {/*      onClick={openModalHandler}*/}
-      {/*      style={{*/}
-      {/*        fontSize: "3.2rem",*/}
-      {/*        color: "#fff",*/}
-      {/*      }}*/}
-      {/*    />*/}
-      {/*  )}*/}
-      {/*</div>*/}
-
-      {/*<div className="playlist__songs">*/}
-      {/*  <List list={playlist.songs} onPlaylist={true} pId={playlist.id} />*/}
-      {/*</div>*/}
     </div>
   );
 };
