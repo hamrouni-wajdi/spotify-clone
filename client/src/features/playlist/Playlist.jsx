@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import PlaylistHeader from "./Header/PlaylistHeader.jsx";
+import PlaylistHeader from "./header/PlaylistHeader.jsx";
 import { useEffect } from "react";
 import {
   getPlaylist,
