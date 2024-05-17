@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import PlaylistNav from "./PlaylistNav.jsx";
 import List from "../../components/UI/List.jsx";
+import Modal from "../../components/Modal.jsx";
 
 const Body = styled.div`
   position: relative;
@@ -51,6 +52,16 @@ const Playlist = () => {
 
   return (
     <div>
+      <Modal>
+        <Modal.Open>Open</Modal.Open>
+        <Modal.Window>
+          <span>IMG</span>
+          <span>Name</span>
+          <span>Description</span>
+          <span>Save</span>
+        </Modal.Window>
+      </Modal>
+
       <PlaylistHeader playlist={playlist} />
 
       <Body>
