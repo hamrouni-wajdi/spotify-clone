@@ -7,6 +7,24 @@ import {
   selectPlaylistStatus,
 } from "./playlistSlice.js";
 import { useDispatch, useSelector } from "react-redux";
+import styled, { css } from "styled-components";
+import PlaylistNav from "./PlaylistNav.jsx";
+
+const Body = styled.div`
+  position: relative;
+`;
+
+const Gradient = styled.div`
+  width: 100%;
+  height: 24rem;
+  position: absolute;
+
+  // Gradient
+  ${({ $color = "#64748b" }) => css`
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #121212),
+      linear-gradient(${$color}, ${$color});
+  `}
+`;
 
 const Playlist = () => {
   const { id } = useParams();
@@ -22,8 +40,14 @@ const Playlist = () => {
   if (status !== "success") return <p>Loading...</p>;
 
   return (
-    <div className="playlist">
+    <div>
       <PlaylistHeader playlist={playlist} />
+
+      <Body>
+        <Gradient />
+        <PlaylistNav playlist={playlist} />
+      </Body>
+
       {/*<div className="playlist__header">*/}
       {/*  <div className="playlist__img">*/}
       {/*    <img src={playlist.img} alt="Playlisto cover" />*/}

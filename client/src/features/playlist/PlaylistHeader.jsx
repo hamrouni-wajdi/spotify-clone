@@ -10,7 +10,7 @@ const StyledPlaylistHeader = styled.header`
   color: #fff;
 
   // Gradient
-  ${({ $color = "#ffa068" }) => css`
+  ${({ $color = "#64748b" }) => css`
     background-color: ${$color};
     background-image: linear-gradient(transparent 0, rgba(0, 0, 0, 0.5) 100%);
   `}

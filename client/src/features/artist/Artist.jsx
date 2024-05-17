@@ -26,13 +26,13 @@ const Gradient = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 0 1.8rem 1.8rem 1.8rem;
+  padding: 0 2rem 2rem 2rem;
   position: relative;
   z-index: 1000;
 `;
 
 const SongsHeading = styled.h2`
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.6rem;
   color: #fff;
   font-size: 2.4rem;
   font-weight: 600;
