@@ -1,20 +1,6 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
-function tintColor(color, amount) {
-  return (
-    "#" +
-    color
-      .replace(/^#/, "")
-      .replace(/../g, (color) =>
-        (
-          "0" +
-          Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)
-        ).slice(-2),
-      )
-  );
-}
-
 const StyledPlaylistHeader = styled.header`
   padding: 8.4rem 2rem 2rem 2rem;
 
@@ -93,26 +79,23 @@ const AuthorName = styled(Link)`
   }
 `;
 
-const PlaylistHeader = () => {
+const PlaylistHeader = ({ playlist }) => {
   return (
     <StyledPlaylistHeader>
       <Cover>
-        <img
-          src="https://ik.imagekit.io/8cs4gpobr/spotify/playlists/playlist-65ae756987219cb71d711d73-1705932237921_GETr42FNd.jpeg"
-          alt="Playlist cover"
-        />
+        <img src={playlist.img} alt="Playlist cover" />
       </Cover>
 
       <Info>
         <Type>Playlist</Type>
-        <Name>Taylor Singles</Name>
-        <Description>All of the Artist's single releases</Description>
+        <Name>{playlist.name}</Name>
+        {playlist.description && (
+          <Description>All of the Artist's single releases</Description>
+        )}
         <Author>
-          <AuthorImg
-            src="https://ik.imagekit.io/8cs4gpobr/spotify/users/user-6513505bef35c9d633139956-1696161152100_iBYK4G6TN.jpeg"
-            alt="User profile"
-          />
-          <AuthorName>Maqsud Tolipov</AuthorName>
+          <AuthorImg src={playlist.user.img} alt="User profile" />
+          {/* TODO: Modify this after user profile is created */}
+          <AuthorName to={""}>{playlist.user.name}</AuthorName>
         </Author>
       </Info>
     </StyledPlaylistHeader>
