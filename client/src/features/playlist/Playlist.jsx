@@ -51,19 +51,15 @@ const Playlist = () => {
   if (status !== "success") return <p>Loading...</p>;
 
   return (
-    <div>
+    <Modal>
       <PlaylistHeader playlist={playlist} />
 
-      <Modal>
-        <Modal.Open name="playlist">Open</Modal.Open>
-        <Modal.Window name="playlist">
-          <span>IMG</span>
-          <span>Name</span>
-          <span>Description</span>
-          <span>Save</span>
-        </Modal.Window>
-      </Modal>
-
+      <Modal.Window name="playlist">
+        <span>IMG</span>
+        <span>Name</span>
+        <span>Description</span>
+        <span>Save</span>
+      </Modal.Window>
       <Body>
         <Gradient />
         <PlaylistNav playlist={playlist} />
@@ -72,7 +68,7 @@ const Playlist = () => {
           <List list={playlist.songs} onPlaylist={true} pId={playlist.id} />
         </Content>
       </Body>
-    </div>
+    </Modal>
   );
 };
 

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { RiPencilLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { selectPlaylist } from "./playlistSlice.js";
+import Modal from "../../components/Modal.jsx";
 
 const StyledCover = styled.div`
   height: 18rem;
@@ -44,10 +45,12 @@ const Cover = () => {
   const playlist = useSelector(selectPlaylist);
 
   return (
-    <StyledCover onClick={() => console.log("Open modal")}>
-      <PencilIcon />
-      <Img src={playlist.img} alt="Playlist cover" />
-    </StyledCover>
+    <Modal.Open name="playlist">
+      <StyledCover>
+        <PencilIcon />
+        <Img src={playlist.img} alt="Playlist cover" />
+      </StyledCover>
+    </Modal.Open>
   );
 };
 

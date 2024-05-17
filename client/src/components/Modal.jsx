@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { cloneElement, createContext, useContext, useState } from "react";
 import styled from "styled-components";
 import { createPortal } from "react-dom";
 import { RiCloseLine } from "react-icons/ri";
@@ -86,20 +86,21 @@ const Modal = ({ children }) => {
   );
 };
 
-const Open = ({ name }) => {
+const Open = ({ name, children }) => {
   const { openName, open, close } = useContext(ModalContext);
 
   const handleOpen = (e) => {
+    console.log("open here");
     e.stopPropagation();
 
     openName === "" || openName !== name ? open(name) : close();
   };
 
-  return <button onClick={handleOpen}>Open</button>;
+  return cloneElement(children, { onClick: (e) => handleOpen(e) });
 };
 
 const Window = ({ name, children }) => {
-  const { openName, open, close } = useContext(ModalContext);
+  const { openName, close } = useContext(ModalContext);
   const { ref } = useOutsideClick(close);
 
   if (name !== openName) return null;

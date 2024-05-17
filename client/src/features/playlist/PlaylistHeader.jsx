@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import Cover from "./Cover.jsx";
+import Modal from "../../components/Modal.jsx";
 
 const StyledPlaylistHeader = styled.header`
   padding: 8.4rem 2rem 2rem 2rem;
@@ -75,10 +76,15 @@ const PlaylistHeader = ({ playlist }) => {
 
       <Info>
         <Type>Playlist</Type>
-        <Name onClick={() => console.log("Open modal")}>{playlist.name}</Name>
+
+        <Modal.Open name="playlist">
+          <Name>{playlist.name}</Name>
+        </Modal.Open>
+
         {playlist.description && (
           <Description>All of the Artist's single releases</Description>
         )}
+
         <Author>
           <AuthorImg src={playlist.user.img} alt="User profile" />
           {/* TODO: Modify this after user profile is created */}
