@@ -61,15 +61,19 @@ const PlaylistNav = ({ playlist }) => {
   const handleLikePlaylist = () => dispatch(likePlaylist(playlist.id));
   const handleDislikePlaylist = () => dispatch(dislikePlaylist(playlist.id));
 
+  console.log(playlist, playlist.user.id, userId);
+
   return (
     <Nav>
       <PlayButton size={5.6} iconSize={2.4} onClick={handlePlayPlaylist} />
 
-      {playlist.user.id !== userId && isLikedPlaylist(playlist.id) ? (
-        <DislikeButton onClick={handleDislikePlaylist} />
-      ) : (
-        <LikeButton onClick={handleLikePlaylist} />
-      )}
+      {/* TODO: This should be prevented in server */}
+      {playlist.user.id !== userId &&
+        (isLikedPlaylist(playlist.id) ? (
+          <DislikeButton onClick={handleDislikePlaylist} />
+        ) : (
+          <LikeButton onClick={handleLikePlaylist} />
+        ))}
     </Nav>
   );
 };
