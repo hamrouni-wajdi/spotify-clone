@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import HeaderCover from "./HeaderCover.jsx";
 import HeaderInfo from "./HeaderInfo.jsx";
 import Modal from "../../../components/Modal.jsx";
+import EditModal from "./EditModal.jsx";
 
 const StyledPlaylistHeader = styled.header`
   padding: 8.4rem 2rem 2rem 2rem;
@@ -27,10 +28,7 @@ const PlaylistHeader = () => {
         <HeaderInfo />
 
         <Modal.Window name="playlist">
-          <span>IMG</span>
-          <span>Name</span>
-          <span>Description</span>
-          <span>Save</span>
+          <EditModal />
         </Modal.Window>
       </StyledPlaylistHeader>
     </Modal>
