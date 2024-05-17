@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import PlaylistHeader from "./PlaylistHeader.jsx";
+import PlaylistHeader from "./Header/PlaylistHeader.jsx";
 import { useEffect } from "react";
 import {
   getPlaylist,
@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
 import PlaylistNav from "./PlaylistNav.jsx";
 import List from "../../components/UI/List.jsx";
-import Modal from "../../components/Modal.jsx";
 
 const Body = styled.div`
   position: relative;
@@ -51,15 +50,8 @@ const Playlist = () => {
   if (status !== "success") return <p>Loading...</p>;
 
   return (
-    <Modal>
+    <div>
       <PlaylistHeader playlist={playlist} />
-
-      <Modal.Window name="playlist">
-        <span>IMG</span>
-        <span>Name</span>
-        <span>Description</span>
-        <span>Save</span>
-      </Modal.Window>
       <Body>
         <Gradient />
         <PlaylistNav playlist={playlist} />
@@ -68,7 +60,7 @@ const Playlist = () => {
           <List list={playlist.songs} onPlaylist={true} pId={playlist.id} />
         </Content>
       </Body>
-    </Modal>
+    </div>
   );
 };
 

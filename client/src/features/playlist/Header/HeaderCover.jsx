@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { RiPencilLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
-import { selectPlaylist } from "./playlistSlice.js";
-import Modal from "../../components/Modal.jsx";
+import { selectPlaylist } from "../playlistSlice.js";
+import Modal from "../../../components/Modal.jsx";
 
 const StyledCover = styled.div`
   height: 18rem;
@@ -41,7 +41,7 @@ const Img = styled.img`
   width: 100%;
 `;
 
-const Cover = () => {
+const HeaderCover = () => {
   const playlist = useSelector(selectPlaylist);
 
   return (
@@ -54,4 +54,4 @@ const Cover = () => {
   );
 };
 
-export default Cover;
+export default HeaderCover;
