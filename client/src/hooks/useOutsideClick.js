@@ -12,6 +12,7 @@ const useOutsideClick = (handler) => {
     const handleClick = (e) => {
       e.stopPropagation();
       console.log("close");
+
       if (ref.current && !ref.current?.contains(e.target)) {
         handler();
       }

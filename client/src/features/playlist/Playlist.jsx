@@ -52,17 +52,17 @@ const Playlist = () => {
 
   return (
     <div>
+      <PlaylistHeader playlist={playlist} />
+
       <Modal>
-        <Modal.Open>Open</Modal.Open>
-        <Modal.Window>
+        <Modal.Open name="playlist">Open</Modal.Open>
+        <Modal.Window name="playlist">
           <span>IMG</span>
           <span>Name</span>
           <span>Description</span>
           <span>Save</span>
         </Modal.Window>
       </Modal>
-
-      <PlaylistHeader playlist={playlist} />
 
       <Body>
         <Gradient />

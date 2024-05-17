@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import styled from "styled-components";
 import { createPortal } from "react-dom";
 import { RiCloseLine } from "react-icons/ri";
+import useOutsideClick from "../hooks/useOutsideClick.js";
 
 // Styled Components
 const Overlay = styled.div`
@@ -67,15 +68,15 @@ const CloseButton = styled(RiCloseLine)`
 const ModalContext = createContext(null);
 
 const Modal = ({ children }) => {
-  const [modalName, setModalName] = useState("");
+  const [openName, setOpenName] = useState("");
 
-  const open = (name) => setModalName(name);
-  const close = () => setModalName("");
+  const open = (name) => setOpenName(name);
+  const close = () => setOpenName("");
 
   return (
     <ModalContext.Provider
       value={{
-        modalName,
+        openName,
         open,
         close,
       }}
@@ -86,17 +87,28 @@ const Modal = ({ children }) => {
 };
 
 const Open = ({ name }) => {
-  const { modalName, open, close } = useContext(ModalContext);
+  const { openName, open, close } = useContext(ModalContext);
 
-  return <button onClick={() => open("playlist")}>Open</button>;
+  const handleOpen = (e) => {
+    e.stopPropagation();
+
+    openName === "" || openName !== name ? open(name) : close();
+  };
+
+  return <button onClick={handleOpen}>Open</button>;
 };
 
 const Window = ({ name, children }) => {
+  const { openName, open, close } = useContext(ModalContext);
+  const { ref } = useOutsideClick(close);
+
+  if (name !== openName) return null;
+
   return createPortal(
     <Overlay>
-      <Body>
+      <Body ref={ref}>
         <Title>Edit Details</Title>
-        <Button>
+        <Button onClick={close}>
           <CloseButton role="button" />
         </Button>
 
