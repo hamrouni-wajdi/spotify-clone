@@ -1,22 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  becomeArtist,
+  createPlaylist,
+  deletePlaylist,
   dislikeSong,
   followArtist,
+  getAllPlaylists,
   isLoggedIn,
   likeSong,
   loginUser,
+  logoutUser,
   resetPassword,
   signupUser,
   unfollowArtist,
-  becomeArtist,
   updateUser,
-  createPlaylist,
-  deletePlaylist,
-  getAllPlaylists,
-  logoutUser,
 } from "../thunks/user";
-import { dislikePlaylist, likePlaylist } from "../thunks/playlist";
 import { toast } from "react-toastify";
+import {
+  dislikePlaylist,
+  likePlaylist,
+} from "../../features/playlist/playlistSlice.js";
 
 export const userSlice = createSlice({
   name: "user",

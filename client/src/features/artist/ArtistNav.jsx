@@ -49,7 +49,7 @@ const ArtistNav = ({ artist }) => {
   };
 
   // TODO: Server should handle this when user gets artist date
-  const isUserFollowed = (id) => !!followedArtists.find((obj) => obj.id === id);
+  const isUserFollowed = (id) => !!followedArtists.find((el) => el.id === id);
 
   return (
     <Nav>
