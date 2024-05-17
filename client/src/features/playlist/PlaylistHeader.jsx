@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
+import Cover from "./Cover.jsx";
 
 const StyledPlaylistHeader = styled.header`
   padding: 8.4rem 2rem 2rem 2rem;
@@ -14,19 +15,6 @@ const StyledPlaylistHeader = styled.header`
     background-color: ${$color};
     background-image: linear-gradient(transparent 0, rgba(0, 0, 0, 0.5) 100%);
   `}
-`;
-
-const Cover = styled.div`
-  height: 18rem;
-  width: 18rem;
-  overflow: hidden;
-
-  border-radius: 4px;
-  box-shadow: 0 4px 6rem rgba(0, 0, 0, 0.5);
-
-  img {
-    width: 100%;
-  }
 `;
 
 const Info = styled.div`
@@ -44,6 +32,7 @@ const Type = styled.p`
 const Name = styled.h1`
   font-size: 9.6rem;
   font-weight: 800;
+  cursor: pointer;
 `;
 
 const Description = styled.p`
@@ -82,13 +71,11 @@ const AuthorName = styled(Link)`
 const PlaylistHeader = ({ playlist }) => {
   return (
     <StyledPlaylistHeader>
-      <Cover>
-        <img src={playlist.img} alt="Playlist cover" />
-      </Cover>
+      <Cover />
 
       <Info>
         <Type>Playlist</Type>
-        <Name>{playlist.name}</Name>
+        <Name onClick={() => console.log("Open modal")}>{playlist.name}</Name>
         {playlist.description && (
           <Description>All of the Artist's single releases</Description>
         )}

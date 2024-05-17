@@ -49,8 +49,6 @@ const Playlist = () => {
   if (status === "fail") return <p>No playlist found with this id</p>;
   if (status !== "success") return <p>Loading...</p>;
 
-  console.log(playlist);
-
   return (
     <div>
       <PlaylistHeader playlist={playlist} />
