@@ -44,7 +44,7 @@ const Playlist = () => {
 
   useEffect(() => {
     dispatch(getPlaylist(id));
-  }, []);
+  }, [id, dispatch]);
 
   if (status === "fail") return <p>No playlist found with this id</p>;
   if (status !== "success") return <p>Loading...</p>;
