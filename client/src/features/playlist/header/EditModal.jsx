@@ -159,10 +159,12 @@ const EditModal = () => {
   const [imgFile, setImgFile] = useState("");
   const dispatch = useDispatch();
 
-  const handleChangeImg = (e) => {
+  const handleChangeImg = (e, onChange) => {
+    onChange(e.target.files[0]);
     setImgFile(URL.createObjectURL(e.target.files[0]));
   };
 
+  // TODO: Server should remove old images
   const onSubmit = (data) => {
     const formData = new FormData();
 
@@ -190,9 +192,7 @@ const EditModal = () => {
               <input
                 type="file"
                 id="img"
-                onChange={(e) => {
-                  onChange(e.target.files[0]);
-                }}
+                onChange={(e) => handleChangeImg(e, onChange)}
                 {...field}
               />
             )}
