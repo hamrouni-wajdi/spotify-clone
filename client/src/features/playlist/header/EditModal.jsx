@@ -2,8 +2,10 @@ import styled, { css } from "styled-components";
 import { useSelector } from "react-redux";
 import { selectPlaylist } from "../playlistSlice.js";
 import { RiPencilLine } from "react-icons/ri";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
-const FormGrid = styled.form`
+const FormGrid = styled.div`
   margin-bottom: 0.8rem;
 
   display: grid;
@@ -58,6 +60,9 @@ const PencilIcon = styled(RiPencilLine)`
 const Img = styled.img`
   width: 100%;
   height: 100%;
+
+  object-fit: cover;
+  object-position: center;
 `;
 
 const InputGrid = styled.div`
@@ -149,18 +154,33 @@ const FormButton = styled.button`
 
 const EditModal = () => {
   const playlist = useSelector(selectPlaylist);
+  const { register, handleSubmit } = useForm();
+  const [imgFile, setImgFile] = useState("");
+
+  const handleChangeImg = (e) => {
+    setImgFile(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <FormGrid>
         <ImgField>
           <label htmlFor="img">
             <StyledCover>
-              <Img src={playlist.img} alt="playlist cover" />
+              <Img src={imgFile || playlist.img} alt="playlist cover" />
               <PencilIcon />
             </StyledCover>
           </label>
-          <input type="file" id="img" />
+          <input
+            type="file"
+            id="img"
+            {...register("img")}
+            onChange={handleChangeImg}
+          />
         </ImgField>
 
         <InputGrid>
@@ -183,7 +203,7 @@ const EditModal = () => {
         </InputGrid>
       </FormGrid>
 
-      <FormButton>Save</FormButton>
+      <FormButton type="submit">Save</FormButton>
     </form>
   );
 };
