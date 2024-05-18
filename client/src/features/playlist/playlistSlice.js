@@ -11,6 +11,26 @@ export const getPlaylist = createAsyncThunk(
   },
 );
 
+export const updatePlaylist = createAsyncThunk(
+  "playlist/editPlaylist",
+  async ({ data, id }) => {
+    // Prepare
+    const formData = new FormData();
+
+    console.log(data);
+
+    formData.append("img", data.img);
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+
+    // Submit
+    const res = await axios.patch(`/playlists/${id}`, data);
+
+    toast.success("Playlist updated");
+    return res.data.data;
+  },
+);
+
 export const likePlaylist = createAsyncThunk(
   "playlist/likePlaylist",
   async (id) => {
@@ -56,6 +76,11 @@ const playlistSlice = createSlice({
       })
       .addCase(getPlaylist.rejected, (state) => {
         state.status = "fail";
+      })
+      .addCase(updatePlaylist.fulfilled, (state, action) => {
+        state.data.name = action.payload.playlist.name;
+        state.data.img = action.payload.playlist.img;
+        state.data.description = action.payload.playlist.description;
       }),
 });
 

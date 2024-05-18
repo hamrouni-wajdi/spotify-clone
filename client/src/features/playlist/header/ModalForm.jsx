@@ -1,12 +1,11 @@
 import styled, { css } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPlaylist } from "../playlistSlice.js";
+import { selectPlaylist, updatePlaylist } from "../playlistSlice.js";
 import { useForm } from "react-hook-form";
-import { updatePlaylist } from "../../../store/thunks/playlist.js";
 import ModalInputField from "./ModalInputField.jsx";
 import ModalImgField from "./ModalImgField.jsx";
 
-const StyledForm = styled.div`
+const StyledForm = styled.form`
   margin-bottom: 0.8rem;
 
   display: grid;
@@ -88,13 +87,7 @@ const ModalForm = () => {
 
   // TODO: Server should remove old images
   const onSubmit = (data) => {
-    const formData = new FormData();
-
-    formData.append("img", data.img);
-    formData.append("name", data.name);
-    formData.append("description", data.description);
-
-    dispatch(updatePlaylist({ data: formData, id: playlist.id }));
+    dispatch(updatePlaylist({ data, id: playlist.id }));
   };
 
   return (
