@@ -94,15 +94,15 @@ const Sidebar = () => {
 
       <Library />
 
-      <Block>
-        {role === "artist" && (
+      {role === "artist" && (
+        <Block>
           <StyledLink to="/admin">
             <RiMusicLine className="line" />
             <RiMusicFill className="fill" />
             <span>Artist</span>
           </StyledLink>
-        )}
-      </Block>
+        </Block>
+      )}
     </StyledSidebar>
   );
 };
