@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { RiPlayFill } from "react-icons/ri";
 import React from "react";
+import PlayButton from "../PlayButton.jsx";
 
 const StyledCard = styled.div`
   padding: 1.2rem;
@@ -21,6 +22,16 @@ const StyledCard = styled.div`
 const ImgContainer = styled.div`
   margin-bottom: 0.8rem;
   position: relative;
+
+  button {
+    position: absolute;
+    bottom: 0.8rem;
+    right: 0.8rem;
+
+    transition: 0.3s;
+    opacity: 0;
+    translate: 0 1rem;
+  }
 `;
 
 const Img = styled.img`
@@ -50,39 +61,6 @@ const Role = styled.p`
   color: var(--color-text-sub);
 `;
 
-const PlayButton = styled.button`
-  height: 4.8rem;
-  width: 4.8rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  bottom: 0.8rem;
-  right: 0.8rem;
-
-  transition: 0.3s;
-  opacity: 0;
-  translate: 0 1rem;
-
-  background: var(--color-brand);
-  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
-  border-radius: 5rem;
-
-  svg {
-    font-size: 2.4rem;
-  }
-
-  &:hover {
-    scale: 1.05;
-  }
-
-  &:active {
-    background-color: var(--color-brand-press);
-    scale: 1;
-  }
-`;
-
 const Card = ({
   imgBorder,
   img,
@@ -95,7 +73,12 @@ const Card = ({
     <StyledCard onClick={onClick}>
       <ImgContainer>
         <Img src={img} $imgBorder={imgBorder} />
-        <PlayButton onClick={onButtonClick}>
+        <PlayButton
+          size={4.8}
+          iconSize={2.4}
+          hasShadow={true}
+          onClick={onButtonClick}
+        >
           <RiPlayFill />
         </PlayButton>
       </ImgContainer>

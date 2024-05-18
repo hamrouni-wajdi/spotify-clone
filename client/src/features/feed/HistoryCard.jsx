@@ -1,6 +1,7 @@
 import React from "react";
 import { RiPlayFill } from "react-icons/ri";
 import styled from "styled-components";
+import PlayButton from "../../components/PlayButton.jsx";
 
 const Card = styled.div`
   height: 4.8rem;
@@ -15,6 +16,10 @@ const Card = styled.div`
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.5s;
+
+  button {
+    opacity: 0;
+  }
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
@@ -34,33 +39,6 @@ const CardName = styled.span`
   font-size: 1.4rem;
   font-weight: 600;
   color: #fff;
-`;
-
-const PlayButton = styled.button`
-  height: 3.2rem;
-  width: 3.2rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-
-  background: var(--color-brand);
-  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
-  border-radius: 5rem;
-
-  svg {
-    font-size: 1.6rem;
-  }
-
-  &:hover {
-    scale: 1.05;
-  }
-
-  &:active {
-    background-color: var(--color-brand-press);
-    scale: 1;
-  }
 `;
 
 const HistoryCard = ({ setGradientColor }) => {
