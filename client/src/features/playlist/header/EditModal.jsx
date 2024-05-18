@@ -1,9 +1,10 @@
 import styled, { css } from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectPlaylist } from "../playlistSlice.js";
 import { RiPencilLine } from "react-icons/ri";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useState } from "react";
+import { updatePlaylist } from "../../../store/thunks/playlist.js";
 
 const FormGrid = styled.div`
   margin-bottom: 0.8rem;
@@ -154,15 +155,22 @@ const FormButton = styled.button`
 
 const EditModal = () => {
   const playlist = useSelector(selectPlaylist);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, control } = useForm();
   const [imgFile, setImgFile] = useState("");
+  const dispatch = useDispatch();
 
   const handleChangeImg = (e) => {
     setImgFile(URL.createObjectURL(e.target.files[0]));
   };
 
   const onSubmit = (data) => {
-    console.log(data);
+    const formData = new FormData();
+
+    formData.append("img", data.img);
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+
+    dispatch(updatePlaylist({ data: formData, id: playlist.id }));
   };
 
   return (
@@ -175,11 +183,19 @@ const EditModal = () => {
               <PencilIcon />
             </StyledCover>
           </label>
-          <input
-            type="file"
-            id="img"
-            {...register("img")}
-            onChange={handleChangeImg}
+          <Controller
+            control={control}
+            name="img"
+            render={({ field: { value, onChange, ...field } }) => (
+              <input
+                type="file"
+                id="img"
+                onChange={(e) => {
+                  onChange(e.target.files[0]);
+                }}
+                {...field}
+              />
+            )}
           />
         </ImgField>
 
@@ -189,7 +205,7 @@ const EditModal = () => {
               type="text"
               defaultValue={playlist.name}
               placeholder="Add a name"
-              required={true}
+              {...register("name")}
             />
             <Label>Name</Label>
           </InputField>
@@ -197,6 +213,7 @@ const EditModal = () => {
             <StyledTextarea
               defaultValue={playlist.description}
               placeholder="Add an optional description"
+              {...register("description")}
             />
             <Label>Description</Label>
           </InputField>
