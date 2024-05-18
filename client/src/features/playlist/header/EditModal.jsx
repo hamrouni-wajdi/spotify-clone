@@ -165,11 +165,19 @@ const EditModal = () => {
 
         <InputGrid>
           <InputField>
-            <StyledInput type="text" />
+            <StyledInput
+              type="text"
+              defaultValue={playlist.name}
+              placeholder="Add a name"
+              required={true}
+            />
             <Label>Name</Label>
           </InputField>
           <InputField>
-            <StyledTextarea />
+            <StyledTextarea
+              defaultValue={playlist.description}
+              placeholder="Add an optional description"
+            />
             <Label>Description</Label>
           </InputField>
         </InputGrid>
