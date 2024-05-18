@@ -10,7 +10,8 @@ const RowHeading = styled.h2`
 `;
 
 const Row = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 
   //  TEMP
   margin-bottom: 4rem;
