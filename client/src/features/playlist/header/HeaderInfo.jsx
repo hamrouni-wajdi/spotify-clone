@@ -29,9 +29,25 @@ const Description = styled.p`
   font-weight: 400;
 `;
 
-const Author = styled.div`
+const StatusContainer = styled.div`
   margin-top: 0.8rem;
 
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+`;
+
+const StatusBar = styled.span`
+  font-size: 1.4rem;
+  font-weight: 400;
+
+  &::before {
+    content: "●";
+    margin-right: 0.4rem;
+  }
+`;
+
+const Author = styled.div`
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -71,11 +87,17 @@ const HeaderInfo = () => {
         <Description>{playlist.description}</Description>
       )}
 
-      <Author>
-        <AuthorImg src={playlist.user.img} alt="User profile" />
-        {/* TODO: Modify this after user profile is created */}
-        <AuthorName to={""}>{playlist.user.name}</AuthorName>
-      </Author>
+      <StatusContainer>
+        <Author>
+          <AuthorImg src={playlist.user.img} alt="User profile" />
+          {/* TODO: Modify this after user profile is created */}
+          <AuthorName to={""}>{playlist.user.name}</AuthorName>
+        </Author>
+
+        {/*TODO: This will calculated by server */}
+        <StatusBar>441 likes</StatusBar>
+        <StatusBar>12 songs, about 1 hr 30 min</StatusBar>
+      </StatusContainer>
     </Info>
   );
 };
