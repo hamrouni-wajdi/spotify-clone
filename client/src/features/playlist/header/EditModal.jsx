@@ -4,6 +4,8 @@ import { selectPlaylist } from "../playlistSlice.js";
 import { RiPencilLine } from "react-icons/ri";
 
 const FormGrid = styled.form`
+  margin-bottom: 0.8rem;
+
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 1.6rem;
@@ -120,36 +122,61 @@ const StyledTextarea = styled.textarea`
   resize: none;
 `;
 
+const FormButton = styled.button`
+  height: 4.8rem;
+  padding: 0 3.2rem;
+
+  display: block;
+  margin-left: auto;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+  background: #fff;
+  border-radius: 5rem;
+
+  transition: all 0.1s;
+
+  &:hover {
+    background: #f6f6f6;
+    scale: 1.04;
+  }
+
+  &:active {
+    background: #b7b7b7;
+    scale: 1;
+  }
+`;
+
 const EditModal = () => {
   const playlist = useSelector(selectPlaylist);
 
   return (
-    <div>
-      <form>
-        <FormGrid>
-          <ImgField>
-            <label htmlFor="img">
-              <StyledCover>
-                <Img src={playlist.img} alt="playlist cover" />
-                <PencilIcon />
-              </StyledCover>
-            </label>
-            <input type="file" id="img" />
-          </ImgField>
+    <form>
+      <FormGrid>
+        <ImgField>
+          <label htmlFor="img">
+            <StyledCover>
+              <Img src={playlist.img} alt="playlist cover" />
+              <PencilIcon />
+            </StyledCover>
+          </label>
+          <input type="file" id="img" />
+        </ImgField>
 
-          <InputGrid>
-            <InputField>
-              <StyledInput type="text" />
-              <Label>Name</Label>
-            </InputField>
-            <InputField>
-              <StyledTextarea />
-              <Label>Description</Label>
-            </InputField>
-          </InputGrid>
-        </FormGrid>
-      </form>
-    </div>
+        <InputGrid>
+          <InputField>
+            <StyledInput type="text" />
+            <Label>Name</Label>
+          </InputField>
+          <InputField>
+            <StyledTextarea />
+            <Label>Description</Label>
+          </InputField>
+        </InputGrid>
+      </FormGrid>
+
+      <FormButton>Save</FormButton>
+    </form>
   );
 };
 
