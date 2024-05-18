@@ -17,14 +17,12 @@ export const updatePlaylist = createAsyncThunk(
     // Prepare
     const formData = new FormData();
 
-    console.log(data);
-
     formData.append("img", data.img);
     formData.append("name", data.name);
     formData.append("description", data.description);
 
     // Submit
-    const res = await axios.patch(`/playlists/${id}`, data);
+    const res = await axios.patch(`/playlists/${id}`, formData);
 
     toast.success("Playlist updated");
     return res.data.data;

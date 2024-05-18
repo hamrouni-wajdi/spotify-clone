@@ -68,7 +68,7 @@ const HeaderInfo = () => {
       </Modal.Open>
 
       {playlist.description && (
-        <Description>All of the Artist's single releases</Description>
+        <Description>{playlist.description}</Description>
       )}
 
       <Author>
