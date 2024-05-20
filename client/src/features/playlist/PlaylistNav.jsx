@@ -1,9 +1,16 @@
 import PlayButton from "../../components/PlayButton.jsx";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { replaceQueue } from "../../store/reducers/queue.js";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePlaylist, likePlaylist } from "./playlistSlice.js";
-import { RiAddCircleLine, RiCheckboxCircleFill } from "react-icons/ri";
+import {
+  RiAddCircleLine,
+  RiCheckboxCircleFill,
+  RiIndeterminateCircleLine,
+  RiLockFill,
+} from "react-icons/ri";
+import Menu from "../../components/Menu.jsx";
+import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
   padding: 2rem;
@@ -45,6 +52,34 @@ const DislikeButton = styled(RiCheckboxCircleFill)`
   }
 `;
 
+const MenuButton = styled.button``;
+
+// TEMP
+const MenuList = styled.div`
+  width: 20rem;
+  padding: 0.4rem;
+  color: #fff;
+`;
+
+const MenuItem = styled(Link)`
+  padding: 1.2rem 0.8rem 1.2rem 1.2rem;
+  display: block;
+
+  font-size: 1.4rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  ${({ $underline }) =>
+    $underline &&
+    css`
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    `}
+`;
+
 const PlaylistNav = ({ playlist }) => {
   const userId = useSelector((state) => state.user.data.id);
   const likedPlaylists = useSelector((state) => state.user.data.likedPlaylists);
@@ -61,8 +96,6 @@ const PlaylistNav = ({ playlist }) => {
   const handleLikePlaylist = () => dispatch(likePlaylist(playlist.id));
   const handleDislikePlaylist = () => dispatch(dislikePlaylist(playlist.id));
 
-  console.log(playlist, playlist.user.id, userId);
-
   return (
     <Nav>
       <PlayButton size={5.6} iconSize={2.4} onClick={handlePlayPlaylist} />
@@ -74,6 +107,22 @@ const PlaylistNav = ({ playlist }) => {
         ) : (
           <LikeButton onClick={handleLikePlaylist} />
         ))}
+
+      <Menu>
+        <Menu.Open>
+          <MenuButton>...</MenuButton>
+        </Menu.Open>
+        <Menu.Body>
+          <Menu.Item>
+            <RiLockFill />
+            <span>Make Private</span>
+          </Menu.Item>
+          <Menu.Item>
+            <RiIndeterminateCircleLine />
+            <span>Delete</span>
+          </Menu.Item>
+        </Menu.Body>
+      </Menu>
     </Nav>
   );
 };
