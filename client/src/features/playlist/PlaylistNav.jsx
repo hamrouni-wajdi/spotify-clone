@@ -1,5 +1,5 @@
 import PlayButton from "../../components/PlayButton.jsx";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { replaceQueue } from "../../store/reducers/queue.js";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePlaylist, likePlaylist } from "./playlistSlice.js";
@@ -11,7 +11,6 @@ import {
   RiMoreLine,
 } from "react-icons/ri";
 import Menu from "../../components/Menu.jsx";
-import { Link } from "react-router-dom";
 
 const Nav = styled.nav`
   padding: 2rem;
@@ -73,32 +72,6 @@ const MenuButton = styled.button`
     color: var(--color-text-sub);
     scale: 1;
   }
-`;
-
-// TEMP
-const MenuList = styled.div`
-  width: 20rem;
-  padding: 0.4rem;
-  color: #fff;
-`;
-
-const MenuItem = styled(Link)`
-  padding: 1.2rem 0.8rem 1.2rem 1.2rem;
-  display: block;
-
-  font-size: 1.4rem;
-  border-radius: 0.2rem;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  ${({ $underline }) =>
-    $underline &&
-    css`
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    `}
 `;
 
 const PlaylistNav = ({ playlist }) => {

@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Menu from "../../components/Menu.jsx";
 
@@ -58,31 +58,6 @@ const Avatar = styled.button`
   }
 `;
 
-const MenuList = styled.div`
-  width: 20rem;
-  padding: 0.4rem;
-  color: #fff;
-`;
-
-const MenuItem = styled(Link)`
-  padding: 1.2rem 0.8rem 1.2rem 1.2rem;
-  display: block;
-
-  font-size: 1.4rem;
-
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  ${({ $underline }) =>
-    $underline &&
-    css`
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    `}
-`;
-
 const Nav = () => {
   const { name, img } = useSelector((state) => state.user.data);
   const navigate = useNavigate();
@@ -105,13 +80,11 @@ const Nav = () => {
           </Avatar>
         </Menu.Open>
         <Menu.Body>
-          <MenuList>
-            <MenuItem to="">Account</MenuItem>
-            <MenuItem to="profile" $underline>
-              Profile
-            </MenuItem>
-            <MenuItem to="">Log out</MenuItem>
-          </MenuList>
+          <Menu.Link to="">Account</Menu.Link>
+          <Menu.Link to="profile" $underline>
+            Profile
+          </Menu.Link>
+          <Menu.Link to="">Log out</Menu.Link>
         </Menu.Body>
       </Menu>
     </StyledNav>

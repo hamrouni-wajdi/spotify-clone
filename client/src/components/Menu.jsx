@@ -2,6 +2,7 @@ import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import styled, { css } from "styled-components";
 import useOutsideClick from "../hooks/useOutsideClick.js";
+import { Link as RouterLink } from "react-router-dom";
 
 const StyledBody = styled.div`
   position: absolute;
@@ -36,6 +37,25 @@ const StyledItem = styled.li`
     font-size: 1.6rem;
     color: var(--color-text-sub);
   }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  ${({ $underline }) =>
+    $underline &&
+    css`
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    `}
+`;
+
+const StyledLink = styled(RouterLink)`
+  padding: 1.2rem 0.8rem 1.2rem 1.2rem;
+  display: block;
+
+  font-size: 1.4rem;
+
+  cursor: pointer;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -101,16 +121,17 @@ const Body = ({ name, children }) => {
   );
 };
 
-const List = ({ children }) => {
-  return <StyledList>{children}</StyledList>;
-};
-
 const Item = ({ children }) => {
   return <StyledItem>{children}</StyledItem>;
+};
+
+const Link = ({ to, children }) => {
+  return <StyledLink to={to}>{children}</StyledLink>;
 };
 
 Menu.Open = Open;
 Menu.Body = Body;
 Menu.Item = Item;
+Menu.Link = Link;
 
 export default Menu;
