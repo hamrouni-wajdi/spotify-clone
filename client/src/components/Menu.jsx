@@ -121,12 +121,16 @@ const Body = ({ name, children }) => {
   );
 };
 
-const Item = ({ children }) => {
-  return <StyledItem>{children}</StyledItem>;
+const Item = ({ underline, children }) => {
+  return <StyledItem $underline={underline}>{children}</StyledItem>;
 };
 
-const Link = ({ to, children }) => {
-  return <StyledLink to={to}>{children}</StyledLink>;
+const Link = ({ to, underline, children }) => {
+  return (
+    <StyledLink to={to} $underline={underline}>
+      {children}
+    </StyledLink>
+  );
 };
 
 Menu.Open = Open;

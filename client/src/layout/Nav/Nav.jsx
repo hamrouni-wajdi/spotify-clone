@@ -81,7 +81,7 @@ const Nav = () => {
         </Menu.Open>
         <Menu.Body>
           <Menu.Link to="">Account</Menu.Link>
-          <Menu.Link to="profile" $underline>
+          <Menu.Link to="profile" underline={true}>
             Profile
           </Menu.Link>
           <Menu.Link to="">Log out</Menu.Link>
