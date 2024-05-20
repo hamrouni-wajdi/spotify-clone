@@ -8,6 +8,7 @@ import {
   RiCheckboxCircleFill,
   RiIndeterminateCircleLine,
   RiLockFill,
+  RiMoreLine,
 } from "react-icons/ri";
 import Menu from "../../components/Menu.jsx";
 import { Link } from "react-router-dom";
@@ -52,7 +53,27 @@ const DislikeButton = styled(RiCheckboxCircleFill)`
   }
 `;
 
-const MenuButton = styled.button``;
+const MenuButton = styled.button`
+  height: 3.2rem;
+  width: 3.2rem;
+
+  color: var(--color-text-sub);
+  background: transparent;
+
+  svg {
+    font-size: 3.2rem;
+  }
+
+  &:hover {
+    color: #fff;
+    scale: 1.04;
+  }
+
+  &:active {
+    color: var(--color-text-sub);
+    scale: 1;
+  }
+`;
 
 // TEMP
 const MenuList = styled.div`
@@ -110,7 +131,9 @@ const PlaylistNav = ({ playlist }) => {
 
       <Menu>
         <Menu.Open>
-          <MenuButton>...</MenuButton>
+          <MenuButton>
+            <RiMoreLine />
+          </MenuButton>
         </Menu.Open>
         <Menu.Body>
           <Menu.Item>
