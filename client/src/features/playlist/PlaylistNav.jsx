@@ -51,6 +51,8 @@ const PlaylistNav = ({ playlist }) => {
   const likedPlaylists = useSelector((state) => state.user.data.likedPlaylists);
   const dispatch = useDispatch();
 
+  const isPersonal = playlist.user.id === userId;
+
   const handlePlayPlaylist = () => {
     if (playlist.songs.length)
       dispatch(replaceQueue({ songs: playlist.songs }));
@@ -67,14 +69,14 @@ const PlaylistNav = ({ playlist }) => {
       <PlayButton size={5.6} iconSize={2.4} onClick={handlePlayPlaylist} />
 
       {/* TODO: This should be prevented in server */}
-      {playlist.user.id !== userId &&
+      {!isPersonal &&
         (isLikedPlaylist(playlist.id) ? (
           <DislikeButton onClick={handleDislikePlaylist} />
         ) : (
           <LikeButton onClick={handleLikePlaylist} />
         ))}
 
-      <PlaylistMenu id={playlist.id} />
+      {isPersonal && <PlaylistMenu id={playlist.id} />}
     </Nav>
   );
 };
