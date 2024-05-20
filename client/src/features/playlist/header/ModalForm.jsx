@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPlaylist, updatePlaylist } from "../playlistSlice.js";
+import {
+  selectPlaylist,
+  selectPlaylistStatusUpdate,
+  updatePlaylist,
+} from "../playlistSlice.js";
 import { useForm } from "react-hook-form";
 import ModalInputField from "./ModalInputField.jsx";
 import ModalImgField from "./ModalImgField.jsx";
@@ -78,12 +82,20 @@ const FormButton = styled.button`
     background: #b7b7b7;
     scale: 1;
   }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
 `;
 
 const ModalForm = () => {
   const playlist = useSelector(selectPlaylist);
+  const playlistStatusUpdate = useSelector(selectPlaylistStatusUpdate);
   const { register, handleSubmit, control } = useForm();
   const dispatch = useDispatch();
+
+  const isDisabled = playlistStatusUpdate === "loading";
 
   // TODO: Server should remove old images
   const onSubmit = (data) => {
@@ -113,7 +125,9 @@ const ModalForm = () => {
         />
       </InputGrid>
 
-      <FormButton type="submit">Save</FormButton>
+      <FormButton type="submit" disabled={isDisabled}>
+        {!isDisabled ? "Save" : "Saving"}
+      </FormButton>
     </StyledForm>
   );
 };

@@ -56,7 +56,12 @@ export const dislikePlaylist = createAsyncThunk(
 // Slice
 const initialState = {
   data: null,
+  /*
+    Main options: 'idle' | 'loading' | 'success' | 'fail
+    Named status codes used for certain data fetches
+   */
   status: "idle", // 'idle' | 'loading' | 'success' | 'fail',
+  statusUpdate: "idle",
 };
 
 const playlistSlice = createSlice({
@@ -75,15 +80,27 @@ const playlistSlice = createSlice({
       .addCase(getPlaylist.rejected, (state) => {
         state.status = "fail";
       })
+      // Update playlist
+      .addCase(updatePlaylist.pending, (state) => {
+        state.statusUpdate = "loading";
+      })
       .addCase(updatePlaylist.fulfilled, (state, action) => {
+        state.statusUpdate = "success";
+
         state.data.name = action.payload.playlist.name;
         state.data.img = action.payload.playlist.img;
         state.data.description = action.payload.playlist.description;
+      })
+      .addCase(updatePlaylist.rejected, (state) => {
+        state.statusUpdate = "fail";
       }),
 });
 
 // Selectors
 export const selectPlaylist = (state) => state.playlist.data;
 export const selectPlaylistStatus = (state) => state.playlist.status;
+
+export const selectPlaylistStatusUpdate = (state) =>
+  state.playlist.statusUpdate;
 
 export default playlistSlice.reducer;
