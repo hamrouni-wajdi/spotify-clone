@@ -218,6 +218,7 @@ export const createPlaylist = createAsyncThunk(
 export const deletePlaylist = createAsyncThunk(
   "user/deletePlaylist",
   async (id) => {
+    console.log("hit delete");
     try {
       const res = await axios.delete(`/playlists/${id}`);
 

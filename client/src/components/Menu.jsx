@@ -121,8 +121,12 @@ const Body = ({ name, children }) => {
   );
 };
 
-const Item = ({ underline, children }) => {
-  return <StyledItem $underline={underline}>{children}</StyledItem>;
+const Item = ({ underline, onClick, children }) => {
+  return (
+    <StyledItem $underline={underline} onClick={onClick}>
+      {children}
+    </StyledItem>
+  );
 };
 
 const Link = ({ to, underline, children }) => {

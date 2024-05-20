@@ -3,14 +3,8 @@ import styled from "styled-components";
 import { replaceQueue } from "../../store/reducers/queue.js";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePlaylist, likePlaylist } from "./playlistSlice.js";
-import {
-  RiAddCircleLine,
-  RiCheckboxCircleFill,
-  RiIndeterminateCircleLine,
-  RiLockFill,
-  RiMoreLine,
-} from "react-icons/ri";
-import Menu from "../../components/Menu.jsx";
+import { RiAddCircleLine, RiCheckboxCircleFill } from "react-icons/ri";
+import PlaylistMenu from "./PlaylistMenu.jsx";
 
 const Nav = styled.nav`
   padding: 2rem;
@@ -52,28 +46,6 @@ const DislikeButton = styled(RiCheckboxCircleFill)`
   }
 `;
 
-const MenuButton = styled.button`
-  height: 3.2rem;
-  width: 3.2rem;
-
-  color: var(--color-text-sub);
-  background: transparent;
-
-  svg {
-    font-size: 3.2rem;
-  }
-
-  &:hover {
-    color: #fff;
-    scale: 1.04;
-  }
-
-  &:active {
-    color: var(--color-text-sub);
-    scale: 1;
-  }
-`;
-
 const PlaylistNav = ({ playlist }) => {
   const userId = useSelector((state) => state.user.data.id);
   const likedPlaylists = useSelector((state) => state.user.data.likedPlaylists);
@@ -102,23 +74,7 @@ const PlaylistNav = ({ playlist }) => {
           <LikeButton onClick={handleLikePlaylist} />
         ))}
 
-      <Menu>
-        <Menu.Open>
-          <MenuButton>
-            <RiMoreLine />
-          </MenuButton>
-        </Menu.Open>
-        <Menu.Body>
-          <Menu.Item>
-            <RiLockFill />
-            <span>Make Private</span>
-          </Menu.Item>
-          <Menu.Item>
-            <RiIndeterminateCircleLine />
-            <span>Delete</span>
-          </Menu.Item>
-        </Menu.Body>
-      </Menu>
+      <PlaylistMenu id={playlist.id} />
     </Nav>
   );
 };
