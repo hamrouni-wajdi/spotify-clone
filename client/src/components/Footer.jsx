@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { RiGithubFill, RiTwitterFill } from "react-icons/ri";
 
 const StyledFooter = styled.footer`
-  padding: 4rem 3.2rem;
+  padding: 1.6rem 3.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
