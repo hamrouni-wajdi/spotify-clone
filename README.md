@@ -56,6 +56,8 @@ Follow the instructions inside the `./client` and `./server` directories.
 
 ## Contributing
 
+### NOTE: Please use [this commit](https://github.com/maqsudtolipov/spotify-clone/tree/d6fd416c308b377c0113dfa2d0529bae2356b1e4) if you want to clone this project. I started working V2 and commits after that might not be included in installation steps or create conflicts.
+
 Contributions to this project are welcome! If you would like to contribute, please follow these steps:
 
 1. Fork the repository
