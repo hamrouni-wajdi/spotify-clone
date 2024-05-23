@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./reducers/user";
-import playerReducer from "./reducers/player";
-import playlistReducer from "../features/playlist/playlistSlice.js";
-import queueReducer from "./reducers/queue";
-import adminReducer from "./reducers/admin";
+import userReducer from "../features/user/userSlice.js";
 import artistReducer from "../features/artist/artistSlice.js";
+import playlistReducer from "../features/playlist/playlistSlice.js";
+import playerReducer from "../store/reducers/player.js";
+import queueReducer from "../store/reducers/queue.js";
+import adminReducer from "../store/reducers/admin.js";
 
 export const store = configureStore({
   reducer: {

@@ -14,12 +14,9 @@ import {
   signupUser,
   unfollowArtist,
   updateUser,
-} from "../thunks/user";
+} from "./userThunks.js";
 import { toast } from "react-toastify";
-import {
-  dislikePlaylist,
-  likePlaylist,
-} from "../../features/playlist/playlistSlice.js";
+import { dislikePlaylist, likePlaylist } from "../playlist/playlistSlice.js";
 
 export const userSlice = createSlice({
   name: "user",

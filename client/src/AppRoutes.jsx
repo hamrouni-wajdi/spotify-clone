@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { isLoggedIn } from "./store/thunks/user";
+import { isLoggedIn } from "./features/user/userThunks.js";
 import Sidebar from "./layout/Sidebar/Sidebar.jsx";
 import Player from "./components/player/Player";
 import App from "./components/app/App";

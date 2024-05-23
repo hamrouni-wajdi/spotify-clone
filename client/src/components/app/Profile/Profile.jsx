@@ -1,15 +1,15 @@
 import "./Profile.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  updatePassword,
-  updateUser,
   becomeArtist,
   logoutUser,
-} from "../../../store/thunks/user";
+  updatePassword,
+  updateUser,
+} from "../../../features/user/userThunks.js";
 import { useRef } from "react";
 import Button from "../../UI/Button";
 import Input from "../../UI/Input";
-import {RiLogoutBoxLine} from "react-icons/ri";
+import { RiLogoutBoxLine } from "react-icons/ri";
 
 const Profile = () => {
   const user = useSelector((state) => state.user.data);

@@ -1,7 +1,7 @@
 import { RiAddFill, RiBook3Line } from "react-icons/ri";
 import Tags from "./Tags.jsx";
 import styled from "styled-components";
-import { createPlaylist } from "../../../store/thunks/user.js";
+import { createPlaylist } from "../../../features/user/userThunks.js";
 import { useDispatch } from "react-redux";
 
 const Header = styled.header`

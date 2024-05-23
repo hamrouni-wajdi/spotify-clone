@@ -1,6 +1,6 @@
 import "./Player.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { dislikeSong, likeSong } from "../../store/thunks/user";
+import { dislikeSong, likeSong } from "../../features/user/userThunks.js";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { playPause } from "../../store/reducers/player";
 import { nextSong, prevSong } from "../../store/reducers/queue";

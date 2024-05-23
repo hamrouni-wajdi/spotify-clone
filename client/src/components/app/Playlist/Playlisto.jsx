@@ -18,7 +18,10 @@ import { useDispatch, useSelector } from "react-redux";
 import List from "../../UI/List";
 import { useNavigate, useParams } from "react-router-dom";
 import { replaceQueue } from "../../../store/reducers/queue";
-import { deletePlaylist, getAllPlaylists } from "../../../store/thunks/user";
+import {
+  deletePlaylist,
+  getAllPlaylists,
+} from "../../../features/user/userThunks.js";
 import Loading from "../../UI/Loading";
 import Button from "../../UI/Button";
 import { RiEditCircleLine } from "react-icons/ri";

@@ -6,7 +6,7 @@ import {
   RiMoreLine,
 } from "react-icons/ri";
 import styled from "styled-components";
-import { deletePlaylist } from "../../store/thunks/user.js";
+import { deletePlaylist } from "../user/userThunks.js";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
