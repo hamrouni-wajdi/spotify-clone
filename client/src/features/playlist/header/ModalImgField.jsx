@@ -1,7 +1,7 @@
-import { Controller } from "react-hook-form";
-import styled from "styled-components";
-import { RiPencilLine } from "react-icons/ri";
-import { useState } from "react";
+import { Controller } from 'react-hook-form';
+import styled from 'styled-components';
+import { RiPencilLine } from 'react-icons/ri';
+import { useState } from 'react';
 
 const ImgField = styled.div`
   input {
@@ -56,7 +56,7 @@ const Img = styled.img`
 `;
 
 const ModalImgField = ({ playlist, control }) => {
-  const [imgFile, setImgFile] = useState("");
+  const [imgFile, setImgFile] = useState('');
 
   const handleChangeImg = (e, onChange) => {
     onChange(e.target.files[0]);

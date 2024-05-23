@@ -1,26 +1,26 @@
-import "./Auth.scss";
-import logo from "../../img/logo.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../features/user/userThunks.js";
-import { Link, Navigate } from "react-router-dom";
-import { useState } from "react";
-import isValidEmail from "./isValidEmail";
-import { toast } from "react-toastify";
-import Button from "../UI/Button";
-import Input from "../UI/Input";
+import './Auth.scss';
+import logo from '../../img/logo.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../../features/user/userThunks.js';
+import { Link, Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import isValidEmail from './isValidEmail';
+import { toast } from 'react-toastify';
+import Button from '../UI/Button';
+import Input from '../UI/Input';
 
 const Login = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!isValidEmail(email)) {
-      return toast.warn("Email is not valid");
+      return toast.warn('Email is not valid');
     }
 
     dispatch(loginUser({ email, password }));
@@ -63,7 +63,7 @@ const Login = () => {
           </p>
         </div>
       ) : (
-        <Navigate to={"/"} />
+        <Navigate to={'/'} />
       )}
     </>
   );

@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const queueSlice = createSlice({
-  name: "queue",
+  name: 'queue',
   initialState: {
     list: [],
     current: 0,
-    currentId: "",
+    currentId: '',
   },
   reducers: {
     replaceQueue: (state, action) => {

@@ -1,5 +1,5 @@
-import FeedRow from "../FeedRow.jsx";
-import { useSelector } from "react-redux";
+import FeedRow from '../FeedRow.jsx';
+import { useSelector } from 'react-redux';
 
 const FavouriteArtists = () => {
   const followedArtists = useSelector(

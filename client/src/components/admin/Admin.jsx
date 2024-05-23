@@ -1,20 +1,20 @@
-import "./Admin.scss";
-import "./../UI/Modal.scss";
+import './Admin.scss';
+import './../UI/Modal.scss';
 
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteSong,
   getSongs,
   updateSong,
   uploadSong,
-} from "../../features/admin/adminThunks.js";
-import List from "../UI/List";
-import { IoCloseCircle } from "react-icons/io5";
-import Loading from "../UI/Loading";
-import Button from "../UI/Button";
-import ModalWrapper from "../UI/ModalWrapper";
-import Input from "../UI/Input";
+} from '../../features/admin/adminThunks.js';
+import List from '../UI/List';
+import { IoCloseCircle } from 'react-icons/io5';
+import Loading from '../UI/Loading';
+import Button from '../UI/Button';
+import ModalWrapper from '../UI/ModalWrapper';
+import Input from '../UI/Input';
 
 const Admin = () => {
   const [song, setSong] = useState({});
@@ -63,7 +63,7 @@ const Admin = () => {
 
   const uploadModal = () => {
     // NOTE: If upload is successful or cancelled then modal will be closed
-    if (isUploading === "idle" || isUploading === "uploading")
+    if (isUploading === 'idle' || isUploading === 'uploading')
       return (
         <ModalWrapper
           heading="Upload song"
@@ -81,8 +81,8 @@ const Admin = () => {
             <Input type="text" name="name" id="name" placeholder="Song name" />
 
             <Button type="submit" color="white" fullWidth={true}>
-              {isUploading === "idle" && "Upload"}
-              {isUploading === "uploading" && "Uploading"}
+              {isUploading === 'idle' && 'Upload'}
+              {isUploading === 'uploading' && 'Uploading'}
             </Button>
           </form>
         </ModalWrapper>
@@ -148,7 +148,7 @@ const Admin = () => {
       {uploadModal()}
       {editModal()}
 
-      {song && editModalOpen && "bad" === "good" && (
+      {song && editModalOpen && 'bad' === 'good' && (
         <div className="modal modal--admin">
           <div className="modal__header">
             <h2>Upload a new song</h2>

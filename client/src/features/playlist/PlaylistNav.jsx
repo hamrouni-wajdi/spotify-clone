@@ -1,10 +1,10 @@
-import PlayButton from "../../components/PlayButton.jsx";
-import styled from "styled-components";
-import { replaceQueue } from "../queue/queueSlice.js";
-import { useDispatch, useSelector } from "react-redux";
-import { dislikePlaylist, likePlaylist } from "./playlistSlice.js";
-import { RiAddCircleLine, RiCheckboxCircleFill } from "react-icons/ri";
-import PlaylistMenu from "./PlaylistMenu.jsx";
+import PlayButton from '../../components/PlayButton.jsx';
+import styled from 'styled-components';
+import { replaceQueue } from '../queue/queueSlice.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { dislikePlaylist, likePlaylist } from './playlistSlice.js';
+import { RiAddCircleLine, RiCheckboxCircleFill } from 'react-icons/ri';
+import PlaylistMenu from './PlaylistMenu.jsx';
 
 const Nav = styled.nav`
   padding: 2rem;

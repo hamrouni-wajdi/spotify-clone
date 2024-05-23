@@ -1,7 +1,7 @@
-import React from "react";
-import { RiPlayFill } from "react-icons/ri";
-import styled from "styled-components";
-import PlayButton from "../../components/PlayButton.jsx";
+import React from 'react';
+import { RiPlayFill } from 'react-icons/ri';
+import styled from 'styled-components';
+import PlayButton from '../../components/PlayButton.jsx';
 
 const Card = styled.div`
   height: 4.8rem;
@@ -43,7 +43,7 @@ const CardName = styled.span`
 
 const HistoryCard = ({ setGradientColor }) => {
   const randomHexColor =
-    "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
+    '#' + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, '0');
 
   return (
     <Card onMouseEnter={() => setGradientColor(randomHexColor)}>

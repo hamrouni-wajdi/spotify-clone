@@ -1,15 +1,15 @@
-import { useParams } from "react-router-dom";
-import PlaylistHeader from "./header/PlaylistHeader.jsx";
-import { useEffect } from "react";
+import { useParams } from 'react-router-dom';
+import PlaylistHeader from './header/PlaylistHeader.jsx';
+import { useEffect } from 'react';
 import {
   getPlaylist,
   selectPlaylist,
   selectPlaylistStatus,
-} from "./playlistSlice.js";
-import { useDispatch, useSelector } from "react-redux";
-import styled, { css } from "styled-components";
-import PlaylistNav from "./PlaylistNav.jsx";
-import List from "../../components/UI/List.jsx";
+} from './playlistSlice.js';
+import { useDispatch, useSelector } from 'react-redux';
+import styled, { css } from 'styled-components';
+import PlaylistNav from './PlaylistNav.jsx';
+import List from '../../components/UI/List.jsx';
 
 const Body = styled.div`
   position: relative;
@@ -24,7 +24,7 @@ const Gradient = styled.div`
   position: absolute;
 
   // Gradient
-  ${({ $color = "#64748b" }) => css`
+  ${({ $color = '#64748b' }) => css`
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #121212),
       linear-gradient(${$color}, ${$color});
   `}
@@ -46,8 +46,8 @@ const Playlist = () => {
     dispatch(getPlaylist(id));
   }, [id, dispatch]);
 
-  if (status === "fail") return <p>No playlist found with this id</p>;
-  if (status !== "success") return <p>Loading...</p>;
+  if (status === 'fail') return <p>No playlist found with this id</p>;
+  if (status !== 'success') return <p>Loading...</p>;
 
   return (
     <div>

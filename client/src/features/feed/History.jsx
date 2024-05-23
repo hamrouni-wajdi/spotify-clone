@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import HistoryCard from "./HistoryCard.jsx";
+import styled from 'styled-components';
+import HistoryCard from './HistoryCard.jsx';
 
 const StyledHistory = styled.div`
   margin-bottom: 4rem;

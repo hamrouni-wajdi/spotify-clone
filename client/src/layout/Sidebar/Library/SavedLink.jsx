@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
-import styled, { css } from "styled-components";
-import { RiPushpinFill } from "react-icons/ri";
+import { NavLink } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { RiPushpinFill } from 'react-icons/ri';
 
 const StyledSavedLink = styled(NavLink)`
   padding: 0.8rem;
@@ -76,8 +76,8 @@ const Pin = styled(RiPushpinFill)`
  *  - Show playlist creator name
  */
 const SavedLink = ({ item }) => {
-  const isArtist = item.role === "artist";
-  const link = (isArtist ? "/artist/" : "/playlist/") + item.id;
+  const isArtist = item.role === 'artist';
+  const link = (isArtist ? '/artist/' : '/playlist/') + item.id;
   const pinned = false;
 
   return (
@@ -87,7 +87,7 @@ const SavedLink = ({ item }) => {
         <Name>{item.name}</Name>
         <Type>
           {pinned ? <Pin /> : null}
-          <span>{isArtist ? "Artist" : "Playlist"}</span>
+          <span>{isArtist ? 'Artist' : 'Playlist'}</span>
         </Type>
       </Content>
     </StyledSavedLink>

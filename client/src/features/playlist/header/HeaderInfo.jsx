@@ -1,9 +1,9 @@
-import React from "react";
-import Modal from "../../../components/Modal.jsx";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { selectPlaylist } from "../playlistSlice.js";
+import React from 'react';
+import Modal from '../../../components/Modal.jsx';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectPlaylist } from '../playlistSlice.js';
 
 const Info = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ const StatusBar = styled.span`
   font-weight: 400;
 
   &::before {
-    content: "●";
+    content: '●';
     margin-right: 0.4rem;
   }
 `;
@@ -91,7 +91,7 @@ const HeaderInfo = () => {
         <Author>
           <AuthorImg src={playlist.user.img} alt="User profile" />
           {/* TODO: Modify this after user profile is created */}
-          <AuthorName to={""}>{playlist.user.name}</AuthorName>
+          <AuthorName to={''}>{playlist.user.name}</AuthorName>
         </Author>
 
         {/*TODO: This will calculated by server */}

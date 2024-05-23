@@ -1,8 +1,8 @@
-import { cloneElement, createContext, useContext, useState } from "react";
-import { createPortal } from "react-dom";
-import styled, { css } from "styled-components";
-import useOutsideClick from "../hooks/useOutsideClick.js";
-import { Link as RouterLink } from "react-router-dom";
+import { cloneElement, createContext, useContext, useState } from 'react';
+import { createPortal } from 'react-dom';
+import styled, { css } from 'styled-components';
+import useOutsideClick from '../hooks/useOutsideClick.js';
+import { Link as RouterLink } from 'react-router-dom';
 
 const StyledBody = styled.div`
   position: absolute;
@@ -71,11 +71,11 @@ const StyledLink = styled(RouterLink)`
 const MenuContext = createContext(null);
 
 const Menu = ({ children }) => {
-  const [menuName, setMenuName] = useState("");
+  const [menuName, setMenuName] = useState('');
   const [position, setPosition] = useState();
 
   const openMenu = (name) => setMenuName(name);
-  const closeMenu = () => setMenuName("");
+  const closeMenu = () => setMenuName('');
 
   return (
     <MenuContext.Provider
@@ -101,7 +101,7 @@ const Open = ({ name, children }) => {
       top: el.bottom,
     });
 
-    menuName === "" || menuName !== name ? openMenu(name) : closeMenu();
+    menuName === '' || menuName !== name ? openMenu(name) : closeMenu();
   };
 
   return cloneElement(children, { onClick: (e) => handleClick(e) });

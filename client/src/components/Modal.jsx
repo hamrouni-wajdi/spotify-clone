@@ -1,8 +1,8 @@
-import { cloneElement, createContext, useContext, useState } from "react";
-import styled from "styled-components";
-import { createPortal } from "react-dom";
-import { RiCloseLine } from "react-icons/ri";
-import useOutsideClick from "../hooks/useOutsideClick.js";
+import { cloneElement, createContext, useContext, useState } from 'react';
+import styled from 'styled-components';
+import { createPortal } from 'react-dom';
+import { RiCloseLine } from 'react-icons/ri';
+import useOutsideClick from '../hooks/useOutsideClick.js';
 
 // Styled Components
 const Overlay = styled.div`
@@ -68,10 +68,10 @@ const CloseButton = styled(RiCloseLine)`
 const ModalContext = createContext(null);
 
 const Modal = ({ children }) => {
-  const [openName, setOpenName] = useState("");
+  const [openName, setOpenName] = useState('');
 
   const open = (name) => setOpenName(name);
-  const close = () => setOpenName("");
+  const close = () => setOpenName('');
 
   return (
     <ModalContext.Provider
@@ -90,10 +90,10 @@ const Open = ({ name, children }) => {
   const { openName, open, close } = useContext(ModalContext);
 
   const handleOpen = (e) => {
-    console.log("open here");
+    console.log('open here');
     e.stopPropagation();
 
-    openName === "" || openName !== name ? open(name) : close();
+    openName === '' || openName !== name ? open(name) : close();
   };
 
   return cloneElement(children, { onClick: (e) => handleOpen(e) });

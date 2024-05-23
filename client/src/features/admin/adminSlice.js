@@ -1,12 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getSongs, uploadSong } from "./adminThunks.js";
-import { toast } from "react-toastify";
+import { createSlice } from '@reduxjs/toolkit';
+import { getSongs, uploadSong } from './adminThunks.js';
+import { toast } from 'react-toastify';
 
 const adminSlice = createSlice({
-  name: "playlist",
+  name: 'playlist',
   initialState: {
     songs: null,
-    isUploading: "idle",
+    isUploading: 'idle',
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -16,15 +16,15 @@ const adminSlice = createSlice({
         state.songs = action.payload;
       }) // Upload song
       .addCase(uploadSong.pending, (state) => {
-        state.isUploading = "uploading";
+        state.isUploading = 'uploading';
       })
       .addCase(uploadSong.fulfilled, (state, action) => {
-        state.isUploading = "success";
+        state.isUploading = 'success';
 
         state.songs = [...state.songs, action.payload];
       })
       .addCase(uploadSong.rejected, (state, action) => {
-        state.isUploading = "failed";
+        state.isUploading = 'failed';
 
         toast.error(action.payload.response.data.message);
       });

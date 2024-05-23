@@ -1,9 +1,9 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../api/axios.js";
-import { toast } from "react-toastify";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from '../../api/axios.js';
+import { toast } from 'react-toastify';
 
 export const getSongs = createAsyncThunk(
-  "admin/getSongs",
+  'admin/getSongs',
   async (id, { rejectWithValue }) => {
     try {
       const res = await axios.get(`/songs?personal=true`);
@@ -16,12 +16,12 @@ export const getSongs = createAsyncThunk(
 );
 
 export const uploadSong = createAsyncThunk(
-  "admin/uploadSong",
+  'admin/uploadSong',
   async ({ data }, { rejectWithValue }) => {
     try {
       const res = await axios.post(`/songs`, data);
 
-      toast.success("Song uploaded");
+      toast.success('Song uploaded');
 
       return res.data.data.song;
     } catch (err) {
@@ -31,12 +31,12 @@ export const uploadSong = createAsyncThunk(
 );
 
 export const updateSong = createAsyncThunk(
-  "admin/updateSong",
+  'admin/updateSong',
   async ({ data, id }, { rejectWithValue }) => {
     try {
       const res = await axios.patch(`/songs/${id}`, data);
 
-      toast.success("Song updated");
+      toast.success('Song updated');
 
       return res.data.data.song;
     } catch (err) {
@@ -45,11 +45,11 @@ export const updateSong = createAsyncThunk(
   },
 );
 
-export const deleteSong = createAsyncThunk("user/deleteSong", async (id) => {
+export const deleteSong = createAsyncThunk('user/deleteSong', async (id) => {
   try {
     await axios.delete(`/songs/${id}`);
 
-    toast.success("Song deleted");
+    toast.success('Song deleted');
   } catch (err) {
     throw err;
   }

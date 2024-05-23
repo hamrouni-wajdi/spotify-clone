@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { RiGithubFill, RiTwitterFill } from "react-icons/ri";
+import styled from 'styled-components';
+import { RiGithubFill, RiTwitterFill } from 'react-icons/ri';
 
 const StyledFooter = styled.footer`
   padding: 1.6rem 3.2rem;

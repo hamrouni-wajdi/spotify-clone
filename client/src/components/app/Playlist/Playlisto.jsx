@@ -1,30 +1,30 @@
-import "./Playlist.scss";
-import "./../../UI/Modal.scss";
+import './Playlist.scss';
+import './../../UI/Modal.scss';
 
 import {
   IoCloseCircle,
   IoHeart,
   IoHeartOutline,
   IoPlayCircle,
-} from "react-icons/io5";
-import { useEffect, useRef, useState } from "react";
+} from 'react-icons/io5';
+import { useEffect, useRef, useState } from 'react';
 import {
   dislikePlaylist,
   getPlaylist,
   likePlaylist,
   updatePlaylist,
-} from "../../../store/thunks/playlist";
-import { useDispatch, useSelector } from "react-redux";
-import List from "../../UI/List";
-import { useNavigate, useParams } from "react-router-dom";
-import { replaceQueue } from "../../../features/queue/queueSlice.js";
+} from '../../../store/thunks/playlist';
+import { useDispatch, useSelector } from 'react-redux';
+import List from '../../UI/List';
+import { useNavigate, useParams } from 'react-router-dom';
+import { replaceQueue } from '../../../features/queue/queueSlice.js';
 import {
   deletePlaylist,
   getAllPlaylists,
-} from "../../../features/user/userThunks.js";
-import Loading from "../../UI/Loading";
-import Button from "../../UI/Button";
-import { RiEditCircleLine } from "react-icons/ri";
+} from '../../../features/user/userThunks.js';
+import Loading from '../../UI/Loading';
+import Button from '../../UI/Button';
+import { RiEditCircleLine } from 'react-icons/ri';
 
 const Playlisto = () => {
   const [modal, setModal] = useState(false);
@@ -67,7 +67,7 @@ const Playlisto = () => {
 
   const deletePlaylistHandler = (id) => {
     dispatch(deletePlaylist(id));
-    navigate("/");
+    navigate('/');
   };
 
   const likePlaylistHandler = (id) => dispatch(likePlaylist(id));
@@ -128,8 +128,8 @@ const Playlisto = () => {
               <RiEditCircleLine
                 onClick={openModalHandler}
                 style={{
-                  fontSize: "3.2rem",
-                  color: "#fff",
+                  fontSize: '3.2rem',
+                  color: '#fff',
                 }}
               />
             )}
@@ -175,7 +175,7 @@ const Playlisto = () => {
                 fullWidth={true}
                 onClick={(e) => {
                   e.preventDefault();
-                  console.log("sdfds");
+                  console.log('sdfds');
                   deletePlaylistHandler(playlist.id);
                 }}
               >

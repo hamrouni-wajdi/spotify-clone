@@ -1,15 +1,15 @@
-import "./Search.scss";
-import axios from "../../../api/axios";
-import { IoSearch } from "react-icons/io5";
-import { useEffect, useState } from "react";
-import List from "../../UI/List";
-import SquareList from "../../UI/SquareList";
+import './Search.scss';
+import axios from '../../../api/axios';
+import { IoSearch } from 'react-icons/io5';
+import { useEffect, useState } from 'react';
+import List from '../../UI/List';
+import SquareList from '../../UI/SquareList';
 
 const Search = () => {
-  const [query, setQuery] = useState("");
-  const [queryType, setQueryType] = useState("song");
+  const [query, setQuery] = useState('');
+  const [queryType, setQueryType] = useState('song');
   const [results, setResults] = useState({
-    type: "song",
+    type: 'song',
     results: [],
   });
   const [error, setError] = useState(false);
@@ -56,25 +56,25 @@ const Search = () => {
       <ul className="search__tags">
         <li
           className={
-            "search__tag " + (queryType === "song" && "search__tag--active")
+            'search__tag ' + (queryType === 'song' && 'search__tag--active')
           }
-          onClick={() => changeTagHandler("song")}
+          onClick={() => changeTagHandler('song')}
         >
           Song
         </li>
         <li
           className={
-            "search__tag " + (queryType === "artist" && "search__tag--active")
+            'search__tag ' + (queryType === 'artist' && 'search__tag--active')
           }
-          onClick={() => changeTagHandler("artist")}
+          onClick={() => changeTagHandler('artist')}
         >
           Artist
         </li>
         <li
           className={
-            "search__tag " + (queryType === "playlist" && "search__tag--active")
+            'search__tag ' + (queryType === 'playlist' && 'search__tag--active')
           }
-          onClick={() => changeTagHandler("playlist")}
+          onClick={() => changeTagHandler('playlist')}
         >
           Playlist
         </li>
@@ -83,18 +83,20 @@ const Search = () => {
       {error && (
         <h2
           style={{
-            textAlign: "center",
+            textAlign: 'center',
           }}
         >
           😔 Could not find a match. Try another one.
         </h2>
       )}
 
-      {results.type === "song" && <List list={results.list} search={true} />}
-      {results.type === "artist" && (
-        <SquareList list={results.list} type='artist' />
+      {results.type === 'song' && <List list={results.list} search={true} />}
+      {results.type === 'artist' && (
+        <SquareList list={results.list} type="artist" />
       )}
-      {results.type === "playlist" && <SquareList list={results.list} type='playlist' />}
+      {results.type === 'playlist' && (
+        <SquareList list={results.list} type="playlist" />
+      )}
     </div>
   );
 };

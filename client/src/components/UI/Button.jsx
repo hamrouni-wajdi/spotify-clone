@@ -1,9 +1,9 @@
-import "./Button.scss";
-import btnLoading from '../../img/btnLoading.svg'
+import './Button.scss';
+import btnLoading from '../../img/btnLoading.svg';
 
 const Button = ({
-  type = "button",
-  color = "",
+  type = 'button',
+  color = '',
   fullWidth = false,
   isLoading = false,
   onClick,
@@ -11,11 +11,11 @@ const Button = ({
 }) => {
   return (
     <button
-      className={`btn btn--${color} ${fullWidth ? "btn--full-width" : ""}`}
+      className={`btn btn--${color} ${fullWidth ? 'btn--full-width' : ''}`}
       type={type}
       onClick={onClick}
     >
-      {isLoading ? <img src={btnLoading}/> : children}
+      {isLoading ? <img src={btnLoading} /> : children}
     </button>
   );
 };

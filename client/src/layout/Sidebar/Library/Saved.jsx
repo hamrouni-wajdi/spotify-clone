@@ -1,8 +1,8 @@
-import SavedLink from "./SavedLink.jsx";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
-import SavedSearch from "./SavedSearch.jsx";
-import { useState } from "react";
+import SavedLink from './SavedLink.jsx';
+import { useSelector } from 'react-redux';
+import styled from 'styled-components';
+import SavedSearch from './SavedSearch.jsx';
+import { useState } from 'react';
 
 const StyledSaved = styled.div`
   height: calc(100% - 12rem);
@@ -14,13 +14,13 @@ const Saved = ({ activeTag }) => {
   const { likedPlaylists, followedArtists, playlists } = useSelector(
     (state) => state.user.data,
   );
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
 
   const sortedList =
     // Filter out selected tab items
     (
       activeTag
-        ? activeTag === "artists"
+        ? activeTag === 'artists'
           ? followedArtists
           : [...likedPlaylists, ...playlists]
         : [...followedArtists, ...likedPlaylists, ...playlists]
@@ -35,7 +35,7 @@ const Saved = ({ activeTag }) => {
   };
 
   const handleClearQuery = () => {
-    setQuery("");
+    setQuery('');
   };
 
   return (

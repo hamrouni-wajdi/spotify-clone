@@ -1,10 +1,10 @@
-import "./Loading.scss";
-import loadingSvg from "./../../img/loading.svg";
-import { Link } from "react-router-dom";
+import './Loading.scss';
+import loadingSvg from './../../img/loading.svg';
+import { Link } from 'react-router-dom';
 
 const Loading = ({ main = false, fullHeight = false }) => {
   return (
-    <div className={`loading ${fullHeight && "full-height"}`}>
+    <div className={`loading ${fullHeight && 'full-height'}`}>
       <img src={loadingSvg} alt="Loading spinner" />
       {main && (
         <>

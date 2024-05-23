@@ -1,8 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "../../api/axios.js";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from '../../api/axios.js';
 
 // Thunks
-export const getArtist = createAsyncThunk("artist/getArtist", async (id) => {
+export const getArtist = createAsyncThunk('artist/getArtist', async (id) => {
   const res = await axios.get(`/users/${id}`);
   return res.data.data;
 });
@@ -10,24 +10,24 @@ export const getArtist = createAsyncThunk("artist/getArtist", async (id) => {
 // Slice
 const initialState = {
   data: null,
-  status: "idle", // 'idle' | 'loading' | 'success' | 'fail',
+  status: 'idle', // 'idle' | 'loading' | 'success' | 'fail',
 };
 
 const artistSlice = createSlice({
-  name: "artist",
+  name: 'artist',
   initialState,
   reducers: {},
   extraReducers: (builder) =>
     builder
       .addCase(getArtist.pending, (state) => {
-        state.status = "loading";
+        state.status = 'loading';
       })
       .addCase(getArtist.fulfilled, (state, action) => {
-        state.status = "success";
+        state.status = 'success';
         state.data = action.payload;
       })
       .addCase(getArtist.rejected, (state, action) => {
-        state.status = "fail";
+        state.status = 'fail';
       }),
 });
 

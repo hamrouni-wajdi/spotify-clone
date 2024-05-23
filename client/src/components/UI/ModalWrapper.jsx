@@ -1,11 +1,11 @@
-import "./ModalWrapper.scss";
-import { useRef } from "react";
-import { RiCloseCircleFill } from "react-icons/ri";
+import './ModalWrapper.scss';
+import { useRef } from 'react';
+import { RiCloseCircleFill } from 'react-icons/ri';
 
 const ModalWrapper = ({
   heading,
   open = false,
-  type = "",
+  type = '',
   handleClose,
   children,
 }) => {
@@ -13,7 +13,7 @@ const ModalWrapper = ({
 
   return (
     <dialog
-      className={`modal-wrapper ${type ? "modal-wrapper--" + type : null}`}
+      className={`modal-wrapper ${type ? 'modal-wrapper--' + type : null}`}
       ref={modalRef}
       open={open}
     >

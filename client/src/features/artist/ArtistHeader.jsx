@@ -1,14 +1,14 @@
-import badgeImg from "../../img/verify.png";
-import styled, { css } from "styled-components";
+import badgeImg from '../../img/verify.png';
+import styled, { css } from 'styled-components';
 
 function tintColor(color, amount) {
   return (
-    "#" +
+    '#' +
     color
-      .replace(/^#/, "")
+      .replace(/^#/, '')
       .replace(/../g, (color) =>
         (
-          "0" +
+          '0' +
           Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)
         ).slice(-2),
       )
@@ -25,7 +25,7 @@ const Header = styled.header`
   color: #fff;
 
   // Gradient
-  ${({ $color = "#1ed760" }) => css`
+  ${({ $color = '#1ed760' }) => css`
     background-color: ${$color};
     background-image: repeating-radial-gradient(
         circle at 0 0,
@@ -68,7 +68,7 @@ const ArtistHeader = ({ artist }) => {
   return (
     <Header $color="#49796B">
       <Verified>
-        <img src={badgeImg || ""} alt="Verified badge" />
+        <img src={badgeImg || ''} alt="Verified badge" />
         <span>Verified Artist</span>
       </Verified>
 

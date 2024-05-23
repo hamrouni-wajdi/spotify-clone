@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import { RiPlayFill } from "react-icons/ri";
-import React from "react";
+import styled from 'styled-components';
+import { RiPlayFill } from 'react-icons/ri';
+import React from 'react';
 
 const StyledPlayButton = styled.button`
-  height: ${({ $size }) => ($size ? $size + "rem" : "3.2rem")};
-  width: ${({ $size }) => ($size ? $size + "rem" : "3.2rem")};
+  height: ${({ $size }) => ($size ? $size + 'rem' : '3.2rem')};
+  width: ${({ $size }) => ($size ? $size + 'rem' : '3.2rem')};
   box-shadow: ${({ $hasShadow }) =>
-    $hasShadow ? "0 8px 8px rgba(0, 0, 0, 0.3)" : "none"};
+    $hasShadow ? '0 8px 8px rgba(0, 0, 0, 0.3)' : 'none'};
 
   display: flex;
   align-items: center;
@@ -17,7 +17,7 @@ const StyledPlayButton = styled.button`
   transition: all 0.1s;
 
   svg {
-    font-size: ${({ $iconSize }) => ($iconSize ? $iconSize + "rem" : "1.6rem")};
+    font-size: ${({ $iconSize }) => ($iconSize ? $iconSize + 'rem' : '1.6rem')};
   }
 
   &:hover {

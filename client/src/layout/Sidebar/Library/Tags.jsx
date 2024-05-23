@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { css } from 'styled-components';
 
 const StyledTags = styled.div`
   display: flex;
@@ -47,15 +47,15 @@ const Tags = ({ activeTag, onChangeTag }) => {
     <StyledTags>
       <Tag
         role="button"
-        $active={activeTag === "artists"}
-        onClick={() => onChangeTag("artists")}
+        $active={activeTag === 'artists'}
+        onClick={() => onChangeTag('artists')}
       >
         Artists
       </Tag>
       <Tag
         role="button"
-        $active={activeTag === "playlists"}
-        onClick={() => onChangeTag("playlists")}
+        $active={activeTag === 'playlists'}
+        onClick={() => onChangeTag('playlists')}
       >
         Playlists
       </Tag>

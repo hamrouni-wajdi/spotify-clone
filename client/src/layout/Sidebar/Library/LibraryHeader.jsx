@@ -1,8 +1,8 @@
-import { RiAddFill, RiBook3Line } from "react-icons/ri";
-import Tags from "./Tags.jsx";
-import styled from "styled-components";
-import { createPlaylist } from "../../../features/user/userThunks.js";
-import { useDispatch } from "react-redux";
+import { RiAddFill, RiBook3Line } from 'react-icons/ri';
+import Tags from './Tags.jsx';
+import styled from 'styled-components';
+import { createPlaylist } from '../../../features/user/userThunks.js';
+import { useDispatch } from 'react-redux';
 
 const Header = styled.header`
   padding: 0.8rem 1.6rem;
@@ -67,7 +67,7 @@ const LibraryHeader = ({ activeTag, onChangeTag }) => {
         <RiBook3Line />
         <span>Library</span>
         <AddButton onClick={handleCreatePlaylist}>
-          <RiAddFill style={{ scale: "1.4" }} />
+          <RiAddFill style={{ scale: '1.4' }} />
         </AddButton>
       </HeaderTitle>
       <Tags activeTag={activeTag} onChangeTag={onChangeTag} />

@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components";
-import { RiPlayFill } from "react-icons/ri";
-import React from "react";
-import PlayButton from "../PlayButton.jsx";
+import styled, { css } from 'styled-components';
+import { RiPlayFill } from 'react-icons/ri';
+import React from 'react';
+import PlayButton from '../PlayButton.jsx';
 
 const StyledCard = styled.div`
   padding: 1.2rem;
@@ -38,13 +38,13 @@ const Img = styled.img`
   width: 100%;
 
   ${({ $imgBorder }) =>
-    $imgBorder === "round" &&
+    $imgBorder === 'round' &&
     css`
       border-radius: 50rem;
     `}
 
   ${({ $imgBorder }) =>
-    $imgBorder === "square" &&
+    $imgBorder === 'square' &&
     css`
       border-radius: 0.6rem;
     `}

@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
   RiHome4Fill,
   RiHome4Line,
@@ -7,9 +7,9 @@ import {
   RiMusicLine,
   RiSearchFill,
   RiSearchLine,
-} from "react-icons/ri";
-import Library from "./Library/Library.jsx";
-import styled from "styled-components";
+} from 'react-icons/ri';
+import Library from './Library/Library.jsx';
+import styled from 'styled-components';
 
 const StyledSidebar = styled.nav`
   height: 100%;
@@ -94,7 +94,7 @@ const Sidebar = () => {
 
       <Library />
 
-      {role === "artist" && (
+      {role === 'artist' && (
         <Block>
           <StyledLink to="/admin">
             <RiMusicLine className="line" />

@@ -1,11 +1,11 @@
-import styled, { css } from "styled-components";
-import List from "../../components/UI/List.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { getArtist, selectArtist, selectArtistStatus } from "./artistSlice.js";
-import ArtistHeader from "./ArtistHeader.jsx";
-import ArtistNav from "./ArtistNav.jsx";
+import styled, { css } from 'styled-components';
+import List from '../../components/UI/List.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { getArtist, selectArtist, selectArtistStatus } from './artistSlice.js';
+import ArtistHeader from './ArtistHeader.jsx';
+import ArtistNav from './ArtistNav.jsx';
 
 const StyledArtist = styled.div``;
 
@@ -19,7 +19,7 @@ const Gradient = styled.div`
   position: absolute;
 
   // Gradient
-  ${({ $color = "#1ed760" }) => css`
+  ${({ $color = '#1ed760' }) => css`
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), #121212),
       linear-gradient(${$color}, ${$color});
   `}
@@ -48,8 +48,8 @@ const Artist = () => {
     dispatch(getArtist(id));
   }, [id, dispatch]);
 
-  if (status === "fail") return <p>No artist found with this id</p>;
-  if (status !== "success") return <p>Loading...</p>;
+  if (status === 'fail') return <p>No artist found with this id</p>;
+  if (status !== 'success') return <p>Loading...</p>;
 
   return (
     <StyledArtist>

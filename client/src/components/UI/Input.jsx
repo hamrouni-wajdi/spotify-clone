@@ -1,12 +1,12 @@
-import "./Input.scss";
+import './Input.scss';
 
 const Input = ({
-  id = "",
-  type = "text",
-  name = "",
-  minLength = "",
-  maxLength = "",
-  placeholder = "",
+  id = '',
+  type = 'text',
+  name = '',
+  minLength = '',
+  maxLength = '',
+  placeholder = '',
   required = false,
   onChange = null,
 }) => {

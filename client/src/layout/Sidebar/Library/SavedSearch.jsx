@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { RiSearchLine } from "react-icons/ri";
-import { useState } from "react";
-import useOutsideClick from "../../../hooks/useOutsideClick.js";
+import styled from 'styled-components';
+import { RiSearchLine } from 'react-icons/ri';
+import { useState } from 'react';
+import useOutsideClick from '../../../hooks/useOutsideClick.js';
 
 const StyledSearch = styled.div`
   padding: 0 0.8rem;
@@ -85,7 +85,7 @@ const SavedSearch = ({ query, onChangeQuery, onClearQuery }) => {
   const { ref } = useOutsideClick(handleCloseSearch);
 
   return (
-    <StyledSearch ref={ref} className={isOpen ? "active" : ""}>
+    <StyledSearch ref={ref} className={isOpen ? 'active' : ''}>
       <Input
         type="text"
         placeholder="Search in your Library"

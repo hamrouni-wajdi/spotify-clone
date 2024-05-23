@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import {
   becomeArtist,
   createPlaylist,
@@ -14,12 +14,12 @@ import {
   signupUser,
   unfollowArtist,
   updateUser,
-} from "./userThunks.js";
-import { toast } from "react-toastify";
-import { dislikePlaylist, likePlaylist } from "../playlist/playlistSlice.js";
+} from './userThunks.js';
+import { toast } from 'react-toastify';
+import { dislikePlaylist, likePlaylist } from '../playlist/playlistSlice.js';
 
 export const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {
     data: {},
     auth: false,
@@ -63,7 +63,7 @@ export const userSlice = createSlice({
         state.data = action.payload.data;
         state.auth = true;
 
-        toast.success("Welcome back");
+        toast.success('Welcome back');
       })
       .addCase(isLoggedIn.rejected, (state, action) => {
         state.auth = false;
@@ -119,7 +119,7 @@ export const userSlice = createSlice({
 
       // Become an Artist
       .addCase(becomeArtist.fulfilled, (state) => {
-        state.data.role = "artist";
+        state.data.role = 'artist';
       })
 
       // Get All playlists

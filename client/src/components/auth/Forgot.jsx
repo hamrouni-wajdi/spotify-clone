@@ -1,18 +1,18 @@
-import "./Auth.scss";
-import logo from "../../img/logo.svg";
-import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
-import { useState } from "react";
-import isValidEmail from "./isValidEmail";
-import { toast } from "react-toastify";
-import Button from "../UI/Button";
-import Input from "../UI/Input";
-import axios from "../../api/axios.js";
+import './Auth.scss';
+import logo from '../../img/logo.svg';
+import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { useState } from 'react';
+import isValidEmail from './isValidEmail';
+import { toast } from 'react-toastify';
+import Button from '../UI/Button';
+import Input from '../UI/Input';
+import axios from '../../api/axios.js';
 
 const Forgot = () => {
-  const {auth} = useSelector((state) => state.user.data);
+  const { auth } = useSelector((state) => state.user.data);
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleFormSubmit = async (e) => {
@@ -20,16 +20,16 @@ const Forgot = () => {
     setLoading(true);
 
     if (!isValidEmail(email)) {
-      return toast.warn("Email is not valid");
+      return toast.warn('Email is not valid');
     }
 
     try {
-      await axios.post("users/forgotPassword", { email });
-      toast.success("Email sent");
+      await axios.post('users/forgotPassword', { email });
+      toast.success('Email sent');
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -45,11 +45,13 @@ const Forgot = () => {
               required={true}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Button type="submit" isLoading={loading}>Send Token</Button>
+            <Button type="submit" isLoading={loading}>
+              Send Token
+            </Button>
           </form>
         </div>
       ) : (
-        <Navigate to={"/"} />
+        <Navigate to={'/'} />
       )}
     </>
   );

@@ -1,14 +1,14 @@
-import React from "react";
-import Menu from "../../components/Menu.jsx";
+import React from 'react';
+import Menu from '../../components/Menu.jsx';
 import {
   RiIndeterminateCircleLine,
   RiLockFill,
   RiMoreLine,
-} from "react-icons/ri";
-import styled from "styled-components";
-import { deletePlaylist } from "../user/userThunks.js";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+} from 'react-icons/ri';
+import styled from 'styled-components';
+import { deletePlaylist } from '../user/userThunks.js';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Button = styled.button`
   height: 3.2rem;
@@ -38,7 +38,7 @@ const PlaylistMenu = ({ id }) => {
 
   const handleDeletePlaylist = () => {
     dispatch(deletePlaylist(id));
-    navigate("/");
+    navigate('/');
   };
 
   return (

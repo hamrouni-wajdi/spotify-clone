@@ -1,25 +1,25 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { isLoggedIn } from "./features/user/userThunks.js";
-import Sidebar from "./layout/Sidebar/Sidebar.jsx";
-import Player from "./components/player/Player";
-import App from "./components/app/App";
-import Home from "./pages/Home.jsx";
-import Login from "./components/auth/Login";
-import Signup from "./components/auth/Signup";
-import Profile from "./components/app/Profile/Profile";
-import Search from "./components/app/Search/Search";
-import LikedSongs from "./components/app/Playlist/LikedSongs";
-import Reset from "./components/auth/Reset";
-import Forgot from "./components/auth/Forgot";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Admin from "./components/admin/Admin";
-import Loading from "./components/UI/Loading";
-import Artist from "./features/artist/Artist.jsx";
-import Playlist from "./features/playlist/Playlist.jsx";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { isLoggedIn } from './features/user/userThunks.js';
+import Sidebar from './layout/Sidebar/Sidebar.jsx';
+import Player from './components/player/Player';
+import App from './components/app/App';
+import Home from './pages/Home.jsx';
+import Login from './components/auth/Login';
+import Signup from './components/auth/Signup';
+import Profile from './components/app/Profile/Profile';
+import Search from './components/app/Search/Search';
+import LikedSongs from './components/app/Playlist/LikedSongs';
+import Reset from './components/auth/Reset';
+import Forgot from './components/auth/Forgot';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Admin from './components/admin/Admin';
+import Loading from './components/UI/Loading';
+import Artist from './features/artist/Artist.jsx';
+import Playlist from './features/playlist/Playlist.jsx';
 
 function AppRoutes() {
   const user = useSelector((state) => state.user);

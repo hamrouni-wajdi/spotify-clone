@@ -1,25 +1,25 @@
-import "./List.scss";
-import { useDispatch, useSelector } from "react-redux";
+import './List.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   changeCurrent,
   replaceQueue,
-} from "../../features/queue/queueSlice.js";
-import { dislikeSong, likeSong } from "../../features/user/userThunks.js";
-import axios from "../../api/axios";
-import { useState } from "react";
-import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
-import ModalWrapper from "./ModalWrapper";
+} from '../../features/queue/queueSlice.js';
+import { dislikeSong, likeSong } from '../../features/user/userThunks.js';
+import axios from '../../api/axios';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import ModalWrapper from './ModalWrapper';
 import {
   RiDeleteBin6Line,
   RiEditCircleLine,
   RiHeart2Fill,
   RiHeart2Line,
   RiMoreLine,
-} from "react-icons/ri";
+} from 'react-icons/ri';
 
 const List = (props) => {
-  const [songId, setSongId] = useState("");
+  const [songId, setSongId] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
 
   const { likedSongs, playlists } = useSelector((state) => state.user.data);
@@ -29,7 +29,7 @@ const List = (props) => {
   const playSongHandler = (i, id) => {
     const songs = props.list;
 
-    if (id === "65195ebfd44961eafcf4c9c2") toast("🦄 I GOT YOU!");
+    if (id === '65195ebfd44961eafcf4c9c2') toast('🦄 I GOT YOU!');
     dispatch(changeCurrent({ i, id }));
     dispatch(replaceQueue({ songs, i, id }));
   };
@@ -65,7 +65,7 @@ const List = (props) => {
 
   const removeSongFromPlaylistHandler = async (id, songId) => {
     await axios.delete(`playlists/${id}/song/${songId}`);
-    toast.success("Song removed");
+    toast.success('Song removed');
   };
 
   return (
@@ -75,8 +75,8 @@ const List = (props) => {
           props.list.map((el, i) => (
             <div
               className={`list__item ${
-                el.artist.id === "6513505bef35c9d633139956" ? "vip" : ""
-              } ${el.artist === "6513505bef35c9d633139956" ? "vip" : ""}`}
+                el.artist.id === '6513505bef35c9d633139956' ? 'vip' : ''
+              } ${el.artist === '6513505bef35c9d633139956' ? 'vip' : ''}`}
               key={el.id}
             >
               {currentId !== el.id ? (
@@ -92,7 +92,7 @@ const List = (props) => {
               <img src={el.img} alt="Song cover" />
               <span
                 className={
-                  (currentId === el.id ? "list--green" : "") + " list__name"
+                  (currentId === el.id ? 'list--green' : '') + ' list__name'
                 }
                 onClick={() => playSongHandler(i, el.id)}
               >
@@ -109,7 +109,7 @@ const List = (props) => {
                 <RiHeart2Fill onClick={() => dislikeSongHandler(el)} />
               ) : (
                 <RiHeart2Line
-                  style={{ color: "#fff" }}
+                  style={{ color: '#fff' }}
                   onClick={() => likeSongHandler(el)}
                 />
               )}

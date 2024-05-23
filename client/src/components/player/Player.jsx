@@ -1,11 +1,11 @@
-import "./Player.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { dislikeSong, likeSong } from "../../features/user/userThunks.js";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { playPause } from "../../features/player/playerSlice.js";
-import { nextSong, prevSong } from "../../features/queue/queueSlice.js";
-import axios from "../../api/axios";
-import { Link } from "react-router-dom";
+import './Player.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { dislikeSong, likeSong } from '../../features/user/userThunks.js';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { playPause } from '../../features/player/playerSlice.js';
+import { nextSong, prevSong } from '../../features/queue/queueSlice.js';
+import axios from '../../api/axios';
+import { Link } from 'react-router-dom';
 import {
   RiHeart2Fill,
   RiHeart2Line,
@@ -18,7 +18,7 @@ import {
   RiVolumeDownLine,
   RiVolumeMuteLine,
   RiVolumeUpLine,
-} from "react-icons/ri";
+} from 'react-icons/ri';
 
 const Player = () => {
   const [volume, setVolume] = useState(100);
@@ -44,7 +44,7 @@ const Player = () => {
 
     progressRef.current.value = time;
     progressRef.current.style.setProperty(
-      "--range-progress",
+      '--range-progress',
       `${(progressRef.current.value / duration) * 100}%`,
     );
 
@@ -93,7 +93,7 @@ const Player = () => {
 
   const volumeChangeHandler = (e) => {
     setVolume(e.target.value);
-    e.target.style.setProperty("--range-progress", `${e.target.value}%`);
+    e.target.style.setProperty('--range-progress', `${e.target.value}%`);
   };
 
   const onLoadedMetadataHandler = () => {
@@ -111,19 +111,19 @@ const Player = () => {
   };
 
   // Navigator control
-  navigator.mediaSession.setActionHandler("previoustrack", () => {
+  navigator.mediaSession.setActionHandler('previoustrack', () => {
     dispatch(prevSong());
   });
 
-  navigator.mediaSession.setActionHandler("nexttrack", () => {
+  navigator.mediaSession.setActionHandler('nexttrack', () => {
     dispatch(nextSong());
   });
 
-  navigator.mediaSession.setActionHandler("play", () => {
+  navigator.mediaSession.setActionHandler('play', () => {
     dispatch(playPause());
   });
 
-  navigator.mediaSession.setActionHandler("pause", () => {
+  navigator.mediaSession.setActionHandler('pause', () => {
     dispatch(playPause());
   });
 
@@ -140,7 +140,7 @@ const Player = () => {
       const formatSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`;
       return `${formatMinutes}:${formatSeconds}`;
     }
-    return "00:00";
+    return '00:00';
   };
 
   const userLikedSong = () => {
@@ -205,7 +205,7 @@ const Player = () => {
               <RiSkipForwardMiniFill onClick={handleNext} />
               {repeatSong ? (
                 <RiRepeatOneLine
-                  className={"player__repeat"}
+                  className={'player__repeat'}
                   onClick={repeatSongHandler}
                 />
               ) : (

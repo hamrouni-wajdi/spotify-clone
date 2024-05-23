@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { RiPencilLine } from "react-icons/ri";
-import { useSelector } from "react-redux";
-import { selectPlaylist } from "../playlistSlice.js";
-import Modal from "../../../components/Modal.jsx";
+import styled from 'styled-components';
+import { RiPencilLine } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
+import { selectPlaylist } from '../playlistSlice.js';
+import Modal from '../../../components/Modal.jsx';
 
 const StyledCover = styled.div`
   height: 18rem;

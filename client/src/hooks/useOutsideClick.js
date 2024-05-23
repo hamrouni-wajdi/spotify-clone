@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 /**
  *
@@ -11,15 +11,15 @@ const useOutsideClick = (handler) => {
   useEffect(() => {
     const handleClick = (e) => {
       e.stopPropagation();
-      console.log("close");
+      console.log('close');
 
       if (ref.current && !ref.current?.contains(e.target)) {
         handler();
       }
     };
 
-    document.addEventListener("click", handleClick, false);
-    return () => document.removeEventListener("click", handleClick, false);
+    document.addEventListener('click', handleClick, false);
+    return () => document.removeEventListener('click', handleClick, false);
   }, [ref, handler]);
 
   return { ref };

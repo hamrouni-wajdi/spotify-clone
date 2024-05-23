@@ -1,15 +1,15 @@
-import "./Profile.scss";
-import { useDispatch, useSelector } from "react-redux";
+import './Profile.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   becomeArtist,
   logoutUser,
   updatePassword,
   updateUser,
-} from "../../../features/user/userThunks.js";
-import { useRef } from "react";
-import Button from "../../UI/Button";
-import Input from "../../UI/Input";
-import { RiLogoutBoxLine } from "react-icons/ri";
+} from '../../../features/user/userThunks.js';
+import { useRef } from 'react';
+import Button from '../../UI/Button';
+import Input from '../../UI/Input';
+import { RiLogoutBoxLine } from 'react-icons/ri';
 
 const Profile = () => {
   const user = useSelector((state) => state.user.data);
@@ -103,17 +103,17 @@ const Profile = () => {
                 />
                 <Button type="submit">Update</Button>
               </form>
-              {user.role === "user" && (
+              {user.role === 'user' && (
                 <p
                   onClick={becomeArtistHandler}
-                  style={{ color: "#22c55e", cursor: "pointer" }}
+                  style={{ color: '#22c55e', cursor: 'pointer' }}
                 >
                   🎤 Become an Artist
                 </p>
               )}
               <p
                 onClick={logoutHandler}
-                style={{ color: "#ef4444", cursor: "pointer" }}
+                style={{ color: '#ef4444', cursor: 'pointer' }}
               >
                 <RiLogoutBoxLine /> Log out
               </p>

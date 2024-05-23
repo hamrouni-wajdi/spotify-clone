@@ -1,31 +1,31 @@
-import "./Auth.scss";
-import logo from "../../img/logo.svg";
-import { Link, Navigate } from "react-router-dom";
-import { signupUser } from "../../features/user/userThunks.js";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { useState } from "react";
-import isValidEmail from "./isValidEmail";
-import Button from "../UI/Button";
-import Input from "../UI/Input";
+import './Auth.scss';
+import logo from '../../img/logo.svg';
+import { Link, Navigate } from 'react-router-dom';
+import { signupUser } from '../../features/user/userThunks.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
+import isValidEmail from './isValidEmail';
+import Button from '../UI/Button';
+import Input from '../UI/Input';
 
 const Signup = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   // TODO: Validate all inputs
   const handleSignup = (e) => {
     e.preventDefault();
 
     if (password !== passwordConfirm)
-      return toast.warn("Passwords do not match");
+      return toast.warn('Passwords do not match');
     else if (!isValidEmail(email)) {
-      return toast.warn("Email is not valid");
+      return toast.warn('Email is not valid');
     }
 
     dispatch(signupUser({ name, email, password, passwordConfirm }));
@@ -68,7 +68,7 @@ const Signup = () => {
               onChange={(e) => setPasswordConfirm(e.target.value)}
             />
             <Button type="submit">
-              {user.loading ? "Loading" : "Sign Up"}
+              {user.loading ? 'Loading' : 'Sign Up'}
             </Button>
           </form>
 
@@ -79,7 +79,7 @@ const Signup = () => {
           </p>
         </div>
       ) : (
-        <Navigate to={"/"} />
+        <Navigate to={'/'} />
       )}
     </>
   );

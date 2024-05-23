@@ -1,6 +1,6 @@
-import React from "react";
-import Card from "./Card.jsx";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import Card from './Card.jsx';
+import { useNavigate } from 'react-router-dom';
 
 /**
  *
