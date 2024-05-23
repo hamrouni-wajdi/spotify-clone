@@ -8,7 +8,7 @@ import {
   getSongs,
   updateSong,
   uploadSong,
-} from "../../store/thunks/admin";
+} from "../../features/admin/adminThunks.js";
 import List from "../UI/List";
 import { IoCloseCircle } from "react-icons/io5";
 import Loading from "../UI/Loading";
