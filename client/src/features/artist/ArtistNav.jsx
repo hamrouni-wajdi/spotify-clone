@@ -1,7 +1,7 @@
 import PlayButton from "../../components/PlayButton.jsx";
 import { followArtist, unfollowArtist } from "../user/userThunks.js";
 import styled from "styled-components";
-import { replaceQueue } from "../../store/reducers/queue.js";
+import { replaceQueue } from "../queue/queueSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 
 const Nav = styled.nav`

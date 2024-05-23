@@ -2,7 +2,7 @@ import "./Playlist.scss";
 import { IoPlayCircle } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import List from "../../UI/List";
-import { replaceQueue } from "../../../store/reducers/queue";
+import { replaceQueue } from "../../../features/queue/queueSlice.js";
 
 const Playlist = () => {
   const likedSongs = useSelector((state) => state.user.data.likedSongs);

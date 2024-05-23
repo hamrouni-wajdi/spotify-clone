@@ -3,7 +3,7 @@ import userReducer from "../features/user/userSlice.js";
 import artistReducer from "../features/artist/artistSlice.js";
 import playlistReducer from "../features/playlist/playlistSlice.js";
 import playerReducer from "../store/reducers/player.js";
-import queueReducer from "../store/reducers/queue.js";
+import queueReducer from "../features/queue/queueSlice.js";
 import adminReducer from "../features/admin/adminSlice.js";
 
 export const store = configureStore({

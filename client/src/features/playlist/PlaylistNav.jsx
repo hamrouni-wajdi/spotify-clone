@@ -1,6 +1,6 @@
 import PlayButton from "../../components/PlayButton.jsx";
 import styled from "styled-components";
-import { replaceQueue } from "../../store/reducers/queue.js";
+import { replaceQueue } from "../queue/queueSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePlaylist, likePlaylist } from "./playlistSlice.js";
 import { RiAddCircleLine, RiCheckboxCircleFill } from "react-icons/ri";

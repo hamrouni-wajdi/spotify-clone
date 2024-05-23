@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "./Card.jsx";
 import { useDispatch } from "react-redux";
-import { replaceQueue } from "../../store/reducers/queue.js";
+import { replaceQueue } from "../../features/queue/queueSlice.js";
 
 /**
  *

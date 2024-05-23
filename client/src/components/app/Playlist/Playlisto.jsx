@@ -17,7 +17,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import List from "../../UI/List";
 import { useNavigate, useParams } from "react-router-dom";
-import { replaceQueue } from "../../../store/reducers/queue";
+import { replaceQueue } from "../../../features/queue/queueSlice.js";
 import {
   deletePlaylist,
   getAllPlaylists,

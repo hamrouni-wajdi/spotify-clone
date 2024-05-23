@@ -1,6 +1,9 @@
 import "./List.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCurrent, replaceQueue } from "../../store/reducers/queue";
+import {
+  changeCurrent,
+  replaceQueue,
+} from "../../features/queue/queueSlice.js";
 import { dislikeSong, likeSong } from "../../features/user/userThunks.js";
 import axios from "../../api/axios";
 import { useState } from "react";
