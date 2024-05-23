@@ -2,7 +2,7 @@ import "./Player.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikeSong, likeSong } from "../../features/user/userThunks.js";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { playPause } from "../../store/reducers/player";
+import { playPause } from "../../features/player/playerSlice.js";
 import { nextSong, prevSong } from "../../features/queue/queueSlice.js";
 import axios from "../../api/axios";
 import { Link } from "react-router-dom";

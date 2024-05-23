@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "../features/user/userSlice.js";
 import artistReducer from "../features/artist/artistSlice.js";
 import playlistReducer from "../features/playlist/playlistSlice.js";
-import playerReducer from "../store/reducers/player.js";
+import playerReducer from "../features/player/playerSlice.js";
 import queueReducer from "../features/queue/queueSlice.js";
 import adminReducer from "../features/admin/adminSlice.js";
 
