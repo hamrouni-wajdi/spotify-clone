@@ -1,7 +1,7 @@
+import React, { useEffect, useState } from 'react';
 import './Search.scss';
 import axios from '../../api/axios.js';
 import { IoSearch } from 'react-icons/io5';
-import { useEffect, useState } from 'react';
 import List from '../../components/List.jsx';
 import SquareList from '../../components/SquareList.jsx';
 

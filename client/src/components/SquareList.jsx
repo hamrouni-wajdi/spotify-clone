@@ -1,3 +1,4 @@
+import React from 'react';
 import './SquareList.scss';
 import { Link } from 'react-router-dom';
 import { replaceQueue } from '../features/queue/queueSlice.js';

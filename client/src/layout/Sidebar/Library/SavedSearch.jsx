@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RiSearchLine } from 'react-icons/ri';
-import { useState } from 'react';
 import useOutsideClick from '../../../hooks/useOutsideClick.js';
 
 const StyledSearch = styled.div`

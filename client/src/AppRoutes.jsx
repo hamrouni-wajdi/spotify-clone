@@ -10,7 +10,7 @@ import Login from './features/auth/Login';
 import Signup from './features/auth/Signup';
 import Profile from './features/user/Profile.jsx';
 import Search from './features/search/Search';
-import LikedSongs from './components/app/Playlist/LikedSongs';
+import LikedSongs from './features/playlist/LikedSongs.jsx';
 import Reset from './features/auth/Reset';
 import Forgot from './features/auth/Forgot';
 import { ToastContainer } from 'react-toastify';

@@ -1,3 +1,4 @@
+import React from 'react';
 import './Loading.scss';
 import loadingSvg from '../assets/loading.svg';
 import { Link } from 'react-router-dom';

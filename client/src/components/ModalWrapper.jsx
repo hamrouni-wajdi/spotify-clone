@@ -1,5 +1,5 @@
 import './ModalWrapper.scss';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { RiCloseCircleFill } from 'react-icons/ri';
 
 const ModalWrapper = ({

@@ -1,4 +1,9 @@
-import { cloneElement, createContext, useContext, useState } from 'react';
+import React, {
+  cloneElement,
+  createContext,
+  useContext,
+  useState,
+} from 'react';
 import { createPortal } from 'react-dom';
 import styled, { css } from 'styled-components';
 import useOutsideClick from '../hooks/useOutsideClick.js';

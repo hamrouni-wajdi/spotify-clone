@@ -1,3 +1,4 @@
+import React from 'react';
 import badgeImg from '../../assets/verify.png';
 import styled, { css } from 'styled-components';
 

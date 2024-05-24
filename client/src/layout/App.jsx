@@ -1,3 +1,4 @@
+import React from 'react';
 import Nav from './Nav/Nav.jsx';
 import styled from 'styled-components';
 import Footer from '../components/Footer.jsx';

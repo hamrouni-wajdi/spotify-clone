@@ -1,3 +1,4 @@
+import React from 'react';
 import FeedRow from '../FeedRow.jsx';
 import { useSelector } from 'react-redux';
 

@@ -2,7 +2,7 @@ import './Auth.scss';
 import logo from '../../assets/logo.svg';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import isValidEmail from './isValidEmail.js';
 import { toast } from 'react-toastify';
 import Button from '../../components/Button.jsx';

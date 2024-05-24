@@ -1,3 +1,4 @@
+import React from 'react';
 import PlayButton from '../../components/PlayButton.jsx';
 import { followArtist, unfollowArtist } from '../user/userThunks.js';
 import styled from 'styled-components';

@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';

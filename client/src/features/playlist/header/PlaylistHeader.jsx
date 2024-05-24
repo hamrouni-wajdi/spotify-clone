@@ -1,3 +1,4 @@
+import React from 'react';
 import styled, { css } from 'styled-components';
 import HeaderCover from './HeaderCover.jsx';
 import HeaderInfo from './HeaderInfo.jsx';

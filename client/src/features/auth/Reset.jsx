@@ -1,10 +1,10 @@
+import React, { useState } from 'react';
 import './Auth.scss';
 import logo from '../../assets/logo.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetPassword } from '../user/userThunks.js';
 import { Navigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useState } from 'react';
 import Button from '../../components/Button.jsx';
 import Input from '../../components/Input.jsx';
 

@@ -1,7 +1,7 @@
 import { Controller } from 'react-hook-form';
 import styled from 'styled-components';
 import { RiPencilLine } from 'react-icons/ri';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const ImgField = styled.div`
   input {
@@ -74,7 +74,7 @@ const ModalImgField = ({ playlist, control }) => {
       <Controller
         control={control}
         name="img"
-        render={({ field: { value, onChange, ...field } }) => (
+        render={({ field: { onChange, ...field } }) => (
           <input
             type="file"
             id="img"

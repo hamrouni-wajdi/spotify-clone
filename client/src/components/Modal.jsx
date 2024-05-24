@@ -1,4 +1,9 @@
-import { cloneElement, createContext, useContext, useState } from 'react';
+import React, {
+  cloneElement,
+  createContext,
+  useContext,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 import { RiCloseLine } from 'react-icons/ri';

@@ -1,3 +1,4 @@
+import React from 'react';
 import './Button.scss';
 import btnLoading from '../assets/btnLoading.svg';
 

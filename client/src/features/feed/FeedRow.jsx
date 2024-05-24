@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import SongCard from '../../components/card/SongCard.jsx';
 import ArtistCard from '../../components/card/ArtistCard.jsx';
@@ -25,7 +26,7 @@ const FeedRow = ({ title, list, type }) => {
       {type === 'song' && (
         <Row>
           {list.map((el) => (
-            <SongCard data={el} />
+            <SongCard key={el.id} data={el} />
           ))}
         </Row>
       )}
@@ -33,7 +34,7 @@ const FeedRow = ({ title, list, type }) => {
       {type === 'artist' && (
         <Row>
           {list.map((el) => (
-            <ArtistCard data={el} />
+            <ArtistCard key={el.id} data={el} />
           ))}
         </Row>
       )}

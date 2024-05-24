@@ -1,9 +1,9 @@
+import React, { useState } from 'react';
 import './List.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeCurrent, replaceQueue } from '../features/queue/queueSlice.js';
 import { dislikeSong, likeSong } from '../features/user/userThunks.js';
 import axios from '../api/axios.js';
-import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import ModalWrapper from './ModalWrapper.jsx';

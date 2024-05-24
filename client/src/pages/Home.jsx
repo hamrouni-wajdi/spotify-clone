@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import History from '../features/feed/History.jsx';
-import { useState } from 'react';
 import TopSongs from '../features/feed/customFeeds/TopSongs.jsx';
 import NewReleases from '../features/feed/customFeeds/NewReleases.jsx';
 import FavouriteArtists from '../features/feed/customFeeds/FavouriteArtists.jsx';

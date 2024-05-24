@@ -6,7 +6,7 @@ import {
   updatePassword,
   updateUser,
 } from './userThunks.js';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import Button from '../../components/Button.jsx';
 import Input from '../../components/Input.jsx';
 import { RiLogoutBoxLine } from 'react-icons/ri';

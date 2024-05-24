@@ -1,9 +1,9 @@
+import React, { useState } from 'react';
 import './Auth.scss';
 import logo from '../../assets/logo.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../user/userThunks.js';
 import { Link, Navigate } from 'react-router-dom';
-import { useState } from 'react';
 import isValidEmail from './isValidEmail.js';
 import { toast } from 'react-toastify';
 import Button from '../../components/Button.jsx';
