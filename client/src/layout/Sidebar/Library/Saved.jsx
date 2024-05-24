@@ -25,7 +25,7 @@ const Saved = ({ activeTag }) => {
           : [...likedPlaylists, ...playlists]
         : [...followedArtists, ...likedPlaylists, ...playlists]
     )
-      // Search list by query
+      // search list by query
       .filter((el) => el.name.toLowerCase().includes(query.toLowerCase()))
       // Sort list alphabetically
       .sort((a, b) => (a.name > b.name ? 1 : -1));

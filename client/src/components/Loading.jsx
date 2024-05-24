@@ -1,5 +1,5 @@
 import './Loading.scss';
-import loadingSvg from './../../img/loading.svg';
+import loadingSvg from '../assets/loading.svg';
 import { Link } from 'react-router-dom';
 
 const Loading = ({ main = false, fullHeight = false }) => {

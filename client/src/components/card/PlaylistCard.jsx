@@ -5,7 +5,7 @@ import Card from './Card.jsx';
  *
  * @returns {Element}
  * @constructor
- * @instance Card
+ * @instance card
  */
 const PlaylistCard = () => {
   return (

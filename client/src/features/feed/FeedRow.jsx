@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import SongCard from '../../components/Card/SongCard.jsx';
-import ArtistCard from '../../components/Card/ArtistCard.jsx';
+import SongCard from '../../components/card/SongCard.jsx';
+import ArtistCard from '../../components/card/ArtistCard.jsx';
 
 const RowHeading = styled.h2`
   font-size: 2.4rem;

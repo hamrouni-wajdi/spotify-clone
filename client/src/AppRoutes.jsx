@@ -1,23 +1,22 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { isLoggedIn } from './features/user/userThunks.js';
 import Sidebar from './layout/Sidebar/Sidebar.jsx';
-import Player from './components/player/Player';
-import App from './components/app/App';
+import Player from './features/player/Player.jsx';
+import App from './layout/App.jsx';
 import Home from './pages/Home.jsx';
-import Login from './components/auth/Login';
-import Signup from './components/auth/Signup';
-import Profile from './components/app/Profile/Profile';
-import Search from './components/app/Search/Search';
+import Login from './features/auth/Login';
+import Signup from './features/auth/Signup';
+import Profile from './features/user/Profile.jsx';
+import Search from './features/search/Search';
 import LikedSongs from './components/app/Playlist/LikedSongs';
-import Reset from './components/auth/Reset';
-import Forgot from './components/auth/Forgot';
+import Reset from './features/auth/Reset';
+import Forgot from './features/auth/Forgot';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Admin from './components/admin/Admin';
-import Loading from './components/UI/Loading';
+import Admin from './features/admin/Admin.jsx';
+import Loading from './components/Loading.jsx';
 import Artist from './features/artist/Artist.jsx';
 import Playlist from './features/playlist/Playlist.jsx';
 

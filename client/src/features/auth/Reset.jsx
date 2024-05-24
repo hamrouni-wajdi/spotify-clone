@@ -1,12 +1,12 @@
 import './Auth.scss';
-import logo from '../../img/logo.svg';
+import logo from '../../assets/logo.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetPassword } from '../../features/user/userThunks.js';
+import { resetPassword } from '../user/userThunks.js';
 import { Navigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import Button from '../UI/Button';
-import Input from '../UI/Input.jsx';
+import Button from '../../components/Button.jsx';
+import Input from '../../components/Input.jsx';
 
 const Reset = () => {
   const user = useSelector((state) => state.user);

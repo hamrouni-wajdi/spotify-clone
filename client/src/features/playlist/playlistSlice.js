@@ -32,7 +32,7 @@ export const updatePlaylist = createAsyncThunk(
 export const likePlaylist = createAsyncThunk(
   'playlist/likePlaylist',
   async (id) => {
-    const res = await axios.post(`/playlists/likes/add`, {
+    const res = await axios.post('/playlists/likes/add', {
       playlist: id,
     });
 
@@ -44,7 +44,7 @@ export const likePlaylist = createAsyncThunk(
 export const dislikePlaylist = createAsyncThunk(
   'playlist/dislikePlaylist',
   async (id) => {
-    const res = await axios.post(`/playlists/likes/remove`, {
+    const res = await axios.post('/playlists/likes/remove', {
       playlist: id,
     });
 
@@ -55,11 +55,7 @@ export const dislikePlaylist = createAsyncThunk(
 
 // Slice
 const initialState = {
-  data: null,
-  /*
-    Main options: 'idle' | 'loading' | 'success' | 'fail
-    Named status codes used for certain data fetches
-   */
+  data: {},
   status: 'idle', // 'idle' | 'loading' | 'success' | 'fail',
   statusUpdate: 'idle',
 };

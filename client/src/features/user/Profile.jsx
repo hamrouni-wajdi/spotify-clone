@@ -5,10 +5,10 @@ import {
   logoutUser,
   updatePassword,
   updateUser,
-} from '../../../features/user/userThunks.js';
+} from './userThunks.js';
 import { useRef } from 'react';
-import Button from '../../UI/Button';
-import Input from '../../UI/Input';
+import Button from '../../components/Button.jsx';
+import Input from '../../components/Input.jsx';
 import { RiLogoutBoxLine } from 'react-icons/ri';
 
 const Profile = () => {

@@ -7,7 +7,7 @@ import { replaceQueue } from '../../features/queue/queueSlice.js';
  *
  * @returns {Element}
  * @constructor
- * @instance Card
+ * @instance card
  */
 const SongCard = ({ data }) => {
   const { img, name } = data;

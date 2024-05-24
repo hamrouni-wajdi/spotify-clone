@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import List from '../../components/UI/List.jsx';
+import List from '../../components/List.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { getArtist, selectArtist, selectArtistStatus } from './artistSlice.js';
 import ArtistHeader from './ArtistHeader.jsx';
 import ArtistNav from './ArtistNav.jsx';

@@ -1,12 +1,12 @@
 import './Auth.scss';
-import logo from '../../img/logo.svg';
+import logo from '../../assets/logo.svg';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { useState } from 'react';
-import isValidEmail from './isValidEmail';
+import isValidEmail from './isValidEmail.js';
 import { toast } from 'react-toastify';
-import Button from '../UI/Button';
-import Input from '../UI/Input';
+import Button from '../../components/Button.jsx';
+import Input from '../../components/Input.jsx';
 import axios from '../../api/axios.js';
 
 const Forgot = () => {

@@ -1,13 +1,13 @@
 import './Auth.scss';
-import logo from '../../img/logo.svg';
+import logo from '../../assets/logo.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../features/user/userThunks.js';
+import { loginUser } from '../user/userThunks.js';
 import { Link, Navigate } from 'react-router-dom';
 import { useState } from 'react';
-import isValidEmail from './isValidEmail';
+import isValidEmail from './isValidEmail.js';
 import { toast } from 'react-toastify';
-import Button from '../UI/Button';
-import Input from '../UI/Input';
+import Button from '../../components/Button.jsx';
+import Input from '../../components/Input.jsx';
 
 const Login = () => {
   const user = useSelector((state) => state.user);

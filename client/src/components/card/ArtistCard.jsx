@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
  *
  * @returns {Element}
  * @constructor
- * @instance Card
+ * @instance card
  */
 const ArtistCard = ({ data }) => {
   const { id, img, name } = data;

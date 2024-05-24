@@ -1,6 +1,6 @@
 import './SquareList.scss';
 import { Link } from 'react-router-dom';
-import { replaceQueue } from '../../features/queue/queueSlice.js';
+import { replaceQueue } from '../features/queue/queueSlice.js';
 import { useDispatch } from 'react-redux';
 import { RiPlayCircleFill } from 'react-icons/ri';
 

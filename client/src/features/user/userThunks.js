@@ -4,214 +4,150 @@ import { toast } from 'react-toastify';
 
 export const loginUser = createAsyncThunk(
   'user/login',
-  async ({ email, password }, { rejectWithValue }) => {
-    try {
-      const res = await axios.post('/users/login', {
-        email,
-        password,
-      });
+  async ({ email, password }) => {
+    const res = await axios.post('/users/login', {
+      email,
+      password,
+    });
 
-      toast.success('Logged in successfully');
+    toast.success('Logged in successfully');
 
-      return { data: res.data.data.user, auth: true };
-    } catch (err) {
-      console.log(err);
-      return rejectWithValue(err);
-    }
+    return { data: res.data.data.user, auth: true };
   },
 );
 
 export const signupUser = createAsyncThunk(
   'user/signup',
-  async ({ name, email, password, passwordConfirm }, { rejectWithValue }) => {
-    try {
-      const res = await axios.post('/users/signup', {
-        name,
-        email,
-        password,
-        passwordConfirm,
-      });
+  async ({ name, email, password, passwordConfirm }) => {
+    const res = await axios.post('/users/signup', {
+      name,
+      email,
+      password,
+      passwordConfirm,
+    });
 
-      toast.success('Welcome to spotify!');
+    toast.success('Welcome to spotify!');
 
-      return { data: res.data.data.user, auth: true };
-    } catch (err) {
-      return rejectWithValue(err);
-    }
+    return { data: res.data.data.user, auth: true };
   },
 );
 
-export const isLoggedIn = createAsyncThunk(
-  'user/isLoggedIn',
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await axios.get('/users/isLoggedIn');
+export const isLoggedIn = createAsyncThunk('user/isLoggedIn', async () => {
+  const res = await axios.get('/users/isLoggedIn');
 
-      return { data: res.data.data.user, auth: true };
-    } catch (err) {
-      return rejectWithValue(err);
-    }
-  },
-);
-
-export const updateUser = createAsyncThunk('user/updateUser', async (data) => {
-  try {
-    const res = await axios.patch('/users/updateMe', data);
-
-    toast.success('Your data updated ');
-    return res.data.data;
-  } catch (err) {
-    throw err;
-  }
+  return { data: res.data.data.user, auth: true };
 });
 
+export const updateUser = createAsyncThunk('user/updateUser', async (data) => {
+  const res = await axios.patch('/users/updateMe', data);
+
+  toast.success('Your data updated ');
+  return res.data.data;
+});
+
+// TODO: Not used
 export const forgotPassword = createAsyncThunk(
   'user/forgotPassword',
   async (data) => {
-    try {
-      await axios.post('users/forgotPassword', data);
+    await axios.post('users/forgotPassword', data);
 
-      toast.success('Email sent');
-    } catch (err) {
-      toast.error(err.response.data.message);
-    }
+    toast.success('Email sent');
   },
 );
 
 export const resetPassword = createAsyncThunk(
   'user/resetPassword',
-  async (data, { rejectWithValue }) => {
-    try {
-      const res = await axios.patch(`/users/resetPassword/${data.id}`, data);
+  async (data) => {
+    const res = await axios.patch(`/users/resetPassword/${data.id}`, data);
 
-      toast.success('Reset password');
+    toast.success('Reset password');
 
-      return res.data;
-    } catch (err) {
-      return rejectWithValue(err);
-    }
+    return res.data;
   },
 );
 
 export const updatePassword = createAsyncThunk(
   'user/updatePassword',
   async (data) => {
-    try {
-      await axios.patch('/users/updatePassword', data);
+    await axios.patch('/users/updatePassword', data);
 
-      toast.success('Updated password');
-    } catch (err) {
-      toast.error(err.response.data.message);
-    }
+    toast.success('Updated password');
   },
 );
 
 export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
-  try {
-    const res = await axios.get('users/logout');
-    await toast.success(res.data.message);
-  } catch (err) {
-    console.log(err);
-  }
+  const res = await axios.get('users/logout');
+  toast.success(res.data.message);
 });
 
 // Like/dislike
 export const likeSong = createAsyncThunk('song/likeSong', async (id) => {
-  try {
-    const res = await axios.post('/users/likes/add', {
-      song: id,
-    });
+  const res = await axios.post('/users/likes/add', {
+    song: id,
+  });
 
-    toast.success('Song added to Liked Songs');
+  toast.success('Song added to Liked Songs');
 
-    return res.data.songs;
-  } catch (err) {
-    throw err;
-  }
+  return res.data.songs;
 });
 
 export const dislikeSong = createAsyncThunk('song/dislikeSong', async (id) => {
-  try {
-    const res = await axios.post('/users/likes/remove', {
-      song: id,
-    });
+  const res = await axios.post('/users/likes/remove', {
+    song: id,
+  });
 
-    toast.success('Song removed from Liked Songs');
+  toast.success('Song removed from Liked Songs');
 
-    return res.data.songs;
-  } catch (err) {
-    throw err;
-  }
+  return res.data.songs;
 });
 
 // Artist
 export const followArtist = createAsyncThunk(
   'user/followArtist',
   async (id) => {
-    try {
-      const res = await axios.post(`/users/follow/${id}`);
+    const res = await axios.post(`/users/follow/${id}`);
 
-      toast.success('Added to Artists');
+    toast.success('Added to Artists');
 
-      return res.data.data;
-    } catch (err) {
-      throw err;
-    }
+    return res.data.data;
   },
 );
 
 export const unfollowArtist = createAsyncThunk(
   'user/unfollowArtist',
   async (id) => {
-    try {
-      const res = await axios.post(`/users/unfollow/${id}`);
+    const res = await axios.post(`/users/unfollow/${id}`);
 
-      toast.success('Removed from Artists');
+    toast.success('Removed from Artists');
 
-      return res.data.data;
-    } catch (err) {
-      throw err;
-    }
+    return res.data.data;
   },
 );
 
 export const becomeArtist = createAsyncThunk('user/becomeArtist', async () => {
-  try {
-    await axios.patch('/users/becomeArtist');
+  await axios.patch('/users/becomeArtist');
 
-    toast.success("Now you're an artist");
-  } catch (err) {
-    throw err;
-  }
+  toast.success('Now you are an artist');
 });
 
 // Playlist
 export const getAllPlaylists = createAsyncThunk(
   'user/getAllPlaylists',
   async () => {
-    try {
-      const res = await axios.get('/playlists');
+    const res = await axios.get('/playlists');
 
-      return res.data.data.playlists;
-    } catch (err) {
-      throw err;
-    }
+    return res.data.data.playlists;
   },
 );
 
-// Playlist
 export const createPlaylist = createAsyncThunk(
   'user/createPlaylist',
   async () => {
-    try {
-      const res = await axios.post('/playlists');
+    const res = await axios.post('/playlists');
 
-      toast.success('Playlist created');
+    toast.success('Playlist created');
 
-      return res.data.data.user.playlists;
-    } catch (err) {
-      throw err;
-    }
+    return res.data.data.user.playlists;
   },
 );
 
@@ -219,13 +155,9 @@ export const deletePlaylist = createAsyncThunk(
   'user/deletePlaylist',
   async (id) => {
     console.log('hit delete');
-    try {
-      const res = await axios.delete(`/playlists/${id}`);
+    const res = await axios.delete(`/playlists/${id}`);
 
-      toast.success('Playlist deleted');
-      return res.data.data.playlists;
-    } catch (err) {
-      throw err;
-    }
+    toast.success('Playlist deleted');
+    return res.data.data.playlists;
   },
 );

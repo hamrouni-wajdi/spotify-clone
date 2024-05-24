@@ -1,4 +1,4 @@
-import badgeImg from '../../img/verify.png';
+import badgeImg from '../../assets/verify.png';
 import styled, { css } from 'styled-components';
 
 function tintColor(color, amount) {

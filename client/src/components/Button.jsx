@@ -1,5 +1,5 @@
 import './Button.scss';
-import btnLoading from '../../img/btnLoading.svg';
+import btnLoading from '../assets/btnLoading.svg';
 
 const Button = ({
   type = 'button',

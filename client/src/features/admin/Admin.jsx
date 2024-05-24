@@ -1,20 +1,15 @@
 import './Admin.scss';
-import './../UI/Modal.scss';
+import '../../components/Modal.scss';
 
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  deleteSong,
-  getSongs,
-  updateSong,
-  uploadSong,
-} from '../../features/admin/adminThunks.js';
-import List from '../UI/List';
+import { deleteSong, getSongs, updateSong, uploadSong } from './adminThunks.js';
+import List from '../../components/List.jsx';
 import { IoCloseCircle } from 'react-icons/io5';
-import Loading from '../UI/Loading';
-import Button from '../UI/Button';
-import ModalWrapper from '../UI/ModalWrapper';
-import Input from '../UI/Input';
+import Loading from '../../components/Loading.jsx';
+import Button from '../../components/Button.jsx';
+import ModalWrapper from '../../components/ModalWrapper.jsx';
+import Input from '../../components/Input.jsx';
 
 const Admin = () => {
   const [song, setSong] = useState({});

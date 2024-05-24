@@ -1,9 +1,9 @@
 import './Search.scss';
-import axios from '../../../api/axios';
+import axios from '../../api/axios.js';
 import { IoSearch } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
-import List from '../../UI/List';
-import SquareList from '../../UI/SquareList';
+import List from '../../components/List.jsx';
+import SquareList from '../../components/SquareList.jsx';
 
 const Search = () => {
   const [query, setQuery] = useState('');
