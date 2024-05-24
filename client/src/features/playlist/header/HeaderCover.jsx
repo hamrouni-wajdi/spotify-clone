@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { RiPencilLine } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
-import { selectPlaylist } from '../playlistSlice.js';
 import Modal from '../../../components/Modal.jsx';
+import { selectPlaylist } from '../playlistSlice.js';
 
 const StyledCover = styled.div`
   height: 18rem;
@@ -14,17 +14,22 @@ const StyledCover = styled.div`
 
   border-radius: 4px;
   box-shadow: 0 4px 6rem rgba(0, 0, 0, 0.5);
-  cursor: pointer;
 
-  &:hover {
-    svg {
-      display: inline-block;
-    }
+  ${({ hideHover }) =>
+    hideHover &&
+    css`
+      cursor: pointer;
 
-    img {
-      filter: brightness(70%);
-    }
-  }
+      &:hover {
+        svg {
+          display: inline-block;
+        }
+
+        img {
+          filter: brightness(70%);
+        }
+      }
+    `}
 `;
 
 const PencilIcon = styled(RiPencilLine)`
@@ -43,13 +48,19 @@ const Img = styled.img`
 `;
 
 const HeaderCover = () => {
-  const playlist = useSelector(selectPlaylist);
+  const { id, img } = useSelector(selectPlaylist);
+  const userPlaylists = useSelector((state) => state.user.data.playlists);
+
+  // FIXME: server should handle this
+  const isSeparatePlaylist = !userPlaylists.find(
+    (playlist) => playlist.id === id,
+  );
 
   return (
-    <Modal.Open name="playlist">
-      <StyledCover>
+    <Modal.Open name="playlist" isDisabled={isSeparatePlaylist}>
+      <StyledCover hideHover={!isSeparatePlaylist}>
         <PencilIcon />
-        <Img src={playlist.img} alt="Playlist cover" />
+        <Img src={img} alt="Playlist cover" />
       </StyledCover>
     </Modal.Open>
   );

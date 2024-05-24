@@ -91,13 +91,13 @@ const Modal = ({ children }) => {
   );
 };
 
-const Open = ({ name, children }) => {
+const Open = ({ name, isDisabled = false, children }) => {
   const { openName, open, close } = useContext(ModalContext);
 
   const handleOpen = (e) => {
-    console.log('open here');
-    e.stopPropagation();
+    if (isDisabled) return;
 
+    e.stopPropagation();
     openName === '' || openName !== name ? open(name) : close();
   };
 

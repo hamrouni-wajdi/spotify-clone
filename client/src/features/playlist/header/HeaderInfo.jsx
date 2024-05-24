@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from '../../../components/Modal.jsx';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectPlaylist } from '../playlistSlice.js';
@@ -20,7 +20,12 @@ const Type = styled.p`
 const Name = styled.h1`
   font-size: 9.6rem;
   font-weight: 800;
-  cursor: pointer;
+
+  ${({ hideHover }) =>
+    hideHover &&
+    css`
+      cursor: pointer;
+    `}
 `;
 
 const Description = styled.p`
@@ -74,13 +79,20 @@ const AuthorName = styled(Link)`
 
 const HeaderInfo = () => {
   const playlist = useSelector(selectPlaylist);
+  const { id } = playlist;
+  const userPlaylists = useSelector((state) => state.user.data.playlists);
+
+  // FIXME: server should handle this
+  const isSeparatePlaylist = !userPlaylists.find(
+    (playlist) => playlist.id === id,
+  );
 
   return (
     <Info>
       <Type>Playlist</Type>
 
-      <Modal.Open name="playlist">
-        <Name>{playlist.name}</Name>
+      <Modal.Open name="playlist" isDisabled={isSeparatePlaylist}>
+        <Name hideHover={!isSeparatePlaylist}>{playlist.name}</Name>
       </Modal.Open>
 
       {playlist.description && (
