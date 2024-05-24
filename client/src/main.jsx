@@ -4,7 +4,6 @@ import AppRoutes from './AppRoutes.jsx';
 import { Provider } from 'react-redux';
 import { store } from './app/store.js';
 import GlobalStyles from './styles/globalStyles.js';
-import './styles.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

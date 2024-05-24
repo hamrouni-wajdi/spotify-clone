@@ -11,6 +11,9 @@ const GlobalStyles = createGlobalStyle`
 		
 		--color-gray: #b3b3b3;
 		--color-text-sub: #a7a7a7;
+
+    --toastify-toast-width: 32rem;
+    --toastify-toast-min-height: 5.8rem;
 	}
 
   * {
@@ -46,5 +49,29 @@ const GlobalStyles = createGlobalStyle`
   ul {
 	  list-style: none;
   }
+
+  // TEMP
+  .main {
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr auto;
+    position: relative;
+    overflow: hidden;
+  }
+	
+  .note {
+    max-width: 80vw;
+    padding: 1rem;
+
+    position: absolute;
+    bottom: 3rem;
+
+    font-size: 1.4rem;
+    background-color: #121212;
+    border-radius: 3px;
+  }
+
 `;
 export default GlobalStyles;
