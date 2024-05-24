@@ -26,7 +26,7 @@ const artistSlice = createSlice({
         state.status = 'success';
         state.data = action.payload;
       })
-      .addCase(getArtist.rejected, (state, action) => {
+      .addCase(getArtist.rejected, (state) => {
         state.status = 'fail';
       }),
 });

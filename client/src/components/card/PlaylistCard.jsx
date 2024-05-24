@@ -7,6 +7,8 @@ import Card from './Card.jsx';
  * @constructor
  * @instance card
  */
+
+// UNUSED
 const PlaylistCard = () => {
   return (
     <Card

@@ -45,7 +45,7 @@ export const updateUser = createAsyncThunk('user/updateUser', async (data) => {
   return res.data.data;
 });
 
-// TODO: Not used
+// UNUSED
 export const forgotPassword = createAsyncThunk(
   'user/forgotPassword',
   async (data) => {
