@@ -42,7 +42,9 @@ const FollowButton = styled.button`
 
 const ArtistNav = ({ artist }) => {
   const id = artist.id;
-  const { followedArtists } = useSelector((state) => state.user.data);
+  const { id: userId, followedArtists } = useSelector(
+    (state) => state.user.data,
+  );
   const dispatch = useDispatch();
 
   const handlePlayArtist = () => {
@@ -56,15 +58,16 @@ const ArtistNav = ({ artist }) => {
     <Nav>
       <PlayButton size={5.6} iconSize={2.4} onClick={handlePlayArtist} />
 
-      {isUserFollowed(id) ? (
-        <FollowButton onClick={() => dispatch(unfollowArtist(id))}>
-          Unfollow
-        </FollowButton>
-      ) : (
-        <FollowButton onClick={() => dispatch(followArtist(id))}>
-          Follow
-        </FollowButton>
-      )}
+      {userId !== id &&
+        (isUserFollowed(id) ? (
+          <FollowButton onClick={() => dispatch(unfollowArtist(id))}>
+            Unfollow
+          </FollowButton>
+        ) : (
+          <FollowButton onClick={() => dispatch(followArtist(id))}>
+            Follow
+          </FollowButton>
+        ))}
     </Nav>
   );
 };
