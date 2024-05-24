@@ -13,7 +13,6 @@ import Search from './features/search/Search';
 import LikedSongs from './features/playlist/LikedSongs.jsx';
 import Reset from './features/auth/Reset';
 import Forgot from './features/auth/Forgot';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Admin from './features/admin/Admin.jsx';
 import Loading from './components/Loading.jsx';
@@ -60,14 +59,6 @@ function AppRoutes() {
           <Route path="*" element={<Loading main={true} fullHeight={true} />} />
         </Routes>
       )}
-
-      <ToastContainer
-        theme="dark"
-        closeOnClick
-        style={{
-          opacity: 0.8,
-        }}
-      />
     </BrowserRouter>
   );
 }
