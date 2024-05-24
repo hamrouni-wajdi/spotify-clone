@@ -110,22 +110,22 @@ const Player = () => {
     dispatch(prevSong());
   };
 
-  // Navigator control
-  navigator.mediaSession.setActionHandler('previoustrack', () => {
-    dispatch(prevSong());
-  });
-
-  navigator.mediaSession.setActionHandler('nexttrack', () => {
-    dispatch(nextSong());
-  });
-
-  navigator.mediaSession.setActionHandler('play', () => {
-    dispatch(playPause());
-  });
-
-  navigator.mediaSession.setActionHandler('pause', () => {
-    dispatch(playPause());
-  });
+  // TODO: Navigator control
+  // navigator.mediaSession.setActionHandler('previoustrack', () => {
+  //   dispatch(prevSong());
+  // });
+  //
+  // navigator.mediaSession.setActionHandler('nexttrack', () => {
+  //   dispatch(nextSong());
+  // });
+  //
+  // navigator.mediaSession.setActionHandler('play', () => {
+  //   dispatch(playPause());
+  // });
+  //
+  // navigator.mediaSession.setActionHandler('pause', () => {
+  //   dispatch(playPause());
+  // });
 
   const onEndedHandler = () => {
     handleNext();
