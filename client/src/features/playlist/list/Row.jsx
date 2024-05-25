@@ -1,5 +1,5 @@
 import React from 'react';
-import { RiHeartLine, RiMoreFill, RiPlayFill } from 'react-icons/ri';
+import { RiMoreFill, RiPlayFill } from 'react-icons/ri';
 import styled, { css } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -8,6 +8,7 @@ import {
   selectQueueCurrentId,
   selectQueueId,
 } from '../../queue/queueSlice.js';
+import LikeButton from './LikeButton.jsx';
 
 const StyledRow = styled.div`
   height: 5.6rem;
@@ -163,7 +164,7 @@ const Row = ({ index, song, playlist }) => {
       <Info style={{ justifySelf: 'end' }}>3:20</Info>
 
       <Action role="button">
-        <RiHeartLine />
+        <LikeButton id={id} />
       </Action>
       <Action role="button">
         <RiMoreFill />
