@@ -7,12 +7,12 @@ const StyledList = styled.div`
   color: var(--color-text-sub);
 `;
 
-const List = ({ list }) => {
+const List = ({ playlist }) => {
   return (
     <StyledList>
       <ListHeader />
-      {list.map((el, i) => (
-        <Row key={el.id} index={i} playlist={el} />
+      {playlist.songs.map((el, i) => (
+        <Row key={el.id} index={i} song={el} playlist={playlist} />
       ))}
     </StyledList>
   );

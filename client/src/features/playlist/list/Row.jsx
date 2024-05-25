@@ -1,6 +1,13 @@
 import React from 'react';
 import { RiHeartLine, RiMoreFill, RiPlayFill } from 'react-icons/ri';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  exChangeCurrent,
+  exReplaceQueue,
+  selectQueueCurrentId,
+  selectQueueId,
+} from '../../queue/queueSlice.js';
 
 const StyledRow = styled.div`
   height: 5.6rem;
@@ -18,6 +25,14 @@ const StyledRow = styled.div`
   gap: 1.6rem;
 
   border-radius: 4px;
+
+  ${({ $active }) =>
+    $active &&
+    css`
+      div:nth-child(2) {
+        color: var(--color-brand);
+      }
+    `}
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
@@ -114,18 +129,29 @@ const Action = styled.div`
   }
 `;
 
-// TODO: Use redux selector
-const Row = ({ index, playlist }) => {
-  const { id, img, name } = playlist;
+// Row needs list for global queue state
+const Row = ({ index, song, playlist }) => {
+  const queueId = useSelector(selectQueueId);
+  const queueCurrentId = useSelector(selectQueueCurrentId);
+  const { id, img, name } = song;
+  const dispatch = useDispatch();
+
+  const handlePlaySong = () => {
+    if (queueId !== playlist.id) {
+      dispatch(exReplaceQueue(0, playlist.id, playlist.songs));
+    }
+
+    dispatch(exChangeCurrent(index));
+  };
 
   return (
-    <StyledRow key={id}>
+    <StyledRow key={id} $active={queueCurrentId === id}>
       <Id>
         <span>{index + 1}</span>
         <RiPlayFill />
       </Id>
 
-      <Title>
+      <Title onClick={handlePlaySong}>
         <img src={img} alt="song cover" />
         <div>
           <span>{name}</span>

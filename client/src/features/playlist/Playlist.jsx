@@ -57,7 +57,7 @@ const Playlist = () => {
         <PlaylistNav playlist={playlist} />
 
         <Content>
-          <List list={playlist.songs} />
+          <List playlist={playlist} />
           {/*<List list={playlist.songs} onPlaylist={true} pId={playlist.id} />*/}
         </Content>
       </Body>

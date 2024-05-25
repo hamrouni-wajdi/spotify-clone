@@ -1,7 +1,7 @@
 import React from 'react';
 import PlayButton from '../../components/PlayButton.jsx';
 import styled from 'styled-components';
-import { replaceQueue } from '../queue/queueSlice.js';
+import { exChangeCurrent, exReplaceQueue } from '../queue/queueSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { dislikePlaylist, likePlaylist } from './playlistSlice.js';
 import { RiAddCircleLine, RiCheckboxCircleFill } from 'react-icons/ri';
@@ -55,8 +55,11 @@ const PlaylistNav = ({ playlist }) => {
   const isPersonal = playlist.user.id === userId;
 
   const handlePlayPlaylist = () => {
-    if (playlist.songs.length)
-      dispatch(replaceQueue({ songs: playlist.songs }));
+    // TODO: If no songs play should be hidden
+    if (playlist.songs.length) {
+      dispatch(exReplaceQueue(0, playlist.id, playlist.songs));
+      dispatch(exChangeCurrent(0));
+    }
   };
 
   // TODO: This should be handled by server
