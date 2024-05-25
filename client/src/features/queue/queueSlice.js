@@ -59,10 +59,9 @@ const queueSlice = createSlice({
         state.id = action.payload.id;
         state.list = action.payload.list;
       },
-      prepare: (index, id, list) => {
+      prepare: (id, list) => {
         return {
           payload: {
-            index,
             id,
             list,
           },

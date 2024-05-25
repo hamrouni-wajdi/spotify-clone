@@ -138,7 +138,7 @@ const Row = ({ index, song, playlist }) => {
 
   const handlePlaySong = () => {
     if (queueId !== playlist.id) {
-      dispatch(exReplaceQueue(0, playlist.id, playlist.songs));
+      dispatch(exReplaceQueue(playlist.id, playlist.songs));
     }
 
     dispatch(exChangeCurrent(index));

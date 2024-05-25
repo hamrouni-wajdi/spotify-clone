@@ -57,7 +57,7 @@ const PlaylistNav = ({ playlist }) => {
   const handlePlayPlaylist = () => {
     // TODO: If no songs play should be hidden
     if (playlist.songs.length) {
-      dispatch(exReplaceQueue(0, playlist.id, playlist.songs));
+      dispatch(exReplaceQueue(playlist.id, playlist.songs));
       dispatch(exChangeCurrent(0));
     }
   };
