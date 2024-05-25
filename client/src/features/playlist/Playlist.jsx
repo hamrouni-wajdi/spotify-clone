@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import PlaylistNav from './PlaylistNav.jsx';
-import List from '../../components/List.jsx';
+import List from './list/List.jsx';
 
 const Body = styled.div`
   position: relative;
@@ -57,7 +57,8 @@ const Playlist = () => {
         <PlaylistNav playlist={playlist} />
 
         <Content>
-          <List list={playlist.songs} onPlaylist={true} pId={playlist.id} />
+          <List list={playlist.songs} />
+          {/*<List list={playlist.songs} onPlaylist={true} pId={playlist.id} />*/}
         </Content>
       </Body>
     </div>
