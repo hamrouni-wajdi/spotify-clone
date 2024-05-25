@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PlaylistHeader from './header/PlaylistHeader.jsx';
-import {
-  getPlaylist,
-  selectPlaylist,
-  selectPlaylistStatus,
-} from './playlistSlice.js';
+import { selectPlaylist, selectPlaylistStatus } from './playlistSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
-import PlaylistNav from './PlaylistNav.jsx';
+import PlaylistNav from './nav/PlaylistNav.jsx';
 import List from './list/List.jsx';
+import { getPlaylist } from './playlistThunks.js';
 
 const Body = styled.div`
   position: relative;

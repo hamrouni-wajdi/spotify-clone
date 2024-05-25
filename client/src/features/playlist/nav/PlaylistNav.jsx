@@ -1,9 +1,9 @@
 import React from 'react';
-import PlayButton from '../../components/PlayButton.jsx';
+import PlayButton from '../../../components/PlayButton.jsx';
 import styled from 'styled-components';
-import { exChangeCurrent, exReplaceQueue } from '../queue/queueSlice.js';
+import { exChangeCurrent, exReplaceQueue } from '../../queue/queueSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { dislikePlaylist, likePlaylist } from './playlistSlice.js';
+import { dislikePlaylist, likePlaylist } from '../playlistSlice.js';
 import { RiAddCircleLine, RiCheckboxCircleFill } from 'react-icons/ri';
 import PlaylistMenu from './PlaylistMenu.jsx';
 

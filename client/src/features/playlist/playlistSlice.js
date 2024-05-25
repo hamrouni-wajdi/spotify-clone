@@ -1,15 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../api/axios.js';
 import { toast } from 'react-toastify';
-
-// Thunks
-export const getPlaylist = createAsyncThunk(
-  'playlist/getPlaylist',
-  async (id) => {
-    const res = await axios.get(`/playlists/${id}`);
-    return res.data.data.playlist;
-  },
-);
+import { getPlaylist } from './playlistThunks.js';
 
 export const updatePlaylist = createAsyncThunk(
   'playlist/editPlaylist',

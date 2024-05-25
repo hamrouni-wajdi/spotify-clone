@@ -10,7 +10,7 @@ import Login from './features/auth/Login';
 import Signup from './features/auth/Signup';
 import Profile from './features/user/Profile.jsx';
 import Search from './features/search/Search';
-import LikedSongs from './features/playlist/LikedSongs.jsx';
+import LikedSongs from './features/playlist/likedSongs/LikedSongs.jsx';
 import Reset from './features/auth/Reset';
 import Forgot from './features/auth/Forgot';
 import 'react-toastify/dist/ReactToastify.css';
